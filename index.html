@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d3b3a">
+<title>هم‌مسیر | HamMasir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
+  display:['Lalezar','Space Grotesk','sans-serif'],
+  body:['Vazirmatn','Space Grotesk','sans-serif']}}}}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(rgba(13,148,136,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.09) 1px,transparent 1px);background-size:24px 24px,24px 24px,120px 120px,120px 120px;transition:background-color .3s}
+  .dark body{background-color:#0a1214;background-image:linear-gradient(rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(rgba(45,212,191,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.07) 1px,transparent 1px)}
+  ::selection{background:#99f6e4;color:#134e4a}
+  .screen{animation:fadeUp .45s ease both}.view{animation:fadeUp .4s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .darkbg{background:#0d3b3a;background-image:radial-gradient(rgba(94,234,212,.12) 1px,transparent 1px);background-size:22px 22px}
+  .ecg-live{fill:none;stroke:#5eead4;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:140 780;animation:ecg 3s linear infinite;filter:drop-shadow(0 0 6px rgba(94,234,212,.9))}
+  .ecg-base{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
+  @keyframes ecg{from{stroke-dashoffset:920}to{stroke-dashoffset:0}}
+  .tab.active{background:#0d3b3a;color:#fff;box-shadow:0 6px 16px rgba(13,59,58,.35)}
+  .dark .tab.active{background:#2dd4bf;color:#042f2e}
+  .pulse-dot{position:relative;display:inline-block;width:9px;height:9px;border-radius:99px}
+  .pulse-dot::after{content:'';position:absolute;inset:-4px;border-radius:99px;border:2px solid currentColor;animation:ping 1.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.4);opacity:.8}80%,100%{transform:scale(1.5);opacity:0}}
+  .fill{width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+  .shake{animation:shake .4s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+  .toast{animation:toastIn .35s ease both}@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+  .face{user-select:none}
+  .swatch{transition:transform .15s}.swatch:hover{transform:scale(1.2)}
+  .glass{transition:transform .15s}.glass.full{background:linear-gradient(to top,#38bdf8 60%,#e0f2fe 60%)}
+  .dosecard{transition:all .3s}.dosecard.due{box-shadow:0 0 0 3px rgba(245,158,11,.5);animation:glowPulse 2s infinite}
+  @keyframes glowPulse{0%,100%{box-shadow:0 0 0 3px rgba(245,158,11,.4)}50%{box-shadow:0 0 0 6px rgba(245,158,11,.15)}}
+  .hm{transition:transform .15s}.hm:hover{transform:scale(1.4)}
+  .blurbox{filter:blur(8px);pointer-events:none;user-select:none}
+  .revealwrap{position:relative}
+  .revealwrap .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
+  .mic{animation:micPulse 1.2s infinite}
+  @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.5)}50%{box-shadow:0 0 0 12px rgba(225,29,72,0)}}
+  #printDigest{display:none}
+  @media print{.app{display:none!important}#printDigest{display:block!important}body{background:#fff!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body class="font-body text-slate-800 dark:text-slate-100 antialiased">
+
+<!-- ═════════ صفحه قفل ═════════ -->
+<div id="scr-lock" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+  <svg viewBox="0 0 624 100" preserveAspectRatio="none" class="absolute bottom-10 left-0 w-full h-24 opacity-40"><path class="ecg-base" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/><path class="ecg-live" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/></svg>
+  <div class="w-full max-w-md relative z-10">
+    <div class="text-center mb-6"><div class="inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-4xl shadow-2xl mb-4">🔒</div>
+      <h1 class="font-display text-5xl text-white" id="lockAppName">هم‌مسیر</h1><p class="text-teal-300 text-sm mt-1" data-t="lockSub"></p></div>
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
+      <div id="pinArea" class="hidden mb-4">
+        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pinLbl"></label>
+        <input type="password" inputmode="numeric" id="lockPin" maxlength="6" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg text-center tracking-widest focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPin()">
+        <button onclick="unlockPin()" class="mt-2 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-2.5 transition-colors" data-t="pinOpen"></button>
+        <div class="text-center mt-2"><button onclick="showPwdMode()" class="text-xs text-slate-400 underline" data-t="usePwdInstead"></button></div>
+        <div class="border-t border-slate-200 dark:border-slate-600 my-3"></div>
+      </div>
+      <div id="pwdArea">
+        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pwdLbl"></label>
+        <div class="relative"><input type="password" id="lockPwd" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPwd()">
+        <button type="button" onclick="togglePwd('lockPwd')" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600">👁️</button></div>
+        <button onclick="unlockPwd()" class="mt-3 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="unlock"></button>
+      </div>
+      <div id="bioArea" class="hidden mt-3"><button onclick="unlockBio()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-3 transition-colors">👆 <span data-t="bioOpen"></span></button></div>
+      <div id="lockErr" class="hidden text-rose-600 text-sm font-bold mt-2 text-center" data-t="wrongCred"></div>
+      <div class="mt-4 text-center"><button onclick="forgot()" class="text-xs text-slate-400 hover:text-rose-500 underline" data-t="forgot"></button></div>
+    </div>
+    <button onclick="showEmergency()" class="mt-4 w-full bg-rose-600/90 hover:bg-rose-500 text-white font-bold rounded-xl py-3 transition-colors">🚑 <span data-t="emergencyBtn"></span></button>
+    <div class="flex justify-center gap-2 mt-4">
+      <button onclick="setLang(lang==='fa'?'en':'fa')" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌐 <span data-t="langOther"></span></button>
+      <button onclick="cycleTheme()" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌓 <span data-t="theme"></span></button>
+    </div>
+    <p class="text-center text-teal-400/70 text-[11px] mt-4" data-t="lockHint"></p>
+  </div>
+</div>
+
+<!-- ═════════ کارت اورژانس ═════════ -->
+<div id="scr-emergency" class="app screen hidden darkbg min-h-screen p-4">
+  <div class="max-w-md mx-auto pt-8">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 border-t-8 border-rose-600">
+      <h1 class="font-display text-3xl text-rose-600 mb-1">🚑 <span data-t="emergencyTitle"></span></h1>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="emergencySub"></p>
+      <div id="emgBody" class="space-y-3 text-sm"></div>
+      <button onclick="hideEmergency()" class="mt-5 w-full border-2 border-slate-300 dark:border-slate-600 rounded-xl py-2.5 font-bold text-slate-600 dark:text-slate-300" data-t="backToLock"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ خوش‌آمدگویی ═════════ -->
+<div id="scr-setup" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-lg">
+    <div class="text-center mb-5"><div class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-3xl shadow-2xl mb-3">🧭</div>
+      <h1 class="font-display text-4xl text-white" data-t="setupTitle"></h1><p class="text-teal-300 text-sm mt-1" data-t="setupSub"></p></div>
+    <div class="flex gap-1.5 mb-4" id="suProg"></div>
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
+      <div id="su-s0"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep1"></h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep1d"></p>
+        <input type="password" id="su-pwd1" oninput="pwdStrength()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none mb-2">
+        <div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden mb-1"><div id="pwdBar" class="h-full rounded-full w-0 transition-all"></div></div>
+        <p id="pwdHint" class="text-[11px] text-slate-400 mb-3"></p>
+        <input type="password" id="su-pwd2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none"></div>
+      <div id="su-s1" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep2"></h2>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+          <div class="col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="su-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="su-age" type="number" value="30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fSex"></label><select id="su-sex" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="m" data-t="male"></option><option value="f" data-t="female"></option></select></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="su-height" type="number" value="170" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="su-weight" type="number" value="70" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+        </div></div>
+      <div id="su-s2" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep3"></h2>
+        <div class="space-y-3 mt-3">
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="su-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fType"></label><select id="su-mstype" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option>RRMS</option><option>SPMS</option><option>PPMS</option><option>CIS</option></select></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="su-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
+          <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="su-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="su-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
+        </div></div>
+      <div id="su-s3" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep4"></h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep4d"></p><div id="su-concerns" class="flex flex-wrap gap-2"></div></div>
+      <div class="flex gap-3 mt-6">
+        <button id="suBack" onclick="suBack()" class="px-4 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-700" style="visibility:hidden" data-t="back"></button>
+        <button id="suNext" onclick="suNext()" class="flex-1 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="next"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ اپلیکیشن ═════════ -->
+<div id="scr-app" class="app screen hidden">
+  <header class="sticky top-0 z-50 bg-[#0d3b3a] dark:bg-slate-900 text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-xl shadow">🧭</div>
+        <div><h1 class="font-display text-2xl leading-6" id="appTitle">هم‌مسیر</h1><p class="text-[11px] text-teal-300 dark:text-teal-400" data-t="tagline"></p></div></div>
+      <div class="flex items-center gap-2">
+        <button id="stealthQuick" onclick="quickHide()" class="hidden bg-slate-600 hover:bg-slate-500 rounded-lg px-3 py-1.5 text-sm" title="Quick hide">🙈</button>
+        <button onclick="setLang(lang==='fa'?'en':'fa')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm font-bold">🌐 <span id="langLbl">EN</span></button>
+        <button onclick="cycleTheme()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm">🌓</button>
+        <button id="installBtn" onclick="installApp()" class="hidden bg-sky-500 hover:bg-sky-400 font-bold rounded-lg px-3 py-1.5 text-sm">📲 <span data-t="install"></span></button>
+        <span class="hidden sm:flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-3 py-1 text-sm">🔥 <b id="streakNum">۰</b></span>
+        <button onclick="printReport()" class="bg-amber-400 hover:bg-amber-300 text-[#0d3b3a] font-bold rounded-lg px-3 py-1.5 text-sm">🖨️ <span data-t="print"></span></button>
+        <button onclick="lockApp()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm">🔒</button>
+      </div>
+    </div>
+    <nav class="max-w-6xl mx-auto px-4 pb-3 flex gap-1.5 overflow-x-auto" style="scrollbar-width:none" id="navBar"></nav>
+  </header>
+
+  <!-- بنر اعلان دوز -->
+  <div id="doseBanner" class="app hidden fixed top-24 left-1/2 -translate-x-1/2 z-[65] w-[92%] max-w-md bg-[#0d3b3a] dark:bg-slate-800 text-white rounded-2xl shadow-2xl p-4 border-2 border-amber-400">
+    <p id="dbText" class="font-bold text-center mb-3"></p>
+    <div class="flex gap-2">
+      <button id="dbTake" class="flex-1 bg-emerald-500 hover:bg-emerald-400 rounded-xl py-2.5 font-bold"></button>
+      <button id="dbSnooze" class="flex-1 bg-amber-500 hover:bg-amber-400 text-[#0d3b3a] rounded-xl py-2.5 font-bold"></button>
+      <button id="dbSkip" class="flex-1 bg-rose-600 hover:bg-rose-500 rounded-xl py-2.5 font-bold"></button>
+    </div>
+  </div>
+
+  <!-- حالت مخفی: صفحه یادداشت جعلی -->
+  <div id="fakeNote" class="app hidden fixed inset-0 z-[80] bg-amber-50 dark:bg-slate-900 p-6 overflow-auto">
+    <div class="max-w-md mx-auto">
+      <h1 class="font-display text-3xl text-amber-800 dark:text-amber-300 mb-4">📝 <span data-t="fakeTitle"></span></h1>
+      <div class="space-y-3" id="fakeList"></div>
+      <button onclick="quickHide()" class="mt-6 w-full border-2 border-amber-300 text-amber-700 dark:text-amber-300 rounded-xl py-3 font-bold" data-t="fakeBack"></button>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 py-8" id="mainArea">
+
+    <!-- داشبورد -->
+    <section id="view-dash" class="view">
+      <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
+        <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300"><span data-t="hello"></span>، <span id="greetName"></span> 👋</h2><p class="text-sm text-slate-500 dark:text-slate-400" id="greetSub"></p></div>
+        <div class="flex gap-2">
+          <button onclick="badDay()" class="bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 font-bold rounded-xl px-4 py-2.5 text-sm transition-colors">🌧️ <span data-t="badDay"></span></button>
+          <button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-5 py-2.5 transition-all hover:scale-105 shadow">✍️ <span data-t="checkin"></span></button>
+        </div>
+      </div>
+      <div id="reviewBanner" class="hidden mb-4 bg-indigo-50 dark:bg-indigo-900/30 border-s-4 border-indigo-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm text-indigo-900 dark:text-indigo-200">🪞 <span data-t="reviewPrompt"></span></p>
+        <button onclick="openReview()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="reviewStart"></button>
+      </div>
+      <div id="backupBanner" class="hidden mb-4 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm text-amber-900 dark:text-amber-200">💾 <span id="backupMsg"></span></p>
+        <button onclick="exportVault()" class="bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="backupNow"></button>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" id="statStrip"></div>
+      <div id="sampleBanner" class="hidden mb-6 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm text-amber-900 dark:text-amber-200" data-t="sampleWarn"></p><button onclick="clearSample()" class="bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg px-3 py-1.5" data-t="clearSample"></button></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
+          <div class="flex items-center justify-between mb-3"><h3 class="font-bold">🌤️ <span data-t="weather"></span></h3>
+            <select id="citySel" class="text-xs border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1 outline-none"></select></div>
+          <div id="weatherBody" class="text-sm text-slate-500 dark:text-slate-400" data-t="loading"></div></div>
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow flex items-center gap-4">
+          <svg viewBox="0 0 120 120" class="w-24 h-24 shrink-0 -rotate-90"><circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="12" class="dark:opacity-20"/><circle id="adhRing" cx="60" cy="60" r="52" fill="none" stroke="#0f766e" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"/></svg>
+          <div><p class="text-xs text-slate-500 dark:text-slate-400" data-t="todayMeds"></p><p class="font-display text-3xl text-teal-800 dark:text-teal-300"><span id="adhPct">۰</span>٪</p><p class="text-[11px] text-slate-400 mt-1" id="adhSub"></p></div></div>
+        <div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white shadow-sm p-5 hover:shadow-lg transition-shadow">
+          <p class="text-xs text-teal-300" data-t="nextDose"></p><p id="nextDoseTxt" class="font-bold leading-8 mt-1">—</p><p id="nextDoseSub" class="text-[11px] text-teal-400"></p></div>
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
+          <p class="text-xs text-slate-500 dark:text-slate-400" data-t="nextVisit"></p><p id="nextVisitTxt" class="font-bold leading-7 mt-1 text-sm">—</p>
+          <button onclick="showTab('check')" class="mt-2 text-xs bg-amber-400 text-[#0d3b3a] font-bold rounded-full px-3 py-1 hover:scale-105 transition-transform" data-t="prepare"></button></div>
+      </div>
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-2"><h3 class="font-bold">📈 <span data-t="trend"></span></h3>
+          <div class="flex gap-1.5"><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="30">30</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="60">60</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600 bg-teal-600 text-white" data-r="90">90</button></div></div>
+        <div id="seriesChips" class="flex flex-wrap gap-1.5 mb-3"></div>
+        <div class="relative"><canvas id="chart" style="width:100%;height:280px"></canvas><div id="chartTip" class="hidden absolute pointer-events-none bg-[#0d3b3a] dark:bg-slate-700 text-white text-xs rounded-lg px-3 py-2 shadow-lg z-10" style="min-width:140px"></div></div>
+        <div id="chartEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">🌱</p><p class="font-bold" data-t="noData"></p>
+          <div class="flex gap-2 justify-center mt-4"><button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-4 py-2 text-sm" data-t="startCheck"></button><button onclick="loadSample()" class="border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-lg px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-300" data-t="sampleBtn"></button></div></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5"><h3 class="font-bold mb-3">🔍 <span data-t="insights"></span></h3><div id="insights" class="space-y-3 text-sm"></div></div>
+        <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 shadow-sm p-5"><h3 class="font-bold text-rose-700 dark:text-rose-300 mb-3">🚩 <span data-t="attention"></span></h3><ul id="redflags" class="space-y-2 text-sm text-slate-700 dark:text-slate-200"></ul></div>
+      </div>
+    </section>
+
+    <!-- دارویار -->
+    <section id="view-meds" class="view hidden space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="enableNotif()" class="text-sm border-2 border-sky-300 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-900/30 font-bold rounded-xl px-4 py-2">🔔 <span id="notifLbl"></span></button>
+          <button onclick="copyMedList()" class="text-sm border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-bold rounded-xl px-4 py-2">📋 <span data-t="copyList"></span></button>
+          <button onclick="openMedForm()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 hover:scale-105 shadow">＋ <span data-t="addMed"></span></button>
+        </div>
+      </div>
+      <div id="medForm" class="hidden rounded-xl border-2 border-teal-300 bg-white dark:bg-slate-800 shadow-lg p-6">
+        <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4" id="mfTitle"></h3>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medName"></label><input id="mf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medDose"></label><input id="mf-dose" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medEmoji"></label><input id="mf-emoji" value="💊" maxlength="4" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none text-center text-xl"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medColor"></label><div id="mf-colors" class="flex gap-2 flex-wrap"></div></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medPerday"></label><select id="mf-perday" onchange="mfPerday()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medTimes"></label>
+            <div class="flex gap-2"><input type="time" id="mf-t1" value="08:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none"><input type="time" id="mf-t2" value="13:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"><input type="time" id="mf-t3" value="22:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"></div></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medFreq"></label>
+            <div class="flex gap-3 text-sm flex-wrap"><label class="flex items-center gap-1"><input type="radio" name="mff" value="daily" checked onchange="mfFreq()" class="accent-teal-600"><span data-t="daily"></span></label>
+            <label class="flex items-center gap-1"><input type="radio" name="mff" value="everyN" onchange="mfFreq()" class="accent-teal-600"><span data-t="every"></span> <input type="number" id="mf-n" value="3" min="2" class="w-14 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-1 py-1 outline-none"></label>
+            <label class="flex items-center gap-1"><input type="radio" name="mff" value="days" onchange="mfFreq()" class="accent-teal-600"><span data-t="specificDays"></span></label></div></div>
+          <div id="mf-daysBox" class="hidden"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="weekDays"></label><div id="mf-days" class="flex gap-1.5"></div></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medRemaining"></label><input id="mf-remaining" type="number" min="0" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+          <div class="sm:col-span-2 flex items-center gap-4"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mf-food" class="w-5 h-5 accent-teal-600">🍽️ <span data-t="withFood"></span></label>
+            <input id="mf-note" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm focus:border-teal-500 outline-none" data-t-attr="placeholder" data-t="medNote"></div>
+        </div>
+        <div class="flex gap-3 mt-5"><button onclick="saveMed()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
+        <button onclick="closeMedForm()" class="border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold rounded-xl px-6 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700" data-t="cancel"></button></div>
+      </div>
+      <div class="revealwrap" id="medsSensitive">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6" id="medsInner">
+          <div class="flex items-center justify-between mb-4"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">⏱️ <span data-t="todayPlan"></span></h3><span class="text-sm text-slate-500 dark:text-slate-400" id="todayCount"></span></div>
+          <div id="timeline" class="space-y-3"></div>
+          <div id="timelineEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">💊</p><p class="font-bold" data-t="noMed"></p></div>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+          <div class="flex items-center justify-between mb-3"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">💧 <span data-t="waterToday"></span></h3><span class="text-sm font-bold text-sky-600 dark:text-sky-300" id="waterTxt"></span></div>
+          <div id="waterGlasses" class="flex flex-wrap gap-2 mb-3"></div>
+          <p id="waterHot" class="hidden text-xs text-rose-600 font-bold mb-2" data-t="waterHot"></p></div>
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+          <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-3">⏰ <span data-t="healthReminders"></span></h3>
+          <div id="reminderList" class="space-y-3"></div></div>
+      </div>
+      <div class="revealwrap" id="medListWrap">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+          <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🗂️ <span data-t="myMeds"></span></h3>
+          <div id="medList" class="grid sm:grid-cols-2 gap-3"></div></div>
+      </div>
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">📜 <span data-t="medHistory"></span></h3>
+        <div id="medHistory" class="space-y-2 text-sm"></div></div>
+    </section>
+
+    <!-- پایبندی -->
+    <section id="view-adh" class="view hidden space-y-6">
+      <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h3 class="font-bold mb-1">🗓️ <span data-t="heatmap"></span></h3><p class="text-xs text-slate-400 mb-4" data-t="heatmapSub"></p>
+        <div id="heatmap" class="flex gap-1 overflow-x-auto pb-2" dir="ltr"></div></div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">💊 <span data-t="perMed"></span></h3><div id="perMed" class="space-y-4"></div></div>
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">🕐 <span data-t="timePattern"></span></h3><div id="timePattern" class="space-y-3"></div><p id="timeInsight" class="text-sm mt-4 font-bold text-amber-700 dark:text-amber-300"></p></div>
+      </div>
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h3 class="font-bold mb-4">📅 <span data-t="weeklyTrend"></span></h3><div id="weeklyTrend" class="flex items-end gap-2 h-32"></div>
+        <p id="adhInsight" class="text-sm mt-4 font-bold text-teal-700 dark:text-teal-300"></p></div>
+    </section>
+
+    <!-- چک‌این -->
+    <section id="view-check" class="view hidden">
+      <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="checkTitle"></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="checkSub"></p></div>
+          <div class="flex gap-2">
+            <button id="voiceBtn" onclick="voiceCheck()" class="text-xs border-2 border-rose-300 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-full px-3 py-1.5 font-bold">🎙️ <span data-t="voice"></span></button>
+            <button onclick="copyYesterday()" class="text-xs border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-full px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">📋 <span data-t="likeYesterday"></span></button>
+          </div></div>
+        <div id="voiceBox" class="hidden mt-3 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 rounded-xl p-3 text-sm text-rose-800 dark:text-rose-200"></div>
+        <div id="checkDone" class="hidden mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-sm rounded-lg p-3" data-t="alreadyChecked"></div>
+        <div id="emoRows" class="mt-4"></div>
+        <div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="trigChips" class="flex flex-wrap gap-2"></div></div>
+        <textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" data-t-attr="placeholder" data-t="notePh"></textarea>
+        <button onclick="saveCheckin()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="saveCheck"></button>
+      </div>
+    </section>
+
+    <!-- تریاژ -->
+    <section id="view-triage" class="view hidden">
+      <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="triageTitle"></h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="triageSub"></p>
+        <div id="triageBox" class="mt-6"></div>
+        <div class="mt-8"><h3 class="font-bold text-sm text-slate-600 dark:text-slate-300 mb-2" data-t="triageHist"></h3><div id="triageHist" class="space-y-2 text-sm"></div></div>
+      </div>
+    </section>
+
+    <!-- پایش -->
+    <section id="view-cal" class="view hidden">
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
+        <button onclick="addMonitor()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2">＋ <span data-t="addMonitor"></span></button></div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="monitorSub"></p>
+        <div id="monitorList" class="space-y-3"></div></div>
+    </section>
+
+    <!-- گزارش -->
+    <section id="view-report" class="view hidden space-y-8">
+      <div class="revealwrap" id="reportWrap">
+        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌡️ <span data-t="mainSymptoms"></span></h2><div class="space-y-4 text-sm" id="repSymp"></div></div>
+      </div>
+      <div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white p-6"><h2 class="font-display text-2xl text-amber-300 mb-3">💬 <span data-t="myConcerns"></span></h2><div id="repConcerns" class="flex flex-wrap gap-2"></div></div>
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewHist"></span></h2><div id="reviewList" class="space-y-3 text-sm"></div></div>
+    </section>
+
+    <!-- تنظیمات -->
+    <section id="view-profile" class="view hidden space-y-6">
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">👤 <span data-t="profileTitle"></span></h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="pf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="pf-age" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="pf-height" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="pf-weight" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="pf-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="pf-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="pf-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="pf-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+        </div>
+        <div class="mt-4"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="concerns"></label><div id="pf-concerns" class="flex flex-wrap gap-2"></div></div>
+        <button onclick="saveProfile()" class="mt-5 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🎨 <span data-t="prefsTitle"></span></h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="language"></label>
+            <div class="flex gap-2"><button onclick="setLang('fa')" id="langFa" class="flex-1 border-2 rounded-xl py-2.5 font-bold">فارسی</button><button onclick="setLang('en')" id="langEn" class="flex-1 border-2 rounded-xl py-2.5 font-bold">English</button></div></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="theme"></label>
+            <div class="flex gap-2"><button onclick="setTheme('light')" id="thLight" class="flex-1 border-2 rounded-xl py-2.5 font-bold">☀️</button><button onclick="setTheme('dark')" id="thDark" class="flex-1 border-2 rounded-xl py-2.5 font-bold">🌙</button><button onclick="setTheme('system')" id="thSys" class="flex-1 border-2 rounded-xl py-2.5 font-bold" data-t="system"></button></div></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="refillDays"></label>
+            <input id="set-refill" type="number" min="1" max="60" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveSetting('refillDays',+this.value)"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthMode"></label>
+            <label class="relative inline-flex items-center cursor-pointer mt-1"><input type="checkbox" id="set-stealth" onchange="toggleStealth(this.checked)" class="sr-only peer">
+            <div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label>
+            <p class="text-[11px] text-slate-400 mt-1" data-t="stealthDesc"></p></div>
+          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthName"></label>
+            <input id="set-appname" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveStealthName(this.value)"></div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌤️ <span data-t="weatherSet"></span></h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3"><span data-t="weatherApi"></span>: <b dir="ltr">Open-Meteo.com</b> (<span data-t="freeNoKey"></span>)</p>
+        <div class="flex gap-2 mb-3">
+          <input id="citySearch" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-teal-500" data-t-attr="placeholder" data-t="searchCity">
+          <button onclick="searchCity()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="search"></button></div>
+        <div id="cityResults" class="mb-3 space-y-1"></div>
+        <div id="cityList" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🩺 <span data-t="emergencySet"></span></h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgContact"></label><input id="emg-contact" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgPhone"></label><input id="emg-phone" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgAllergy"></label><input id="emg-allergy" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgNotes"></label><input id="emg-notes" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+        </div>
+        <button onclick="saveEmergency()" class="mt-4 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5" data-t="save"></button>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">✍️ <span data-t="symptomSet"></span></h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="symptomSetSub"></p>
+        <div id="symptomMgr" class="space-y-2"></div>
+        <div class="flex gap-2 mt-3">
+          <input id="newSymFa" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymFa">
+          <input id="newSymEn" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymEn">
+          <button onclick="addSymptom()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">＋</button></div>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🔑 <span data-t="securityTitle"></span></h2>
+        <div class="grid sm:grid-cols-3 gap-3 mb-3"><input type="password" id="cp-old" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="curPwd"><input type="password" id="cp-new" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="newPwd"><input type="password" id="cp-con" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="repeatPwd"></div>
+        <button onclick="changePwd()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl px-6 py-2.5" data-t="changePwd"></button>
+        <div class="border-t border-slate-200 dark:border-slate-600 my-4"></div>
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="flex gap-2"><input type="password" inputmode="numeric" id="pinSet" maxlength="6" class="w-32 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-center outline-none" data-t-attr="placeholder" data-t="pinPh">
+          <button onclick="setPin()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm" data-t="setPin"></button></div>
+          <button id="bioSetBtn" onclick="setupBio()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm">👆 <span data-t="enableBio"></span></button>
+          <span id="pinStatus" class="text-xs text-slate-400"></span>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1">💾 <span data-t="backupTitle"></span></h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><span data-t="storageUsed"></span>: <b id="storageUsed"></b> · <span data-t="storageFree"></span>: <b id="storageFree"></b></p>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4"><span data-t="lastBackup"></span>: <b id="lastBackupTxt"></b></p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="exportVault()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">⬇️ <span data-t="downloadBackup"></span></button>
+          <button onclick="shareBackup()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">📤 <span data-t="shareBackup"></span></button>
+          <label class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow cursor-pointer">⬆️ <span data-t="restore"></span><input type="file" id="importFile" accept=".json" class="hidden"></label>
+        </div>
+        <div id="importPwdBox" class="hidden mt-4 bg-sky-50 dark:bg-sky-900/30 border border-sky-300 rounded-xl p-4">
+          <p class="text-sm text-sky-900 dark:text-sky-200 mb-2" data-t="importPwdMsg"></p>
+          <div class="flex gap-2"><input type="password" id="importPwd" class="flex-1 border-2 border-sky-300 rounded-xl px-3 py-2 outline-none"><button onclick="importWithPwd()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2" data-t="open"></button></div></div>
+      </div>
+
+      <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 p-6">
+        <h2 class="font-display text-2xl text-rose-700 dark:text-rose-300 mb-3">⚠️ <span data-t="dangerTitle"></span></h2>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="clearPart('dose')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearDose"></button>
+          <button onclick="clearPart('check')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearCheck"></button>
+          <button onclick="clearPart('triage')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearTriage"></button>
+          <button onclick="lockApp()" class="border-2 border-slate-400 text-slate-700 dark:text-slate-200 font-bold rounded-xl px-4 py-2 hover:bg-white dark:hover:bg-slate-700 text-sm" data-t="lockNow"></button>
+          <button onclick="wipeAll()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="wipeAll"></button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- مرور هفتگی -->
+<div id="reviewModal" class="app hidden fixed inset-0 z-[75] bg-black/50 flex items-center justify-center p-4">
+  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-md w-full">
+    <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewTitle"></span></h3>
+    <div class="space-y-3">
+      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ1"></label><textarea id="rv-good" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ2"></label><textarea id="rv-hard" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ3"></label><textarea id="rv-goal" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+    </div>
+    <div class="flex gap-3 mt-4"><button onclick="saveReview()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-2.5" data-t="save"></button>
+    <button onclick="closeReview()" class="border-2 border-slate-300 dark:border-slate-600 rounded-xl px-4 font-bold text-slate-600 dark:text-slate-300" data-t="later"></button></div>
+  </div>
+</div>
+
+<!-- خلاصه چاپی -->
+<div id="printDigest" class="max-w-3xl mx-auto p-6 text-slate-900">
+  <div class="flex items-center justify-between border-b-4 border-teal-700 pb-3 mb-4">
+    <div><h1 class="font-display text-3xl" id="pdTitle"></h1><p id="pdPatient" class="text-sm text-slate-600"></p></div>
+    <div class="text-left text-sm"><p id="pdDate" class="font-bold"></p></div>
+  </div>
+  <div id="pdBody"></div>
+  <p class="mt-6 text-[11px] text-slate-500 border-t border-slate-300 pt-2" data-t="printFooter"></p>
+</div>
+
+<div id="toast" class="toast hidden fixed bottom-6 left-1/2 z-[90] bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
+<div id="softToast" class="toast hidden fixed bottom-20 left-1/2 z-[89] bg-sky-600 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
+
+<script>
+/* ═══════════ i18n ═══════════ */
+let lang=localStorage.getItem('hammasir-lang')||'fa';
+const L={
+lockSub:['داده‌های تو روی همین دستگاه رمزگذاری شده‌اند','Your data is encrypted on this device'],
+pwdLbl:['رمز عبور','Password'],pinLbl:['پین کد','PIN'],pinOpen:['باز کردن با پین','Unlock with PIN'],usePwdInstead:['استفاده از رمز عبور','Use password instead'],
+unlock:['باز کن','Unlock'],bioOpen:['ورود با اثر انگشت','Unlock with fingerprint'],wrongCred:['❌ اشتباه است','❌ Wrong'],
+forgot:['رمز را فراموش کرده‌ام (پاک شدن داده‌ها)','Forgot password (erase data)'],lockHint:['🔐 AES-GCM-256 · PBKDF2 · هیچ چیزی به سرور ارسال نمی‌شود','🔐 AES-GCM-256 · PBKDF2 · Nothing is sent to any server'],
+emergencyBtn:['کارت اورژانس (بدون قفل)','Emergency card (no unlock)'],langOther:['English','فارسی'],theme:['تم','Theme'],
+emergencyTitle:['کارت اورژانس','Emergency Card'],emergencySub:['این اطلاعات بدون باز شدن اپ نمایش داده می‌شود','Shown without unlocking the app'],backToLock:['بازگشت','Back'],
+setupTitle:['به هم‌مسیر خوش آمدی','Welcome to HamMasir'],setupSub:['۴ قدم کوتاه','4 short steps'],
+suStep1:['۱) رمز عبور بساز','1) Create a password'],suStep1d:['این رمز داده‌هایت را رمزگذاری می‌کند. اگر فراموشش کنی راه بازیابی نیست مگر با پشتیبان.','Encrypts your data. If forgotten, unrecoverable without a backup.'],
+suStep2:['۲) اطلاعات پایه','2) Basic info'],suStep3:['۳) بیماری و درمان','3) Condition & treatment'],suStep4:['۴) دغدغه‌ها','4) Concerns'],suStep4d:['در گزارش پزشک برجسته می‌شوند','Highlighted in the doctor report'],
+back:['قبلی','Back'],next:['بعدی','Next'],
+fName:['نام/حروف اختصاری','Name/initials'],fAge:['سن','Age'],fSex:['جنسیت','Sex'],male:['مرد','Male'],female:['زن','Female'],fHeight:['قد (cm)','Height (cm)'],fWeight:['وزن (kg)','Weight (kg)'],
+fDx:['تاریخ تشخیص','Diagnosis date'],fType:['نوع MS','MS type'],fDmt:['داروی اصلی','Main DMT'],fDoc:['پزشک','Doctor'],fNext:['ویزیت بعدی','Next visit'],
+tagline:['پایش هوشمند MS','Smart MS tracking'],install:['نصب','Install'],print:['چاپ/PDF','Print/PDF'],
+tabs:{dash:['داشبورد','Dashboard'],meds:['دارویار','Meds'],adh:['پایبندی','Adherence'],check:['چک‌این','Check-in'],triage:['تریاژ','Triage'],cal:['پایش','Monitor'],report:['گزارش','Report'],profile:['تنظیمات','Settings']},
+hello:['سلام','Hello'],checkin:['چک‌این امروز','Check-in'],badDay:['روز بد / عود','Bad day / Flare'],
+reviewPrompt:['وقت بازبینی هفتگی است — ۳ سوال کوتاه','Time for your weekly review — 3 short questions'],reviewStart:['شروع','Start'],
+backupNow:['پشتیبان بگیر','Back up now'],sampleWarn:['⚠️ داده‌های نمونه فعال‌اند','⚠️ Sample data is active'],clearSample:['پاک کردن','Clear'],
+weather:['آب‌وهوا','Weather'],loading:['در حال دریافت…','Loading…'],todayMeds:['داروهای امروز','Today\'s meds'],nextDose:['دوز بعدی','Next dose'],nextVisit:['ویزیت بعدی','Next visit'],prepare:['آماده‌سازی','Prepare'],
+trend:['روند علائم','Symptom trend'],noData:['هنوز داده‌ای ثبت نکرده‌ای','No data yet'],startCheck:['شروع چک‌این','Start check-in'],sampleBtn:['داده‌ی نمونه','Sample data'],
+insights:['بینش‌های خودکار','Auto insights'],attention:['نیازمند توجه','Needs attention'],
+medsTitle:['دارویار','Medication companion'],medsSub:['برنامه، یادآوری سر وقت، ثبت با یک ضربه','Schedule, on-time reminders, one-tap logging'],
+copyList:['کپی لیست داروها','Copy med list'],addMed:['داروی جدید','New med'],
+medName:['نام دارو','Med name'],medDose:['دوز','Dose'],medEmoji:['ایموجی','Emoji'],medColor:['رنگ','Color'],medPerday:['دوز در روز','Doses/day'],medTimes:['ساعت(ها)','Time(s)'],
+medFreq:['تکرار','Repeat'],daily:['هر روز','Daily'],every:['هر','Every'],specificDays:['روزهای خاص','Specific days'],weekDays:['روزهای هفته','Weekdays'],
+medRemaining:['قرص باقی‌مانده','Pills remaining'],withFood:['با غذا','With food'],medNote:['یادداشت','Note'],save:['ذخیره','Save'],cancel:['انصراف','Cancel'],
+todayPlan:['برنامه‌ی امروز','Today\'s plan'],noMed:['دارویی اضافه نشده','No meds added'],
+waterToday:['آب امروز','Water today'],waterHot:['🔥 امروز گرمه — هدف آب بیشتر شد','🔥 Hot day — water goal increased'],
+healthReminders:['یادآورهای سلامتی','Health reminders'],myMeds:['داروهای من','My meds'],medHistory:['تاریخچه‌ی تغییرات دارو','Medication change history'],
+adhTitle:['گزارش پایبندی','Adherence report'],adhSub:['پزشک را میخکوب می‌کند','Will impress your doctor'],
+heatmap:['نقشه‌ی حرارتی ۴ ماه','4-month heatmap'],heatmapSub:['هر خانه یک روز — سبز یعنی کامل','Each cell is a day — green means complete'],
+perMed:['پایبندی هر دارو (۳۰ روز)','Per-med adherence (30d)'],timePattern:['الگوی ساعتی','Time-of-day pattern'],weeklyTrend:['روند هفتگی','Weekly trend'],
+checkTitle:['چک‌این امروز','Today\'s check-in'],checkSub:['هر ردیف یک ضربه','One tap per row'],voice:['صوتی','Voice'],likeYesterday:['مثل دیروز','Like yesterday'],
+alreadyChecked:['✅ امروز چک‌این کرده‌ای','✅ Already checked in today'],triggers:['محرک‌های امروز','Today\'s triggers'],notePh:['یادداشت دلخواه…','Optional note…'],saveCheck:['ثبت و ذخیره‌ی رمزگذاری‌شده','Save (encrypted)'],
+triageTitle:['تریاز علامت جدید','New symptom triage'],triageSub:['عود واقعی یا تشدید موقت؟','Real relapse or temporary flare?'],triageHist:['سابقه','History'],
+monitorTitle:['پایش سلامت','Health monitor'],addMonitor:['افزودن','Add'],monitorSub:['آزمایش‌ها، تصویربرداری‌ها و کارهای دوره‌ای را با تاریخ اضافه کن','Add labs, imaging and periodic tasks with dates'],
+mainSymptoms:['علائم اصلی','Main symptoms'],myConcerns:['دغدغه‌های من','My concerns'],reviewHist:['بازبینی‌های هفتگی','Weekly reviews'],
+profileTitle:['اطلاعات من','My info'],concerns:['دغدغه‌ها','Concerns'],
+prefsTitle:['ظاهر و ترجیحات','Appearance & prefs'],language:['زبان','Language'],system:['سیستم','System'],
+refillDays:['هشدار شارژ نسخه (چند روز مانده)','Refill warning (days left)'],
+stealthMode:['حالت مخفی','Stealth mode'],stealthDesc:['اعلان‌ها خنثی می‌شوند و بخش‌های حساس محو هستند','Notifications become neutral; sensitive sections blur'],
+stealthName:['نام نمایشی اپ (برای مخفی‌کاری)','App display name (for stealth)'],
+weatherSet:['هواشناسی','Weather'],weatherApi:['سرویس','Service'],freeNoKey:['رایگان، بدون کلید','Free, no key'],searchCity:['نام شهر (هر جای جهان)','City name (anywhere)'],search:['جستجو','Search'],
+emergencySet:['کارت اورژانس','Emergency card'],emgContact:['نام تماس اضطراری','Emergency contact'],emgPhone:['تلفن','Phone'],emgAllergy:['حساسیت‌ها','Allergies'],emgNotes:['یادداشت مهم','Important notes'],
+symptomSet:['سوالات چک‌این','Check-in questions'],symptomSetSub:['اضافه/کم/غیرفعال کن','Add/remove/disable'],newSymFa:['نام فارسی','Persian name'],newSymEn:['نام انگلیسی','English name'],
+securityTitle:['امنیت','Security'],curPwd:['رمز فعلی','Current'],newPwd:['رمز جدید','New'],repeatPwd:['تکرار','Repeat'],changePwd:['تغییر رمز','Change password'],
+pinPh:['پین ۴-۶ رقم','4-6 digit PIN'],setPin:['تنظیم پین','Set PIN'],enableBio:['فعال‌سازی اثر انگشت','Enable fingerprint'],
+backupTitle:['پشتیبان‌گیری','Backup'],storageUsed:['استفاده‌شده','Used'],storageFree:['باقی‌مانده (تخمین)','Free (est.)'],lastBackup:['آخرین پشتیبان','Last backup'],never:['هرگز','Never'],
+downloadBackup:['دانلود پشتیبان','Download backup'],shareBackup:['اشتراک‌گذاری','Share'],restore:['بازیابی','Restore'],importPwdMsg:['این فایل رمز دیگری دارد','This file uses a different password'],open:['باز کن','Open'],
+dangerTitle:['منطقه‌ی خطر','Danger zone'],clearDose:['پاک کردن دوزها','Clear doses'],clearCheck:['پاک کردن چک‌این‌ها','Clear check-ins'],clearTriage:['پاک کردن تریازها','Clear triage'],lockNow:['قفل حالا','Lock now'],wipeAll:['پاک کردن همه‌چیز','Wipe everything'],
+reviewTitle:['بازبینی هفتگی','Weekly review'],reviewQ1:['این هفته چه چیزی خوب پیش رفت؟','What went well this week?'],reviewQ2:['چه چیزی سخت بود؟','What was hard?'],reviewQ3:['یک هدف برای هفته‌ی بعد','One goal for next week'],later:['بعداً','Later'],
+printFooter:['این خلاصه توسط بیمار تولید شده و جایگزین قضاوت بالینی پزشک نیست.','Patient-generated; not a substitute for clinical judgment.'],
+fakeTitle:['یادداشت‌ها','Notes'],fakeBack:['بازگشت','Back'],
+notifOn:['اعلان فعال','Notifications on'],notifOff:['فعال‌سازی اعلان','Enable notifications'],notifDenied:['اعلان مسدود است','Notifications blocked'],notifNone:['اعلان پشتیبانی نمی‌شود','Not supported'],
+took:['✅ خوردم','✅ Taken'],snooze:['⏰ بعداً','⏰ Later'],skipped:['❌ نخوردم','❌ Skipped'],
+stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],stUpcoming:['بعدی','Upcoming'],
+};
+function t(k){let v=L;for(const p of k.split(".")){v=v&&v[p];}return Array.isArray(v)?v[lang==="fa"?0:1]:k;}
+function num(n){return Number(n).toLocaleString(lang==='fa'?'fa-IR':'en-US');}
+function fdate(d,o){return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-US',o||{day:'numeric',month:'long'}).format(d);}
+function applyStatic(){document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t(el.dataset.t);});
+document.querySelectorAll('[data-t-attr]').forEach(el=>{el.setAttribute(el.dataset.tAttr,t(el.dataset.t));});
+document.documentElement.dir=lang==='fa'?'rtl':'ltr';document.documentElement.lang=lang;
+$('langLbl').textContent=lang==='fa'?'EN':'فا';
+buildNav();}
+function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic();if(S){renderAll();}else{renderLock();}}
+function buildNav(){const tabs=['dash','meds','adh','check','triage','cal','report','profile'];
+const icons={dash:'📊',meds:'💊',adh:'📈',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
+$('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" data-tab="${tb}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
+
+/* ═══════════ تم ═══════════ */
+let theme=localStorage.getItem('hammasir-theme')||'system';
+function applyTheme(){const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
+document.documentElement.classList.toggle('dark',dark);}
+function setTheme(m){theme=m;localStorage.setItem('hammasir-theme',m);applyTheme();toast('🌓');}
+function cycleTheme(){setTheme(document.documentElement.classList.contains('dark')?'light':'dark');}
+
+/* ═══════════ ابزار ═══════════ */
+const $=id=>document.getElementById(id);
+const dkey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const r1=v=>Math.round(v*10)/10;
+const ease=t=>1-Math.pow(1-t,3);
+function toast(m){const el=$('toast');el.textContent=m;el.classList.remove('hidden');clearTimeout(el._h);el._h=setTimeout(()=>el.classList.add('hidden'),2600);}
+function softToast(m){const el=$('softToast');el.textContent=m;el.classList.remove('hidden');clearTimeout(el._h);el._h=setTimeout(()=>el.classList.add('hidden'),4000);}
+function pearson(x,y){const n=x.length;if(n<5)return 0;const mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let nu=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=x[i]-mx,b=y[i]-my;nu+=a*b;dx+=a*a;dy+=b*b;}return dx&&dy?nu/Math.sqrt(dx*dy):0;}
+function togglePwd(id){const el=$(id);el.type=el.type==='password'?'text':'password';}
+
+/* ═══════════ رمزنگاری (key-wrapping) ═══════════ */
+const VAULT_KEY='hammasir-vault-v5',DEVKEY='hammasir-devkey';
+const enc=new TextEncoder(),dec=new TextDecoder();
+let WEAK=!(window.crypto&&crypto.subtle);
+function buf2b64(b){const u=new Uint8Array(b);let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s);}
+function b642buf(b){return Uint8Array.from(atob(b),c=>c.charCodeAt(0)).buffer;}
+async function deriveKey(p,salt){const base=await crypto.subtle.importKey('raw',enc.encode(p),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);}
+async function importMaster(bytes){return crypto.subtle.importKey('raw',bytes,{name:'AES-GCM'},false,['encrypt','decrypt']);}
+async function wrapMaster(master,secret){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+const k=await deriveKey(secret,salt);const w=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,master);
+return{salt:buf2b64(salt),iv:buf2b64(iv),w:buf2b64(w)};}
+async function unwrapMaster(wrap,secret){const k=await deriveKey(secret,b642buf(wrap.salt));return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:b642buf(wrap.iv)},k,b642buf(wrap.w)));}
+async function encData(master,obj){const iv=crypto.getRandomValues(new Uint8Array(12));const k=await importMaster(master);
+const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,enc.encode(JSON.stringify(obj)));return{iv:buf2b64(iv),ct:buf2b64(ct)};}
+async function decData(master,d){const k=await importMaster(master);const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b642buf(d.iv)},k,b642buf(d.ct));return JSON.parse(dec.decode(pt));}
+/* weak fallback */
+function keystream(p,len){let h=2166136261;for(let i=0;i<p.length;i++){h^=p.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}const o=new Array(len);let x=h||1;for(let i=0;i<len;i++){x=(Math.imul(x,1103515245)+12345)>>>0;o[i]=x&0xff;}return o;}
+function weakEnc(o,p){const s=encodeURIComponent(JSON.stringify(o));const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return btoa(r);}
+function weakDec(b,p){const s=atob(b);const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return r;}
+
+let MASTER=null,S=null,vault=null;
+async function persist(){if(!S||!MASTER)return;try{
+  if(WEAK){vault.ct=weakEnc(S,MASTER.weakPwd);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+  else{vault.data=await encData(MASTER.bytes,S);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+  updateStorage();}catch(e){toast('⚠️ save failed');}}
+async function createVault(pwd,state){
+  if(WEAK){vault={v:5,weak:1,ct:weakEnc(state,pwd)};MASTER={weakPwd:pwd};}
+  else{const master=crypto.getRandomValues(new Uint8Array(32));
+    vault={v:5,data:await encData(master,state),pwd:await wrapMaster(master,pwd),pin:null,bio:null};
+    MASTER={bytes:master};}
+  localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+async function unlockWith(secret,kind){
+  vault=JSON.parse(localStorage.getItem(VAULT_KEY));
+  if(WEAK){S=JSON.parse(decodeURIComponent(weakDec(vault.ct,secret)));MASTER={weakPwd:secret};return;}
+  let master;
+  if(kind==='pwd')master=await unwrapMaster(vault.pwd,secret);
+  else if(kind==='pin')master=await unwrapMaster(vault.pin,secret);
+  else if(kind==='bio'){const dk=JSON.parse(localStorage.getItem(DEVKEY));master=await unwrapMaster(vault.bio,dk);}
+  S=await decData(master,vault.data);MASTER={bytes:master};}
+async function setPin(){const pin=$('pinSet').value;if(!/^\d{4,6}$/.test(pin))return toast(lang==='fa'?'پین ۴ تا ۶ رقم':'PIN must be 4-6 digits');
+  if(WEAK)return toast('PIN unavailable');
+  vault.pin=await wrapMaster(MASTER.bytes,pin);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
+  $('pinSet').value='';updatePinStatus();toast('🔑 '+(lang==='fa'?'پین تنظیم شد':'PIN set'));}
+async function setupBio(){try{
+  const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'HamMasir'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user',displayName:'user'},pubKeyCredParams:[{type:'public-key',alg:-7}]}});
+  let dk=localStorage.getItem(DEVKEY);
+  if(!dk){dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));localStorage.setItem(DEVKEY,JSON.stringify(dk));}
+  dk=JSON.parse(localStorage.getItem(DEVKEY));
+  vault.bio=await wrapMaster(MASTER.bytes,dk);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
+  toast('👆 '+(lang==='fa'?'اثر انگشت فعال شد':'Fingerprint enabled'));}catch(e){toast(lang==='fa'?'اثر انگشت در دسترس نیست':'Biometric unavailable');}}
+async function wrapMasterRaw(master,keyB64){const k=await crypto.subtle.importKey('raw',b642buf(keyB64),{name:'AES-GCM'},false,['encrypt']);
+const iv=crypto.getRandomValues(new Uint8Array(12));const w=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,master);return{iv:buf2b64(iv),w:buf2b64(w)};}
+async function changePwd(){const o=$('cp-old').value,n=$('cp-new').value,c=$('cp-con').value;
+  if(n.length<4)return toast(lang==='fa'?'رمز جدید حداقل ۴ نویسه':'Min 4 chars');if(n!==c)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');
+  if(WEAK){if(o!==MASTER.weakPwd)return toast(t('wrongCred'));vault.ct=weakEnc(S,n);MASTER.weakPwd=n;}
+  else{try{await unwrapMaster(vault.pwd,o);}catch(e){return toast(t('wrongCred'));}
+    vault.pwd=await wrapMaster(MASTER.bytes,n);}
+  localStorage.setItem(VAULT_KEY,JSON.stringify(vault));$('cp-old').value=$('cp-new').value=$('cp-con').value='';toast('🔑');}
+function updatePinStatus(){const hasPin=vault&&vault.pin;const hasBio=vault&&vault.bio;
+$('pinStatus').textContent=(hasPin?'✅ PIN':'')+(hasBio?' · 👆 Bio':'');
+if(window.PublicKeyCredential)$('bioSetBtn').classList.remove('hidden');}
+
+/* ═══════════ صفحه‌ها ═══════════ */
+let curTab='dash';
+function showScreen(id){['lock','setup','app','emergency'].forEach(s=>$('scr-'+s).classList.toggle('hidden',s!==id));}
+function renderLock(){const hasPin=vault&&vault.pin;$('pinArea').classList.toggle('hidden',!hasPin);
+$('pwdArea').classList.toggle('hidden',!!hasPin);$('bioArea').classList.toggle('hidden',!(vault&&vault.bio));
+$('lockAppName').textContent=stealthName();}
+function boot(){applyTheme();applyStatic();initPWA();
+  const raw=localStorage.getItem(VAULT_KEY);
+  if(raw){vault=JSON.parse(raw);showScreen('lock');renderLock();setTimeout(()=>$(hasPinFocus()).focus(),100);}
+  else{showScreen('setup');suShow();$('su-dx').value=dkey(new Date());renderConcernChips('su-concerns',setupConcerns);}}
+function hasPinFocus(){return vault&&vault.pin?'lockPin':'lockPwd';}
+async function unlockPwd(){try{await unlockWith($('lockPwd').value,'pwd');enterApp();}catch(e){lockError();}}
+async function unlockPin(){try{await unlockWith($('lockPin').value,'pin');enterApp();}catch(e){lockError();}}
+async function unlockBio(){try{await unlockWith(null,'bio');enterApp();}catch(e){lockError();}}
+function lockError(){$('lockErr').classList.remove('hidden');const el=$(hasPinFocus());el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),450);}
+function showPwdMode(){$('pinArea').classList.add('hidden');$('pwdArea').classList.remove('hidden');$('lockPwd').focus();}
+function enterApp(){ensureState();$('lockErr').classList.add('hidden');$('lockPwd').value='';$('lockPin').value='';
+showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();
+checkReviewPrompt();checkBackupPrompt();toast(lang==='fa'?'خوش برگشتی 👋':'Welcome back 👋');}
+function forgot(){if(confirm(lang==='fa'?'بدون رمز داده‌ها قابل بازیابی نیستند. پاک شود؟':'Without the password data is unrecoverable. Erase?'))wipeAll();}
+function lockApp(){MASTER=null;S=null;showScreen('lock');renderLock();}
+function wipeAll(){if(confirm(lang==='fa'?'همه‌چیز برای همیشه پاک می‌شود. مطمئنی؟':'Erase everything forever?')){localStorage.removeItem(VAULT_KEY);localStorage.removeItem(DEVKEY);location.reload();}}
+
+/* ═══════════ حالت مخفی ═══════════ */
+let stealthOn=localStorage.getItem('hammasir-stealth')==='1';
+let stealthAppName=localStorage.getItem('hammasir-appname')||'';
+function stealth(){return stealthOn;}
+function stealthName(){return stealthOn&&stealthAppName?stealthAppName:(lang==='fa'?'هم‌مسیر':'HamMasir');}
+function toggleStealth(v){stealthOn=v;localStorage.setItem('hammasir-stealth',v?'1':'0');applyStealth();toast(v?'🙈 '+(lang==='fa'?'مخفی فعال شد':'Stealth on'):'🙉');}
+function saveStealthName(v){stealthAppName=v.trim();localStorage.setItem('hammasir-appname',stealthAppName);applyStealth();}
+function applyStealth(){document.title=stealthName();
+if(S){$('appTitle').textContent=stealthAppName||(lang==='fa'?'هم‌مسیر':'HamMasir');}
+$('stealthQuick').classList.toggle('hidden',!stealthOn);
+['medsSensitive','medListWrap','reportWrap'].forEach(id=>wrapStealth($(id)));}
+function wrapStealth(el){if(!el)return;const existing=el.querySelector('.cover');
+if(stealth()){if(!existing){el.classList.add('blurbox');
+  const c=document.createElement('div');c.className='cover';c.innerHTML=`<button onclick="revealOnce(this)" class="bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm font-bold shadow-lg">🔓 ${lang==='fa'?'نمایش':'Reveal'}</button>`;
+  el.classList.add('revealwrap');el.appendChild(c);}}
+else{el.classList.remove('blurbox');if(existing)existing.remove();}}
+function revealOnce(btn){const p=btn.closest('.revealwrap');p.classList.remove('blurbox');btn.remove();}
+function quickHide(){$('fakeNote').classList.toggle('hidden');
+if(!$('fakeNote').classList.contains('hidden')){$('fakeList').innerHTML=['خرید: نان، شیر','تماس با بانک','قرار پنجشنبه'].map(n=>`<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow border-r-4 border-amber-400">${n}</div>`).join('');}}
+
+/* ═══════════ کارت اورژانس ═══════════ */
+function showEmergency(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
+let emg={};try{emg=JSON.parse(localStorage.getItem('hammasir-emg')||'{}');}catch(e){}
+$('emgBody').innerHTML=`
+  <div class="bg-rose-50 dark:bg-rose-900/30 rounded-lg p-3"><b>${t('emgContact')}:</b> ${emg.contact||'—'}<br><b>${t('emgPhone')}:</b> ${emg.phone||'—'}</div>
+  <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgAllergy')}:</b> ${emg.allergy||'—'}</div>
+  <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgNotes')}:</b> ${emg.notes||'—'}</div>
+  <p class="text-xs text-slate-400">${lang==='fa'?'برای ویرایش، وارد اپ شوید و به تنظیمات بروید.':'Sign in and edit in Settings.'}</p>`;
+showScreen('emergency');}
+function hideEmergency(){showScreen('lock');}
+function saveEmergency(){const e={contact:$('emg-contact').value,phone:$('emg-phone').value,allergy:$('emg-allergy').value,notes:$('emg-notes').value};
+localStorage.setItem('hammasir-emg',JSON.stringify(e));if(S){S.emergency=e;persist();}toast('🚑 '+t('save'));}
+
+/* ═══════════ خوش‌آمد ═══════════ */
+let suStep=0,setupConcerns=new Set(),profileConcerns=new Set();
+function suShow(){for(let i=0;i<4;i++)$('su-s'+i).classList.toggle('hidden',i!==suStep);
+$('suProg').innerHTML=[0,1,2,3].map(i=>`<div class="h-1.5 flex-1 rounded-full ${i<=suStep?'bg-teal-400':'bg-white/20'}"></div>`).join('');
+$('suBack').style.visibility=suStep?'visible':'hidden';$('suNext').textContent=suStep===3?(lang==='fa'?'🚀 شروع':'🚀 Start'):t('next');}
+function suNext(){if(suStep===0){const a=$('su-pwd1').value,b=$('su-pwd2').value;if(a.length<4)return toast(lang==='fa'?'رمز حداقل ۴ نویسه':'Min 4 chars');if(a!==b)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');}
+if(suStep<3){suStep++;suShow();}else finishSetup();}
+function suBack(){if(suStep>0){suStep--;suShow();}}
+function pwdStrength(){const p=$('su-pwd1').value;let s=0;if(p.length>=4)s++;if(p.length>=8)s++;if(/[0-9]/.test(p))s++;if(p.length>=12||/[^a-zA-Z0-9]/.test(p))s++;
+const b=$('pwdBar');b.style.width=(s/4*100)+'%';b.className='h-full rounded-full transition-all '+(s<=1?'bg-rose-500':s===2?'bg-amber-500':'bg-emerald-500');}
+async function finishSetup(){
+  const state=defaultState();
+  state.profile={name:$('su-name').value.trim(),age:+$('su-age').value||30,sex:$('su-sex').value,height:+$('su-height').value||170,weight:+$('su-weight').value||70,dxDate:$('su-dx').value,msType:$('su-mstype').value,dmt:$('su-dmt').value.trim(),doctor:$('su-doc').value.trim(),nextVisit:$('su-next').value,concerns:[...setupConcerns]};
+  await createVault($('su-pwd1').value,state);S=state;
+  showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();toast('🎉');}
+function defaultState(){return{profile:{},symptoms:defaultSymptoms(),checkins:{},meds:[],doseLog:{},medHistory:[],
+reminders:{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}},
+water:{d:dkey(new Date()),c:0},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,
+settings:{refillDays:7,city:'tehran',customCities:[],wxOn:true},seeded:false,seedDismissed:false};}
+function defaultSymptoms(){return[
+{id:'fatigue',fa:'خستگی',en:'Fatigue',color:'#f59e0b',good:false,active:true},
+{id:'sleep',fa:'کیفیت خواب',en:'Sleep quality',color:'#0284c7',good:true,active:true},
+{id:'mood',fa:'خلق‌وتنگ',en:'Mood',color:'#059669',good:false,active:true},
+{id:'pain',fa:'درد',en:'Pain',color:'#e11d48',good:false,active:true},
+{id:'cognition',fa:'تمرکز/حافظه',en:'Focus/memory',color:'#0d9488',good:false,active:true},
+{id:'balance',fa:'تعادل',en:'Balance',color:'#ea580c',good:false,active:true},
+{id:'vision',fa:'بینایی',en:'Vision',color:'#7c3aed',good:false,active:true},
+{id:'tingling',fa:'گزگز/بی‌حسی',en:'Tingling',color:'#db2777',good:false,active:true}];}
+function symLabel(s){return lang==='fa'?s.fa:s.en;}
+function ensureState(){if(!S.symptoms||!S.symptoms.length)S.symptoms=defaultSymptoms();
+S.meds=S.meds||[];S.doseLog=S.doseLog||{};S.medHistory=S.medHistory||[];S.flareDays=S.flareDays||{};S.reviews=S.reviews||[];S.monitor=S.monitor||[];
+S.reminders=S.reminders||{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}};
+S.water=S.water||{d:dkey(new Date()),c:0};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
+S.checkins=S.checkins||{};S.triage=S.triage||[];}
+
+/* ═══════════ PWA ═══════════ */
+let deferredPrompt=null;
+function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
+const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',background_color:'#0d3b3a',theme_color:'#0d3b3a',icons:[{src:icon,sizes:'any',type:'image/svg+xml'}]};
+const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));document.head.appendChild(l);
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden');});}
+function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('installBtn').classList.add('hidden');}else toast(lang==='fa'?'از منوی مرورگر «Add to Home Screen» بزن':'Use browser "Add to Home Screen"');}
+
+/* ═══════════ تب‌ها ═══════════ */
+function showTab(id){curTab=id;document.querySelectorAll('#scr-app .view').forEach(v=>v.classList.add('hidden'));$('view-'+id).classList.remove('hidden');buildNav();
+window.scrollTo({top:0,behavior:'smooth'});
+if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
+if(id==='check')renderCheck();if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();}
+if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();}
+
+/* ═══════════ دارویار ═══════════ */
+function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
+if(m.freq.type==='everyN'){const s=new Date(m.start||dkey(new Date()));const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const b=new Date(date.getFullYear(),date.getMonth(),date.getDate());const diff=Math.round((b-a)/86400000);return diff>=0&&diff%(m.freq.n||1)===0;}
+if(m.freq.type==='days')return(m.freq.days||[]).includes(date.getDay());return true;}
+function todayDoses(date){const out=[];(S.meds||[]).filter(m=>m.active!==false).forEach(m=>{if(!isDoseDay(m,date))return;(m.times||[]).forEach(tm=>out.push({med:m,key:m.id+'@'+tm,time:tm,date:dkey(date)}));});return out.sort((a,b)=>a.time.localeCompare(b.time));}
+function getLog(dk,key){return S.doseLog[dk]?S.doseLog[dk][key]:null;}
+function setLog(dk,key,val){if(!S.doseLog[dk])S.doseLog[dk]={};if(val===null)delete S.doseLog[dk][key];else S.doseLog[dk][key]=val;}
+function doseStatus(d,now){const lg=getLog(d.date,d.key);if(lg)return lg.s;
+const[h,mi]=d.time.split(':').map(Number);const sch=new Date(now);sch.setHours(h,mi,0,0);const diff=(now-sch)/60000;
+if(diff<-30)return'upcoming';if(diff<=120)return'due';if(diff<=420)return'late';return'miss';}
+function takeDose(d){const st=doseStatus(d,new Date());const s=(st==='due'||st==='upcoming')?'ontime':'late';
+const was=getLog(d.date,d.key);setLog(d.date,d.key,{s,t:Date.now()});
+if(!was||was.s==='skip'){const m=S.meds.find(x=>x.id===d.med.id);if(m&&m.remaining!=null)m.remaining=Math.max(0,m.remaining-1);}
+hideBanner();persist();renderMeds();renderDash();toast(s==='ontime'?'✅':'⏱️');}
+function skipDose(d){const was=getLog(d.date,d.key);
+if(was&&(was.s==='ontime'||was.s==='late')){const m=S.meds.find(x=>x.id===d.med.id);if(m&&m.remaining!=null)m.remaining++;}
+setLog(d.date,d.key,{s:'skip',t:Date.now()});hideBanner();persist();renderMeds();renderDash();}
+function undoDose(d){const was=getLog(d.date,d.key);
+if(was&&(was.s==='ontime'||was.s==='late')){const m=S.meds.find(x=>x.id===d.med.id);if(m&&m.remaining!=null)m.remaining++;}
+setLog(d.date,d.key,null);persist();renderMeds();renderDash();}
+function logMedHistory(action,name){S.medHistory.unshift({date:new Date().toISOString(),action,name});S.medHistory=S.medHistory.slice(0,50);}
+function renderMedHistory(){const am={add:['➕',lang==='fa'?'افزوده شد':'added'],edit:['✏️',lang==='fa'?'ویرایش شد':'edited'],del:['🗑️',lang==='fa'?'حذف شد':'removed'],pause:['⏸️',lang==='fa'?'غیرفعال شد':'paused'],resume:['▶️',lang==='fa'?'فعال شد':'resumed']};
+$('medHistory').innerHTML=S.medHistory.length?S.medHistory.slice(0,10).map(h=>{const a=am[h.action]||['·',h.action];
+return `<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${a[0]}</span><span class="flex-1"><b>${h.name}</b> — ${a[1]}</span><span class="text-xs text-slate-400">${fdate(new Date(h.date))}</span></div>`;}).join(''):`<p class="text-slate-400">${lang==='fa'?'تاریخچه‌ای نیست':'No history'}</p>`;}
+
+/* فرم دارو */
+let editingId=null,mfColor='#0f766e',mfDays=new Set();
+const MED_COLORS=['#0f766e','#f59e0b','#e11d48','#0284c7','#059669','#ea580c','#7c3aed','#db2777','#0d9488','#ca8a04'];
+const DAY_LBL=lang==='fa'?[['ش',6],['ی',0],['د',1],['س',2],['چ',3],['پ',4],['ج',5]]:[['S',0],['M',1],['T',2],['W',3],['T',4],['F',5],['S',6]];
+function openMedForm(id){editingId=id||null;mfDays=new Set();
+const m=id?S.meds.find(x=>x.id===id):null;
+$('mfTitle').textContent=m?(lang==='fa'?'ویرایش دارو':'Edit med'):(lang==='fa'?'داروی جدید':'New med');
+$('mf-name').value=m?m.name:'';$('mf-dose').value=m?m.dose:'';$('mf-emoji').value=m?m.emoji:'💊';
+mfColor=m?m.color:'#0f766e';renderSwatches();
+const pd=m?(m.times||['08:00']).length:1;$('mf-perday').value=pd;mfPerday();
+$('mf-t1').value=(m&&m.times[0])||'08:00';$('mf-t2').value=(m&&m.times[1])||'13:00';$('mf-t3').value=(m&&m.times[2])||'22:00';
+const ft=m&&m.freq?m.freq.type:'daily';document.querySelectorAll('input[name=mff]').forEach(r=>r.checked=r.value===ft);
+$('mf-n').value=m&&m.freq&&m.freq.n?m.freq.n:3;
+if(m&&m.freq&&m.freq.days)m.freq.days.forEach(d=>mfDays.add(d));
+mfFreq();renderMfDays();
+$('mf-food').checked=m?!!m.food:false;$('mf-note').value=m?m.note||'':'';$('mf-remaining').value=m&&m.remaining!=null?m.remaining:'';
+$('medForm').classList.remove('hidden');$('medForm').scrollIntoView({behavior:'smooth'});}
+function closeMedForm(){$('medForm').classList.add('hidden');editingId=null;}
+function renderSwatches(){$('mf-colors').innerHTML=MED_COLORS.map(c=>`<button type="button" onclick="mfColor='${c}';renderSwatches()" class="swatch w-8 h-8 rounded-full border-4 ${mfColor===c?'border-slate-800 dark:border-white':'border-white dark:border-slate-600'} shadow" style="background:${c}"></button>`).join('');}
+function mfPerday(){const n=+$('mf-perday').value;$('mf-t2').classList.toggle('hidden',n<2);$('mf-t3').classList.toggle('hidden',n<3);}
+function mfFreq(){$('mf-daysBox').classList.toggle('hidden',document.querySelector('input[name=mff]:checked').value!=='days');}
+function renderMfDays(){$('mf-days').innerHTML=DAY_LBL.map(([l,d])=>`<button type="button" onclick="toggleMfDay(${d})" class="w-9 h-9 rounded-full border-2 text-sm font-bold transition-all ${mfDays.has(d)?'bg-teal-600 text-white border-teal-600':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${l}</button>`).join('');}
+function toggleMfDay(d){mfDays.has(d)?mfDays.delete(d):mfDays.add(d);renderMfDays();}
+function saveMed(){const name=$('mf-name').value.trim();if(!name)return toast(lang==='fa'?'نام دارو را بنویس':'Enter med name');
+const pd=+$('mf-perday').value;const times=[$('mf-t1').value,pd>=2?$('mf-t2').value:null,pd>=3?$('mf-t3').value:null].filter(Boolean);
+const ft=document.querySelector('input[name=mff]:checked').value;
+const freq=ft==='daily'?{type:'daily'}:ft==='everyN'?{type:'everyN',n:+$('mf-n').value||2}:{type:'days',days:[...mfDays]};
+const rem=$('mf-remaining').value===''?null:+$('mf-remaining').value;
+const obj={name,dose:$('mf-dose').value.trim(),emoji:$('mf-emoji').value||'💊',color:mfColor,times,freq,food:$('mf-food').checked,note:$('mf-note').value.trim(),remaining:rem,active:true,start:dkey(new Date())};
+if(editingId){const i=S.meds.findIndex(x=>x.id===editingId);obj.id=editingId;obj.start=S.meds[i].start;S.meds[i]=obj;logMedHistory('edit',name);}
+else{obj.id='m'+Date.now();S.meds.push(obj);logMedHistory('add',name);}
+persist();closeMedForm();renderMeds();renderMedHistory();renderDash();toast('💊');}
+function delMed(id){if(!confirm(lang==='fa'?'حذف شود؟':'Delete?'))return;const m=S.meds.find(x=>x.id===id);logMedHistory('del',m.name);
+S.meds=S.meds.filter(x=>x.id!==id);persist();renderMeds();renderMedHistory();renderDash();}
+function toggleMedActive(id){const m=S.meds.find(x=>x.id===id);m.active=m.active===false?true:false;logMedHistory(m.active?'resume':'pause',m.name);persist();renderMeds();renderMedHistory();renderDash();}
+function copyMedList(){if(!S.meds.length)return toast(lang==='fa'?'دارویی نیست':'No meds');
+const txt=(lang==='fa'?'لیست داروها — ':'Medication list — ')+(S.profile.name||'')+'\n'+S.meds.map(m=>`• ${m.name} ${m.dose} — ${(m.times||[]).map(fmtTime).join(', ')}${m.food?' ('+t('withFood')+')':''}`).join('\n');
+navigator.clipboard.writeText(txt).then(()=>toast('📋')).catch(()=>prompt('Copy:',txt));}
+
+/* رندر داروها */
+function fmtTime(tm){const[h,m]=tm.split(':').map(Number);const d=new Date();d.setHours(h,m);return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-US',{hour:'2-digit',minute:'2-digit'}).format(d);}
+function renderMeds(){const now=new Date(),dk=dkey(now);const doses=todayDoses(now);
+$('timelineEmpty').classList.toggle('hidden',doses.length>0);
+const taken=doses.filter(d=>{const l=getLog(dk,d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
+$('todayCount').textContent=doses.length?num(taken)+' / '+num(doses.length):'';
+$('timeline').innerHTML=doses.map(d=>{const st=doseStatus(d,now),lg=getLog(dk,d.key),m=d.med;let chip='',acts='',cls='';
+if(st==='ontime'){chip=stChip('emerald',t('stOntime'));acts=undoBtn(d.key);}
+else if(st==='late'&&lg){chip=stChip('amber',t('stLate'));acts=undoBtn(d.key);}
+else if(st==='skip'){chip=stChip('slate',t('stSkip'));acts=undoBtn(d.key);}
+else if(st==='miss'){chip=stChip('rose',t('stMiss'));acts=`<button onclick='act("take","${d.key}")' class="text-xs bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-lg px-3 py-1.5">${t('took')}</button>`;}
+else if(st==='due'){cls='due';chip=`<span class="text-[11px] font-bold bg-amber-400 text-[#0d3b3a] rounded-full px-2.5 py-1 animate-pulse">⏰ ${t('stDue')}</span>`;
+acts=`<button onclick='act("take","${d.key}")' class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg py-2 text-sm">${t('took')}</button><button onclick='act("snooze","${d.key}")' class="bg-amber-500 text-[#0d3b3a] font-bold rounded-lg px-3 py-2 text-sm">⏰</button><button onclick='act("skip","${d.key}")' class="bg-rose-600 text-white font-bold rounded-lg px-3 py-2 text-sm">❌</button>`;}
+else if(st==='late'){chip=stChip('amber',t('stLate'));acts=`<button onclick='act("take","${d.key}")' class="flex-1 bg-amber-500 text-white font-bold rounded-lg py-2 text-sm">${t('took')}</button><button onclick='act("skip","${d.key}")' class="bg-rose-600 text-white font-bold rounded-lg px-3 py-2 text-sm">❌</button>`;}
+else{chip=stChip('sky','🔜 '+fmtTime(d.time));acts=`<button onclick='act("take","${d.key}")' class="text-xs border-2 border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">${t('took')}</button>`;}
+return `<div class="dosecard ${cls} flex items-center gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3 bg-white dark:bg-slate-700">
+<div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</div>
+<div class="flex-1 min-w-0"><p class="font-bold truncate">${m.name} <span class="text-xs text-slate-400 font-normal">${m.dose}</span></p>
+<p class="text-[11px] text-slate-500 dark:text-slate-400">${fmtTime(d.time)}${m.food?' · 🍽️':''}</p></div>${chip}
+<div class="flex gap-1.5 items-center" style="min-width:150px">${acts}</div></div>`;}).join('');
+const refill=S.settings.refillDays||7;
+$('medList').innerHTML=S.meds.length?S.meds.map(m=>{const pd=(m.times||[]).length||1;const dl=m.remaining!=null?Math.floor(m.remaining/pd):null;
+return `<div class="border border-slate-200 dark:border-slate-600 rounded-xl p-4 bg-white dark:bg-slate-700 hover:shadow-md transition-shadow ${m.active===false?'opacity-50':''}">
+<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</div>
+<div class="flex-1"><p class="font-bold">${m.name}</p><p class="text-xs text-slate-500 dark:text-slate-400">${m.dose} · ${(m.times||[]).map(fmtTime).join('، ')}</p></div>
+${dl!=null&&dl<=refill?`<span class="text-[10px] font-bold bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full px-2 py-1 animate-pulse">⚠️ ${num(dl)}</span>`:''}</div>
+<div class="flex gap-2 mt-3 flex-wrap">
+<button onclick="openMedForm('${m.id}')" class="text-xs border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">✏️</button>
+<button onclick="toggleMedActive('${m.id}')" class="text-xs border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">${m.active===false?'▶️':'⏸️'}</button>
+<button onclick="delMed('${m.id}')" class="text-xs border border-rose-200 dark:border-rose-800 rounded-lg px-3 py-1.5 font-bold text-rose-500">🗑️</button>
+${m.remaining!=null?`<span class="text-[11px] text-slate-400 mr-auto self-center">${num(m.remaining)}</span>`:''}</div></div>`;}).join(''):`<p class="text-slate-400 text-sm sm:col-span-2">${t('noMed')}</p>`;}
+function stChip(c,txt){const map={emerald:'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',amber:'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',rose:'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',slate:'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-200',sky:'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300'};
+return `<span class="text-[11px] font-bold ${map[c]} rounded-full px-2.5 py-1">${txt}</span>`;}
+function undoBtn(k){return `<button onclick='act("undo","${k}")' class="text-xs text-slate-400 hover:text-teal-600 underline">↩️</button>`;}
+function act(a,key){const d=todayDoses(new Date()).find(x=>x.key===key);if(!d)return;
+if(a==='take')takeDose(d);else if(a==='skip')skipDose(d);else if(a==='undo')undoDose(d);
+else if(a==='snooze'){snoozes[key]=Date.now()+15*60000;hideBanner();toast('⏰');}}
+
+/* اعلان‌ها */
+let notifiedKeys=new Set(),snoozes={},audioCtx=null;
+function enableNotif(){if(!('Notification'in window))return toast(t('notifNone'));
+Notification.requestPermission().then(p=>{updateNotifLbl();if(p==='granted')notify('HamMasir','✅');});}
+function updateNotifLbl(){if(!('Notification'in window))$('notifLbl').textContent=t('notifNone');
+else $('notifLbl').textContent=Notification.permission==='granted'?t('notifOn'):Notification.permission==='denied'?t('notifDenied'):t('notifOff');}
+function notify(title,body){if(stealth()){title='🔔';body=lang==='fa'?'یادآوری':'Reminder';}
+if('Notification'in window&&Notification.permission==='granted'){try{new Notification(title,{body});}catch(e){}}}
+function beep(){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;g.gain.setValueAtTime(.3,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.01,audioCtx.currentTime+.5);o.start();o.stop(audioCtx.currentTime+.5);}catch(e){}}
+let bannerDose=null;
+function showBanner(d){bannerDose=d;
+$('dbText').innerHTML=stealth()?('🔔 '+(lang==='fa'?'یادآوری':'Reminder')):`💊 <b>${d.med.name}</b> (${d.med.dose}) — ${fmtTime(d.time)}`;
+$('dbTake').textContent=t('took');$('dbSnooze').textContent=t('snooze');$('dbSkip').textContent=t('skipped');
+$('dbTake').onclick=()=>act('take',d.key);$('dbSnooze').onclick=()=>act('snooze',d.key);$('dbSkip').onclick=()=>act('skip',d.key);
+$('doseBanner').classList.remove('hidden');}
+function hideBanner(){$('doseBanner').classList.add('hidden');bannerDose=null;}
+function alertDose(d){showBanner(d);notify('💊 '+d.med.name,d.med.dose);beep();if(navigator.vibrate)navigator.vibrate([120,60,120]);}
+function inQuiet(now){const h=now.getHours();return h>=23||h<7;}
+
+/* یادآورها */
+let lastAlert={water:0,stand:0,eye:0,sleepDone:false};
+function waterGoal(){return(S.reminders.water.goal||8)+((S._wxHigh||0)>=35?2:0);}
+function checkReminders(now){if(S.flareDays[dkey(now)])return; // روز بد: یادآورهای غیردارویی خاموش
+const R=S.reminders;
+if(R.water.on&&S.water.c<waterGoal()&&now.getTime()-lastAlert.water>(R.water.every||120)*60000){lastAlert.water=now.getTime();softToast('💧 '+num(S.water.c)+'/'+num(waterGoal()));}
+if(R.stand.on&&now.getTime()-lastAlert.stand>(R.stand.every||90)*60000){lastAlert.stand=now.getTime();softToast('🧍');}
+if(R.eye.on&&now.getTime()-lastAlert.eye>(R.eye.every||20)*60000){lastAlert.eye=now.getTime();softToast('👁️');}
+if(R.sleep.on){const[h,m]=(R.sleep.at||'00:30').split(':').map(Number);const hm=now.getHours()*60+now.getMinutes();const st=h*60+m;
+if(hm>=st&&hm<st+90&&!lastAlert.sleepDone){lastAlert.sleepDone=true;softToast('😴');}if(hm<st)lastAlert.sleepDone=false;}}
+function renderWater(){if(S.water.d!==dkey(new Date())){S.water={d:dkey(new Date()),c:0};persist();}
+const goal=waterGoal();$('waterHot').classList.toggle('hidden',(S._wxHigh||0)<35);
+$('waterTxt').textContent=num(S.water.c)+' / '+num(goal);
+$('waterGlasses').innerHTML=Array.from({length:goal},(_,i)=>`<button onclick="setWater(${i+1})" class="glass w-10 h-12 rounded-b-xl rounded-t-sm border-2 ${i<S.water.c?'full border-sky-400':'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700'} hover:scale-110 transition-transform"></button>`).join('')+
+`<button onclick="setWater(S.water.c+1)" class="w-10 h-12 rounded-xl border-2 border-dashed border-sky-400 text-sky-600 font-bold hover:bg-sky-50 dark:hover:bg-sky-900/30">＋</button>`;}
+function setWater(n){S.water.c=clamp(n,0,waterGoal());persist();renderWater();if(S.water.c>=waterGoal())toast('💧🎉');}
+function renderReminders(){const R=S.reminders;
+const rows=[['water','💧 '+t('waterToday')],['stand','🧍'],['eye','👁️'],['sleep','😴'],['cool','🧊']];
+$('reminderList').innerHTML=rows.map(([k,l])=>`<div class="flex items-center justify-between gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3">
+<p class="font-bold text-sm">${l}</p>
+<label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" ${R[k].on?'checked':''} onchange="toggleReminder('${k}',this.checked)" class="sr-only peer">
+<div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label></div>`).join('');}
+function toggleReminder(k,v){S.reminders[k].on=v;persist();renderReminders();}
+
+/* موتور */
+let engineOn=false;
+function startEngine(){if(engineOn)return;engineOn=true;tick();setInterval(tick,30000);}
+function tick(){if(!S||!MASTER)return;const now=new Date();
+if(S.water.d!==dkey(now)){S.water={d:dkey(now),c:0};persist();}
+if(!inQuiet(now)){todayDoses(now).forEach(d=>{const st=doseStatus(d,now);const kk=d.date+'|'+d.key;
+if(st==='due'&&!notifiedKeys.has(kk)){const sn=snoozes[d.key];if(sn&&now.getTime()<sn)return;alertDose(d);notifiedKeys.add(kk);}});
+Object.keys(snoozes).forEach(k=>{if(now.getTime()>=snoozes[k]){delete snoozes[k];const d=todayDoses(now).find(x=>x.key===k);if(d&&doseStatus(d,now)==='due')alertDose(d);}});}
+checkReminders(now);updateNextDose();}
+function updateNextDose(){const now=new Date();const doses=todayDoses(now);let next=null;
+for(const d of doses){if(getLog(d.date,d.key))continue;const[h,m]=d.time.split(':').map(Number);const sch=new Date(now);sch.setHours(h,m,0,0);if(sch>now){next={d,sch};break;}}
+const taken=doses.filter(d=>{const l=getLog(d.date,d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
+if(next){const mins=Math.round((next.sch-now)/60000);$('nextDoseTxt').textContent=next.d.med.emoji+' '+next.d.med.name;
+$('nextDoseSub').textContent=num(mins)+' min · '+num(taken)+'/'+num(doses.length);}
+else if(doses.length){$('nextDoseTxt').textContent='🎉';$('nextDoseSub').textContent=num(taken)+'/'+num(doses.length);}
+else{$('nextDoseTxt').textContent='—';$('nextDoseSub').textContent='';}}
+
+/* ═══════════ پایبندی ═══════════ */
+function dayAdherence(date){const ds=todayDoses(date);if(!ds.length)return null;
+let taken=0;ds.forEach(d=>{const l=getLog(dkey(date),d.key);if(l&&(l.s==='ontime'||l.s==='late'))taken++;});
+return{taken,total:ds.length,pct:taken/ds.length};}
+function medStats(m,days){let ontime=0,late=0,skip=0,miss=0,total=0;
+for(let i=0;i<days;i++){const d=new Date();d.setDate(d.getDate()-i);if(!isDoseDay(m,d))continue;
+(m.times||[]).forEach(tm=>{total++;const l=getLog(dkey(d),m.id+'@'+tm);
+if(!l){const[h,mi]=tm.split(':').map(Number);const sch=new Date(d);sch.setHours(h,mi);if(sch<new Date())miss++;}
+else if(l.s==='ontime')ontime++;else if(l.s==='late')late++;else skip++;});}
+return{ontime,late,skip,miss,total};}
+function heatColor(p,flare){if(flare)return'#c084fc';if(p===null)return'#e2e8f0';if(p===0)return'#fda4af';if(p<0.5)return'#fcd34d';if(p<1)return'#86efac';return'#34d399';}
+function perfectStreak(){let s=0,d=new Date();if((dayAdherence(d)||{}).pct!==1)d.setDate(d.getDate()-1);
+while(true){const a=dayAdherence(d);if(a&&a.pct===1){s++;d.setDate(d.getDate()-1);}else break;}return s;}
+function renderAdh(){let t30=0,taken30=0;for(let i=0;i<30;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));if(a){t30+=a.total;taken30+=a.taken;}}
+const pct30=t30?Math.round(taken30/t30*100):0;
+$('adhStats').innerHTML=`
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-4 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${t('adhTitle')} 30d</p><p class="font-display text-3xl ${pct30>=80?'text-emerald-600':pct30>=50?'text-amber-600':'text-rose-600'}">${num(pct30)}٪</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-4 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">🏆</p><p class="font-display text-3xl text-teal-800 dark:text-teal-300">${num(perfectStreak())}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-4 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">30d</p><p class="font-display text-3xl text-teal-800 dark:text-teal-300">${num(taken30)}/${num(t30)}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-4 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">💊</p><p class="font-display text-3xl text-teal-800 dark:text-teal-300">${num(S.meds.filter(m=>m.active!==false).length)}</p></div>`;
+const hm=$('heatmap');hm.innerHTML='';
+for(let w=17;w>=0;w--){const col=document.createElement('div');col.className='flex flex-col gap-1';
+for(let dow=0;dow<7;dow++){const idx=w*7+(6-dow);const date=new Date();date.setDate(date.getDate()-idx);
+const a=idx>=0?dayAdherence(date):null;const flare=idx>=0&&S.flareDays[dkey(date)];
+const cell=document.createElement('div');cell.className='hm w-3.5 h-3.5 rounded-sm';cell.style.background=heatColor(a?a.pct:null,flare);
+cell.title=fdate(date)+(flare?' 🌧️':(a?' — '+a.taken+'/'+a.total:''));col.appendChild(cell);}hm.appendChild(col);}
+$('perMed').innerHTML=S.meds.length?S.meds.map(m=>{const s=medStats(m,30);if(!s.total)return'';
+const p=k=>Math.round(s[k]/s.total*100);
+return `<div><div class="flex justify-between text-sm mb-1"><b>${m.emoji} ${m.name}</b><span class="text-slate-500 dark:text-slate-400">${num(Math.round((s.ontime+s.late)/s.total*100))}٪</span></div>
+<div class="flex h-3 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-600" dir="ltr">
+<div style="width:${p('ontime')}%;background:#34d399"></div><div style="width:${p('late')}%;background:#fbbf24"></div>
+<div style="width:${p('skip')}%;background:#94a3b8"></div><div style="width:${p('miss')}%;background:#fb7185"></div></div></div>`;}).join(''):`<p class="text-slate-400 text-sm">${t('noMed')}</p>`;
+const buckets={morning:{l:'☀️',t:0,miss:0},noon:{l:'🕛',t:0,miss:0},evening:{l:'🌆',t:0,miss:0},night:{l:'🌙',t:0,miss:0}};
+for(let i=0;i<30;i++){const date=new Date();date.setDate(date.getDate()-i);
+todayDoses(date).forEach(d=>{const h=+d.time.split(':')[0];const b=h>=5&&h<11?'morning':h>=11&&h<15?'noon':h>=15&&h<19?'evening':'night';
+buckets[b].t++;if(!getLog(dkey(date),d.key))buckets[b].miss++;});}
+let worst=null,wr=-1;
+$('timePattern').innerHTML=Object.values(buckets).filter(b=>b.t).map(b=>{const rate=Math.round(b.miss/b.t*100);if(rate>wr){wr=rate;worst=b;}
+return `<div><div class="flex justify-between text-xs mb-1"><span>${b.l}</span><span class="font-bold ${rate>30?'text-rose-600':'text-slate-500'}">${num(rate)}٪</span></div>
+<div class="h-2.5 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden"><div class="fill h-full rounded-full ${rate>30?'bg-rose-500':'bg-teal-500'}" data-val="${rate}"></div></div></div>`;}).join('');
+setTimeout(()=>document.querySelectorAll('#timePattern .fill').forEach(f=>f.style.width=f.dataset.val+'%'),200);
+$('timeInsight').textContent=worst&&wr>20?'💡 '+(lang==='fa'?'بیشتر در این بازه جا می‌اندازی':'You miss most in this window'):'';
+const wt=$('weeklyTrend');wt.innerHTML='';
+for(let w=7;w>=0;w--){let tt=0,tk=0;for(let i=0;i<7;i++){const a=dayAdherence(new Date(Date.now()-(w*7+i)*86400000));if(a){tt+=a.total;tk+=a.taken;}}
+const p=tt?Math.round(tk/tt*100):0;
+wt.insertAdjacentHTML('beforeend',`<div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg ${p>=80?'bg-emerald-400':p>=50?'bg-amber-400':'bg-rose-400'}" style="height:${Math.max(4,p)}%"></div><span class="text-[10px] text-slate-400">${w===0?'←':w}</span></div>`);}
+const xs=[],ys=[];
+for(let i=1;i<60;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));const c=S.checkins[dkey(new Date(Date.now()-(i-1)*86400000))];
+const fat=c&&c.v?c.v.fatigue:null;if(a&&fat!=null){xs.push(1-a.pct);ys.push(fat);}}
+const r=pearson(xs,ys);
+$('adhInsight').textContent=(xs.length>=10&&r>0.3)?'🔗 '+(lang==='fa'?'روزهای بدون دارو ⇒ خستگی بیشتر فردا':'Missed meds ⇒ more fatigue next day'):'';}
+
+/* ═══════════ چک‌این ═══════════ */
+let chkSel={},chkTrig=new Set();
+const FACES=['😄','🙂','😐','🙁','😞'];
+const TRIGGERS=lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];
+function activeSyms(){return S.symptoms.filter(s=>s.active!==false);}
+function renderCheck(){const today=S.checkins[dkey(new Date())];$('checkDone').classList.toggle('hidden',!today);
+const box=$('emoRows');box.innerHTML='';chkTrig=new Set(today&&today.trig?today.trig:[]);
+activeSyms().forEach(s=>{let idx=2;if(today&&today.v&&today.v[s.id]!=null){const sev=s.good?(10-today.v[s.id]):today.v[s.id];idx=clamp(Math.round(sev/2.5),0,4);}chkSel[s.id]=idx;
+box.insertAdjacentHTML('beforeend',`<div class="flex items-center justify-between gap-3 py-3 border-b border-slate-100 dark:border-slate-700">
+<span class="font-bold text-sm w-32 shrink-0">${symLabel(s)}</span>
+<div class="flex gap-1.5" id="faces-${s.id}">${FACES.map((f,i)=>`<button type="button" onclick="pickFace('${s.id}',${i})" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 transition-all hover:scale-110 hover:border-teal-400">${f}</button>`).join('')}</div></div>`);});
+applyFaces();renderTrigChips();$('noteTxt').value=today?today.note||'':'';}
+function renderTrigChips(){$('trigChips').innerHTML=TRIGGERS.map(tr=>`<button type="button" onclick="toggleTrig('${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${chkTrig.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
+function toggleTrig(tr){chkTrig.has(tr)?chkTrig.delete(tr):chkTrig.add(tr);renderTrigChips();}
+function applyFaces(){activeSyms().forEach(s=>{const c=$('faces-'+s.id);if(!c)return;[...c.children].forEach((b,i)=>{const on=i===chkSel[s.id];b.classList.toggle('border-teal-600',on);b.classList.toggle('bg-teal-50',on);b.classList.toggle('scale-110',on);b.classList.toggle('opacity-50',!on);});});}
+function pickFace(id,i){chkSel[id]=i;applyFaces();}
+function copyYesterday(){const y=new Date();y.setDate(y.getDate()-1);const e=S.checkins[dkey(y)];if(!e||!e.v)return toast(lang==='fa'?'دیروز ثبتی نیست':'Nothing yesterday');
+activeSyms().forEach(s=>{if(e.v[s.id]!=null){const sev=s.good?(10-e.v[s.id]):e.v[s.id];chkSel[s.id]=clamp(Math.round(sev/2.5),0,4);}});
+chkTrig=new Set(e.trig||[]);applyFaces();renderTrigChips();toast('📋');}
+function saveCheckin(){const v={};activeSyms().forEach(s=>{const sev=chkSel[s.id]*2.5;v[s.id]=s.good?(10-sev):sev;});
+S.checkins[dkey(new Date())]={v,note:$('noteTxt').value.trim(),trig:[...chkTrig]};
+persist();renderAll();toast('🎉');showTab('dash');}
+/* صوتی */
+function voiceCheck(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR)return toast(lang==='fa'?'تشخیص گفتار پشتیبانی نمی‌شود':'Speech not supported');
+const rec=new SR();rec.lang=lang==='fa'?'fa-IR':'en-US';rec.interimResults=false;
+$('voiceBtn').classList.add('mic');$('voiceBox').classList.remove('hidden');
+$('voiceBox').textContent=lang==='fa'?'🎙️ در حال شنیدن… اعداد را بگو':'🎙️ Listening… say the numbers';
+rec.onresult=e=>{const txt=e.results[0][0].transcript;$('voiceBox').textContent='«'+txt+'»';parseVoice(txt);$('voiceBtn').classList.remove('mic');};
+rec.onerror=()=>{$('voiceBtn').classList.remove('mic');$('voiceBox').textContent=lang==='fa'?'شنیده نشد، دوباره امتحان کن':'Could not hear, try again';};
+rec.onend=()=>$('voiceBtn').classList.remove('mic');rec.start();}
+function parseVoice(txt){const faNums={'صفر':0,'یک':1,'دو':2,'سه':3,'چهار':4,'پنج':5,'شش':6,'هفت':7,'هشت':8,'نه':9,'ده':10};
+const syms=activeSyms();let matched=0;
+syms.forEach(s=>{const label=symLabel(s).toLowerCase();
+if(txt.toLowerCase().includes(label)||txt.includes(s.fa)){const m=txt.match(/(\d+)|([^\s]+)/g);
+for(const tok of (m||[])){let n=parseInt(tok);if(isNaN(n))n=faNums[tok];
+if(!isNaN(n)&&n>=0&&n<=10){const sev=clamp(n,0,10);chkSel[s.id]=clamp(Math.round((s.good?(10-sev):sev)/2.5),0,4);matched++;break;}}}});
+applyFaces();toast(matched?(lang==='fa'?num(matched)+' مورد تنظیم شد':num(matched)+' set'):(lang==='fa'?'تشخیص داده نشد — دستی تنظیم کن':'No match — adjust manually'));}
+
+/* ═══════════ روز بد ═══════════ */
+function badDay(){if(!confirm(lang==='fa'?'امروز به‌عنوان «روز بد / عود» ثبت شود؟ یادآورهای غیردارویی امروز خاموش می‌شوند.':'Mark today as a bad/flare day? Non-med reminders will pause today.'))return;
+S.flareDays[dkey(new Date())]=true;persist();renderDash();toast('🌧️ '+(lang==='fa'?'ثبت شد. مراقب خودت باش':'Logged. Be kind to yourself'));
+showTab('triage');tri={step:0,symptom:'',duration:'',triggers:[],severity:5};renderTriage();}
+
+/* ═══════════ مرور هفتگی ═══════════ */
+function checkReviewPrompt(){const today=new Date();if(today.getDay()===5){const wk=dkey(new Date(today.getFullYear(),0,1))+Math.floor((today-new Date(today.getFullYear(),0,1))/604800000);
+if(!S.reviews.some(r=>r.wk===wk))$('reviewBanner').classList.remove('hidden');}}
+function openReview(){$('reviewModal').classList.remove('hidden');}
+function closeReview(){$('reviewModal').classList.add('hidden');}
+function saveReview(){const today=new Date();const wk=dkey(new Date(today.getFullYear(),0,1))+Math.floor((today-new Date(today.getFullYear(),0,1))/604800000);
+S.reviews.unshift({date:new Date().toISOString(),wk,good:$('rv-good').value,hard:$('rv-hard').value,goal:$('rv-goal').value});
+$('rv-good').value=$('rv-hard').value=$('rv-goal').value='';persist();closeReview();$('reviewBanner').classList.add('hidden');renderReport();toast('🪞');}
+function renderReviewList(){$('reviewList').innerHTML=S.reviews.length?S.reviews.slice(0,5).map(r=>`<div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3">
+<p class="text-xs text-slate-400 mb-1">${fdate(new Date(r.date),{dateStyle:'medium'})}</p>
+<p>✅ ${r.good||'—'}</p><p>😓 ${r.hard||'—'}</p><p>🎯 ${r.goal||'—'}</p></div>`).join(''):`<p class="text-slate-400">${lang==='fa'?'هنوز مرور نیست':'No reviews yet'}</p>`;}
+
+/* ═══════════ پایش (مانیتور) ═══════════ */
+function addMonitor(){const title=prompt(lang==='fa'?'عنوان (مثلاً: آزمایش خون)':'Title (e.g., Blood test)');if(!title)return;
+const due=prompt(lang==='fa'?'تاریخ (YYYY-MM-DD)':'Date (YYYY-MM-DD)',dkey(new Date()));if(!due)return;
+S.monitor.push({id:'mn'+Date.now(),title,due,done:false});persist();renderMonitor();}
+function renderMonitor(){const today=dkey(new Date());
+$('monitorList').innerHTML=S.monitor.length?S.monitor.map(m=>{const overdue=!m.done&&m.due<today;
+return `<label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700 cursor-pointer">
+<input type="checkbox" ${m.done?'checked':''} onchange="toggleMonitor('${m.id}',this.checked)" class="w-5 h-5 accent-teal-600">
+<div class="flex-1"><b>${m.title}</b> <span class="text-xs text-slate-500 dark:text-slate-400">— ${m.due}</span></div>
+${overdue?`<span class="text-[11px] font-bold bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full px-2.5 py-1">${lang==='fa'?'عقب‌افتاده':'Overdue'}</span>`:''}
+<button onclick="delMonitor('${m.id}')" class="text-rose-400 hover:text-rose-600">🗑️</button></label>`;}).join(''):`<p class="text-slate-400 text-sm">${t('monitorSub')}</p>`;}
+function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();}
+function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();}
+
+/* ═══════════ تریاژ ═══════════ */
+let tri={step:0,symptom:'',duration:'',triggers:[],severity:5};
+function renderTriage(){const b=$('triageBox');
+const syms=lang==='fa'?['بینایی','ضعف/بی‌حسی','تعادل','ادراری','سایر']:['Vision','Weakness','Balance','Bladder','Other'];
+const trig=lang==='fa'?['تب/عفونت','گرمای زیاد','استرس']:['Fever/infection','Heat','Stress'];
+if(tri.step===0){b.innerHTML=`<div class="text-center py-8"><p class="text-5xl mb-3">🩺</p><button onclick="tri.step=1;renderTriage()" class="mt-2 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl px-6 py-3 hover:scale-105 transition-all">${lang==='fa'?'شروع ارزیابی':'Start'}</button></div>`;return;}
+const prog=`<div class="flex gap-1 mb-5">${[1,2,3,4].map(i=>`<div class="h-1.5 flex-1 rounded-full ${i<=tri.step?'bg-teal-600':'bg-slate-200 dark:bg-slate-600'}"></div>`).join('')}</div>`;let q='';
+if(tri.step===1)q=`<div class="grid grid-cols-2 gap-2">${syms.map(s=>`<button onclick="tri.symptom='${s}';tri.step=2;renderTriage()" class="p-3 rounded-xl border-2 ${tri.symptom===s?'border-teal-600 bg-teal-50 dark:bg-teal-900/40':'border-slate-200 dark:border-slate-600'} hover:border-teal-400 text-sm font-medium">${s}</button>`).join('')}</div>`;
+if(tri.step===2)q=`<div class="grid grid-cols-2 gap-2">${(lang==='fa'?['کمتر از ۲۴ ساعت','بیشتر از ۲۴ ساعت']:['< 24h','> 24h']).map(d=>`<button onclick="tri.duration='${d}';tri.step=3;renderTriage()" class="p-4 rounded-xl border-2 ${tri.duration===d?'border-teal-600 bg-teal-50 dark:bg-teal-900/40':'border-slate-200 dark:border-slate-600'} font-medium">${d}</button>`).join('')}</div>`;
+if(tri.step===3)q=`${trig.map(tr=>`<label class="flex items-center gap-3 p-3 rounded-xl border-2 border-slate-200 dark:border-slate-600 hover:border-teal-400 cursor-pointer mb-2"><input type="checkbox" ${tri.triggers.includes(tr)?'checked':''} onchange="toggleTriTrig('${tr}')" class="w-5 h-5 accent-teal-600">${tr}</label>`).join('')}<button onclick="tri.step=4;renderTriage()" class="mt-2 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3">${t('next')}</button>`;
+if(tri.step===4)q=`<div class="flex justify-between items-baseline mb-1"><span class="font-display text-3xl text-rose-600" id="triSev">${num(tri.severity)}</span></div>
+<input type="range" min="0" max="10" value="${tri.severity}" style="accent-color:#e11d48" oninput="tri.severity=+this.value;$('triSev').textContent=num(this.value)">
+<button onclick="triageResult()" class="mt-5 w-full bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl py-3.5 text-lg">${lang==='fa'?'نتیجه':'Result'}</button>`;
+b.innerHTML=prog+`<div class="screen">${q}</div>${tri.step>1?`<button onclick="tri.step--;renderTriage()" class="mt-4 text-sm text-slate-500">→ ${t('back')}</button>`:''}`;}
+function toggleTriTrig(tr){tri.triggers=tri.triggers.includes(tr)?tri.triggers.filter(x=>x!==tr):[...tri.triggers,tr];}
+function triageResult(){const hot=tri.triggers.some(x=>x.includes('تب')||x.includes('عفونت')||x.includes('گرما')||x.includes('Fever')||x.includes('Heat'));
+let level,icon,title,advice;
+const visOk=(tri.symptom==='بینایی'||tri.symptom==='Vision');
+if(tri.severity>=8||(visOk&&tri.severity>=6)){level='red';icon='🔴';title=lang==='fa'?'تماس فوری':'Contact now';advice=lang==='fa'?'همین امروز با پزشک تماس بگیر یا به اورژانس برو.':'Contact your doctor today or go to ER.';}
+else if(hot){level='amber';icon='🟠';title=lang==='fa'?'احتمالاً تشدید موقت':'Likely temporary';advice=lang==='fa'?'خنک شو و استراحت کن. اگر بیش از ۲۴ ساعت ماند، تماس بگیر.':'Cool down & rest. If it persists >24h, call.';}
+else if(tri.duration.includes('بیشتر')||tri.duration.includes('>')){level='amber';icon='🟠';title=lang==='fa'?'احتمال عود':'Possible relapse';advice=lang==='fa'?'امروز یا فردا با پزشک تماس بگیر.':'Call your doctor today or tomorrow.';}
+else{level='yellow';icon='🟡';title=lang==='fa'?'پایش کن':'Monitor';advice=lang==='fa'?'۲۴ ساعت ثبت کن. اگر بدتر شد تماس بگیر.':'Track for 24h. Call if worse.';}
+S.triage.unshift({date:new Date().toISOString(),symptom:tri.symptom,severity:tri.severity,level});persist();
+$('triageBox').innerHTML=`<div class="screen rounded-xl border-2 ${level==='red'?'border-rose-400 bg-rose-50 dark:bg-rose-900/30':level==='amber'?'border-amber-400 bg-amber-50 dark:bg-amber-900/30':'border-yellow-300 bg-yellow-50 dark:bg-yellow-900/30'} p-6">
+<p class="text-4xl mb-2">${icon}</p><p class="font-display text-2xl">${title}</p><p class="text-sm leading-8 mt-2">${advice}</p>
+<p class="text-[11px] text-slate-500 mt-3 border-t border-slate-200 dark:border-slate-600 pt-2">⚖️ ${lang==='fa'?'جایگزین نظر پزشک نیست.':'Not a substitute for medical advice.'}</p>
+<button onclick="tri={step:0,symptom:'',duration:'',triggers:[],severity:5};renderTriage()" class="mt-4 text-sm bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-2">${lang==='fa'?'جدید':'New'}</button></div>`;
+renderTriageHist();renderFlags();}
+function renderTriageHist(){const ic={red:'🔴',amber:'🟠',yellow:'🟡'};
+$('triageHist').innerHTML=S.triage.length?S.triage.slice(0,5).map(x=>`<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${ic[x.level]}</span><span class="flex-1"><b>${x.symptom}</b> — ${num(x.severity)}</span><span class="text-xs text-slate-400">${fdate(new Date(x.date))}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
+
+/* ═══════════ آب‌وهوا + شهرها ═══════════ */
+const CITIES={tehran:{lat:35.6892,lon:51.389,fa:'تهران',en:'Tehran'},zahedan:{lat:29.4963,lon:60.8629,fa:'زاهدان',en:'Zahedan'},mashhad:{lat:36.2605,lon:59.6168,fa:'مشهد',en:'Mashhad'},isfahan:{lat:32.6546,lon:51.6680,fa:'اصفهان',en:'Isfahan'},shiraz:{lat:29.5918,lon:52.5837,fa:'شیراز',en:'Shiraz'},tabriz:{lat:38.0962,lon:46.2738,fa:'تبریز',en:'Tabriz'},ahvaz:{lat:31.3183,lon:48.6706,fa:'اهواز',en:'Ahvaz'},rasht:{lat:37.2808,lon:49.5832,fa:'رشت',en:'Rasht'},bandar:{lat:27.1865,lon:56.2808,fa:'بندرعباس',en:'Bandar Abbas'},london:{lat:51.5072,lon:-0.1276,fa:'لندن',en:'London'},dubai:{lat:25.2048,lon:55.2708,fa:'دبی',en:'Dubai'},toronto:{lat:43.6532,lon:-79.3832,fa:'تورنتو',en:'Toronto'}};
+function cityLabel(id){const c=CITIES[id];if(c)return lang==='fa'?c.fa:c.en;
+const cc=(S.settings.customCities||[]).find(x=>x.id===id);return cc?cc.name:id;}
+function buildCitySel(){const opts=Object.keys(CITIES).map(id=>`<option value="${id}">${cityLabel(id)}</option>`).join('')+
+(S.settings.customCities||[]).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+$('citySel').innerHTML=opts;$('citySel').value=S.settings.city||'tehran';
+$('cityList').innerHTML=(Object.keys(CITIES).concat((S.settings.customCities||[]).map(c=>c.id))).map(id=>`<button onclick="setCity('${id}')" class="text-xs rounded-full px-3 py-1.5 border-2 ${S.settings.city===id?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 font-bold text-teal-700 dark:text-teal-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${cityLabel(id)}</button>`).join('');}
+function setCity(id){S.settings.city=id;persist();buildCitySel();loadWeather();}
+async function searchCity(){const q=$('citySearch').value.trim();if(!q)return;
+try{const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=en`);
+const j=await r.json();
+$('cityResults').innerHTML=(j.results||[]).map(c=>`<button onclick='addCity(${JSON.stringify({name:c.name,lat:c.latitude,lon:c.longitude,country:c.country||''}).replace(/'/g,"&#39;")})' class="block w-full text-right text-sm bg-slate-50 dark:bg-slate-700 hover:bg-teal-50 dark:hover:bg-slate-600 rounded-lg px-3 py-2">${c.name} <span class="text-xs text-slate-400">${c.admin1||''} ${c.country||''}</span></button>`).join('')||`<p class="text-xs text-slate-400">${lang==='fa'?'یافت نشد':'Not found'}</p>`;}
+catch(e){$('cityResults').innerHTML=`<p class="text-xs text-slate-400">${lang==='fa'?'آفلاین':'Offline'}</p>`;}}
+function addCity(c){const id='c'+Date.now();S.settings.customCities=S.settings.customCities||[];
+S.settings.customCities.push({id,name:c.name,lat:c.lat,lon:c.lon});S.settings.city=id;persist();buildCitySel();loadWeather();
+$('cityResults').innerHTML='';$('citySearch').value='';toast('🌍 '+c.name);}
+async function loadWeather(){const id=S.settings.city||'tehran';
+const c=CITIES[id]||((S.settings.customCities||[]).find(x=>x.id===id));
+if(!c){$('weatherBody').textContent='—';return;}
+try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=4`);
+const j=await r.json(),max=j.daily.temperature_2m_max,min=j.daily.temperature_2m_min,todayMax=Math.round(max[0]);
+S._wxHigh=todayMax;persist();renderWater();
+let lvl,cls;if(todayMax>=35){lvl='🔴';cls='bg-rose-50 dark:bg-rose-900/40 border-rose-300 text-rose-800 dark:text-rose-200';}
+else if(todayMax>=30){lvl='🟠';cls='bg-amber-50 dark:bg-amber-900/40 border-amber-300 text-amber-800 dark:text-amber-200';}
+else{lvl='🟢';cls='bg-emerald-50 dark:bg-emerald-900/40 border-emerald-300 text-emerald-800 dark:text-emerald-200';}
+$('weatherBody').innerHTML=`<div class="flex items-end justify-between"><div><p class="font-display text-4xl text-slate-800 dark:text-slate-100">${num(todayMax)}°</p><p class="text-xs text-slate-400">${cityLabel(id)}</p></div><span class="text-xs font-bold rounded-full px-3 py-1 border ${cls}">${lvl}</span></div>
+<div class="flex gap-2 mt-3">${max.map((m,i)=>`<div class="flex-1 text-center bg-slate-50 dark:bg-slate-700 rounded-lg py-1.5"><p class="text-[10px] text-slate-400">${i===0?(lang==='fa'?'امروز':'Today'):fdate(new Date(Date.now()+i*86400000),{day:'numeric'})}</p><p class="text-sm font-bold">${num(Math.round(m))}°</p></div>`).join('')}</div>`;}
+catch(e){$('weatherBody').innerHTML=`<p class="text-sm text-slate-500">📴 ${lang==='fa'?'آفلاین':'Offline'}</p>`;}}
+$('citySel').addEventListener('change',e=>setCity(e.target.value));
+
+/* ═══════════ نمودار ═══════════ */
+let range=90,activeSeries={},chartLayout=null;
+function buildChips(){const box=$('seriesChips');box.innerHTML='';
+activeSyms().forEach(s=>{if(activeSeries[s.id]===undefined)activeSeries[s.id]=['fatigue','sleep'].includes(s.id);
+const b=document.createElement('button');
+b.className='text-xs rounded-full px-3 py-1 border transition-all '+(activeSeries[s.id]?'font-bold':'opacity-50');
+b.style.color=s.color;b.style.borderColor=s.color;b.style.boxShadow=activeSeries[s.id]?`0 0 0 2px ${s.color}`:'none';b.textContent=symLabel(s);
+b.onclick=()=>{activeSeries[s.id]=!activeSeries[s.id];buildChips();animateChart();};box.appendChild(b);});}
+document.querySelectorAll('.rng').forEach(b=>b.onclick=()=>{range=+b.dataset.r;
+document.querySelectorAll('.rng').forEach(x=>{x.classList.toggle('bg-teal-600',x===b);x.classList.toggle('text-white',x===b);});animateChart();});
+function getDays(){const days=[],tt=new Date();for(let i=range-1;i>=0;i--){const d=new Date(tt);d.setDate(d.getDate()-i);days.push(d);}return days;}
+function smooth(ctx,p){ctx.moveTo(p[0].x,p[0].y);for(let i=1;i<p.length;i++){const xc=(p[i-1].x+p[i].x)/2,yc=(p[i-1].y+p[i].y)/2;ctx.quadraticCurveTo(p[i-1].x,p[i-1].y,xc,yc);}ctx.lineTo(p[p.length-1].x,p[p.length-1].y);}
+function drawChart(prog=1){const cv=$('chart'),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+const W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+const has=Object.keys(S.checkins).length>0;$('chartEmpty').classList.toggle('hidden',has);cv.style.display=has?'block':'none';if(!has)return;
+const days=getDays(),mL=12,mR=34,mT=12,mB=26,pw=W-mL-mR,ph=H-mT-mB;
+const X=i=>mL+(i/(days.length-1))*pw,Y=v=>mT+(1-v/10)*ph;
+ctx.font='11px Vazirmatn';ctx.lineWidth=1;
+const dark=document.documentElement.classList.contains('dark');
+[0,2,4,6,8,10].forEach(v=>{ctx.strokeStyle=dark?'rgba(148,163,184,.15)':'rgba(148,163,184,.25)';ctx.beginPath();ctx.moveTo(mL,Y(v));ctx.lineTo(W-mR,Y(v));ctx.stroke();ctx.fillStyle='#94a3b8';ctx.fillText(num(v),W-mR+6,Y(v)+4);});
+const step=Math.ceil(days.length/5);days.forEach((d,i)=>{if(i%step===0||i===days.length-1){ctx.fillStyle='#94a3b8';ctx.fillText(fdate(d),X(i)-14,H-8);}});
+ctx.save();ctx.beginPath();ctx.rect(mL,0,pw*ease(prog)+2,H);ctx.clip();
+activeSyms().filter(s=>activeSeries[s.id]).forEach((s,si)=>{const pts=days.map((d,i)=>{const e=S.checkins[dkey(d)];return{x:X(i),y:Y(e&&e.v&&e.v[s.id]!=null?e.v[s.id]:null)};}).filter(p=>p.y!==null);
+if(pts.length<2)return;
+if(si===0){const g=ctx.createLinearGradient(0,mT,0,H-mB);g.addColorStop(0,s.color+'44');g.addColorStop(1,s.color+'00');
+ctx.beginPath();smooth(ctx,pts);ctx.lineTo(pts[pts.length-1].x,H-mB);ctx.lineTo(pts[0].x,H-mB);ctx.closePath();ctx.fillStyle=g;ctx.fill();}
+ctx.beginPath();smooth(ctx,pts);ctx.strokeStyle=s.color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();});
+ctx.restore();chartLayout={days,X,Y,mL,pw};}
+function animateChart(){const t0=performance.now();(function f(tm){const p=Math.min(1,(tm-t0)/700);drawChart(p);if(p<1)requestAnimationFrame(f);})(t0);}
+window.addEventListener('resize',()=>drawChart(1));
+$('chart').addEventListener('mousemove',e=>{if(!chartLayout)return;const r=e.target.getBoundingClientRect(),x=e.clientX-r.left;
+const{days,X}=chartLayout,i=clamp(Math.round((x-chartLayout.mL)/chartLayout.pw*(days.length-1)),0,days.length-1);
+const d=days[i],en=S.checkins[dkey(d)],tip=$('chartTip');if(!en||!en.v){tip.classList.add('hidden');return;}
+let h=`<b>${fdate(d)}</b><br>`;activeSyms().forEach(s=>{if(activeSeries[s.id]&&en.v[s.id]!=null)h+=`<span style="color:${s.color}">●</span> ${symLabel(s)}: ${num(en.v[s.id])}<br>`;});
+tip.innerHTML=h;tip.classList.remove('hidden');tip.style.left=clamp(X(i)-70,0,r.width-150)+'px';tip.style.top='10px';
+drawChart(1);const ctx=$('chart').getContext('2d');ctx.save();ctx.strokeStyle='#0d3b3a';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(i),12);ctx.lineTo(X(i),r.height-26);ctx.stroke();ctx.restore();});
+$('chart').addEventListener('mouseleave',()=>$('chartTip').classList.add('hidden'));
+
+/* داده نمونه */
+function seed(){const out={},tt=new Date();const syms=activeSyms();
+for(let i=89;i>=0;i--){const d=new Date(tt);d.setDate(d.getDate()-i);const v={};
+syms.forEach(s=>{let val;if(s.id==='sleep')val=r1(Math.random()<0.35?2+Math.random()*3:6+Math.random()*3);
+else val=r1(clamp(2+Math.random()*5+((s.id==='fatigue')?((90-i)/90)*2:0),0,10));v[s.id]=val;});
+out[dkey(d)]={v,note:'',trig:Math.random()<0.3?[TRIGGERS[0]]:[]};}return out;}
+function loadSample(){S.checkins=seed();S.seeded=true;S.seedDismissed=false;persist();renderAll();toast('✨');}
+function clearSample(){S.checkins={};S.seeded=false;S.seedDismissed=true;persist();renderAll();}
+
+/* ═══════════ داشبورد ═══════════ */
+function bmi(){const p=S.profile,h=(p.height||170)/100;return r1((p.weight||70)/(h*h));}
+function calcStreak(){let s=0,d=new Date();if(!S.checkins[dkey(d)])d.setDate(d.getDate()-1);while(S.checkins[dkey(d)]){s++;d.setDate(d.getDate()-1);}return s;}
+function renderDash(){const p=S.profile;
+$('greetName').textContent=p.name||(lang==='fa'?'دوست من':'friend');
+const dx=p.dxDate?new Date(p.dxDate):null;
+$('greetSub').textContent=[p.msType,p.dmt,dx?(num(Math.max(0,Math.round((new Date()-dx)/(30.4*86400000))))+' '+(lang==='fa'?'ماه':'mo')):null].filter(Boolean).join(' · ');
+const doses=todayDoses(new Date());const taken=doses.filter(d=>{const l=getLog(dkey(new Date()),d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
+const pct=doses.length?Math.round(taken/doses.length*100):0;
+$('adhPct').textContent=num(pct);$('adhRing').style.strokeDashoffset=326.7*(1-pct/100);
+$('adhSub').textContent=doses.length?num(taken)+'/'+num(doses.length):t('noMed');
+$('streakNum').textContent=num(calcStreak());
+const b=bmi();const bCls=b<18.5?'text-rose-600':b<25?'text-emerald-600':'text-amber-600';
+$('statStrip').innerHTML=`
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-3 text-center hover:-translate-y-0.5 transition-transform"><p class="text-[11px] text-slate-500 dark:text-slate-400">BMI</p><p class="font-display text-2xl ${bCls}">${num(b)}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-3 text-center hover:-translate-y-0.5 transition-transform"><p class="text-[11px] text-slate-500 dark:text-slate-400">🔥</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${num(calcStreak())}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-3 text-center hover:-translate-y-0.5 transition-transform"><p class="text-[11px] text-slate-500 dark:text-slate-400">💧</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(S.water.c)}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-3 text-center hover:-translate-y-0.5 transition-transform"><p class="text-[11px] text-slate-500 dark:text-slate-400">🏆</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${num(perfectStreak())}</p></div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-3 text-center hover:-translate-y-0.5 transition-transform"><p class="text-[11px] text-slate-500 dark:text-slate-400">📊</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${num(Object.keys(S.checkins).length)}</p></div>`;
+$('sampleBanner').classList.toggle('hidden',!(S.seeded&&!S.seedDismissed));
+const nv=p.nextVisit?new Date(p.nextVisit):null;
+$('nextVisitTxt').textContent=nv?fdate(nv,{dateStyle:'medium'})+' ('+num(Math.max(0,Math.ceil((nv-new Date())/86400000)))+' '+(lang==='fa'?'روز':'d')+')':'—';
+updateNextDose();}
+function renderInsights(){const box=$('insights');box.innerHTML='';
+const entries=Object.values(S.checkins).filter(e=>e.v);
+if(entries.length<10){box.innerHTML=`<p class="text-slate-400">${lang==='fa'?'داده‌ی کافی نیست':'Not enough data'}</p>`;return;}
+const pairs=[['sleep','fatigue'],['sleep','cognition'],['mood','fatigue']];
+pairs.forEach(([a,b])=>{const sa=S.symptoms.find(s=>s.id===a),sb=S.symptoms.find(s=>s.id===b);if(!sa||!sb)return;
+const xs=entries.map(e=>e.v[a]).filter(v=>v!=null),ys=entries.map(e=>e.v[b]).filter(v=>v!=null);
+const r=pearson(xs,ys);if(Math.abs(r)<0.3)return;
+box.insertAdjacentHTML('beforeend',`<div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3 hover:bg-teal-50 dark:hover:bg-slate-600 transition-colors">
+<span class="font-display text-2xl text-teal-700 dark:text-teal-300">${num(Math.abs(r).toFixed(2))}</span>
+<p class="leading-6"><b>${symLabel(sa)} ↔ ${symLabel(sb)}</b></p></div>`);});
+/* محرک‌ها */
+const trigSet=new Set();Object.values(S.checkins).forEach(e=>(e.trig||[]).forEach(x=>trigSet.add(x)));
+[...trigSet].slice(0,3).forEach(tr=>{const withT=[],without=[];
+Object.values(S.checkins).forEach(e=>{if(e.v&&e.v.fatigue!=null){((e.trig||[]).includes(tr)?withT:without).push(e.v.fatigue);}});
+if(withT.length>=5&&without.length>=5){const d=withT.reduce((a,b)=>a+b,0)/withT.length-without.reduce((a,b)=>a+b,0)/without.length;
+if(d>0.8)box.insertAdjacentHTML('beforeend',`<div class="flex items-start gap-3 bg-amber-50 dark:bg-amber-900/30 rounded-lg p-3"><span class="text-xl">🏷️</span><p class="leading-6"><b>${tr}</b> ⇒ ${symLabel(S.symptoms.find(s=>s.id==='fatigue'))} +${num(d.toFixed(1))}</p></div>`);}});
+if(!box.innerHTML)box.innerHTML=`<p class="text-slate-400">—</p>`;}
+function renderFlags(){const box=$('redflags');const items=[];const refill=S.settings.refillDays||7;
+S.meds.forEach(m=>{if(m.remaining!=null){const pd=(m.times||[]).length||1;if(Math.floor(m.remaining/pd)<=refill)items.push(`💊 <b>${m.name}</b> — ${lang==='fa'?'رو به اتمام':'running low'}`);}});
+const od=S.monitor.filter(m=>!m.done&&m.due<dkey(new Date())).length;if(od)items.push(`📅 ${num(od)} ${lang==='fa'?'پایش عقب‌افتاده':'overdue monitor'}`);
+const last7=Object.entries(S.checkins).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7);
+const sev=last7.filter(([,e])=>e.v&&Object.entries(e.v).some(([k,v])=>{const s=S.symptoms.find(x=>x.id===k);return s&&!s.good&&v>=8;})).length;
+if(sev)items.push(`⚠️ ${num(sev)} ${lang==='fa'?'روز اخیر علامت شدید':'recent severe days'}`);
+if(bmi()<18.5)items.push(`⚖️ BMI ${num(bmi())}`);
+if(!S.meds.length)items.push(`💊 ${t('noMed')}`);
+box.innerHTML=items.length?items.map(i=>`<li class="flex gap-2 items-start"><span class="pulse-dot bg-rose-500 text-rose-500 mt-1.5"></span><span>${i}</span></li>`).join(''):`<li class="text-slate-400">🌿 ${lang==='fa'?'همه‌چیز مرتب':'All clear'}</li>`;}
+
+/* ═══════════ گزارش ═══════════ */
+function renderReport(){const items=activeSyms().filter(s=>!s.good).slice(0,6);
+$('repSymp').innerHTML=items.map(s=>{const vals=Object.values(S.checkins).map(e=>e.v?e.v[s.id]:null).filter(v=>v!=null);
+const avg=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;const pct=avg?avg*10:0;
+return `<div><div class="flex justify-between text-xs mb-1"><b>${symLabel(s)}</b><span class="text-slate-500 dark:text-slate-400">${avg!=null?num(avg.toFixed(1))+'/10':'—'}</span></div>
+<div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden"><div class="fill h-full rounded-full" style="background:${s.color}" data-val="${pct}"></div></div></div>`;}).join('');
+setTimeout(()=>document.querySelectorAll('#repSymp .fill').forEach(f=>f.style.width=f.dataset.val+'%'),300);
+const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
+$('repConcerns').innerHTML=(S.profile.concerns||[]).length?S.profile.concerns.map(c=>`<span class="bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-sm">${cmap[c]||c}</span>`).join(''):`<span class="text-teal-300 text-sm">—</span>`;
+renderReviewList();}
+const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['cognition','تمرکز','Cognition'],['vision','بینایی','Vision'],['balance','تعادل','Balance'],['mood','خلق','Mood'],['sleep','خواب','Sleep'],['bladder','مثانه','Bladder'],['heat','گرما','Heat'],['work','کار','Work']];
+function renderConcernChips(id,set){const el=$(id);el.innerHTML='';
+CONCERNS.forEach(([k,fa,en])=>{const b=document.createElement('button');b.type='button';
+b.className='text-sm rounded-full px-3 py-1.5 border-2 transition-all '+(set.has(k)?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 font-bold text-teal-800 dark:text-teal-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300');
+b.textContent=lang==='fa'?fa:en;b.onclick=()=>{set.has(k)?set.delete(k):set.add(k);renderConcernChips(id,set);};el.appendChild(b);});}
+
+/* ═══════════ تنظیمات ═══════════ */
+function populateProfile(){const p=S.profile;
+$('pf-name').value=p.name||'';$('pf-age').value=p.age||'';$('pf-height').value=p.height||'';$('pf-weight').value=p.weight||'';
+$('pf-dx').value=p.dxDate||'';$('pf-dmt').value=p.dmt||'';$('pf-doc').value=p.doctor||'';$('pf-next').value=p.nextVisit||'';
+profileConcerns=new Set(p.concerns||[]);renderConcernChips('pf-concerns',profileConcerns);
+$('set-refill').value=S.settings.refillDays||7;$('set-stealth').checked=stealthOn;$('set-appname').value=stealthAppName;
+const emg=S.emergency||{};$('emg-contact').value=emg.contact||'';$('emg-phone').value=emg.phone||'';$('emg-allergy').value=emg.allergy||'';$('emg-notes').value=emg.notes||'';
+renderSymptomMgr();buildCitySel();
+['light','dark','system'].forEach(m=>$('th'+m.charAt(0).toUpperCase()+m.slice(1)).classList.toggle('border-teal-600',theme===m));
+$('langFa').classList.toggle('border-teal-600',lang==='fa');$('langEn').classList.toggle('border-teal-600',lang==='en');}
+function saveSetting(k,v){S.settings[k]=v;persist();toast('✔');}
+function saveProfile(){const p=S.profile;
+p.name=$('pf-name').value.trim();p.age=+$('pf-age').value||p.age;p.height=+$('pf-height').value||p.height;p.weight=+$('pf-weight').value||p.weight;
+p.dxDate=$('pf-dx').value;p.dmt=$('pf-dmt').value.trim();p.doctor=$('pf-doc').value.trim();p.nextVisit=$('pf-next').value;
+p.concerns=[...profileConcerns];S.emergency={contact:$('emg-contact').value,phone:$('emg-phone').value,allergy:$('emg-allergy').value,notes:$('emg-notes').value};
+localStorage.setItem('hammasir-emg',JSON.stringify(S.emergency));
+persist();renderAll();toast('✔');}
+function renderSymptomMgr(){$('symptomMgr').innerHTML=S.symptoms.map(s=>`<div class="flex items-center gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3">
+<span class="w-3 h-3 rounded-full" style="background:${s.color}"></span>
+<span class="flex-1 font-bold text-sm">${s.fa} <span class="text-slate-400 font-normal">/ ${s.en}</span></span>
+<label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" ${s.active!==false?'checked':''} onchange="toggleSymptom('${s.id}',this.checked)" class="sr-only peer">
+<div class="w-9 h-5 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-4 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label>
+<button onclick="delSymptom('${s.id}')" class="text-rose-400 hover:text-rose-600">🗑️</button></div>`).join('');}
+function toggleSymptom(id,v){const s=S.symptoms.find(x=>x.id===id);s.active=v;persist();renderSymptomMgr();buildChips();}
+function delSymptom(id){S.symptoms=S.symptoms.filter(x=>x.id!==id);persist();renderSymptomMgr();buildChips();}
+function addSymptom(){const fa=$('newSymFa').value.trim(),en=$('newSymEn').value.trim();if(!fa&&!en)return;
+S.symptoms.push({id:'s'+Date.now(),fa:fa||en,en:en||fa,color:MED_COLORS[S.symptoms.length%MED_COLORS.length],good:false,active:true});
+$('newSymFa').value='';$('newSymEn').value='';persist();renderSymptomMgr();buildChips();toast('＋');}
+
+/* حافظه */
+function updateStorage(){let used=0;for(const k in localStorage){if(localStorage.hasOwnProperty(k))used+=localStorage[k].length*2;}
+const quota=5*1024*1024;const free=Math.max(0,quota-used);
+$('storageUsed').textContent=num(Math.round(used/1024))+' KB';
+$('storageFree').textContent='~'+num(Math.round(free/1024))+' KB';
+$('lastBackupTxt').textContent=S.lastBackup?fdate(new Date(S.lastBackup),{dateStyle:'medium'}):t('never');}
+function clearPart(k){if(!confirm(lang==='fa'?'پاک شود؟':'Clear?'))return;
+if(k==='dose')S.doseLog={};if(k==='check')S.checkins={};if(k==='triage')S.triage=[];
+persist();renderAll();toast('🗑️');}
+function checkBackupPrompt(){if(S.lastBackup){const days=Math.floor((Date.now()-S.lastBackup)/86400000);
+if(days>30){$('backupMsg').textContent=(lang==='fa'?num(days)+' روز از آخرین پشتیبان گذشته':num(days)+' days since last backup');$('backupBanner').classList.remove('hidden');}}
+else{$('backupMsg').textContent=lang==='fa'?'هنوز پشتیبان نگرفته‌ای':'No backup yet';$('backupBanner').classList.remove('hidden');}}
+
+/* ایمپورت/اکسپورت */
+function exportVault(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));
+a.download='hammasir-backup-'+dkey(new Date())+'.json';a.click();URL.revokeObjectURL(a.href);
+S.lastBackup=Date.now();persist();checkBackupPrompt();updateStorage();toast('💾');}
+function shareBackup(){const raw=localStorage.getItem(VAULT_KEY);
+const file=new File([raw],'hammasir-backup.json',{type:'application/json'});
+if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:'HamMasir backup'}).catch(()=>{});}
+else{exportVault();toast(lang==='fa'?'اشتراک‌گذاری در دسترس نیست — دانلود شد':'Share unavailable — downloaded');}}
+$('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;
+let v;try{v=JSON.parse(await f.text());}catch{return toast(lang==='fa'?'فایل معتبر نیست':'Invalid file');}
+tryImport(v);e.target.value='';});
+async function tryImport(v){
+if(v.weak||WEAK){toast('weak');return;}
+$('importPwdBox').classList.remove('hidden');$('importPwdBox').dataset.vault=JSON.stringify(v);}
+async function importWithPwd(){const v=JSON.parse($('importPwdBox').dataset.vault);
+try{const master=await unwrapMaster(v.pwd,$('importPwd').value);S=await decData(master,v.data);
+MASTER={bytes:master};vault=v;ensureState();await persist();renderAll();
+$('importPwdBox').classList.add('hidden');$('importPwd').value='';toast('✔');}
+catch(e){toast(t('wrongCred'));}}
+
+/* ═══════════ چاپ ═══════════ */
+function printReport(){buildDigest();window.print();}
+function buildDigest(){const p=S.profile;
+$('pdTitle').textContent=stealthAppName||(lang==='fa'?'خلاصه‌ی ویزیت — هم‌مسیر':'Visit summary — HamMasir');
+$('pdDate').textContent=fdate(new Date(),{dateStyle:'full'});
+$('pdPatient').innerHTML=`<b>${p.name||'—'}</b> · ${num(p.age||'')} · ${p.msType||''} ${p.dmt?'· '+p.dmt:''}${p.doctor?' · '+p.doctor:''}`;
+let t30=0,taken30=0;for(let i=0;i<30;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));if(a){t30+=a.total;taken30+=a.taken;}}
+const pct30=t30?Math.round(taken30/t30*100):null;
+const doses=todayDoses(new Date());const taken=doses.filter(d=>{const l=getLog(dkey(new Date()),d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
+let medRows=S.meds.map(m=>{const s=medStats(m,30);if(!s.total)return'';
+return `<tr class="border-b border-slate-200"><td class="py-1.5">${m.emoji} ${m.name} ${m.dose}</td><td class="text-center">${(m.times||[]).map(fmtTime).join(', ')}</td><td class="text-center font-bold">${num(Math.round((s.ontime+s.late)/s.total*100))}٪</td></tr>`;}).join('');
+const sorted=Object.entries(S.checkins).sort((a,b)=>a[0].localeCompare(b[0]));
+const last7=sorted.slice(-7),prev7=sorted.slice(-14,-7);
+const avg=(arr,id)=>{const v=arr.map(([,e])=>e.v?e.v[id]:null).filter(x=>x!=null);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;};
+let symRows='';activeSyms().forEach(s=>{const a=avg(last7,s.id),b=avg(prev7,s.id);if(a===null)return;
+let arrow='—',cls='',word='=';
+if(b!==null){const d=a-b;const worse=s.good?d<0:d>0;if(Math.abs(d)>0.7){arrow=worse?'▲':'▼';word=worse?'↑':'↓';cls=worse?'text-rose-600':'text-emerald-600';}}
+symRows+=`<tr class="border-b border-slate-200"><td class="py-1.5">${symLabel(s)}</td><td class="text-center">${num(a.toFixed(1))}</td><td class="text-center font-bold ${cls}">${arrow}</td></tr>`;});
+const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
+$('pdBody').innerHTML=`
+<div class="grid grid-cols-3 gap-3 text-center mb-4">
+<div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">${t('adhTitle')} 30d</p><p class="font-display text-2xl">${pct30===null?'—':num(pct30)+'٪'}</p></div>
+<div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">${t('todayMeds')}</p><p class="font-display text-2xl">${num(taken)}/${num(doses.length)}</p></div>
+<div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">BMI</p><p class="font-display text-2xl">${num(bmi())}</p></div></div>
+${(p.concerns||[]).length?`<p class="text-sm mb-3"><b>${t('concerns')}:</b> ${p.concerns.map(c=>cmap[c]||c).join(', ')}</p>`:''}
+${S.meds.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">💊</h2><table class="w-full text-sm mb-4"><tbody>${medRows}</tbody></table>`:''}
+<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">📈</h2><table class="w-full text-sm mb-4"><tbody>${symRows||'<tr><td class="text-slate-400 py-2">—</td></tr>'}</tbody></table>
+${S.reviews.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">🪞</h2><p class="text-sm mb-4">✅ ${S.reviews[0].good||'—'} · 😓 ${S.reviews[0].hard||'—'} · 🎯 ${S.reviews[0].goal||'—'}</p>`:''}`;}
+window.addEventListener('beforeprint',buildDigest);
+
+/* ═══════════ رندر کلی ═══════════ */
+function renderAll(){applyStealth();buildCitySel();
+renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
+renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
+renderTriage();renderTriageHist();renderReport();renderMonitor();loadWeather();}
+window.addEventListener('DOMContentLoaded',boot);
+</script>
+</body>
+</html>
