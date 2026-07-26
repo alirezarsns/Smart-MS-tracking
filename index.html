@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#0d3b3a">
 <title>هم‌مسیر | HamMasir</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
-  display:['Lalezar','Space Grotesk','sans-serif'],
-  body:['Vazirmatn','Space Grotesk','sans-serif']}}}}
+  display:['Lalezar','sans-serif'],
+  body:['Vazirmatn','sans-serif']}}}}
 </script>
 <style>
   html{scroll-behavior:smooth}
@@ -49,7 +49,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
 </head>
 <body class="font-body text-slate-800 dark:text-slate-100 antialiased">
 
-<!-- ═════════ صفحه قفل ═════════ -->
+<!-- قفل -->
 <div id="scr-lock" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
   <svg viewBox="0 0 624 100" preserveAspectRatio="none" class="absolute bottom-10 left-0 w-full h-24 opacity-40"><path class="ecg-base" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/><path class="ecg-live" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/></svg>
   <div class="w-full max-w-md relative z-10">
@@ -82,7 +82,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
   </div>
 </div>
 
-<!-- ═════════ کارت اورژانس ═════════ -->
+<!-- کارت اورژانس -->
 <div id="scr-emergency" class="app screen hidden darkbg min-h-screen p-4">
   <div class="max-w-md mx-auto pt-8">
     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 border-t-8 border-rose-600">
@@ -94,7 +94,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
   </div>
 </div>
 
-<!-- ═════════ خوش‌آمدگویی ═════════ -->
+<!-- خوش‌آمد -->
 <div id="scr-setup" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4">
   <div class="w-full max-w-lg">
     <div class="text-center mb-5"><div class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-3xl shadow-2xl mb-3">🧭</div>
@@ -133,26 +133,25 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
   </div>
 </div>
 
-<!-- ═════════ اپلیکیشن ═════════ -->
+<!-- اپ -->
 <div id="scr-app" class="app screen hidden">
   <header class="sticky top-0 z-50 bg-[#0d3b3a] dark:bg-slate-900 text-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-xl shadow">🧭</div>
         <div><h1 class="font-display text-2xl leading-6" id="appTitle">هم‌مسیر</h1><p class="text-[11px] text-teal-300 dark:text-teal-400" data-t="tagline"></p></div></div>
-      <div class="flex items-center gap-2">
-        <button id="stealthQuick" onclick="quickHide()" class="hidden bg-slate-600 hover:bg-slate-500 rounded-lg px-3 py-1.5 text-sm" title="Quick hide">🙈</button>
-        <button onclick="setLang(lang==='fa'?'en':'fa')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm font-bold">🌐 <span id="langLbl">EN</span></button>
-        <button onclick="cycleTheme()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm">🌓</button>
-        <button id="installBtn" onclick="installApp()" class="hidden bg-sky-500 hover:bg-sky-400 font-bold rounded-lg px-3 py-1.5 text-sm">📲 <span data-t="install"></span></button>
-        <span class="hidden sm:flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-3 py-1 text-sm">🔥 <b id="streakNum">۰</b></span>
-        <button onclick="printReport()" class="bg-amber-400 hover:bg-amber-300 text-[#0d3b3a] font-bold rounded-lg px-3 py-1.5 text-sm">🖨️ <span data-t="print"></span></button>
-        <button onclick="lockApp()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg px-3 py-1.5 text-sm">🔒</button>
+      <div class="flex items-center gap-1.5 flex-wrap justify-end">
+        <button id="stealthQuick" onclick="quickHide()" class="hidden bg-slate-600 hover:bg-slate-500 rounded-lg w-9 h-9 text-base">🙈</button>
+        <button onclick="setLang(lang==='fa'?'en':'fa')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg h-9 px-2.5 text-sm font-bold">🌐 <span id="langLbl" class="hidden sm:inline">EN</span></button>
+        <button onclick="cycleTheme()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🌓</button>
+        <button id="installBtn" onclick="installApp()" class="hidden bg-sky-500 hover:bg-sky-400 font-bold rounded-lg w-9 h-9 text-sm">📲</button>
+        <span class="hidden md:flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-3 h-9 text-sm">🔥 <b id="streakNum">۰</b></span>
+        <button onclick="printReport()" class="bg-amber-400 hover:bg-amber-300 text-[#0d3b3a] font-bold rounded-lg px-3 h-9 text-sm">🖨️<span class="hidden sm:inline"> <span data-t="print"></span></span></button>
+        <button onclick="lockApp()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🔒</button>
       </div>
     </div>
     <nav class="max-w-6xl mx-auto px-4 pb-3 flex gap-1.5 overflow-x-auto" style="scrollbar-width:none" id="navBar"></nav>
   </header>
 
-  <!-- بنر اعلان دوز -->
   <div id="doseBanner" class="app hidden fixed top-24 left-1/2 -translate-x-1/2 z-[65] w-[92%] max-w-md bg-[#0d3b3a] dark:bg-slate-800 text-white rounded-2xl shadow-2xl p-4 border-2 border-amber-400">
     <p id="dbText" class="font-bold text-center mb-3"></p>
     <div class="flex gap-2">
@@ -162,7 +161,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
     </div>
   </div>
 
-  <!-- حالت مخفی: صفحه یادداشت جعلی -->
   <div id="fakeNote" class="app hidden fixed inset-0 z-[80] bg-amber-50 dark:bg-slate-900 p-6 overflow-auto">
     <div class="max-w-md mx-auto">
       <h1 class="font-display text-3xl text-amber-800 dark:text-amber-300 mb-4">📝 <span data-t="fakeTitle"></span></h1>
@@ -173,11 +171,10 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
 
   <main class="max-w-6xl mx-auto px-4 py-8" id="mainArea">
 
-    <!-- داشبورد -->
     <section id="view-dash" class="view">
       <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
         <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300"><span data-t="hello"></span>، <span id="greetName"></span> 👋</h2><p class="text-sm text-slate-500 dark:text-slate-400" id="greetSub"></p></div>
-        <div class="flex gap-2">
+        <div class="flex gap-2 flex-wrap">
           <button onclick="badDay()" class="bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 font-bold rounded-xl px-4 py-2.5 text-sm transition-colors">🌧️ <span data-t="badDay"></span></button>
           <button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-5 py-2.5 transition-all hover:scale-105 shadow">✍️ <span data-t="checkin"></span></button>
         </div>
@@ -221,7 +218,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
       </div>
     </section>
 
-    <!-- دارویار -->
     <section id="view-meds" class="view hidden space-y-6">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
@@ -247,15 +243,15 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
             <label class="flex items-center gap-1"><input type="radio" name="mff" value="days" onchange="mfFreq()" class="accent-teal-600"><span data-t="specificDays"></span></label></div></div>
           <div id="mf-daysBox" class="hidden"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="weekDays"></label><div id="mf-days" class="flex gap-1.5"></div></div>
           <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medRemaining"></label><input id="mf-remaining" type="number" min="0" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div class="sm:col-span-2 flex items-center gap-4"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mf-food" class="w-5 h-5 accent-teal-600">🍽️ <span data-t="withFood"></span></label>
-            <input id="mf-note" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm focus:border-teal-500 outline-none" data-t-attr="placeholder" data-t="medNote"></div>
+          <div class="sm:col-span-2 flex items-center gap-4 flex-wrap"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mf-food" class="w-5 h-5 accent-teal-600">🍽️ <span data-t="withFood"></span></label>
+            <input id="mf-note" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm focus:border-teal-500 outline-none" placeholder="..."></div>
         </div>
         <div class="flex gap-3 mt-5"><button onclick="saveMed()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
         <button onclick="closeMedForm()" class="border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold rounded-xl px-6 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700" data-t="cancel"></button></div>
       </div>
       <div class="revealwrap" id="medsSensitive">
         <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6" id="medsInner">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">⏱️ <span data-t="todayPlan"></span></h3><span class="text-sm text-slate-500 dark:text-slate-400" id="todayCount"></span></div>
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">⏱️ <span data-t="todayPlan"></span></h3><span class="text-sm text-slate-500 dark:text-slate-400" id="todayCount"></span></div>
           <div id="timeline" class="space-y-3"></div>
           <div id="timelineEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">💊</p><p class="font-bold" data-t="noMed"></p></div>
         </div>
@@ -279,7 +275,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
         <div id="medHistory" class="space-y-2 text-sm"></div></div>
     </section>
 
-    <!-- پایبندی -->
     <section id="view-adh" class="view hidden space-y-6">
       <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
@@ -295,7 +290,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
         <p id="adhInsight" class="text-sm mt-4 font-bold text-teal-700 dark:text-teal-300"></p></div>
     </section>
 
-    <!-- چک‌این -->
     <section id="view-check" class="view hidden">
       <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
         <div class="flex items-center justify-between flex-wrap gap-2">
@@ -308,12 +302,11 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
         <div id="checkDone" class="hidden mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-sm rounded-lg p-3" data-t="alreadyChecked"></div>
         <div id="emoRows" class="mt-4"></div>
         <div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="trigChips" class="flex flex-wrap gap-2"></div></div>
-        <textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" data-t-attr="placeholder" data-t="notePh"></textarea>
+        <textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" placeholder="..."></textarea>
         <button onclick="saveCheckin()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="saveCheck"></button>
       </div>
     </section>
 
-    <!-- تریاژ -->
     <section id="view-triage" class="view hidden">
       <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
         <h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="triageTitle"></h2>
@@ -323,16 +316,14 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
       </div>
     </section>
 
-    <!-- پایش -->
     <section id="view-cal" class="view hidden">
       <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <div class="flex items-center justify-between mb-4"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
         <button onclick="addMonitor()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2">＋ <span data-t="addMonitor"></span></button></div>
         <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="monitorSub"></p>
         <div id="monitorList" class="space-y-3"></div></div>
     </section>
 
-    <!-- گزارش -->
     <section id="view-report" class="view hidden space-y-8">
       <div class="revealwrap" id="reportWrap">
         <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌡️ <span data-t="mainSymptoms"></span></h2><div class="space-y-4 text-sm" id="repSymp"></div></div>
@@ -341,7 +332,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
       <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewHist"></span></h2><div id="reviewList" class="space-y-3 text-sm"></div></div>
     </section>
 
-    <!-- تنظیمات -->
     <section id="view-profile" class="view hidden space-y-6">
       <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
         <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">👤 <span data-t="profileTitle"></span></h2>
@@ -402,7 +392,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
         <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">✍️ <span data-t="symptomSet"></span></h2>
         <p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="symptomSetSub"></p>
         <div id="symptomMgr" class="space-y-2"></div>
-        <div class="flex gap-2 mt-3">
+        <div class="flex gap-2 mt-3 flex-wrap">
           <input id="newSymFa" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymFa">
           <input id="newSymEn" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymEn">
           <button onclick="addSymptom()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">＋</button></div>
@@ -424,6 +414,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
       <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
         <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1">💾 <span data-t="backupTitle"></span></h2>
         <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><span data-t="storageUsed"></span>: <b id="storageUsed"></b> · <span data-t="storageFree"></span>: <b id="storageFree"></b></p>
+        <div id="storageWarn" class="hidden mb-2 bg-rose-50 dark:bg-rose-900/30 border border-rose-300 text-rose-700 dark:text-rose-300 rounded-xl p-3 text-sm font-bold"></div>
         <p class="text-xs text-slate-500 dark:text-slate-400 mb-4"><span data-t="lastBackup"></span>: <b id="lastBackupTxt"></b></p>
         <div class="flex flex-wrap gap-3">
           <button onclick="exportVault()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">⬇️ <span data-t="downloadBackup"></span></button>
@@ -464,7 +455,6 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
   </div>
 </div>
 
-<!-- خلاصه چاپی -->
 <div id="printDigest" class="max-w-3xl mx-auto p-6 text-slate-900">
   <div class="flex items-center justify-between border-b-4 border-teal-700 pb-3 mb-4">
     <div><h1 class="font-display text-3xl" id="pdTitle"></h1><p id="pdPatient" class="text-sm text-slate-600"></p></div>
@@ -478,7 +468,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
 <div id="softToast" class="toast hidden fixed bottom-20 left-1/2 z-[89] bg-sky-600 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
 
 <script>
-/* ═══════════ i18n ═══════════ */
+/* ═══ i18n ═══ */
 let lang=localStorage.getItem('hammasir-lang')||'fa';
 const L={
 lockSub:['داده‌های تو روی همین دستگاه رمزگذاری شده‌اند','Your data is encrypted on this device'],
@@ -505,7 +495,7 @@ medsTitle:['دارویار','Medication companion'],medsSub:['برنامه، ی�
 copyList:['کپی لیست داروها','Copy med list'],addMed:['داروی جدید','New med'],
 medName:['نام دارو','Med name'],medDose:['دوز','Dose'],medEmoji:['ایموجی','Emoji'],medColor:['رنگ','Color'],medPerday:['دوز در روز','Doses/day'],medTimes:['ساعت(ها)','Time(s)'],
 medFreq:['تکرار','Repeat'],daily:['هر روز','Daily'],every:['هر','Every'],specificDays:['روزهای خاص','Specific days'],weekDays:['روزهای هفته','Weekdays'],
-medRemaining:['قرص باقی‌مانده','Pills remaining'],withFood:['با غذا','With food'],medNote:['یادداشت','Note'],save:['ذخیره','Save'],cancel:['انصراف','Cancel'],
+medRemaining:['قرص باقی‌مانده','Pills remaining'],withFood:['با غذا','With food'],save:['ذخیره','Save'],cancel:['انصراف','Cancel'],
 todayPlan:['برنامه‌ی امروز','Today\'s plan'],noMed:['دارویی اضافه نشده','No meds added'],
 waterToday:['آب امروز','Water today'],waterHot:['🔥 امروز گرمه — هدف آب بیشتر شد','🔥 Hot day — water goal increased'],
 healthReminders:['یادآورهای سلامتی','Health reminders'],myMeds:['داروهای من','My meds'],medHistory:['تاریخچه‌ی تغییرات دارو','Medication change history'],
@@ -513,7 +503,7 @@ adhTitle:['گزارش پایبندی','Adherence report'],adhSub:['پزشک را
 heatmap:['نقشه‌ی حرارتی ۴ ماه','4-month heatmap'],heatmapSub:['هر خانه یک روز — سبز یعنی کامل','Each cell is a day — green means complete'],
 perMed:['پایبندی هر دارو (۳۰ روز)','Per-med adherence (30d)'],timePattern:['الگوی ساعتی','Time-of-day pattern'],weeklyTrend:['روند هفتگی','Weekly trend'],
 checkTitle:['چک‌این امروز','Today\'s check-in'],checkSub:['هر ردیف یک ضربه','One tap per row'],voice:['صوتی','Voice'],likeYesterday:['مثل دیروز','Like yesterday'],
-alreadyChecked:['✅ امروز چک‌این کرده‌ای','✅ Already checked in today'],triggers:['محرک‌های امروز','Today\'s triggers'],notePh:['یادداشت دلخواه…','Optional note…'],saveCheck:['ثبت و ذخیره‌ی رمزگذاری‌شده','Save (encrypted)'],
+alreadyChecked:['✅ امروز چک‌این کرده‌ای','✅ Already checked in today'],triggers:['محرک‌های امروز','Today\'s triggers'],saveCheck:['ثبت و ذخیره‌ی رمزگذاری‌شده','Save (encrypted)'],
 triageTitle:['تریاز علامت جدید','New symptom triage'],triageSub:['عود واقعی یا تشدید موقت؟','Real relapse or temporary flare?'],triageHist:['سابقه','History'],
 monitorTitle:['پایش سلامت','Health monitor'],addMonitor:['افزودن','Add'],monitorSub:['آزمایش‌ها، تصویربرداری‌ها و کارهای دوره‌ای را با تاریخ اضافه کن','Add labs, imaging and periodic tasks with dates'],
 mainSymptoms:['علائم اصلی','Main symptoms'],myConcerns:['دغدغه‌های من','My concerns'],reviewHist:['بازبینی‌های هفتگی','Weekly reviews'],
@@ -535,29 +525,29 @@ printFooter:['این خلاصه توسط بیمار تولید شده و جای�
 fakeTitle:['یادداشت‌ها','Notes'],fakeBack:['بازگشت','Back'],
 notifOn:['اعلان فعال','Notifications on'],notifOff:['فعال‌سازی اعلان','Enable notifications'],notifDenied:['اعلان مسدود است','Notifications blocked'],notifNone:['اعلان پشتیبانی نمی‌شود','Not supported'],
 took:['✅ خوردم','✅ Taken'],snooze:['⏰ بعداً','⏰ Later'],skipped:['❌ نخوردم','❌ Skipped'],
-stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],stUpcoming:['بعدی','Upcoming'],
+stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],
 };
-function t(k){let v=L;for(const p of k.split(".")){v=v&&v[p];}return Array.isArray(v)?v[lang==="fa"?0:1]:k;}
+function t(k){let v=L;for(const p of k.split('.')){v=v&&v[p];}return Array.isArray(v)?v[lang==='fa'?0:1]:k;}
 function num(n){return Number(n).toLocaleString(lang==='fa'?'fa-IR':'en-US');}
 function fdate(d,o){return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-US',o||{day:'numeric',month:'long'}).format(d);}
+let curTab='dash';
 function applyStatic(){document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t(el.dataset.t);});
 document.querySelectorAll('[data-t-attr]').forEach(el=>{el.setAttribute(el.dataset.tAttr,t(el.dataset.t));});
 document.documentElement.dir=lang==='fa'?'rtl':'ltr';document.documentElement.lang=lang;
-$('langLbl').textContent=lang==='fa'?'EN':'فا';
-buildNav();}
+$('langLbl').textContent=lang==='fa'?'EN':'فا';buildNav();}
 function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic();if(S){renderAll();}else{renderLock();}}
 function buildNav(){const tabs=['dash','meds','adh','check','triage','cal','report','profile'];
 const icons={dash:'📊',meds:'💊',adh:'📈',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
-$('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" data-tab="${tb}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
+$('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
 
-/* ═══════════ تم ═══════════ */
+/* ═══ تم ═══ */
 let theme=localStorage.getItem('hammasir-theme')||'system';
 function applyTheme(){const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
 document.documentElement.classList.toggle('dark',dark);}
 function setTheme(m){theme=m;localStorage.setItem('hammasir-theme',m);applyTheme();toast('🌓');}
 function cycleTheme(){setTheme(document.documentElement.classList.contains('dark')?'light':'dark');}
 
-/* ═══════════ ابزار ═══════════ */
+/* ═══ ابزار ═══ */
 const $=id=>document.getElementById(id);
 const dkey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -568,8 +558,8 @@ function softToast(m){const el=$('softToast');el.textContent=m;el.classList.remo
 function pearson(x,y){const n=x.length;if(n<5)return 0;const mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let nu=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=x[i]-mx,b=y[i]-my;nu+=a*b;dx+=a*a;dy+=b*b;}return dx&&dy?nu/Math.sqrt(dx*dy):0;}
 function togglePwd(id){const el=$(id);el.type=el.type==='password'?'text':'password';}
 
-/* ═══════════ رمزنگاری (key-wrapping) ═══════════ */
-const VAULT_KEY='hammasir-vault-v5',DEVKEY='hammasir-devkey';
+/* ═══ رمزنگاری ═══ */
+const VAULT_KEY='hammasir-vault-v5',DEVKEY='hammasir-devkey',CREDID='hammasir-credid';
 const enc=new TextEncoder(),dec=new TextDecoder();
 let WEAK=!(window.crypto&&crypto.subtle);
 function buf2b64(b){const u=new Uint8Array(b);let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s);}
@@ -583,7 +573,6 @@ async function unwrapMaster(wrap,secret){const k=await deriveKey(secret,b642buf(
 async function encData(master,obj){const iv=crypto.getRandomValues(new Uint8Array(12));const k=await importMaster(master);
 const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,enc.encode(JSON.stringify(obj)));return{iv:buf2b64(iv),ct:buf2b64(ct)};}
 async function decData(master,d){const k=await importMaster(master);const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b642buf(d.iv)},k,b642buf(d.ct));return JSON.parse(dec.decode(pt));}
-/* weak fallback */
 function keystream(p,len){let h=2166136261;for(let i=0;i<p.length;i++){h^=p.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}const o=new Array(len);let x=h||1;for(let i=0;i<len;i++){x=(Math.imul(x,1103515245)+12345)>>>0;o[i]=x&0xff;}return o;}
 function weakEnc(o,p){const s=encodeURIComponent(JSON.stringify(o));const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return btoa(r);}
 function weakDec(b,p){const s=atob(b);const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return r;}
@@ -592,7 +581,9 @@ let MASTER=null,S=null,vault=null;
 async function persist(){if(!S||!MASTER)return;try{
   if(WEAK){vault.ct=weakEnc(S,MASTER.weakPwd);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
   else{vault.data=await encData(MASTER.bytes,S);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
-  updateStorage();}catch(e){toast('⚠️ save failed');}}
+  updateStorage();}catch(e){const full=e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014);
+  toast(full?('⚠️ '+(lang==='fa'?'فضای ذخیره پر شد! پشتیبان بگیر':'Storage full! Back up now')):'⚠️ save failed');
+  if(full&&$('storageWarn')){$('storageWarn').classList.remove('hidden');$('storageWarn').textContent='⚠️ '+(lang==='fa'?'فضا پر است':'Storage full');}}}
 async function createVault(pwd,state){
   if(WEAK){vault={v:5,weak:1,ct:weakEnc(state,pwd)};MASTER={weakPwd:pwd};}
   else{const master=crypto.getRandomValues(new Uint8Array(32));
@@ -605,21 +596,35 @@ async function unlockWith(secret,kind){
   let master;
   if(kind==='pwd')master=await unwrapMaster(vault.pwd,secret);
   else if(kind==='pin')master=await unwrapMaster(vault.pin,secret);
-  else if(kind==='bio'){const dk=JSON.parse(localStorage.getItem(DEVKEY));master=await unwrapMaster(vault.bio,dk);}
+  else if(kind==='bio'){
+    const credId=localStorage.getItem(CREDID);
+    const dk=JSON.parse(localStorage.getItem(DEVKEY)||'null');
+    if(!credId||!dk)throw new Error('no-bio');
+    await navigator.credentials.get({publicKey:{
+      challenge:crypto.getRandomValues(new Uint8Array(32)),
+      allowCredentials:[{id:b642buf(credId),type:'public-key',transport:['internal']}],
+      userVerification:'required',timeout:60000}});
+    master=await unwrapMaster(vault.bio,dk);}
   S=await decData(master,vault.data);MASTER={bytes:master};}
 async function setPin(){const pin=$('pinSet').value;if(!/^\d{4,6}$/.test(pin))return toast(lang==='fa'?'پین ۴ تا ۶ رقم':'PIN must be 4-6 digits');
   if(WEAK)return toast('PIN unavailable');
   vault.pin=await wrapMaster(MASTER.bytes,pin);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
   $('pinSet').value='';updatePinStatus();toast('🔑 '+(lang==='fa'?'پین تنظیم شد':'PIN set'));}
-async function setupBio(){try{
-  const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'HamMasir'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user',displayName:'user'},pubKeyCredParams:[{type:'public-key',alg:-7}]}});
-  let dk=localStorage.getItem(DEVKEY);
-  if(!dk){dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));localStorage.setItem(DEVKEY,JSON.stringify(dk));}
-  dk=JSON.parse(localStorage.getItem(DEVKEY));
-  vault.bio=await wrapMaster(MASTER.bytes,dk);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
-  toast('👆 '+(lang==='fa'?'اثر انگشت فعال شد':'Fingerprint enabled'));}catch(e){toast(lang==='fa'?'اثر انگشت در دسترس نیست':'Biometric unavailable');}}
-async function wrapMasterRaw(master,keyB64){const k=await crypto.subtle.importKey('raw',b642buf(keyB64),{name:'AES-GCM'},false,['encrypt']);
-const iv=crypto.getRandomValues(new Uint8Array(12));const w=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,master);return{iv:buf2b64(iv),w:buf2b64(w)};}
+async function setupBio(){
+  if(!window.PublicKeyCredential||!window.isSecureContext){toast(lang==='fa'?'اثرانگشت اینجا کار نمی‌کنه (نیاز به HTTPS و دستگاه دارای حسگر)':'Biometrics need HTTPS + a fingerprint device');return;}
+  try{
+    const cred=await navigator.credentials.create({publicKey:{
+      challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'HamMasir'},
+      user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'hammasir',displayName:'HamMasir'},
+      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
+      authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000}});
+    localStorage.setItem(CREDID,buf2b64(cred.rawId));
+    const dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));
+    localStorage.setItem(DEVKEY,JSON.stringify(dk));
+    vault.bio=await wrapMaster(MASTER.bytes,dk);
+    localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
+    updatePinStatus();toast('👆 '+(lang==='fa'?'اثرانگشت فعال شد — موقع باز کردن چک می‌شه':'Fingerprint enabled'));
+  }catch(e){toast(lang==='fa'?'اثرانگشت لغو یا پشتیبانی نشد':'Biometric cancelled/unsupported');}}
 async function changePwd(){const o=$('cp-old').value,n=$('cp-new').value,c=$('cp-con').value;
   if(n.length<4)return toast(lang==='fa'?'رمز جدید حداقل ۴ نویسه':'Min 4 chars');if(n!==c)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');
   if(WEAK){if(o!==MASTER.weakPwd)return toast(t('wrongCred'));vault.ct=weakEnc(S,n);MASTER.weakPwd=n;}
@@ -628,37 +633,35 @@ async function changePwd(){const o=$('cp-old').value,n=$('cp-new').value,c=$('cp
   localStorage.setItem(VAULT_KEY,JSON.stringify(vault));$('cp-old').value=$('cp-new').value=$('cp-con').value='';toast('🔑');}
 function updatePinStatus(){const hasPin=vault&&vault.pin;const hasBio=vault&&vault.bio;
 $('pinStatus').textContent=(hasPin?'✅ PIN':'')+(hasBio?' · 👆 Bio':'');
-if(window.PublicKeyCredential)$('bioSetBtn').classList.remove('hidden');}
+if(window.PublicKeyCredential&&window.isSecureContext)$('bioSetBtn').classList.remove('hidden');}
 
-/* ═══════════ صفحه‌ها ═══════════ */
-let curTab='dash';
+/* ═══ صفحه‌ها ═══ */
 function showScreen(id){['lock','setup','app','emergency'].forEach(s=>$('scr-'+s).classList.toggle('hidden',s!==id));}
 function renderLock(){const hasPin=vault&&vault.pin;$('pinArea').classList.toggle('hidden',!hasPin);
 $('pwdArea').classList.toggle('hidden',!!hasPin);$('bioArea').classList.toggle('hidden',!(vault&&vault.bio));
 $('lockAppName').textContent=stealthName();}
 function boot(){applyTheme();applyStatic();initPWA();
   const raw=localStorage.getItem(VAULT_KEY);
-  if(raw){vault=JSON.parse(raw);showScreen('lock');renderLock();setTimeout(()=>$(hasPinFocus()).focus(),100);}
+  if(raw){vault=JSON.parse(raw);showScreen('lock');renderLock();setTimeout(()=>$(vault&&vault.pin?'lockPin':'lockPwd').focus(),100);}
   else{showScreen('setup');suShow();$('su-dx').value=dkey(new Date());renderConcernChips('su-concerns',setupConcerns);}}
-function hasPinFocus(){return vault&&vault.pin?'lockPin':'lockPwd';}
 async function unlockPwd(){try{await unlockWith($('lockPwd').value,'pwd');enterApp();}catch(e){lockError();}}
 async function unlockPin(){try{await unlockWith($('lockPin').value,'pin');enterApp();}catch(e){lockError();}}
 async function unlockBio(){try{await unlockWith(null,'bio');enterApp();}catch(e){lockError();}}
-function lockError(){$('lockErr').classList.remove('hidden');const el=$(hasPinFocus());el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),450);}
+function lockError(){$('lockErr').classList.remove('hidden');const el=$(vault&&vault.pin?'lockPin':'lockPwd');el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),450);}
 function showPwdMode(){$('pinArea').classList.add('hidden');$('pwdArea').classList.remove('hidden');$('lockPwd').focus();}
 function enterApp(){ensureState();$('lockErr').classList.add('hidden');$('lockPwd').value='';$('lockPin').value='';
 showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();
 checkReviewPrompt();checkBackupPrompt();toast(lang==='fa'?'خوش برگشتی 👋':'Welcome back 👋');}
 function forgot(){if(confirm(lang==='fa'?'بدون رمز داده‌ها قابل بازیابی نیستند. پاک شود؟':'Without the password data is unrecoverable. Erase?'))wipeAll();}
 function lockApp(){MASTER=null;S=null;showScreen('lock');renderLock();}
-function wipeAll(){if(confirm(lang==='fa'?'همه‌چیز برای همیشه پاک می‌شود. مطمئنی؟':'Erase everything forever?')){localStorage.removeItem(VAULT_KEY);localStorage.removeItem(DEVKEY);location.reload();}}
+function wipeAll(){if(confirm(lang==='fa'?'همه‌چیز برای همیشه پاک می‌شود. مطمئنی؟':'Erase everything forever?')){localStorage.removeItem(VAULT_KEY);localStorage.removeItem(DEVKEY);localStorage.removeItem(CREDID);location.reload();}}
 
-/* ═══════════ حالت مخفی ═══════════ */
+/* ═══ حالت مخفی ═══ */
 let stealthOn=localStorage.getItem('hammasir-stealth')==='1';
 let stealthAppName=localStorage.getItem('hammasir-appname')||'';
 function stealth(){return stealthOn;}
 function stealthName(){return stealthOn&&stealthAppName?stealthAppName:(lang==='fa'?'هم‌مسیر':'HamMasir');}
-function toggleStealth(v){stealthOn=v;localStorage.setItem('hammasir-stealth',v?'1':'0');applyStealth();toast(v?'🙈 '+(lang==='fa'?'مخفی فعال شد':'Stealth on'):'🙉');}
+function toggleStealth(v){stealthOn=v;localStorage.setItem('hammasir-stealth',v?'1':'0');applyStealth();toast(v?'🙈':'🙉');}
 function saveStealthName(v){stealthAppName=v.trim();localStorage.setItem('hammasir-appname',stealthAppName);applyStealth();}
 function applyStealth(){document.title=stealthName();
 if(S){$('appTitle').textContent=stealthAppName||(lang==='fa'?'هم‌مسیر':'HamMasir');}
@@ -673,9 +676,8 @@ function revealOnce(btn){const p=btn.closest('.revealwrap');p.classList.remove('
 function quickHide(){$('fakeNote').classList.toggle('hidden');
 if(!$('fakeNote').classList.contains('hidden')){$('fakeList').innerHTML=['خرید: نان، شیر','تماس با بانک','قرار پنجشنبه'].map(n=>`<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow border-r-4 border-amber-400">${n}</div>`).join('');}}
 
-/* ═══════════ کارت اورژانس ═══════════ */
-function showEmergency(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
-let emg={};try{emg=JSON.parse(localStorage.getItem('hammasir-emg')||'{}');}catch(e){}
+/* ═══ کارت اورژانس ═══ */
+function showEmergency(){let emg={};try{emg=JSON.parse(localStorage.getItem('hammasir-emg')||'{}');}catch(e){}
 $('emgBody').innerHTML=`
   <div class="bg-rose-50 dark:bg-rose-900/30 rounded-lg p-3"><b>${t('emgContact')}:</b> ${emg.contact||'—'}<br><b>${t('emgPhone')}:</b> ${emg.phone||'—'}</div>
   <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgAllergy')}:</b> ${emg.allergy||'—'}</div>
@@ -686,7 +688,7 @@ function hideEmergency(){showScreen('lock');}
 function saveEmergency(){const e={contact:$('emg-contact').value,phone:$('emg-phone').value,allergy:$('emg-allergy').value,notes:$('emg-notes').value};
 localStorage.setItem('hammasir-emg',JSON.stringify(e));if(S){S.emergency=e;persist();}toast('🚑 '+t('save'));}
 
-/* ═══════════ خوش‌آمد ═══════════ */
+/* ═══ خوش‌آمد ═══ */
 let suStep=0,setupConcerns=new Set(),profileConcerns=new Set();
 function suShow(){for(let i=0;i<4;i++)$('su-s'+i).classList.toggle('hidden',i!==suStep);
 $('suProg').innerHTML=[0,1,2,3].map(i=>`<div class="h-1.5 flex-1 rounded-full ${i<=suStep?'bg-teal-400':'bg-white/20'}"></div>`).join('');
@@ -721,7 +723,7 @@ S.reminders=S.reminders||{water:{on:true,every:120,goal:8},stand:{on:true,every:
 S.water=S.water||{d:dkey(new Date()),c:0};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
 S.checkins=S.checkins||{};S.triage=S.triage||[];}
 
-/* ═══════════ PWA ═══════════ */
+/* ═══ PWA ═══ */
 let deferredPrompt=null;
 function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
 const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',background_color:'#0d3b3a',theme_color:'#0d3b3a',icons:[{src:icon,sizes:'any',type:'image/svg+xml'}]};
@@ -729,14 +731,14 @@ const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectU
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden');});}
 function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('installBtn').classList.add('hidden');}else toast(lang==='fa'?'از منوی مرورگر «Add to Home Screen» بزن':'Use browser "Add to Home Screen"');}
 
-/* ═══════════ تب‌ها ═══════════ */
+/* ═══ تب‌ها ═══ */
 function showTab(id){curTab=id;document.querySelectorAll('#scr-app .view').forEach(v=>v.classList.add('hidden'));$('view-'+id).classList.remove('hidden');buildNav();
 window.scrollTo({top:0,behavior:'smooth'});
 if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
 if(id==='check')renderCheck();if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();}
 if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();}
 
-/* ═══════════ دارویار ═══════════ */
+/* ═══ دارویار ═══ */
 function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
 if(m.freq.type==='everyN'){const s=new Date(m.start||dkey(new Date()));const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const b=new Date(date.getFullYear(),date.getMonth(),date.getDate());const diff=Math.round((b-a)/86400000);return diff>=0&&diff%(m.freq.n||1)===0;}
 if(m.freq.type==='days')return(m.freq.days||[]).includes(date.getDay());return true;}
@@ -761,10 +763,9 @@ function renderMedHistory(){const am={add:['➕',lang==='fa'?'افزوده شد'
 $('medHistory').innerHTML=S.medHistory.length?S.medHistory.slice(0,10).map(h=>{const a=am[h.action]||['·',h.action];
 return `<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${a[0]}</span><span class="flex-1"><b>${h.name}</b> — ${a[1]}</span><span class="text-xs text-slate-400">${fdate(new Date(h.date))}</span></div>`;}).join(''):`<p class="text-slate-400">${lang==='fa'?'تاریخچه‌ای نیست':'No history'}</p>`;}
 
-/* فرم دارو */
 let editingId=null,mfColor='#0f766e',mfDays=new Set();
 const MED_COLORS=['#0f766e','#f59e0b','#e11d48','#0284c7','#059669','#ea580c','#7c3aed','#db2777','#0d9488','#ca8a04'];
-const DAY_LBL=lang==='fa'?[['ش',6],['ی',0],['د',1],['س',2],['چ',3],['پ',4],['ج',5]]:[['S',0],['M',1],['T',2],['W',3],['T',4],['F',5],['S',6]];
+function dayLbl(){return lang==='fa'?[['ش',6],['ی',0],['د',1],['س',2],['چ',3],['پ',4],['ج',5]]:[['S',0],['M',1],['T',2],['W',3],['T',4],['F',5],['S',6]];}
 function openMedForm(id){editingId=id||null;mfDays=new Set();
 const m=id?S.meds.find(x=>x.id===id):null;
 $('mfTitle').textContent=m?(lang==='fa'?'ویرایش دارو':'Edit med'):(lang==='fa'?'داروی جدید':'New med');
@@ -782,7 +783,7 @@ function closeMedForm(){$('medForm').classList.add('hidden');editingId=null;}
 function renderSwatches(){$('mf-colors').innerHTML=MED_COLORS.map(c=>`<button type="button" onclick="mfColor='${c}';renderSwatches()" class="swatch w-8 h-8 rounded-full border-4 ${mfColor===c?'border-slate-800 dark:border-white':'border-white dark:border-slate-600'} shadow" style="background:${c}"></button>`).join('');}
 function mfPerday(){const n=+$('mf-perday').value;$('mf-t2').classList.toggle('hidden',n<2);$('mf-t3').classList.toggle('hidden',n<3);}
 function mfFreq(){$('mf-daysBox').classList.toggle('hidden',document.querySelector('input[name=mff]:checked').value!=='days');}
-function renderMfDays(){$('mf-days').innerHTML=DAY_LBL.map(([l,d])=>`<button type="button" onclick="toggleMfDay(${d})" class="w-9 h-9 rounded-full border-2 text-sm font-bold transition-all ${mfDays.has(d)?'bg-teal-600 text-white border-teal-600':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${l}</button>`).join('');}
+function renderMfDays(){$('mf-days').innerHTML=dayLbl().map(([l,d])=>`<button type="button" onclick="toggleMfDay(${d})" class="w-9 h-9 rounded-full border-2 text-sm font-bold transition-all ${mfDays.has(d)?'bg-teal-600 text-white border-teal-600':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${l}</button>`).join('');}
 function toggleMfDay(d){mfDays.has(d)?mfDays.delete(d):mfDays.add(d);renderMfDays();}
 function saveMed(){const name=$('mf-name').value.trim();if(!name)return toast(lang==='fa'?'نام دارو را بنویس':'Enter med name');
 const pd=+$('mf-perday').value;const times=[$('mf-t1').value,pd>=2?$('mf-t2').value:null,pd>=3?$('mf-t3').value:null].filter(Boolean);
@@ -800,8 +801,10 @@ function copyMedList(){if(!S.meds.length)return toast(lang==='fa'?'دارویی 
 const txt=(lang==='fa'?'لیست داروها — ':'Medication list — ')+(S.profile.name||'')+'\n'+S.meds.map(m=>`• ${m.name} ${m.dose} — ${(m.times||[]).map(fmtTime).join(', ')}${m.food?' ('+t('withFood')+')':''}`).join('\n');
 navigator.clipboard.writeText(txt).then(()=>toast('📋')).catch(()=>prompt('Copy:',txt));}
 
-/* رندر داروها */
 function fmtTime(tm){const[h,m]=tm.split(':').map(Number);const d=new Date();d.setHours(h,m);return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-US',{hour:'2-digit',minute:'2-digit'}).format(d);}
+function stChip(c,txt){const map={emerald:'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',amber:'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',rose:'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',slate:'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-200',sky:'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300'};
+return `<span class="text-[11px] font-bold ${map[c]} rounded-full px-2.5 py-1">${txt}</span>`;}
+function undoBtn(k){return `<button onclick='act("undo","${k}")' class="text-xs text-slate-400 hover:text-teal-600 underline">↩️</button>`;}
 function renderMeds(){const now=new Date(),dk=dkey(now);const doses=todayDoses(now);
 $('timelineEmpty').classList.toggle('hidden',doses.length>0);
 const taken=doses.filter(d=>{const l=getLog(dk,d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
@@ -815,11 +818,11 @@ else if(st==='due'){cls='due';chip=`<span class="text-[11px] font-bold bg-amber-
 acts=`<button onclick='act("take","${d.key}")' class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg py-2 text-sm">${t('took')}</button><button onclick='act("snooze","${d.key}")' class="bg-amber-500 text-[#0d3b3a] font-bold rounded-lg px-3 py-2 text-sm">⏰</button><button onclick='act("skip","${d.key}")' class="bg-rose-600 text-white font-bold rounded-lg px-3 py-2 text-sm">❌</button>`;}
 else if(st==='late'){chip=stChip('amber',t('stLate'));acts=`<button onclick='act("take","${d.key}")' class="flex-1 bg-amber-500 text-white font-bold rounded-lg py-2 text-sm">${t('took')}</button><button onclick='act("skip","${d.key}")' class="bg-rose-600 text-white font-bold rounded-lg px-3 py-2 text-sm">❌</button>`;}
 else{chip=stChip('sky','🔜 '+fmtTime(d.time));acts=`<button onclick='act("take","${d.key}")' class="text-xs border-2 border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">${t('took')}</button>`;}
-return `<div class="dosecard ${cls} flex items-center gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3 bg-white dark:bg-slate-700">
+return `<div class="dosecard ${cls} flex flex-wrap items-center gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3 bg-white dark:bg-slate-700">
 <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</div>
 <div class="flex-1 min-w-0"><p class="font-bold truncate">${m.name} <span class="text-xs text-slate-400 font-normal">${m.dose}</span></p>
 <p class="text-[11px] text-slate-500 dark:text-slate-400">${fmtTime(d.time)}${m.food?' · 🍽️':''}</p></div>${chip}
-<div class="flex gap-1.5 items-center" style="min-width:150px">${acts}</div></div>`;}).join('');
+<div class="flex gap-1.5 items-center flex-wrap">${acts}</div></div>`;}).join('');
 const refill=S.settings.refillDays||7;
 $('medList').innerHTML=S.meds.length?S.meds.map(m=>{const pd=(m.times||[]).length||1;const dl=m.remaining!=null?Math.floor(m.remaining/pd):null;
 return `<div class="border border-slate-200 dark:border-slate-600 rounded-xl p-4 bg-white dark:bg-slate-700 hover:shadow-md transition-shadow ${m.active===false?'opacity-50':''}">
@@ -831,14 +834,10 @@ ${dl!=null&&dl<=refill?`<span class="text-[10px] font-bold bg-rose-100 dark:bg-r
 <button onclick="toggleMedActive('${m.id}')" class="text-xs border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">${m.active===false?'▶️':'⏸️'}</button>
 <button onclick="delMed('${m.id}')" class="text-xs border border-rose-200 dark:border-rose-800 rounded-lg px-3 py-1.5 font-bold text-rose-500">🗑️</button>
 ${m.remaining!=null?`<span class="text-[11px] text-slate-400 mr-auto self-center">${num(m.remaining)}</span>`:''}</div></div>`;}).join(''):`<p class="text-slate-400 text-sm sm:col-span-2">${t('noMed')}</p>`;}
-function stChip(c,txt){const map={emerald:'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',amber:'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',rose:'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',slate:'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-200',sky:'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300'};
-return `<span class="text-[11px] font-bold ${map[c]} rounded-full px-2.5 py-1">${txt}</span>`;}
-function undoBtn(k){return `<button onclick='act("undo","${k}")' class="text-xs text-slate-400 hover:text-teal-600 underline">↩️</button>`;}
 function act(a,key){const d=todayDoses(new Date()).find(x=>x.key===key);if(!d)return;
 if(a==='take')takeDose(d);else if(a==='skip')skipDose(d);else if(a==='undo')undoDose(d);
 else if(a==='snooze'){snoozes[key]=Date.now()+15*60000;hideBanner();toast('⏰');}}
 
-/* اعلان‌ها */
 let notifiedKeys=new Set(),snoozes={},audioCtx=null;
 function enableNotif(){if(!('Notification'in window))return toast(t('notifNone'));
 Notification.requestPermission().then(p=>{updateNotifLbl();if(p==='granted')notify('HamMasir','✅');});}
@@ -857,10 +856,9 @@ function hideBanner(){$('doseBanner').classList.add('hidden');bannerDose=null;}
 function alertDose(d){showBanner(d);notify('💊 '+d.med.name,d.med.dose);beep();if(navigator.vibrate)navigator.vibrate([120,60,120]);}
 function inQuiet(now){const h=now.getHours();return h>=23||h<7;}
 
-/* یادآورها */
 let lastAlert={water:0,stand:0,eye:0,sleepDone:false};
 function waterGoal(){return(S.reminders.water.goal||8)+((S._wxHigh||0)>=35?2:0);}
-function checkReminders(now){if(S.flareDays[dkey(now)])return; // روز بد: یادآورهای غیردارویی خاموش
+function checkReminders(now){if(S.flareDays[dkey(now)])return;
 const R=S.reminders;
 if(R.water.on&&S.water.c<waterGoal()&&now.getTime()-lastAlert.water>(R.water.every||120)*60000){lastAlert.water=now.getTime();softToast('💧 '+num(S.water.c)+'/'+num(waterGoal()));}
 if(R.stand.on&&now.getTime()-lastAlert.stand>(R.stand.every||90)*60000){lastAlert.stand=now.getTime();softToast('🧍');}
@@ -881,7 +879,6 @@ $('reminderList').innerHTML=rows.map(([k,l])=>`<div class="flex items-center jus
 <div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label></div>`).join('');}
 function toggleReminder(k,v){S.reminders[k].on=v;persist();renderReminders();}
 
-/* موتور */
 let engineOn=false;
 function startEngine(){if(engineOn)return;engineOn=true;tick();setInterval(tick,30000);}
 function tick(){if(!S||!MASTER)return;const now=new Date();
@@ -898,7 +895,7 @@ $('nextDoseSub').textContent=num(mins)+' min · '+num(taken)+'/'+num(doses.lengt
 else if(doses.length){$('nextDoseTxt').textContent='🎉';$('nextDoseSub').textContent=num(taken)+'/'+num(doses.length);}
 else{$('nextDoseTxt').textContent='—';$('nextDoseSub').textContent='';}}
 
-/* ═══════════ پایبندی ═══════════ */
+/* ═══ پایبندی ═══ */
 function dayAdherence(date){const ds=todayDoses(date);if(!ds.length)return null;
 let taken=0;ds.forEach(d=>{const l=getLog(dkey(date),d.key);if(l&&(l.s==='ontime'||l.s==='late'))taken++;});
 return{taken,total:ds.length,pct:taken/ds.length};}
@@ -950,19 +947,19 @@ const fat=c&&c.v?c.v.fatigue:null;if(a&&fat!=null){xs.push(1-a.pct);ys.push(fat)
 const r=pearson(xs,ys);
 $('adhInsight').textContent=(xs.length>=10&&r>0.3)?'🔗 '+(lang==='fa'?'روزهای بدون دارو ⇒ خستگی بیشتر فردا':'Missed meds ⇒ more fatigue next day'):'';}
 
-/* ═══════════ چک‌این ═══════════ */
+/* ═══ چک‌این ═══ */
 let chkSel={},chkTrig=new Set();
 const FACES=['😄','🙂','😐','🙁','😞'];
-const TRIGGERS=lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];
+function trigList(){return lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];}
 function activeSyms(){return S.symptoms.filter(s=>s.active!==false);}
 function renderCheck(){const today=S.checkins[dkey(new Date())];$('checkDone').classList.toggle('hidden',!today);
 const box=$('emoRows');box.innerHTML='';chkTrig=new Set(today&&today.trig?today.trig:[]);
 activeSyms().forEach(s=>{let idx=2;if(today&&today.v&&today.v[s.id]!=null){const sev=s.good?(10-today.v[s.id]):today.v[s.id];idx=clamp(Math.round(sev/2.5),0,4);}chkSel[s.id]=idx;
 box.insertAdjacentHTML('beforeend',`<div class="flex items-center justify-between gap-3 py-3 border-b border-slate-100 dark:border-slate-700">
-<span class="font-bold text-sm w-32 shrink-0">${symLabel(s)}</span>
-<div class="flex gap-1.5" id="faces-${s.id}">${FACES.map((f,i)=>`<button type="button" onclick="pickFace('${s.id}',${i})" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 transition-all hover:scale-110 hover:border-teal-400">${f}</button>`).join('')}</div></div>`);});
+<span class="font-bold text-xs sm:text-sm w-20 sm:w-32 shrink-0">${symLabel(s)}</span>
+<div class="flex gap-1 sm:gap-1.5" id="faces-${s.id}">${FACES.map((f,i)=>`<button type="button" onclick="pickFace('${s.id}',${i})" class="face w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl text-lg sm:text-2xl flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 transition-all hover:scale-110 hover:border-teal-400">${f}</button>`).join('')}</div></div>`);});
 applyFaces();renderTrigChips();$('noteTxt').value=today?today.note||'':'';}
-function renderTrigChips(){$('trigChips').innerHTML=TRIGGERS.map(tr=>`<button type="button" onclick="toggleTrig('${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${chkTrig.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
+function renderTrigChips(){$('trigChips').innerHTML=trigList().map(tr=>`<button type="button" onclick="toggleTrig('${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${chkTrig.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
 function toggleTrig(tr){chkTrig.has(tr)?chkTrig.delete(tr):chkTrig.add(tr);renderTrigChips();}
 function applyFaces(){activeSyms().forEach(s=>{const c=$('faces-'+s.id);if(!c)return;[...c.children].forEach((b,i)=>{const on=i===chkSel[s.id];b.classList.toggle('border-teal-600',on);b.classList.toggle('bg-teal-50',on);b.classList.toggle('scale-110',on);b.classList.toggle('opacity-50',!on);});});}
 function pickFace(id,i){chkSel[id]=i;applyFaces();}
@@ -972,7 +969,6 @@ chkTrig=new Set(e.trig||[]);applyFaces();renderTrigChips();toast('📋');}
 function saveCheckin(){const v={};activeSyms().forEach(s=>{const sev=chkSel[s.id]*2.5;v[s.id]=s.good?(10-sev):sev;});
 S.checkins[dkey(new Date())]={v,note:$('noteTxt').value.trim(),trig:[...chkTrig]};
 persist();renderAll();toast('🎉');showTab('dash');}
-/* صوتی */
 function voiceCheck(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 if(!SR)return toast(lang==='fa'?'تشخیص گفتار پشتیبانی نمی‌شود':'Speech not supported');
 const rec=new SR();rec.lang=lang==='fa'?'fa-IR':'en-US';rec.interimResults=false;
@@ -989,12 +985,12 @@ for(const tok of (m||[])){let n=parseInt(tok);if(isNaN(n))n=faNums[tok];
 if(!isNaN(n)&&n>=0&&n<=10){const sev=clamp(n,0,10);chkSel[s.id]=clamp(Math.round((s.good?(10-sev):sev)/2.5),0,4);matched++;break;}}}});
 applyFaces();toast(matched?(lang==='fa'?num(matched)+' مورد تنظیم شد':num(matched)+' set'):(lang==='fa'?'تشخیص داده نشد — دستی تنظیم کن':'No match — adjust manually'));}
 
-/* ═══════════ روز بد ═══════════ */
+/* ═══ روز بد ═══ */
 function badDay(){if(!confirm(lang==='fa'?'امروز به‌عنوان «روز بد / عود» ثبت شود؟ یادآورهای غیردارویی امروز خاموش می‌شوند.':'Mark today as a bad/flare day? Non-med reminders will pause today.'))return;
 S.flareDays[dkey(new Date())]=true;persist();renderDash();toast('🌧️ '+(lang==='fa'?'ثبت شد. مراقب خودت باش':'Logged. Be kind to yourself'));
 showTab('triage');tri={step:0,symptom:'',duration:'',triggers:[],severity:5};renderTriage();}
 
-/* ═══════════ مرور هفتگی ═══════════ */
+/* ═══ مرور هفتگی ═══ */
 function checkReviewPrompt(){const today=new Date();if(today.getDay()===5){const wk=dkey(new Date(today.getFullYear(),0,1))+Math.floor((today-new Date(today.getFullYear(),0,1))/604800000);
 if(!S.reviews.some(r=>r.wk===wk))$('reviewBanner').classList.remove('hidden');}}
 function openReview(){$('reviewModal').classList.remove('hidden');}
@@ -1006,7 +1002,7 @@ function renderReviewList(){$('reviewList').innerHTML=S.reviews.length?S.reviews
 <p class="text-xs text-slate-400 mb-1">${fdate(new Date(r.date),{dateStyle:'medium'})}</p>
 <p>✅ ${r.good||'—'}</p><p>😓 ${r.hard||'—'}</p><p>🎯 ${r.goal||'—'}</p></div>`).join(''):`<p class="text-slate-400">${lang==='fa'?'هنوز مرور نیست':'No reviews yet'}</p>`;}
 
-/* ═══════════ پایش (مانیتور) ═══════════ */
+/* ═══ پایش ═══ */
 function addMonitor(){const title=prompt(lang==='fa'?'عنوان (مثلاً: آزمایش خون)':'Title (e.g., Blood test)');if(!title)return;
 const due=prompt(lang==='fa'?'تاریخ (YYYY-MM-DD)':'Date (YYYY-MM-DD)',dkey(new Date()));if(!due)return;
 S.monitor.push({id:'mn'+Date.now(),title,due,done:false});persist();renderMonitor();}
@@ -1020,7 +1016,7 @@ ${overdue?`<span class="text-[11px] font-bold bg-rose-100 dark:bg-rose-900 text-
 function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();}
 function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();}
 
-/* ═══════════ تریاژ ═══════════ */
+/* ═══ تریاژ ═══ */
 let tri={step:0,symptom:'',duration:'',triggers:[],severity:5};
 function renderTriage(){const b=$('triageBox');
 const syms=lang==='fa'?['بینایی','ضعف/بی‌حسی','تعادل','ادراری','سایر']:['Vision','Weakness','Balance','Bladder','Other'];
@@ -1051,7 +1047,7 @@ renderTriageHist();renderFlags();}
 function renderTriageHist(){const ic={red:'🔴',amber:'🟠',yellow:'🟡'};
 $('triageHist').innerHTML=S.triage.length?S.triage.slice(0,5).map(x=>`<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${ic[x.level]}</span><span class="flex-1"><b>${x.symptom}</b> — ${num(x.severity)}</span><span class="text-xs text-slate-400">${fdate(new Date(x.date))}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
 
-/* ═══════════ آب‌وهوا + شهرها ═══════════ */
+/* ═══ آب‌وهوا ═══ */
 const CITIES={tehran:{lat:35.6892,lon:51.389,fa:'تهران',en:'Tehran'},zahedan:{lat:29.4963,lon:60.8629,fa:'زاهدان',en:'Zahedan'},mashhad:{lat:36.2605,lon:59.6168,fa:'مشهد',en:'Mashhad'},isfahan:{lat:32.6546,lon:51.6680,fa:'اصفهان',en:'Isfahan'},shiraz:{lat:29.5918,lon:52.5837,fa:'شیراز',en:'Shiraz'},tabriz:{lat:38.0962,lon:46.2738,fa:'تبریز',en:'Tabriz'},ahvaz:{lat:31.3183,lon:48.6706,fa:'اهواز',en:'Ahvaz'},rasht:{lat:37.2808,lon:49.5832,fa:'رشت',en:'Rasht'},bandar:{lat:27.1865,lon:56.2808,fa:'بندرعباس',en:'Bandar Abbas'},london:{lat:51.5072,lon:-0.1276,fa:'لندن',en:'London'},dubai:{lat:25.2048,lon:55.2708,fa:'دبی',en:'Dubai'},toronto:{lat:43.6532,lon:-79.3832,fa:'تورنتو',en:'Toronto'}};
 function cityLabel(id){const c=CITIES[id];if(c)return lang==='fa'?c.fa:c.en;
 const cc=(S.settings.customCities||[]).find(x=>x.id===id);return cc?cc.name:id;}
@@ -1082,7 +1078,7 @@ $('weatherBody').innerHTML=`<div class="flex items-end justify-between"><div><p 
 catch(e){$('weatherBody').innerHTML=`<p class="text-sm text-slate-500">📴 ${lang==='fa'?'آفلاین':'Offline'}</p>`;}}
 $('citySel').addEventListener('change',e=>setCity(e.target.value));
 
-/* ═══════════ نمودار ═══════════ */
+/* ═══ نمودار ═══ */
 let range=90,activeSeries={},chartLayout=null;
 function buildChips(){const box=$('seriesChips');box.innerHTML='';
 activeSyms().forEach(s=>{if(activeSeries[s.id]===undefined)activeSeries[s.id]=['fatigue','sleep'].includes(s.id);
@@ -1120,16 +1116,15 @@ tip.innerHTML=h;tip.classList.remove('hidden');tip.style.left=clamp(X(i)-70,0,r.
 drawChart(1);const ctx=$('chart').getContext('2d');ctx.save();ctx.strokeStyle='#0d3b3a';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(i),12);ctx.lineTo(X(i),r.height-26);ctx.stroke();ctx.restore();});
 $('chart').addEventListener('mouseleave',()=>$('chartTip').classList.add('hidden'));
 
-/* داده نمونه */
-function seed(){const out={},tt=new Date();const syms=activeSyms();
+function seed(){const out={},tt=new Date();const syms=activeSyms();const TR=trigList();
 for(let i=89;i>=0;i--){const d=new Date(tt);d.setDate(d.getDate()-i);const v={};
 syms.forEach(s=>{let val;if(s.id==='sleep')val=r1(Math.random()<0.35?2+Math.random()*3:6+Math.random()*3);
 else val=r1(clamp(2+Math.random()*5+((s.id==='fatigue')?((90-i)/90)*2:0),0,10));v[s.id]=val;});
-out[dkey(d)]={v,note:'',trig:Math.random()<0.3?[TRIGGERS[0]]:[]};}return out;}
+out[dkey(d)]={v,note:'',trig:Math.random()<0.3?[TR[0]]:[]};}return out;}
 function loadSample(){S.checkins=seed();S.seeded=true;S.seedDismissed=false;persist();renderAll();toast('✨');}
 function clearSample(){S.checkins={};S.seeded=false;S.seedDismissed=true;persist();renderAll();}
 
-/* ═══════════ داشبورد ═══════════ */
+/* ═══ داشبورد ═══ */
 function bmi(){const p=S.profile,h=(p.height||170)/100;return r1((p.weight||70)/(h*h));}
 function calcStreak(){let s=0,d=new Date();if(!S.checkins[dkey(d)])d.setDate(d.getDate()-1);while(S.checkins[dkey(d)]){s++;d.setDate(d.getDate()-1);}return s;}
 function renderDash(){const p=S.profile;
@@ -1162,7 +1157,6 @@ const r=pearson(xs,ys);if(Math.abs(r)<0.3)return;
 box.insertAdjacentHTML('beforeend',`<div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3 hover:bg-teal-50 dark:hover:bg-slate-600 transition-colors">
 <span class="font-display text-2xl text-teal-700 dark:text-teal-300">${num(Math.abs(r).toFixed(2))}</span>
 <p class="leading-6"><b>${symLabel(sa)} ↔ ${symLabel(sb)}</b></p></div>`);});
-/* محرک‌ها */
 const trigSet=new Set();Object.values(S.checkins).forEach(e=>(e.trig||[]).forEach(x=>trigSet.add(x)));
 [...trigSet].slice(0,3).forEach(tr=>{const withT=[],without=[];
 Object.values(S.checkins).forEach(e=>{if(e.v&&e.v.fatigue!=null){((e.trig||[]).includes(tr)?withT:without).push(e.v.fatigue);}});
@@ -1179,7 +1173,8 @@ if(bmi()<18.5)items.push(`⚖️ BMI ${num(bmi())}`);
 if(!S.meds.length)items.push(`💊 ${t('noMed')}`);
 box.innerHTML=items.length?items.map(i=>`<li class="flex gap-2 items-start"><span class="pulse-dot bg-rose-500 text-rose-500 mt-1.5"></span><span>${i}</span></li>`).join(''):`<li class="text-slate-400">🌿 ${lang==='fa'?'همه‌چیز مرتب':'All clear'}</li>`;}
 
-/* ═══════════ گزارش ═══════════ */
+/* ═══ گزارش ═══ */
+const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['cognition','تمرکز','Cognition'],['vision','بینایی','Vision'],['balance','تعادل','Balance'],['mood','خلق','Mood'],['sleep','خواب','Sleep'],['bladder','مثانه','Bladder'],['heat','گرما','Heat'],['work','کار','Work']];
 function renderReport(){const items=activeSyms().filter(s=>!s.good).slice(0,6);
 $('repSymp').innerHTML=items.map(s=>{const vals=Object.values(S.checkins).map(e=>e.v?e.v[s.id]:null).filter(v=>v!=null);
 const avg=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;const pct=avg?avg*10:0;
@@ -1189,13 +1184,12 @@ setTimeout(()=>document.querySelectorAll('#repSymp .fill').forEach(f=>f.style.wi
 const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
 $('repConcerns').innerHTML=(S.profile.concerns||[]).length?S.profile.concerns.map(c=>`<span class="bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-sm">${cmap[c]||c}</span>`).join(''):`<span class="text-teal-300 text-sm">—</span>`;
 renderReviewList();}
-const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['cognition','تمرکز','Cognition'],['vision','بینایی','Vision'],['balance','تعادل','Balance'],['mood','خلق','Mood'],['sleep','خواب','Sleep'],['bladder','مثانه','Bladder'],['heat','گرما','Heat'],['work','کار','Work']];
 function renderConcernChips(id,set){const el=$(id);el.innerHTML='';
 CONCERNS.forEach(([k,fa,en])=>{const b=document.createElement('button');b.type='button';
 b.className='text-sm rounded-full px-3 py-1.5 border-2 transition-all '+(set.has(k)?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 font-bold text-teal-800 dark:text-teal-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300');
 b.textContent=lang==='fa'?fa:en;b.onclick=()=>{set.has(k)?set.delete(k):set.add(k);renderConcernChips(id,set);};el.appendChild(b);});}
 
-/* ═══════════ تنظیمات ═══════════ */
+/* ═══ تنظیمات ═══ */
 function populateProfile(){const p=S.profile;
 $('pf-name').value=p.name||'';$('pf-age').value=p.age||'';$('pf-height').value=p.height||'';$('pf-weight').value=p.weight||'';
 $('pf-dx').value=p.dxDate||'';$('pf-dmt').value=p.dmt||'';$('pf-doc').value=p.doctor||'';$('pf-next').value=p.nextVisit||'';
@@ -1203,7 +1197,7 @@ profileConcerns=new Set(p.concerns||[]);renderConcernChips('pf-concerns',profile
 $('set-refill').value=S.settings.refillDays||7;$('set-stealth').checked=stealthOn;$('set-appname').value=stealthAppName;
 const emg=S.emergency||{};$('emg-contact').value=emg.contact||'';$('emg-phone').value=emg.phone||'';$('emg-allergy').value=emg.allergy||'';$('emg-notes').value=emg.notes||'';
 renderSymptomMgr();buildCitySel();
-['light','dark','system'].forEach(m=>$('th'+m.charAt(0).toUpperCase()+m.slice(1)).classList.toggle('border-teal-600',theme===m));
+['light','dark','system'].forEach(m=>{const el=$('th'+m.charAt(0).toUpperCase()+m.slice(1));if(el)el.classList.toggle('border-teal-600',theme===m);});
 $('langFa').classList.toggle('border-teal-600',lang==='fa');$('langEn').classList.toggle('border-teal-600',lang==='en');}
 function saveSetting(k,v){S.settings[k]=v;persist();toast('✔');}
 function saveProfile(){const p=S.profile;
@@ -1224,12 +1218,15 @@ function addSymptom(){const fa=$('newSymFa').value.trim(),en=$('newSymEn').value
 S.symptoms.push({id:'s'+Date.now(),fa:fa||en,en:en||fa,color:MED_COLORS[S.symptoms.length%MED_COLORS.length],good:false,active:true});
 $('newSymFa').value='';$('newSymEn').value='';persist();renderSymptomMgr();buildChips();toast('＋');}
 
-/* حافظه */
 function updateStorage(){let used=0;for(const k in localStorage){if(localStorage.hasOwnProperty(k))used+=localStorage[k].length*2;}
 const quota=5*1024*1024;const free=Math.max(0,quota-used);
-$('storageUsed').textContent=num(Math.round(used/1024))+' KB';
-$('storageFree').textContent='~'+num(Math.round(free/1024))+' KB';
-$('lastBackupTxt').textContent=S.lastBackup?fdate(new Date(S.lastBackup),{dateStyle:'medium'}):t('never');}
+const usedKB=Math.round(used/1024),freeKB=Math.round(free/1024);
+if($('storageUsed'))$('storageUsed').textContent=num(usedKB)+' KB';
+if($('storageFree'))$('storageFree').textContent='~'+num(freeKB)+' KB';
+if($('lastBackupTxt'))$('lastBackupTxt').textContent=S.lastBackup?fdate(new Date(S.lastBackup),{dateStyle:'medium'}):t('never');
+const low=freeKB<500||used>quota*0.8;const w=$('storageWarn');
+if(w){w.classList.toggle('hidden',!low);
+if(low)w.textContent='⚠️ '+(lang==='fa'?'فضای ذخیره‌سازی رو به اتمامه ('+num(freeKB)+' KB مونده) — پشتیبان بگیر و داده‌های قدیمی رو پاک کن':'Storage nearly full ('+num(freeKB)+' KB left) — back up now');}}
 function clearPart(k){if(!confirm(lang==='fa'?'پاک شود؟':'Clear?'))return;
 if(k==='dose')S.doseLog={};if(k==='check')S.checkins={};if(k==='triage')S.triage=[];
 persist();renderAll();toast('🗑️');}
@@ -1237,7 +1234,6 @@ function checkBackupPrompt(){if(S.lastBackup){const days=Math.floor((Date.now()-
 if(days>30){$('backupMsg').textContent=(lang==='fa'?num(days)+' روز از آخرین پشتیبان گذشته':num(days)+' days since last backup');$('backupBanner').classList.remove('hidden');}}
 else{$('backupMsg').textContent=lang==='fa'?'هنوز پشتیبان نگرفته‌ای':'No backup yet';$('backupBanner').classList.remove('hidden');}}
 
-/* ایمپورت/اکسپورت */
 function exportVault(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
 const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));
 a.download='hammasir-backup-'+dkey(new Date())+'.json';a.click();URL.revokeObjectURL(a.href);
@@ -1249,16 +1245,14 @@ else{exportVault();toast(lang==='fa'?'اشتراک‌گذاری در دسترس 
 $('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;
 let v;try{v=JSON.parse(await f.text());}catch{return toast(lang==='fa'?'فایل معتبر نیست':'Invalid file');}
 tryImport(v);e.target.value='';});
-async function tryImport(v){
-if(v.weak||WEAK){toast('weak');return;}
-$('importPwdBox').classList.remove('hidden');$('importPwdBox').dataset.vault=JSON.stringify(v);}
+function tryImport(v){$('importPwdBox').classList.remove('hidden');$('importPwdBox').dataset.vault=JSON.stringify(v);}
 async function importWithPwd(){const v=JSON.parse($('importPwdBox').dataset.vault);
 try{const master=await unwrapMaster(v.pwd,$('importPwd').value);S=await decData(master,v.data);
 MASTER={bytes:master};vault=v;ensureState();await persist();renderAll();
 $('importPwdBox').classList.add('hidden');$('importPwd').value='';toast('✔');}
 catch(e){toast(t('wrongCred'));}}
 
-/* ═══════════ چاپ ═══════════ */
+/* ═══ چاپ ═══ */
 function printReport(){buildDigest();window.print();}
 function buildDigest(){const p=S.profile;
 $('pdTitle').textContent=stealthAppName||(lang==='fa'?'خلاصه‌ی ویزیت — هم‌مسیر':'Visit summary — HamMasir');
@@ -1273,8 +1267,8 @@ const sorted=Object.entries(S.checkins).sort((a,b)=>a[0].localeCompare(b[0]));
 const last7=sorted.slice(-7),prev7=sorted.slice(-14,-7);
 const avg=(arr,id)=>{const v=arr.map(([,e])=>e.v?e.v[id]:null).filter(x=>x!=null);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;};
 let symRows='';activeSyms().forEach(s=>{const a=avg(last7,s.id),b=avg(prev7,s.id);if(a===null)return;
-let arrow='—',cls='',word='=';
-if(b!==null){const d=a-b;const worse=s.good?d<0:d>0;if(Math.abs(d)>0.7){arrow=worse?'▲':'▼';word=worse?'↑':'↓';cls=worse?'text-rose-600':'text-emerald-600';}}
+let arrow='—',cls='';
+if(b!==null){const d=a-b;const worse=s.good?d<0:d>0;if(Math.abs(d)>0.7){arrow=worse?'▲':'▼';cls=worse?'text-rose-600':'text-emerald-600';}}
 symRows+=`<tr class="border-b border-slate-200"><td class="py-1.5">${symLabel(s)}</td><td class="text-center">${num(a.toFixed(1))}</td><td class="text-center font-bold ${cls}">${arrow}</td></tr>`;});
 const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
 $('pdBody').innerHTML=`
@@ -1288,7 +1282,7 @@ ${S.meds.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">💊
 ${S.reviews.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">🪞</h2><p class="text-sm mb-4">✅ ${S.reviews[0].good||'—'} · 😓 ${S.reviews[0].hard||'—'} · 🎯 ${S.reviews[0].goal||'—'}</p>`:''}`;}
 window.addEventListener('beforeprint',buildDigest);
 
-/* ═══════════ رندر کلی ═══════════ */
+/* ═══ رندر کلی ═══ */
 function renderAll(){applyStealth();buildCitySel();
 renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
 renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
