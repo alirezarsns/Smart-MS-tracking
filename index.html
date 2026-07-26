@@ -219,6 +219,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
     </section>
 
     <section id="view-meds" class="view hidden space-y-6">
+      <div id="catchupBox" class="hidden rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 mb-4"><h3 class="font-bold text-amber-800 dark:text-amber-300 mb-1">⏪ <span id="catchupTitle"></span></h3><p class="text-xs text-amber-700 dark:text-amber-400 mb-3" id="catchupSub"></p><div id="catchupList" class="space-y-2"></div></div>
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
         <div class="flex flex-wrap gap-2">
@@ -275,7 +276,32 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
         <div id="medHistory" class="space-y-2 text-sm"></div></div>
     </section>
 
-    <section id="view-adh" class="view hidden space-y-6">
+    <section id="view-sleep" class="view hidden space-y-6">
+  <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">😴 <span id="sleepTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="sleepSub"></p></div>
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+      <h3 class="font-bold mb-4">🌙 <span id="lastNightTitle"></span></h3>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="bedLbl"></label><input type="time" id="sl-bed" value="23:30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="wakeLbl"></label><input type="time" id="sl-wake" value="07:00" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+      </div>
+      <div class="mt-3"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sqLbl"></label><div class="flex gap-1.5 mt-1" id="sl-faces"></div></div>
+      <div class="mt-3"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sl-wakeups" class="w-5 h-5 accent-teal-600"><span id="wakeupsLbl"></span></label></div>
+      <button onclick="saveNight()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3" id="saveNightBtn"></button>
+    </div>
+    <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+      <h3 class="font-bold mb-4">💤 <span id="napTitle"></span></h3>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napStartLbl"></label><input type="time" id="nap-start" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napDurLbl"></label><input type="number" id="nap-dur" value="30" min="5" max="180" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+      </div>
+      <button onclick="saveNap()" class="mt-4 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-3" id="saveNapBtn"></button>
+      <div class="mt-4"><h4 class="text-sm font-bold mb-2" id="napHistLbl"></h4><div id="napHist" class="space-y-2 text-sm"></div></div>
+    </div>
+  </div>
+  <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">📊 <span id="sleepStatsTitle"></span></h3><div id="sleepStats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div></div>
+</section>
+<section id="view-adh" class="view hidden space-y-6">
       <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
       <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
@@ -300,6 +326,7 @@ tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
           </div></div>
         <div id="voiceBox" class="hidden mt-3 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 rounded-xl p-3 text-sm text-rose-800 dark:text-rose-200"></div>
         <div id="checkDone" class="hidden mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-sm rounded-lg p-3" data-t="alreadyChecked"></div>
+        <div id="entryCount" class="hidden mt-2 text-xs font-bold text-teal-600 dark:text-teal-400"></div>
         <div id="emoRows" class="mt-4"></div>
         <div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="trigChips" class="flex flex-wrap gap-2"></div></div>
         <textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" placeholder="..."></textarea>
@@ -536,8 +563,8 @@ document.querySelectorAll('[data-t-attr]').forEach(el=>{el.setAttribute(el.datas
 document.documentElement.dir=lang==='fa'?'rtl':'ltr';document.documentElement.lang=lang;
 $('langLbl').textContent=lang==='fa'?'EN':'فا';buildNav();}
 function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic();if(S){renderAll();}else{renderLock();}}
-function buildNav(){const tabs=['dash','meds','adh','check','triage','cal','report','profile'];
-const icons={dash:'📊',meds:'💊',adh:'📈',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
+function buildNav(){const tabs=['dash','meds','adh','sleep','check','triage','cal','report','profile'];
+const icons={dash:'📊',meds:'💊',adh:'📈',sleep:'😴',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
 $('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
 
 /* ═══ تم ═══ */
@@ -726,7 +753,7 @@ S.checkins=S.checkins||{};S.triage=S.triage||[];}
 /* ═══ PWA ═══ */
 let deferredPrompt=null;
 function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
-const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',background_color:'#0d3b3a',theme_color:'#0d3b3a',icons:[{src:icon,sizes:'any',type:'image/svg+xml'}]};
+const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',display_override:['standalone','minimal-ui'],orientation:'portrait',background_color:'#0d3b3a',theme_color:'#0d3b3a',categories:['health','medical','lifestyle'],lang:'fa',dir:'rtl',icons:[{src:icon,sizes:'any',type:'image/svg+xml',purpose:'any'},{src:icon,sizes:'512x512',type:'image/svg+xml',purpose:'maskable'}],shortcuts:[{name:'Check-in',short_name:'Check-in',url:'./?tab=check',icons:[{src:icon,sizes:'any'}]},{name:'Meds',short_name:'Meds',url:'./?tab=meds',icons:[{src:icon,sizes:'any'}]},{name:'Sleep',short_name:'Sleep',url:'./?tab=sleep',icons:[{src:icon,sizes:'any'}]}]};
 const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));document.head.appendChild(l);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden');});}
 function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('installBtn').classList.add('hidden');}else toast(lang==='fa'?'از منوی مرورگر «Add to Home Screen» بزن':'Use browser "Add to Home Screen"');}
@@ -735,8 +762,8 @@ function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=
 function showTab(id){curTab=id;document.querySelectorAll('#scr-app .view').forEach(v=>v.classList.add('hidden'));$('view-'+id).classList.remove('hidden');buildNav();
 window.scrollTo({top:0,behavior:'smooth'});
 if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
-if(id==='check')renderCheck();if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();}
-if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();}
+if(id==='check'){renderCheck();afterCheckRender();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();renderCatchup();}
+if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();if(id==='sleep'){applySleepTxt();renderSleep();}}
 
 /* ═══ دارویار ═══ */
 function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
@@ -1286,8 +1313,9 @@ window.addEventListener('beforeprint',buildDigest);
 function renderAll(){applyStealth();buildCitySel();
 renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
 renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
-renderTriage();renderTriageHist();renderReport();renderMonitor();loadWeather();}
+renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderCatchup();loadWeather();}
 window.addEventListener('DOMContentLoaded',boot);
 </script>
+<script src="features.js"></script>
 </body>
 </html>
