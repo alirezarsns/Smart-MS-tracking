@@ -9,488 +9,528 @@
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{
-  display:['Lalezar','sans-serif'],
-  body:['Vazirmatn','sans-serif']}}}}
+tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{display:['Lalezar','sans-serif'],body:['Vazirmatn','sans-serif']}}}}
 </script>
 <style>
-  html{scroll-behavior:smooth}
-  body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(rgba(13,148,136,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.09) 1px,transparent 1px);background-size:24px 24px,24px 24px,120px 120px,120px 120px;transition:background-color .3s}
-  .dark body{background-color:#0a1214;background-image:linear-gradient(rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(rgba(45,212,191,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.07) 1px,transparent 1px)}
-  ::selection{background:#99f6e4;color:#134e4a}
-  .screen{animation:fadeUp .45s ease both}.view{animation:fadeUp .4s ease both}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-  .darkbg{background:#0d3b3a;background-image:radial-gradient(rgba(94,234,212,.12) 1px,transparent 1px);background-size:22px 22px}
-  .ecg-live{fill:none;stroke:#5eead4;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:140 780;animation:ecg 3s linear infinite;filter:drop-shadow(0 0 6px rgba(94,234,212,.9))}
-  .ecg-base{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
-  @keyframes ecg{from{stroke-dashoffset:920}to{stroke-dashoffset:0}}
-  .tab.active{background:#0d3b3a;color:#fff;box-shadow:0 6px 16px rgba(13,59,58,.35)}
-  .dark .tab.active{background:#2dd4bf;color:#042f2e}
-  .pulse-dot{position:relative;display:inline-block;width:9px;height:9px;border-radius:99px}
-  .pulse-dot::after{content:'';position:absolute;inset:-4px;border-radius:99px;border:2px solid currentColor;animation:ping 1.8s ease-out infinite}
-  @keyframes ping{0%{transform:scale(.4);opacity:.8}80%,100%{transform:scale(1.5);opacity:0}}
-  .fill{width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
-  .shake{animation:shake .4s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
-  .toast{animation:toastIn .35s ease both}@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
-  .face{user-select:none}
-  .swatch{transition:transform .15s}.swatch:hover{transform:scale(1.2)}
-  .glass{transition:transform .15s}.glass.full{background:linear-gradient(to top,#38bdf8 60%,#e0f2fe 60%)}
-  .dosecard{transition:all .3s}.dosecard.due{box-shadow:0 0 0 3px rgba(245,158,11,.5);animation:glowPulse 2s infinite}
-  @keyframes glowPulse{0%,100%{box-shadow:0 0 0 3px rgba(245,158,11,.4)}50%{box-shadow:0 0 0 6px rgba(245,158,11,.15)}}
-  .hm{transition:transform .15s}.hm:hover{transform:scale(1.4)}
-  .blurbox{filter:blur(8px);pointer-events:none;user-select:none}
-  .revealwrap{position:relative}
-  .revealwrap .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
-  .mic{animation:micPulse 1.2s infinite}
-  @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.5)}50%{box-shadow:0 0 0 12px rgba(225,29,72,0)}}
-  #printDigest{display:none}
-  @media print{.app{display:none!important}#printDigest{display:block!important}body{background:#fff!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+html{scroll-behavior:smooth}
+body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.05) 1px,transparent 1px),linear-gradient(rgba(13,148,136,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.09) 1px,transparent 1px);background-size:24px 24px,24px 24px,120px 120px,120px 120px;transition:background-color .3s}
+.dark body{background-color:#0a1214;background-image:linear-gradient(rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.04) 1px,transparent 1px),linear-gradient(rgba(45,212,191,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.07) 1px,transparent 1px)}
+::selection{background:#99f6e4;color:#134e4a}
+.screen{animation:fadeUp .45s ease both}.view{animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.darkbg{background:#0d3b3a;background-image:radial-gradient(rgba(94,234,212,.12) 1px,transparent 1px);background-size:22px 22px}
+.ecg-live{fill:none;stroke:#5eead4;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:140 780;animation:ecg 3s linear infinite;filter:drop-shadow(0 0 6px rgba(94,234,212,.9))}
+.ecg-base{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
+@keyframes ecg{from{stroke-dashoffset:920}to{stroke-dashoffset:0}}
+.tab.active{background:#0d3b3a;color:#fff;box-shadow:0 6px 16px rgba(13,59,58,.35)}
+.dark .tab.active{background:#2dd4bf;color:#042f2e}
+.pulse-dot{position:relative;display:inline-block;width:9px;height:9px;border-radius:99px}
+.pulse-dot::after{content:'';position:absolute;inset:-4px;border-radius:99px;border:2px solid currentColor;animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:.8}80%,100%{transform:scale(1.5);opacity:0}}
+.fill{width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+.shake{animation:shake .4s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.toast{animation:toastIn .35s ease both}@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+.face{user-select:none}
+.swatch{transition:transform .15s}.swatch:hover{transform:scale(1.2)}
+.glass{transition:transform .15s}.glass.full{background:linear-gradient(to top,#38bdf8 60%,#e0f2fe 60%)}
+.dosecard{transition:all .3s}.dosecard.due{box-shadow:0 0 0 3px rgba(245,158,11,.5);animation:glowPulse 2s infinite}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 3px rgba(245,158,11,.4)}50%{box-shadow:0 0 0 6px rgba(245,158,11,.15)}}
+.hm{transition:transform .15s}.hm:hover{transform:scale(1.4)}
+.blurbox{filter:blur(8px);pointer-events:none;user-select:none}
+.revealwrap{position:relative}
+.revealwrap .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
+.mic{animation:micPulse 1.2s infinite}
+@keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.5)}50%{box-shadow:0 0 0 12px rgba(225,29,72,0)}}
+.gap-card{transition:all .2s cubic-bezier(.22,1,.36,1)}
+.gap-card:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 20px rgba(14,165,233,.2)}
+.gap-card:active{transform:scale(.97)}
+.gap-dot{width:10px;height:10px;border-radius:3px;transition:all .3s}
+.gap-dot.filled{background:#2dd4bf}
+.gap-dot.empty{background:#e2e8f0;border:1.5px dashed #94a3b8}
+.dark .gap-dot.empty{background:transparent;border-color:#475569}
+.gap-dot.today{background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,.5)}
+.gap-dot.future{background:#f1f5f9;opacity:.4}
+.dark .gap-dot.future{background:#1e293b}
+.backfill-modal{animation:modalIn .3s cubic-bezier(.22,1,.36,1) both}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#printDigest{display:none}
+@media print{.app{display:none!important}#printDigest{display:block!important}body{background:#fff!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body class="font-body text-slate-800 dark:text-slate-100 antialiased">
 
 <!-- قفل -->
 <div id="scr-lock" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-  <svg viewBox="0 0 624 100" preserveAspectRatio="none" class="absolute bottom-10 left-0 w-full h-24 opacity-40"><path class="ecg-base" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/><path class="ecg-live" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/></svg>
-  <div class="w-full max-w-md relative z-10">
-    <div class="text-center mb-6"><div class="inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-4xl shadow-2xl mb-4">🔒</div>
-      <h1 class="font-display text-5xl text-white" id="lockAppName">هم‌مسیر</h1><p class="text-teal-300 text-sm mt-1" data-t="lockSub"></p></div>
-    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
-      <div id="pinArea" class="hidden mb-4">
-        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pinLbl"></label>
-        <input type="password" inputmode="numeric" id="lockPin" maxlength="6" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg text-center tracking-widest focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPin()">
-        <button onclick="unlockPin()" class="mt-2 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-2.5 transition-colors" data-t="pinOpen"></button>
-        <div class="text-center mt-2"><button onclick="showPwdMode()" class="text-xs text-slate-400 underline" data-t="usePwdInstead"></button></div>
-        <div class="border-t border-slate-200 dark:border-slate-600 my-3"></div>
-      </div>
-      <div id="pwdArea">
-        <label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pwdLbl"></label>
-        <div class="relative"><input type="password" id="lockPwd" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPwd()">
-        <button type="button" onclick="togglePwd('lockPwd')" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600">👁️</button></div>
-        <button onclick="unlockPwd()" class="mt-3 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="unlock"></button>
-      </div>
-      <div id="bioArea" class="hidden mt-3"><button onclick="unlockBio()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-3 transition-colors">👆 <span data-t="bioOpen"></span></button></div>
-      <div id="lockErr" class="hidden text-rose-600 text-sm font-bold mt-2 text-center" data-t="wrongCred"></div>
-      <div class="mt-4 text-center"><button onclick="forgot()" class="text-xs text-slate-400 hover:text-rose-500 underline" data-t="forgot"></button></div>
-    </div>
-    <button onclick="showEmergency()" class="mt-4 w-full bg-rose-600/90 hover:bg-rose-500 text-white font-bold rounded-xl py-3 transition-colors">🚑 <span data-t="emergencyBtn"></span></button>
-    <div class="flex justify-center gap-2 mt-4">
-      <button onclick="setLang(lang==='fa'?'en':'fa')" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌐 <span data-t="langOther"></span></button>
-      <button onclick="cycleTheme()" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌓 <span data-t="theme"></span></button>
-    </div>
-    <p class="text-center text-teal-400/70 text-[11px] mt-4" data-t="lockHint"></p>
-  </div>
+<svg viewBox="0 0 624 100" preserveAspectRatio="none" class="absolute bottom-10 left-0 w-full h-24 opacity-40"><path class="ecg-base" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/><path class="ecg-live" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/></svg>
+<div class="w-full max-w-md relative z-10">
+<div class="text-center mb-6"><div class="inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-4xl shadow-2xl mb-4">🔒</div>
+<h1 class="font-display text-5xl text-white" id="lockAppName">هم‌مسیر</h1><p class="text-teal-300 text-sm mt-1" data-t="lockSub"></p></div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
+<div id="pinArea" class="hidden mb-4">
+<label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pinLbl"></label>
+<input type="password" inputmode="numeric" id="lockPin" maxlength="6" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg text-center tracking-widest focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPin()">
+<button onclick="unlockPin()" class="mt-2 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-2.5 transition-colors" data-t="pinOpen"></button>
+<div class="text-center mt-2"><button onclick="showPwdMode()" class="text-xs text-slate-400 underline" data-t="usePwdInstead"></button></div>
+<div class="border-t border-slate-200 dark:border-slate-600 my-3"></div>
+</div>
+<div id="pwdArea">
+<label class="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-200" data-t="pwdLbl"></label>
+<div class="relative"><input type="password" id="lockPwd" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none" onkeydown="if(event.key==='Enter')unlockPwd()">
+<button type="button" onclick="togglePwd('lockPwd')" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600">👁️</button></div>
+<button onclick="unlockPwd()" class="mt-3 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="unlock"></button>
+</div>
+<div id="bioArea" class="hidden mt-3"><button onclick="unlockBio()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-3 transition-colors">👆 <span data-t="bioOpen"></span></button></div>
+<div id="lockErr" class="hidden text-rose-600 text-sm font-bold mt-2 text-center" data-t="wrongCred"></div>
+<div class="mt-4 text-center"><button onclick="forgot()" class="text-xs text-slate-400 hover:text-rose-500 underline" data-t="forgot"></button></div>
+</div>
+<button onclick="showEmergency()" class="mt-4 w-full bg-rose-600/90 hover:bg-rose-500 text-white font-bold rounded-xl py-3 transition-colors">🚑 <span data-t="emergencyBtn"></span></button>
+<div class="flex justify-center gap-2 mt-4">
+<button onclick="setLang(lang==='fa'?'en':'fa')" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌐 <span data-t="langOther"></span></button>
+<button onclick="cycleTheme()" class="text-xs bg-white/10 text-teal-200 rounded-full px-3 py-1.5 hover:bg-white/20">🌓 <span data-t="theme"></span></button>
+</div>
+<p class="text-center text-teal-400/70 text-[11px] mt-4" data-t="lockHint"></p>
+</div>
 </div>
 
 <!-- کارت اورژانس -->
 <div id="scr-emergency" class="app screen hidden darkbg min-h-screen p-4">
-  <div class="max-w-md mx-auto pt-8">
-    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 border-t-8 border-rose-600">
-      <h1 class="font-display text-3xl text-rose-600 mb-1">🚑 <span data-t="emergencyTitle"></span></h1>
-      <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="emergencySub"></p>
-      <div id="emgBody" class="space-y-3 text-sm"></div>
-      <button onclick="hideEmergency()" class="mt-5 w-full border-2 border-slate-300 dark:border-slate-600 rounded-xl py-2.5 font-bold text-slate-600 dark:text-slate-300" data-t="backToLock"></button>
-    </div>
-  </div>
+<div class="max-w-md mx-auto pt-8">
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 border-t-8 border-rose-600">
+<h1 class="font-display text-3xl text-rose-600 mb-1">🚑 <span data-t="emergencyTitle"></span></h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="emergencySub"></p>
+<div id="emgBody" class="space-y-3 text-sm"></div>
+<button onclick="hideEmergency()" class="mt-5 w-full border-2 border-slate-300 dark:border-slate-600 rounded-xl py-2.5 font-bold text-slate-600 dark:text-slate-300" data-t="backToLock"></button>
+</div>
+</div>
 </div>
 
 <!-- خوش‌آمد -->
 <div id="scr-setup" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-lg">
-    <div class="text-center mb-5"><div class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-3xl shadow-2xl mb-3">🧭</div>
-      <h1 class="font-display text-4xl text-white" data-t="setupTitle"></h1><p class="text-teal-300 text-sm mt-1" data-t="setupSub"></p></div>
-    <div class="flex gap-1.5 mb-4" id="suProg"></div>
-    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
-      <div id="su-s0"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep1"></h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep1d"></p>
-        <input type="password" id="su-pwd1" oninput="pwdStrength()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none mb-2">
-        <div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden mb-1"><div id="pwdBar" class="h-full rounded-full w-0 transition-all"></div></div>
-        <p id="pwdHint" class="text-[11px] text-slate-400 mb-3"></p>
-        <input type="password" id="su-pwd2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none"></div>
-      <div id="su-s1" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep2"></h2>
-        <div class="grid grid-cols-2 gap-3 mt-3">
-          <div class="col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="su-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="su-age" type="number" value="30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fSex"></label><select id="su-sex" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="m" data-t="male"></option><option value="f" data-t="female"></option></select></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="su-height" type="number" value="170" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="su-weight" type="number" value="70" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-        </div></div>
-      <div id="su-s2" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep3"></h2>
-        <div class="space-y-3 mt-3">
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="su-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fType"></label><select id="su-mstype" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option>RRMS</option><option>SPMS</option><option>PPMS</option><option>CIS</option></select></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="su-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
-          <div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="su-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="su-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
-        </div></div>
-      <div id="su-s3" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep4"></h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep4d"></p><div id="su-concerns" class="flex flex-wrap gap-2"></div></div>
-      <div class="flex gap-3 mt-6">
-        <button id="suBack" onclick="suBack()" class="px-4 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-700" style="visibility:hidden" data-t="back"></button>
-        <button id="suNext" onclick="suNext()" class="flex-1 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="next"></button>
-      </div>
-    </div>
-  </div>
+<div class="w-full max-w-lg">
+<div class="text-center mb-5"><div class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-600 items-center justify-center text-3xl shadow-2xl mb-3">🧭</div>
+<h1 class="font-display text-4xl text-white" data-t="setupTitle"></h1><p class="text-teal-300 text-sm mt-1" data-t="setupSub"></p></div>
+<div class="flex gap-1.5 mb-4" id="suProg"></div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6">
+<div id="su-s0"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep1"></h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep1d"></p>
+<input type="password" id="su-pwd1" oninput="pwdStrength()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none mb-2">
+<div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden mb-1"><div id="pwdBar" class="h-full rounded-full w-0 transition-all"></div></div>
+<p id="pwdHint" class="text-[11px] text-slate-400 mb-3"></p>
+<input type="password" id="su-pwd2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-4 py-3 text-lg focus:border-teal-500 outline-none"></div>
+<div id="su-s1" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep2"></h2>
+<div class="grid grid-cols-2 gap-3 mt-3">
+<div class="col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="su-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="su-age" type="number" value="30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fSex"></label><select id="su-sex" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="m" data-t="male"></option><option value="f" data-t="female"></option></select></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="su-height" type="number" value="170" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="su-weight" type="number" value="70" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+</div></div>
+<div id="su-s2" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep3"></h2>
+<div class="space-y-3 mt-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="su-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fType"></label><select id="su-mstype" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option>RRMS</option><option>SPMS</option><option>PPMS</option><option>CIS</option></select></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="su-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
+<div class="grid grid-cols-2 gap-3"><div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="su-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="su-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div></div>
+</div></div>
+<div id="su-s3" class="hidden"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1" data-t="suStep4"></h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="suStep4d"></p><div id="su-concerns" class="flex flex-wrap gap-2"></div></div>
+<div class="flex gap-3 mt-6">
+<button id="suBack" onclick="suBack()" class="px-4 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-700" style="visibility:hidden" data-t="back"></button>
+<button id="suNext" onclick="suNext()" class="flex-1 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="next"></button>
+</div>
+</div>
+</div>
 </div>
 
 <!-- اپ -->
 <div id="scr-app" class="app screen hidden">
-  <header class="sticky top-0 z-50 bg-[#0d3b3a] dark:bg-slate-900 text-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
-      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-xl shadow">🧭</div>
-        <div><h1 class="font-display text-2xl leading-6" id="appTitle">هم‌مسیر</h1><p class="text-[11px] text-teal-300 dark:text-teal-400" data-t="tagline"></p></div></div>
-      <div class="flex items-center gap-1.5 flex-wrap justify-end">
-        <button id="stealthQuick" onclick="quickHide()" class="hidden bg-slate-600 hover:bg-slate-500 rounded-lg w-9 h-9 text-base">🙈</button>
-        <button onclick="setLang(lang==='fa'?'en':'fa')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg h-9 px-2.5 text-sm font-bold">🌐 <span id="langLbl" class="hidden sm:inline">EN</span></button>
-        <button onclick="cycleTheme()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🌓</button>
-        <button id="installBtn" onclick="installApp()" class="hidden bg-sky-500 hover:bg-sky-400 font-bold rounded-lg w-9 h-9 text-sm">📲</button>
-        <span class="hidden md:flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-3 h-9 text-sm">🔥 <b id="streakNum">۰</b></span>
-        <button onclick="printReport()" class="bg-amber-400 hover:bg-amber-300 text-[#0d3b3a] font-bold rounded-lg px-3 h-9 text-sm">🖨️<span class="hidden sm:inline"> <span data-t="print"></span></span></button>
-        <button onclick="lockApp()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🔒</button>
-      </div>
-    </div>
-    <nav class="max-w-6xl mx-auto px-4 pb-3 flex gap-1.5 overflow-x-auto" style="scrollbar-width:none" id="navBar"></nav>
-  </header>
+<header class="sticky top-0 z-50 bg-[#0d3b3a] dark:bg-slate-900 text-white shadow-lg">
+<div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
+<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-xl shadow">🧭</div>
+<div><h1 class="font-display text-2xl leading-6" id="appTitle">هم‌مسیر</h1><p class="text-[11px] text-teal-300 dark:text-teal-400" data-t="tagline"></p></div></div>
+<div class="flex items-center gap-1.5 flex-wrap justify-end">
+<button id="stealthQuick" onclick="quickHide()" class="hidden bg-slate-600 hover:bg-slate-500 rounded-lg w-9 h-9 text-base">🙈</button>
+<button onclick="setLang(lang==='fa'?'en':'fa')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg h-9 px-2.5 text-sm font-bold">🌐 <span id="langLbl" class="hidden sm:inline">EN</span></button>
+<button onclick="cycleTheme()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🌓</button>
+<button id="installBtn" onclick="installApp()" class="hidden bg-sky-500 hover:bg-sky-400 font-bold rounded-lg w-9 h-9 text-sm">📲</button>
+<span class="hidden md:flex items-center gap-1 bg-white/10 border border-white/15 rounded-full px-3 h-9 text-sm">🔥 <b id="streakNum">۰</b></span>
+<button onclick="printReport()" class="bg-amber-400 hover:bg-amber-300 text-[#0d3b3a] font-bold rounded-lg px-3 h-9 text-sm">🖨️<span class="hidden sm:inline"> <span data-t="print"></span></span></button>
+<button onclick="lockApp()" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg w-9 h-9 text-sm">🔒</button>
+</div>
+</div>
+<nav class="max-w-6xl mx-auto px-4 pb-3 flex gap-1.5 overflow-x-auto" style="scrollbar-width:none" id="navBar"></nav>
+</header>
 
-  <div id="doseBanner" class="app hidden fixed top-24 left-1/2 -translate-x-1/2 z-[65] w-[92%] max-w-md bg-[#0d3b3a] dark:bg-slate-800 text-white rounded-2xl shadow-2xl p-4 border-2 border-amber-400">
-    <p id="dbText" class="font-bold text-center mb-3"></p>
-    <div class="flex gap-2">
-      <button id="dbTake" class="flex-1 bg-emerald-500 hover:bg-emerald-400 rounded-xl py-2.5 font-bold"></button>
-      <button id="dbSnooze" class="flex-1 bg-amber-500 hover:bg-amber-400 text-[#0d3b3a] rounded-xl py-2.5 font-bold"></button>
-      <button id="dbSkip" class="flex-1 bg-rose-600 hover:bg-rose-500 rounded-xl py-2.5 font-bold"></button>
-    </div>
-  </div>
+<div id="doseBanner" class="app hidden fixed top-24 left-1/2 -translate-x-1/2 z-[65] w-[92%] max-w-md bg-[#0d3b3a] dark:bg-slate-800 text-white rounded-2xl shadow-2xl p-4 border-2 border-amber-400">
+<p id="dbText" class="font-bold text-center mb-3"></p>
+<div class="flex gap-2">
+<button id="dbTake" class="flex-1 bg-emerald-500 hover:bg-emerald-400 rounded-xl py-2.5 font-bold"></button>
+<button id="dbSnooze" class="flex-1 bg-amber-500 hover:bg-amber-400 text-[#0d3b3a] rounded-xl py-2.5 font-bold"></button>
+<button id="dbSkip" class="flex-1 bg-rose-600 hover:bg-rose-500 rounded-xl py-2.5 font-bold"></button>
+</div>
+</div>
 
-  <div id="fakeNote" class="app hidden fixed inset-0 z-[80] bg-amber-50 dark:bg-slate-900 p-6 overflow-auto">
-    <div class="max-w-md mx-auto">
-      <h1 class="font-display text-3xl text-amber-800 dark:text-amber-300 mb-4">📝 <span data-t="fakeTitle"></span></h1>
-      <div class="space-y-3" id="fakeList"></div>
-      <button onclick="quickHide()" class="mt-6 w-full border-2 border-amber-300 text-amber-700 dark:text-amber-300 rounded-xl py-3 font-bold" data-t="fakeBack"></button>
-    </div>
-  </div>
+<div id="fakeNote" class="app hidden fixed inset-0 z-[80] bg-amber-50 dark:bg-slate-900 p-6 overflow-auto">
+<div class="max-w-md mx-auto">
+<h1 class="font-display text-3xl text-amber-800 dark:text-amber-300 mb-4">📝 <span data-t="fakeTitle"></span></h1>
+<div class="space-y-3" id="fakeList"></div>
+<button onclick="quickHide()" class="mt-6 w-full border-2 border-amber-300 text-amber-700 dark:text-amber-300 rounded-xl py-3 font-bold" data-t="fakeBack"></button>
+</div>
+</div>
 
-  <main class="max-w-6xl mx-auto px-4 py-8" id="mainArea">
+<main class="max-w-6xl mx-auto px-4 py-8" id="mainArea">
 
-    <section id="view-dash" class="view">
-      <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
-        <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300"><span data-t="hello"></span>، <span id="greetName"></span> 👋</h2><p class="text-sm text-slate-500 dark:text-slate-400" id="greetSub"></p></div>
-        <div class="flex gap-2 flex-wrap">
-          <button onclick="badDay()" class="bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 font-bold rounded-xl px-4 py-2.5 text-sm transition-colors">🌧️ <span data-t="badDay"></span></button>
-          <button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-5 py-2.5 transition-all hover:scale-105 shadow">✍️ <span data-t="checkin"></span></button>
-        </div>
-      </div>
-      <div id="reviewBanner" class="hidden mb-4 bg-indigo-50 dark:bg-indigo-900/30 border-s-4 border-indigo-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
-        <p class="text-sm text-indigo-900 dark:text-indigo-200">🪞 <span data-t="reviewPrompt"></span></p>
-        <button onclick="openReview()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="reviewStart"></button>
-      </div>
-      <div id="backupBanner" class="hidden mb-4 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
-        <p class="text-sm text-amber-900 dark:text-amber-200">💾 <span id="backupMsg"></span></p>
-        <button onclick="exportVault()" class="bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="backupNow"></button>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" id="statStrip"></div>
-      <div id="sampleBanner" class="hidden mb-6 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
-        <p class="text-sm text-amber-900 dark:text-amber-200" data-t="sampleWarn"></p><button onclick="clearSample()" class="bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg px-3 py-1.5" data-t="clearSample"></button></div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
-          <div class="flex items-center justify-between mb-3"><h3 class="font-bold">🌤️ <span data-t="weather"></span></h3>
-            <select id="citySel" class="text-xs border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1 outline-none"></select></div>
-          <div id="weatherBody" class="text-sm text-slate-500 dark:text-slate-400" data-t="loading"></div></div>
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow flex items-center gap-4">
-          <svg viewBox="0 0 120 120" class="w-24 h-24 shrink-0 -rotate-90"><circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="12" class="dark:opacity-20"/><circle id="adhRing" cx="60" cy="60" r="52" fill="none" stroke="#0f766e" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"/></svg>
-          <div><p class="text-xs text-slate-500 dark:text-slate-400" data-t="todayMeds"></p><p class="font-display text-3xl text-teal-800 dark:text-teal-300"><span id="adhPct">۰</span>٪</p><p class="text-[11px] text-slate-400 mt-1" id="adhSub"></p></div></div>
-        <div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white shadow-sm p-5 hover:shadow-lg transition-shadow">
-          <p class="text-xs text-teal-300" data-t="nextDose"></p><p id="nextDoseTxt" class="font-bold leading-8 mt-1">—</p><p id="nextDoseSub" class="text-[11px] text-teal-400"></p></div>
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
-          <p class="text-xs text-slate-500 dark:text-slate-400" data-t="nextVisit"></p><p id="nextVisitTxt" class="font-bold leading-7 mt-1 text-sm">—</p>
-          <button onclick="showTab('check')" class="mt-2 text-xs bg-amber-400 text-[#0d3b3a] font-bold rounded-full px-3 py-1 hover:scale-105 transition-transform" data-t="prepare"></button></div>
-      </div>
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 mb-6">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2"><h3 class="font-bold">📈 <span data-t="trend"></span></h3>
-          <div class="flex gap-1.5"><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="30">30</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="60">60</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600 bg-teal-600 text-white" data-r="90">90</button></div></div>
-        <div id="seriesChips" class="flex flex-wrap gap-1.5 mb-3"></div>
-        <div class="relative"><canvas id="chart" style="width:100%;height:280px"></canvas><div id="chartTip" class="hidden absolute pointer-events-none bg-[#0d3b3a] dark:bg-slate-700 text-white text-xs rounded-lg px-3 py-2 shadow-lg z-10" style="min-width:140px"></div></div>
-        <div id="chartEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">🌱</p><p class="font-bold" data-t="noData"></p>
-          <div class="flex gap-2 justify-center mt-4"><button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-4 py-2 text-sm" data-t="startCheck"></button><button onclick="loadSample()" class="border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-lg px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-300" data-t="sampleBtn"></button></div></div>
-      </div>
-      <div class="grid lg:grid-cols-2 gap-4">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5"><h3 class="font-bold mb-3">🔍 <span data-t="insights"></span></h3><div id="insights" class="space-y-3 text-sm"></div></div>
-        <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 shadow-sm p-5"><h3 class="font-bold text-rose-700 dark:text-rose-300 mb-3">🚩 <span data-t="attention"></span></h3><ul id="redflags" class="space-y-2 text-sm text-slate-700 dark:text-slate-200"></ul></div>
-      </div>
-    </section>
+<section id="view-dash" class="view">
+<div class="flex flex-wrap items-end justify-between gap-3 mb-3">
+<div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300"><span data-t="hello"></span>، <span id="greetName"></span> 👋</h2><p class="text-sm text-slate-500 dark:text-slate-400" id="greetSub"></p></div>
+<div class="flex gap-2 flex-wrap">
+<button onclick="badDay()" class="bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 font-bold rounded-xl px-4 py-2.5 text-sm transition-colors">🌧️ <span data-t="badDay"></span></button>
+<button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-5 py-2.5 transition-all hover:scale-105 shadow">✍️ <span data-t="checkin"></span></button>
+</div>
+</div>
 
-    <section id="view-meds" class="view hidden space-y-6">
-      <div id="catchupBox" class="hidden rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 mb-4"><h3 class="font-bold text-amber-800 dark:text-amber-300 mb-1">⏪ <span id="catchupTitle"></span></h3><p class="text-xs text-amber-700 dark:text-amber-400 mb-3" id="catchupSub"></p><div id="catchupList" class="space-y-2"></div></div>
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="enableNotif()" class="text-sm border-2 border-sky-300 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-900/30 font-bold rounded-xl px-4 py-2">🔔 <span id="notifLbl"></span></button>
-          <button onclick="copyMedList()" class="text-sm border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-bold rounded-xl px-4 py-2">📋 <span data-t="copyList"></span></button>
-          <button onclick="openMedForm()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 hover:scale-105 shadow">＋ <span data-t="addMed"></span></button>
-        </div>
-      </div>
-      <div id="medForm" class="hidden rounded-xl border-2 border-teal-300 bg-white dark:bg-slate-800 shadow-lg p-6">
-        <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4" id="mfTitle"></h3>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medName"></label><input id="mf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medDose"></label><input id="mf-dose" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medEmoji"></label><input id="mf-emoji" value="💊" maxlength="4" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none text-center text-xl"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medColor"></label><div id="mf-colors" class="flex gap-2 flex-wrap"></div></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medPerday"></label><select id="mf-perday" onchange="mfPerday()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medTimes"></label>
-            <div class="flex gap-2"><input type="time" id="mf-t1" value="08:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none"><input type="time" id="mf-t2" value="13:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"><input type="time" id="mf-t3" value="22:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"></div></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medFreq"></label>
-            <div class="flex gap-3 text-sm flex-wrap"><label class="flex items-center gap-1"><input type="radio" name="mff" value="daily" checked onchange="mfFreq()" class="accent-teal-600"><span data-t="daily"></span></label>
-            <label class="flex items-center gap-1"><input type="radio" name="mff" value="everyN" onchange="mfFreq()" class="accent-teal-600"><span data-t="every"></span> <input type="number" id="mf-n" value="3" min="2" class="w-14 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-1 py-1 outline-none"></label>
-            <label class="flex items-center gap-1"><input type="radio" name="mff" value="days" onchange="mfFreq()" class="accent-teal-600"><span data-t="specificDays"></span></label></div></div>
-          <div id="mf-daysBox" class="hidden"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="weekDays"></label><div id="mf-days" class="flex gap-1.5"></div></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medRemaining"></label><input id="mf-remaining" type="number" min="0" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
-          <div class="sm:col-span-2 flex items-center gap-4 flex-wrap"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mf-food" class="w-5 h-5 accent-teal-600">🍽️ <span data-t="withFood"></span></label>
-            <input id="mf-note" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm focus:border-teal-500 outline-none" placeholder="..."></div>
-        </div>
-        <div class="flex gap-3 mt-5"><button onclick="saveMed()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
-        <button onclick="closeMedForm()" class="border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold rounded-xl px-6 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700" data-t="cancel"></button></div>
-      </div>
-      <div class="revealwrap" id="medsSensitive">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6" id="medsInner">
-          <div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">⏱️ <span data-t="todayPlan"></span></h3><span class="text-sm text-slate-500 dark:text-slate-400" id="todayCount"></span></div>
-          <div id="timeline" class="space-y-3"></div>
-          <div id="timelineEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">💊</p><p class="font-bold" data-t="noMed"></p></div>
-        </div>
-      </div>
-      <div class="grid lg:grid-cols-2 gap-6">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-          <div class="flex items-center justify-between mb-3"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">💧 <span data-t="waterToday"></span></h3><span class="text-sm font-bold text-sky-600 dark:text-sky-300" id="waterTxt"></span></div>
-          <div id="waterGlasses" class="flex flex-wrap gap-2 mb-3"></div>
-          <p id="waterHot" class="hidden text-xs text-rose-600 font-bold mb-2" data-t="waterHot"></p></div>
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-          <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-3">⏰ <span data-t="healthReminders"></span></h3>
-          <div id="reminderList" class="space-y-3"></div></div>
-      </div>
-      <div class="revealwrap" id="medListWrap">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-          <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🗂️ <span data-t="myMeds"></span></h3>
-          <div id="medList" class="grid sm:grid-cols-2 gap-3"></div></div>
-      </div>
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">📜 <span data-t="medHistory"></span></h3>
-        <div id="medHistory" class="space-y-2 text-sm"></div></div>
-    </section>
+<div id="gapsBanner" class="hidden mb-4 bg-gradient-to-l from-sky-50 to-cyan-50 dark:from-sky-900/30 dark:to-cyan-900/30 border-s-4 border-sky-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-900/50 flex items-center justify-center text-xl">📅</div>
+<div><p class="text-sm font-bold text-sky-900 dark:text-sky-200" id="gapsMsg"></p><p class="text-xs text-sky-700 dark:text-sky-300" data-t="gapsSub"></p></div>
+</div>
+<button onclick="showTab('check');scrollToGaps()" class="bg-sky-500 hover:bg-sky-400 text-white text-sm font-bold rounded-lg px-4 py-2 transition-all hover:scale-105 shadow" data-t="gapsFill"></button>
+</div>
 
-    <section id="view-sleep" class="view hidden space-y-6">
-  <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">😴 <span id="sleepTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="sleepSub"></p></div>
-  <div class="grid lg:grid-cols-2 gap-6">
-    <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-      <h3 class="font-bold mb-4">🌙 <span id="lastNightTitle"></span></h3>
-      <div class="grid grid-cols-2 gap-3">
-        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="bedLbl"></label><input type="time" id="sl-bed" value="23:30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="wakeLbl"></label><input type="time" id="sl-wake" value="07:00" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-      </div>
-      <div class="mt-3"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sqLbl"></label><div class="flex gap-1.5 mt-1" id="sl-faces"></div></div>
-      <div class="mt-3"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sl-wakeups" class="w-5 h-5 accent-teal-600"><span id="wakeupsLbl"></span></label></div>
-      <button onclick="saveNight()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3" id="saveNightBtn"></button>
-    </div>
-    <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-      <h3 class="font-bold mb-4">💤 <span id="napTitle"></span></h3>
-      <div class="grid grid-cols-2 gap-3">
-        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napStartLbl"></label><input type="time" id="nap-start" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-        <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napDurLbl"></label><input type="number" id="nap-dur" value="30" min="5" max="180" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-      </div>
-      <button onclick="saveNap()" class="mt-4 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-3" id="saveNapBtn"></button>
-      <div class="mt-4"><h4 class="text-sm font-bold mb-2" id="napHistLbl"></h4><div id="napHist" class="space-y-2 text-sm"></div></div>
-    </div>
-  </div>
-  <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">📊 <span id="sleepStatsTitle"></span></h3><div id="sleepStats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div></div>
+<div id="reviewBanner" class="hidden mb-4 bg-indigo-50 dark:bg-indigo-900/30 border-s-4 border-indigo-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+<p class="text-sm text-indigo-900 dark:text-indigo-200">🪞 <span data-t="reviewPrompt"></span></p>
+<button onclick="openReview()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="reviewStart"></button>
+</div>
+<div id="backupBanner" class="hidden mb-4 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+<p class="text-sm text-amber-900 dark:text-amber-200">💾 <span id="backupMsg"></span></p>
+<button onclick="exportVault()" class="bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="backupNow"></button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6" id="statStrip"></div>
+<div id="sampleBanner" class="hidden mb-6 bg-amber-50 dark:bg-amber-900/30 border-s-4 border-amber-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+<p class="text-sm text-amber-900 dark:text-amber-200" data-t="sampleWarn"></p><button onclick="clearSample()" class="bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg px-3 py-1.5" data-t="clearSample"></button></div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
+<div class="flex items-center justify-between mb-3"><h3 class="font-bold">🌤️ <span data-t="weather"></span></h3>
+<select id="citySel" class="text-xs border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1 outline-none"></select></div>
+<div id="weatherBody" class="text-sm text-slate-500 dark:text-slate-400" data-t="loading"></div></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow flex items-center gap-4">
+<svg viewBox="0 0 120 120" class="w-24 h-24 shrink-0 -rotate-90"><circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="12" class="dark:opacity-20"/><circle id="adhRing" cx="60" cy="60" r="52" fill="none" stroke="#0f766e" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"/></svg>
+<div><p class="text-xs text-slate-500 dark:text-slate-400" data-t="todayMeds"></p><p class="font-display text-3xl text-teal-800 dark:text-teal-300"><span id="adhPct">۰</span>٪</p><p class="text-[11px] text-slate-400 mt-1" id="adhSub"></p></div></div>
+<div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white shadow-sm p-5 hover:shadow-lg transition-shadow">
+<p class="text-xs text-teal-300" data-t="nextDose"></p><p id="nextDoseTxt" class="font-bold leading-8 mt-1">—</p><p id="nextDoseSub" class="text-[11px] text-teal-400"></p></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 hover:shadow-lg transition-shadow">
+<p class="text-xs text-slate-500 dark:text-slate-400" data-t="nextVisit"></p><p id="nextVisitTxt" class="font-bold leading-7 mt-1 text-sm">—</p>
+<button onclick="showTab('check')" class="mt-2 text-xs bg-amber-400 text-[#0d3b3a] font-bold rounded-full px-3 py-1 hover:scale-105 transition-transform" data-t="prepare"></button></div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 mb-6">
+<div class="flex flex-wrap items-center justify-between gap-3 mb-2"><h3 class="font-bold">📈 <span data-t="trend"></span></h3>
+<div class="flex gap-1.5"><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="30">30</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600" data-r="60">60</button><button class="rng text-xs rounded-full px-3 py-1 border border-slate-300 dark:border-slate-600 bg-teal-600 text-white" data-r="90">90</button></div></div>
+<div id="seriesChips" class="flex flex-wrap gap-1.5 mb-3"></div>
+<div class="relative"><canvas id="chart" style="width:100%;height:280px"></canvas><div id="chartTip" class="hidden absolute pointer-events-none bg-[#0d3b3a] dark:bg-slate-700 text-white text-xs rounded-lg px-3 py-2 shadow-lg z-10" style="min-width:140px"></div></div>
+<div id="chartEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">🌱</p><p class="font-bold" data-t="noData"></p>
+<div class="flex gap-2 justify-center mt-4"><button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-4 py-2 text-sm" data-t="startCheck"></button><button onclick="loadSample()" class="border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-lg px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-300" data-t="sampleBtn"></button></div></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-4">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5"><h3 class="font-bold mb-3">🔍 <span data-t="insights"></span></h3><div id="insights" class="space-y-3 text-sm"></div></div>
+<div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 shadow-sm p-5"><h3 class="font-bold text-rose-700 dark:text-rose-300 mb-3">🚩 <span data-t="attention"></span></h3><ul id="redflags" class="space-y-2 text-sm text-slate-700 dark:text-slate-200"></ul></div>
+</div>
 </section>
+
+<section id="view-meds" class="view hidden space-y-6">
+<div id="catchupBox" class="hidden rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 mb-4"><h3 class="font-bold text-amber-800 dark:text-amber-300 mb-1">⏪ <span id="catchupTitle"></span></h3><p class="text-xs text-amber-700 dark:text-amber-400 mb-3" id="catchupSub"></p><div id="catchupList" class="space-y-2"></div></div>
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
+<div class="flex flex-wrap gap-2">
+<button onclick="enableNotif()" class="text-sm border-2 border-sky-300 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-900/30 font-bold rounded-xl px-4 py-2">🔔 <span id="notifLbl"></span></button>
+<button onclick="copyMedList()" class="text-sm border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-bold rounded-xl px-4 py-2">📋 <span data-t="copyList"></span></button>
+<button onclick="openMedForm()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 hover:scale-105 shadow">＋ <span data-t="addMed"></span></button>
+</div>
+</div>
+<div id="medForm" class="hidden rounded-xl border-2 border-teal-300 bg-white dark:bg-slate-800 shadow-lg p-6">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4" id="mfTitle"></h3>
+<div class="grid sm:grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medName"></label><input id="mf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medDose"></label><input id="mf-dose" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medEmoji"></label><input id="mf-emoji" value="💊" maxlength="4" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none text-center text-xl"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medColor"></label><div id="mf-colors" class="flex gap-2 flex-wrap"></div></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medPerday"></label><select id="mf-perday" onchange="mfPerday()" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medTimes"></label>
+<div class="flex gap-2"><input type="time" id="mf-t1" value="08:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none"><input type="time" id="mf-t2" value="13:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"><input type="time" id="mf-t3" value="22:00" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-2 py-2.5 outline-none hidden"></div></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="medFreq"></label>
+<div class="flex gap-3 text-sm flex-wrap"><label class="flex items-center gap-1"><input type="radio" name="mff" value="daily" checked onchange="mfFreq()" class="accent-teal-600"><span data-t="daily"></span></label>
+<label class="flex items-center gap-1"><input type="radio" name="mff" value="everyN" onchange="mfFreq()" class="accent-teal-600"><span data-t="every"></span> <input type="number" id="mf-n" value="3" min="2" class="w-14 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-1 py-1 outline-none"></label>
+<label class="flex items-center gap-1"><input type="radio" name="mff" value="days" onchange="mfFreq()" class="accent-teal-600"><span data-t="specificDays"></span></label></div></div>
+<div id="mf-daysBox" class="hidden"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-1" data-t="weekDays"></label><div id="mf-days" class="flex gap-1.5"></div></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="medRemaining"></label><input id="mf-remaining" type="number" min="0" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 focus:border-teal-500 outline-none"></div>
+<div class="sm:col-span-2 flex items-center gap-4 flex-wrap"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mf-food" class="w-5 h-5 accent-teal-600">🍽️ <span data-t="withFood"></span></label>
+<input id="mf-note" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm focus:border-teal-500 outline-none" placeholder="..."></div>
+</div>
+<div class="flex gap-3 mt-5"><button onclick="saveMed()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
+<button onclick="closeMedForm()" class="border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold rounded-xl px-6 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700" data-t="cancel"></button></div>
+</div>
+<div class="revealwrap" id="medsSensitive">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6" id="medsInner">
+<div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">⏱️ <span data-t="todayPlan"></span></h3><span class="text-sm text-slate-500 dark:text-slate-400" id="todayCount"></span></div>
+<div id="timeline" class="space-y-3"></div>
+<div id="timelineEmpty" class="hidden text-center py-8"><p class="text-4xl mb-2">💊</p><p class="font-bold" data-t="noMed"></p></div>
+</div>
+</div>
+<div class="grid lg:grid-cols-2 gap-6">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<div class="flex items-center justify-between mb-3"><h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">💧 <span data-t="waterToday"></span></h3><span class="text-sm font-bold text-sky-600 dark:text-sky-300" id="waterTxt"></span></div>
+<div id="waterGlasses" class="flex flex-wrap gap-2 mb-3"></div>
+<p id="waterHot" class="hidden text-xs text-rose-600 font-bold mb-2" data-t="waterHot"></p></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-3">⏰ <span data-t="healthReminders"></span></h3>
+<div id="reminderList" class="space-y-3"></div></div>
+</div>
+<div class="revealwrap" id="medListWrap">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🗂️ <span data-t="myMeds"></span></h3>
+<div id="medList" class="grid sm:grid-cols-2 gap-3"></div></div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">📜 <span data-t="medHistory"></span></h3>
+<div id="medHistory" class="space-y-2 text-sm"></div></div>
+</section>
+
+<section id="view-sleep" class="view hidden space-y-6">
+<div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">😴 <span id="sleepTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="sleepSub"></p></div>
+<div class="grid lg:grid-cols-2 gap-6">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-bold mb-4">🌙 <span id="lastNightTitle"></span></h3>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="bedLbl"></label><input type="time" id="sl-bed" value="23:30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="wakeLbl"></label><input type="time" id="sl-wake" value="07:00" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+</div>
+<div class="mt-3"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sqLbl"></label><div class="flex gap-1.5 mt-1" id="sl-faces"></div></div>
+<div class="mt-3"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sl-wakeups" class="w-5 h-5 accent-teal-600"><span id="wakeupsLbl"></span></label></div>
+<button onclick="saveNight()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3" id="saveNightBtn"></button>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-bold mb-4">💤 <span id="napTitle"></span></h3>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napStartLbl"></label><input type="time" id="nap-start" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="napDurLbl"></label><input type="number" id="nap-dur" value="30" min="5" max="180" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+</div>
+<button onclick="saveNap()" class="mt-4 w-full bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl py-3" id="saveNapBtn"></button>
+<div class="mt-4"><h4 class="text-sm font-bold mb-2" id="napHistLbl"></h4><div id="napHist" class="space-y-2 text-sm"></div></div>
+</div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">📊 <span id="sleepStatsTitle"></span></h3><div id="sleepStats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div></div>
+</section>
+
 <section id="view-adh" class="view hidden space-y-6">
-      <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h3 class="font-bold mb-1">🗓️ <span data-t="heatmap"></span></h3><p class="text-xs text-slate-400 mb-4" data-t="heatmapSub"></p>
-        <div id="heatmap" class="flex gap-1 overflow-x-auto pb-2" dir="ltr"></div></div>
-      <div class="grid lg:grid-cols-2 gap-6">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">💊 <span data-t="perMed"></span></h3><div id="perMed" class="space-y-4"></div></div>
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">🕐 <span data-t="timePattern"></span></h3><div id="timePattern" class="space-y-3"></div><p id="timeInsight" class="text-sm mt-4 font-bold text-amber-700 dark:text-amber-300"></p></div>
-      </div>
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h3 class="font-bold mb-4">📅 <span data-t="weeklyTrend"></span></h3><div id="weeklyTrend" class="flex items-end gap-2 h-32"></div>
-        <p id="adhInsight" class="text-sm mt-4 font-bold text-teal-700 dark:text-teal-300"></p></div>
-    </section>
+<div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-bold mb-1">🗓️ <span data-t="heatmap"></span></h3><p class="text-xs text-slate-400 mb-4" data-t="heatmapSub"></p>
+<div id="heatmap" class="flex gap-1 overflow-x-auto pb-2" dir="ltr"></div></div>
+<div class="grid lg:grid-cols-2 gap-6">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">💊 <span data-t="perMed"></span></h3><div id="perMed" class="space-y-4"></div></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">🕐 <span data-t="timePattern"></span></h3><div id="timePattern" class="space-y-3"></div><p id="timeInsight" class="text-sm mt-4 font-bold text-amber-700 dark:text-amber-300"></p></div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h3 class="font-bold mb-4">📅 <span data-t="weeklyTrend"></span></h3><div id="weeklyTrend" class="flex items-end gap-2 h-32"></div>
+<p id="adhInsight" class="text-sm mt-4 font-bold text-teal-700 dark:text-teal-300"></p></div>
+</section>
 
-    <section id="view-check" class="view hidden">
-      <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="checkTitle"></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="checkSub"></p></div>
-          <div class="flex gap-2">
-            <button id="voiceBtn" onclick="voiceCheck()" class="text-xs border-2 border-rose-300 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-full px-3 py-1.5 font-bold">🎙️ <span data-t="voice"></span></button>
-            <button onclick="copyYesterday()" class="text-xs border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-full px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">📋 <span data-t="likeYesterday"></span></button>
-          </div></div>
-        <div id="voiceBox" class="hidden mt-3 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 rounded-xl p-3 text-sm text-rose-800 dark:text-rose-200"></div>
-        <div id="checkDone" class="hidden mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-sm rounded-lg p-3" data-t="alreadyChecked"></div>
-        <div id="entryCount" class="hidden mt-2 text-xs font-bold text-teal-600 dark:text-teal-400"></div>
-        <div id="emoRows" class="mt-4"></div>
-        <div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="trigChips" class="flex flex-wrap gap-2"></div></div>
-        <textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" placeholder="..."></textarea>
-        <button onclick="saveCheckin()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="saveCheck"></button>
-      </div>
-    </section>
+<section id="view-check" class="view hidden">
+<div class="max-w-2xl mx-auto">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<div class="flex items-center justify-between flex-wrap gap-2">
+<div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="checkTitle"></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="checkSub"></p></div>
+<div class="flex gap-2">
+<button id="voiceBtn" onclick="voiceCheck()" class="text-xs border-2 border-rose-300 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-full px-3 py-1.5 font-bold">🎙️ <span data-t="voice"></span></button>
+<button onclick="copyYesterday()" class="text-xs border-2 border-slate-300 dark:border-slate-600 hover:border-teal-500 rounded-full px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">📋 <span data-t="likeYesterday"></span></button>
+</div></div>
+<div id="voiceBox" class="hidden mt-3 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 rounded-xl p-3 text-sm text-rose-800 dark:text-rose-200"></div>
+<div id="checkDone" class="hidden mt-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-300 text-emerald-800 dark:text-emerald-200 text-sm rounded-lg p-3" data-t="alreadyChecked"></div>
+<div id="entryCount" class="hidden mt-2 text-xs font-bold text-teal-600 dark:text-teal-400"></div>
+<div id="emoRows" class="mt-4"></div>
+<div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="trigChips" class="flex flex-wrap gap-2"></div></div>
+<textarea id="noteTxt" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" placeholder="..."></textarea>
+<button onclick="saveCheckin()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="saveCheck"></button>
+</div>
 
-    <section id="view-triage" class="view hidden">
-      <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="triageTitle"></h2>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="triageSub"></p>
-        <div id="triageBox" class="mt-6"></div>
-        <div class="mt-8"><h3 class="font-bold text-sm text-slate-600 dark:text-slate-300 mb-2" data-t="triageHist"></h3><div id="triageHist" class="space-y-2 text-sm"></div></div>
-      </div>
-    </section>
+<!-- ═══ بخش روزهای گم‌شده ═══ -->
+<div id="gapsSection" class="hidden mt-6 rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="gapsTitle"></span></h3>
+<span class="text-xs font-bold bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 rounded-full px-3 py-1" id="gapsCount"></span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="gapsSub"></p>
+<div id="gapsCalendar" class="flex flex-wrap gap-1 mb-4" dir="ltr"></div>
+<div id="gapsList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+<div id="noGaps" class="hidden text-center py-6"><p class="text-4xl mb-2">🎉</p><p class="font-bold text-emerald-600 dark:text-emerald-400" data-t="noGaps"></p></div>
+</div>
+</div>
+</section>
 
-    <section id="view-cal" class="view hidden">
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
-        <button onclick="addMonitor()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2">＋ <span data-t="addMonitor"></span></button></div>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="monitorSub"></p>
-        <div id="monitorList" class="space-y-3"></div></div>
-    </section>
+<section id="view-triage" class="view hidden">
+<div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="triageTitle"></h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="triageSub"></p>
+<div id="triageBox" class="mt-6"></div>
+<div class="mt-8"><h3 class="font-bold text-sm text-slate-600 dark:text-slate-300 mb-2" data-t="triageHist"></h3><div id="triageHist" class="space-y-2 text-sm"></div></div>
+</div>
+</section>
 
-    <section id="view-report" class="view hidden space-y-8">
-      <div class="revealwrap" id="reportWrap">
-        <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌡️ <span data-t="mainSymptoms"></span></h2><div class="space-y-4 text-sm" id="repSymp"></div></div>
-      </div>
-      <div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white p-6"><h2 class="font-display text-2xl text-amber-300 mb-3">💬 <span data-t="myConcerns"></span></h2><div id="repConcerns" class="flex flex-wrap gap-2"></div></div>
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewHist"></span></h2><div id="reviewList" class="space-y-3 text-sm"></div></div>
-    </section>
+<section id="view-cal" class="view hidden">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
+<button onclick="addMonitor()" class="text-sm bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2">＋ <span data-t="addMonitor"></span></button></div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="monitorSub"></p>
+<div id="monitorList" class="space-y-3"></div></div>
+</section>
 
-    <section id="view-profile" class="view hidden space-y-6">
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">👤 <span data-t="profileTitle"></span></h2>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="pf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="pf-age" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="pf-height" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="pf-weight" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="pf-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="pf-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="pf-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="pf-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-        </div>
-        <div class="mt-4"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="concerns"></label><div id="pf-concerns" class="flex flex-wrap gap-2"></div></div>
-        <button onclick="saveProfile()" class="mt-5 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
-      </div>
+<section id="view-report" class="view hidden space-y-8">
+<div class="revealwrap" id="reportWrap">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌡️ <span data-t="mainSymptoms"></span></h2><div class="space-y-4 text-sm" id="repSymp"></div></div>
+</div>
+<div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white p-6"><h2 class="font-display text-2xl text-amber-300 mb-3">💬 <span data-t="myConcerns"></span></h2><div id="repConcerns" class="flex flex-wrap gap-2"></div></div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewHist"></span></h2><div id="reviewList" class="space-y-3 text-sm"></div></div>
+</section>
 
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🎨 <span data-t="prefsTitle"></span></h2>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="language"></label>
-            <div class="flex gap-2"><button onclick="setLang('fa')" id="langFa" class="flex-1 border-2 rounded-xl py-2.5 font-bold">فارسی</button><button onclick="setLang('en')" id="langEn" class="flex-1 border-2 rounded-xl py-2.5 font-bold">English</button></div></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="theme"></label>
-            <div class="flex gap-2"><button onclick="setTheme('light')" id="thLight" class="flex-1 border-2 rounded-xl py-2.5 font-bold">☀️</button><button onclick="setTheme('dark')" id="thDark" class="flex-1 border-2 rounded-xl py-2.5 font-bold">🌙</button><button onclick="setTheme('system')" id="thSys" class="flex-1 border-2 rounded-xl py-2.5 font-bold" data-t="system"></button></div></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="refillDays"></label>
-            <input id="set-refill" type="number" min="1" max="60" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveSetting('refillDays',+this.value)"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthMode"></label>
-            <label class="relative inline-flex items-center cursor-pointer mt-1"><input type="checkbox" id="set-stealth" onchange="toggleStealth(this.checked)" class="sr-only peer">
-            <div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label>
-            <p class="text-[11px] text-slate-400 mt-1" data-t="stealthDesc"></p></div>
-          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthName"></label>
-            <input id="set-appname" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveStealthName(this.value)"></div>
-        </div>
-      </div>
-
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌤️ <span data-t="weatherSet"></span></h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3"><span data-t="weatherApi"></span>: <b dir="ltr">Open-Meteo.com</b> (<span data-t="freeNoKey"></span>)</p>
-        <div class="flex gap-2 mb-3">
-          <input id="citySearch" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-teal-500" data-t-attr="placeholder" data-t="searchCity">
-          <button onclick="searchCity()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="search"></button></div>
-        <div id="cityResults" class="mb-3 space-y-1"></div>
-        <div id="cityList" class="flex flex-wrap gap-2"></div>
-      </div>
-
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🩺 <span data-t="emergencySet"></span></h2>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgContact"></label><input id="emg-contact" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgPhone"></label><input id="emg-phone" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgAllergy"></label><input id="emg-allergy" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-          <div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgNotes"></label><input id="emg-notes" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
-        </div>
-        <button onclick="saveEmergency()" class="mt-4 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5" data-t="save"></button>
-      </div>
-
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">✍️ <span data-t="symptomSet"></span></h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="symptomSetSub"></p>
-        <div id="symptomMgr" class="space-y-2"></div>
-        <div class="flex gap-2 mt-3 flex-wrap">
-          <input id="newSymFa" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymFa">
-          <input id="newSymEn" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymEn">
-          <button onclick="addSymptom()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">＋</button></div>
-      </div>
-
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🔑 <span data-t="securityTitle"></span></h2>
-        <div class="grid sm:grid-cols-3 gap-3 mb-3"><input type="password" id="cp-old" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="curPwd"><input type="password" id="cp-new" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="newPwd"><input type="password" id="cp-con" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="repeatPwd"></div>
-        <button onclick="changePwd()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl px-6 py-2.5" data-t="changePwd"></button>
-        <div class="border-t border-slate-200 dark:border-slate-600 my-4"></div>
-        <div class="flex flex-wrap gap-3 items-center">
-          <div class="flex gap-2"><input type="password" inputmode="numeric" id="pinSet" maxlength="6" class="w-32 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-center outline-none" data-t-attr="placeholder" data-t="pinPh">
-          <button onclick="setPin()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm" data-t="setPin"></button></div>
-          <button id="bioSetBtn" onclick="setupBio()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm">👆 <span data-t="enableBio"></span></button>
-          <span id="pinStatus" class="text-xs text-slate-400"></span>
-        </div>
-      </div>
-
-      <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-        <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1">💾 <span data-t="backupTitle"></span></h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><span data-t="storageUsed"></span>: <b id="storageUsed"></b> · <span data-t="storageFree"></span>: <b id="storageFree"></b></p>
-        <div id="storageWarn" class="hidden mb-2 bg-rose-50 dark:bg-rose-900/30 border border-rose-300 text-rose-700 dark:text-rose-300 rounded-xl p-3 text-sm font-bold"></div>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4"><span data-t="lastBackup"></span>: <b id="lastBackupTxt"></b></p>
-        <div class="flex flex-wrap gap-3">
-          <button onclick="exportVault()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">⬇️ <span data-t="downloadBackup"></span></button>
-          <button onclick="shareBackup()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">📤 <span data-t="shareBackup"></span></button>
-          <label class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow cursor-pointer">⬆️ <span data-t="restore"></span><input type="file" id="importFile" accept=".json" class="hidden"></label>
-        </div>
-        <div id="importPwdBox" class="hidden mt-4 bg-sky-50 dark:bg-sky-900/30 border border-sky-300 rounded-xl p-4">
-          <p class="text-sm text-sky-900 dark:text-sky-200 mb-2" data-t="importPwdMsg"></p>
-          <div class="flex gap-2"><input type="password" id="importPwd" class="flex-1 border-2 border-sky-300 rounded-xl px-3 py-2 outline-none"><button onclick="importWithPwd()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2" data-t="open"></button></div></div>
-      </div>
-
-      <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 p-6">
-        <h2 class="font-display text-2xl text-rose-700 dark:text-rose-300 mb-3">⚠️ <span data-t="dangerTitle"></span></h2>
-        <div class="flex flex-wrap gap-3">
-          <button onclick="clearPart('dose')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearDose"></button>
-          <button onclick="clearPart('check')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearCheck"></button>
-          <button onclick="clearPart('triage')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearTriage"></button>
-          <button onclick="lockApp()" class="border-2 border-slate-400 text-slate-700 dark:text-slate-200 font-bold rounded-xl px-4 py-2 hover:bg-white dark:hover:bg-slate-700 text-sm" data-t="lockNow"></button>
-          <button onclick="wipeAll()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="wipeAll"></button>
-        </div>
-      </div>
-    </section>
-
-  </main>
+<section id="view-profile" class="view hidden space-y-6">
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">👤 <span data-t="profileTitle"></span></h2>
+<div class="grid sm:grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fName"></label><input id="pf-name" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fAge"></label><input id="pf-age" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fHeight"></label><input id="pf-height" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fWeight"></label><input id="pf-weight" type="number" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDx"></label><input id="pf-dx" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDmt"></label><input id="pf-dmt" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fDoc"></label><input id="pf-doc" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="fNext"></label><input id="pf-next" type="date" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+</div>
+<div class="mt-4"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="concerns"></label><div id="pf-concerns" class="flex flex-wrap gap-2"></div></div>
+<button onclick="saveProfile()" class="mt-5 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5 hover:scale-105 shadow" data-t="save"></button>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🎨 <span data-t="prefsTitle"></span></h2>
+<div class="grid sm:grid-cols-2 gap-4">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="language"></label>
+<div class="flex gap-2"><button onclick="setLang('fa')" id="langFa" class="flex-1 border-2 rounded-xl py-2.5 font-bold">فارسی</button><button onclick="setLang('en')" id="langEn" class="flex-1 border-2 rounded-xl py-2.5 font-bold">English</button></div></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="theme"></label>
+<div class="flex gap-2"><button onclick="setTheme('light')" id="thLight" class="flex-1 border-2 rounded-xl py-2.5 font-bold">☀️</button><button onclick="setTheme('dark')" id="thDark" class="flex-1 border-2 rounded-xl py-2.5 font-bold">🌙</button><button onclick="setTheme('system')" id="thSys" class="flex-1 border-2 rounded-xl py-2.5 font-bold" data-t="system"></button></div></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="refillDays"></label>
+<input id="set-refill" type="number" min="1" max="60" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveSetting('refillDays',+this.value)"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthMode"></label>
+<label class="relative inline-flex items-center cursor-pointer mt-1"><input type="checkbox" id="set-stealth" onchange="toggleStealth(this.checked)" class="sr-only peer">
+<div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label>
+<p class="text-[11px] text-slate-400 mt-1" data-t="stealthDesc"></p></div>
+<div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300 block mb-2" data-t="stealthName"></label>
+<input id="set-appname" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500" onchange="saveStealthName(this.value)"></div>
+</div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌤️ <span data-t="weatherSet"></span></h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-3"><span data-t="weatherApi"></span>: <b dir="ltr">Open-Meteo.com</b> (<span data-t="freeNoKey"></span>)</p>
+<div class="flex gap-2 mb-3">
+<input id="citySearch" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-teal-500" data-t-attr="placeholder" data-t="searchCity">
+<button onclick="searchCity()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="search"></button></div>
+<div id="cityResults" class="mb-3 space-y-1"></div>
+<div id="cityList" class="flex flex-wrap gap-2"></div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🩺 <span data-t="emergencySet"></span></h2>
+<div class="grid sm:grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgContact"></label><input id="emg-contact" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgPhone"></label><input id="emg-phone" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgAllergy"></label><input id="emg-allergy" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div class="sm:col-span-2"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="emgNotes"></label><input id="emg-notes" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+</div>
+<button onclick="saveEmergency()" class="mt-4 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-6 py-2.5" data-t="save"></button>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">✍️ <span data-t="symptomSet"></span></h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="symptomSetSub"></p>
+<div id="symptomMgr" class="space-y-2"></div>
+<div class="flex gap-2 mt-3 flex-wrap">
+<input id="newSymFa" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymFa">
+<input id="newSymEn" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 text-sm outline-none" data-t-attr="placeholder" data-t="newSymEn">
+<button onclick="addSymptom()" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-4 py-2 text-sm">＋</button></div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🔑 <span data-t="securityTitle"></span></h2>
+<div class="grid sm:grid-cols-3 gap-3 mb-3"><input type="password" id="cp-old" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="curPwd"><input type="password" id="cp-new" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="newPwd"><input type="password" id="cp-con" class="border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none" data-t-attr="placeholder" data-t="repeatPwd"></div>
+<button onclick="changePwd()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl px-6 py-2.5" data-t="changePwd"></button>
+<div class="border-t border-slate-200 dark:border-slate-600 my-4"></div>
+<div class="flex flex-wrap gap-3 items-center">
+<div class="flex gap-2"><input type="password" inputmode="numeric" id="pinSet" maxlength="6" class="w-32 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 text-center outline-none" data-t-attr="placeholder" data-t="pinPh">
+<button onclick="setPin()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm" data-t="setPin"></button></div>
+<button id="bioSetBtn" onclick="setupBio()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl px-4 py-2.5 text-sm">👆 <span data-t="enableBio"></span></button>
+<span id="pinStatus" class="text-xs text-slate-400"></span>
+</div>
+</div>
+<div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-1">💾 <span data-t="backupTitle"></span></h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2"><span data-t="storageUsed"></span>: <b id="storageUsed"></b> · <span data-t="storageFree"></span>: <b id="storageFree"></b></p>
+<div id="storageWarn" class="hidden mb-2 bg-rose-50 dark:bg-rose-900/30 border border-rose-300 text-rose-700 dark:text-rose-300 rounded-xl p-3 text-sm font-bold"></div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4"><span data-t="lastBackup"></span>: <b id="lastBackupTxt"></b></p>
+<div class="flex flex-wrap gap-3">
+<button onclick="exportVault()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">⬇️ <span data-t="downloadBackup"></span></button>
+<button onclick="shareBackup()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow">📤 <span data-t="shareBackup"></span></button>
+<label class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-5 py-2.5 hover:scale-105 shadow cursor-pointer">⬆️ <span data-t="restore"></span><input type="file" id="importFile" accept=".json" class="hidden"></label>
+</div>
+<div id="importPwdBox" class="hidden mt-4 bg-sky-50 dark:bg-sky-900/30 border border-sky-300 rounded-xl p-4">
+<p class="text-sm text-sky-900 dark:text-sky-200 mb-2" data-t="importPwdMsg"></p>
+<div class="flex gap-2"><input type="password" id="importPwd" class="flex-1 border-2 border-sky-300 rounded-xl px-3 py-2 outline-none"><button onclick="importWithPwd()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2" data-t="open"></button></div></div>
+</div>
+<div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 p-6">
+<h2 class="font-display text-2xl text-rose-700 dark:text-rose-300 mb-3">⚠️ <span data-t="dangerTitle"></span></h2>
+<div class="flex flex-wrap gap-3">
+<button onclick="clearPart('dose')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearDose"></button>
+<button onclick="clearPart('check')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearCheck"></button>
+<button onclick="clearPart('triage')" class="border-2 border-rose-300 text-rose-600 dark:text-rose-300 font-bold rounded-xl px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-900/40 text-sm" data-t="clearTriage"></button>
+<button onclick="lockApp()" class="border-2 border-slate-400 text-slate-700 dark:text-slate-200 font-bold rounded-xl px-4 py-2 hover:bg-white dark:hover:bg-slate-700 text-sm" data-t="lockNow"></button>
+<button onclick="wipeAll()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl px-4 py-2 text-sm" data-t="wipeAll"></button>
+</div>
+</div>
+</section>
+</main>
 </div>
 
 <!-- مرور هفتگی -->
 <div id="reviewModal" class="app hidden fixed inset-0 z-[75] bg-black/50 flex items-center justify-center p-4">
-  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-md w-full">
-    <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewTitle"></span></h3>
-    <div class="space-y-3">
-      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ1"></label><textarea id="rv-good" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
-      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ2"></label><textarea id="rv-hard" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
-      <div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ3"></label><textarea id="rv-goal" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
-    </div>
-    <div class="flex gap-3 mt-4"><button onclick="saveReview()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-2.5" data-t="save"></button>
-    <button onclick="closeReview()" class="border-2 border-slate-300 dark:border-slate-600 rounded-xl px-4 font-bold text-slate-600 dark:text-slate-300" data-t="later"></button></div>
-  </div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-md w-full">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewTitle"></span></h3>
+<div class="space-y-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ1"></label><textarea id="rv-good" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ2"></label><textarea id="rv-hard" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="reviewQ3"></label><textarea id="rv-goal" rows="2" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-2.5 text-sm outline-none focus:border-teal-500"></textarea></div>
+</div>
+<div class="flex gap-3 mt-4"><button onclick="saveReview()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl py-2.5" data-t="save"></button>
+<button onclick="closeReview()" class="border-2 border-slate-300 dark:border-slate-600 rounded-xl px-4 font-bold text-slate-600 dark:text-slate-300" data-t="later"></button></div>
+</div>
+</div>
+
+<!-- ═══ مودال ثبت عقب‌افتاده (Backfill) ═══ -->
+<div id="backfillModal" class="app hidden fixed inset-0 z-[76] bg-black/50 flex items-center justify-center p-4">
+<div class="backfill-modal bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-lg w-full max-h-[90vh] overflow-auto">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="backfillTitle"></span></h3>
+<button onclick="closeBackfill()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">✕</button>
+</div>
+<p id="bfDate" class="text-sm font-bold text-sky-600 dark:text-sky-400 mb-3"></p>
+<div id="bfRows"></div>
+<div class="mt-4"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" data-t="triggers"></p><div id="bfTrigChips" class="flex flex-wrap gap-2"></div></div>
+<textarea id="bfNote" rows="2" class="mt-4 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-none" placeholder="..."></textarea>
+<button onclick="saveBackfill()" class="mt-4 w-full bg-gradient-to-l from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="backfillSave"></button>
+</div>
 </div>
 
 <div id="printDigest" class="max-w-3xl mx-auto p-6 text-slate-900">
-  <div class="flex items-center justify-between border-b-4 border-teal-700 pb-3 mb-4">
-    <div><h1 class="font-display text-3xl" id="pdTitle"></h1><p id="pdPatient" class="text-sm text-slate-600"></p></div>
-    <div class="text-left text-sm"><p id="pdDate" class="font-bold"></p></div>
-  </div>
-  <div id="pdBody"></div>
-  <p class="mt-6 text-[11px] text-slate-500 border-t border-slate-300 pt-2" data-t="printFooter"></p>
+<div class="flex items-center justify-between border-b-4 border-teal-700 pb-3 mb-4">
+<div><h1 class="font-display text-3xl" id="pdTitle"></h1><p id="pdPatient" class="text-sm text-slate-600"></p></div>
+<div class="text-left text-sm"><p id="pdDate" class="font-bold"></p></div>
 </div>
-
+<div id="pdBody"></div>
+<p class="mt-6 text-[11px] text-slate-500 border-t border-slate-300 pt-2" data-t="printFooter"></p>
+</div>
 <div id="toast" class="toast hidden fixed bottom-6 left-1/2 z-[90] bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
 <div id="softToast" class="toast hidden fixed bottom-20 left-1/2 z-[89] bg-sky-600 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
 
@@ -511,7 +551,7 @@ back:['قبلی','Back'],next:['بعدی','Next'],
 fName:['نام/حروف اختصاری','Name/initials'],fAge:['سن','Age'],fSex:['جنسیت','Sex'],male:['مرد','Male'],female:['زن','Female'],fHeight:['قد (cm)','Height (cm)'],fWeight:['وزن (kg)','Weight (kg)'],
 fDx:['تاریخ تشخیص','Diagnosis date'],fType:['نوع MS','MS type'],fDmt:['داروی اصلی','Main DMT'],fDoc:['پزشک','Doctor'],fNext:['ویزیت بعدی','Next visit'],
 tagline:['پایش هوشمند MS','Smart MS tracking'],install:['نصب','Install'],print:['چاپ/PDF','Print/PDF'],
-tabs:{dash:['داشبورد','Dashboard'],meds:['دارویار','Meds'],adh:['پایبندی','Adherence'],check:['چک‌این','Check-in'],triage:['تریاژ','Triage'],cal:['پایش','Monitor'],report:['گزارش','Report'],profile:['تنظیمات','Settings']},
+tabs:{dash:['داشبورد','Dashboard'],meds:['دارویار','Meds'],adh:['پایبندی','Adherence'],sleep:['خواب','Sleep'],check:['چک‌این','Check-in'],triage:['تریاژ','Triage'],cal:['پایش','Monitor'],report:['گزارش','Report'],profile:['تنظیمات','Settings']},
 hello:['سلام','Hello'],checkin:['چک‌این امروز','Check-in'],badDay:['روز بد / عود','Bad day / Flare'],
 reviewPrompt:['وقت بازبینی هفتگی است — ۳ سوال کوتاه','Time for your weekly review — 3 short questions'],reviewStart:['شروع','Start'],
 backupNow:['پشتیبان بگیر','Back up now'],sampleWarn:['⚠️ داده‌های نمونه فعال‌اند','⚠️ Sample data is active'],clearSample:['پاک کردن','Clear'],
@@ -553,6 +593,10 @@ fakeTitle:['یادداشت‌ها','Notes'],fakeBack:['بازگشت','Back'],
 notifOn:['اعلان فعال','Notifications on'],notifOff:['فعال‌سازی اعلان','Enable notifications'],notifDenied:['اعلان مسدود است','Notifications blocked'],notifNone:['اعلان پشتیبانی نمی‌شود','Not supported'],
 took:['✅ خوردم','✅ Taken'],snooze:['⏰ بعداً','⏰ Later'],skipped:['❌ نخوردم','❌ Skipped'],
 stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],
+gapsTitle:['روزهای بدون ثبت','Unlogged days'],gapsSub:['روی هر روز بزن تا اطلاعاتش رو کامل کنی','Tap a day to fill in its data'],
+gapsFill:['کامل کردن','Fill in'],gapsBanner:['روز بدون ثبت داری!','unlogged days!'],
+backfillTitle:['ثبت اطلاعات برای','Log data for'],backfillSave:['ثبت و ذخیره','Save entry'],
+noGaps:['همه‌ی روزها ثبت شده 🎉','All days logged 🎉'],gapsTab:['گمشده‌ها','Gaps'],
 };
 function t(k){let v=L;for(const p of k.split('.')){v=v&&v[p];}return Array.isArray(v)?v[lang==='fa'?0:1]:k;}
 function num(n){return Number(n).toLocaleString(lang==='fa'?'fa-IR':'en-US');}
@@ -566,15 +610,11 @@ function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic()
 function buildNav(){const tabs=['dash','meds','adh','sleep','check','triage','cal','report','profile'];
 const icons={dash:'📊',meds:'💊',adh:'📈',sleep:'😴',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
 $('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
-
-/* ═══ تم ═══ */
 let theme=localStorage.getItem('hammasir-theme')||'system';
 function applyTheme(){const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
 document.documentElement.classList.toggle('dark',dark);}
 function setTheme(m){theme=m;localStorage.setItem('hammasir-theme',m);applyTheme();toast('🌓');}
 function cycleTheme(){setTheme(document.documentElement.classList.contains('dark')?'light':'dark');}
-
-/* ═══ ابزار ═══ */
 const $=id=>document.getElementById(id);
 const dkey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -584,8 +624,6 @@ function toast(m){const el=$('toast');el.textContent=m;el.classList.remove('hidd
 function softToast(m){const el=$('softToast');el.textContent=m;el.classList.remove('hidden');clearTimeout(el._h);el._h=setTimeout(()=>el.classList.add('hidden'),4000);}
 function pearson(x,y){const n=x.length;if(n<5)return 0;const mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let nu=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=x[i]-mx,b=y[i]-my;nu+=a*b;dx+=a*a;dy+=b*b;}return dx&&dy?nu/Math.sqrt(dx*dy):0;}
 function togglePwd(id){const el=$(id);el.type=el.type==='password'?'text':'password';}
-
-/* ═══ رمزنگاری ═══ */
 const VAULT_KEY='hammasir-vault-v5',DEVKEY='hammasir-devkey',CREDID='hammasir-credid';
 const enc=new TextEncoder(),dec=new TextDecoder();
 let WEAK=!(window.crypto&&crypto.subtle);
@@ -603,74 +641,71 @@ async function decData(master,d){const k=await importMaster(master);const pt=awa
 function keystream(p,len){let h=2166136261;for(let i=0;i<p.length;i++){h^=p.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}const o=new Array(len);let x=h||1;for(let i=0;i<len;i++){x=(Math.imul(x,1103515245)+12345)>>>0;o[i]=x&0xff;}return o;}
 function weakEnc(o,p){const s=encodeURIComponent(JSON.stringify(o));const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return btoa(r);}
 function weakDec(b,p){const s=atob(b);const k=keystream(p,s.length);let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k[i]);return r;}
-
 let MASTER=null,S=null,vault=null;
 async function persist(){if(!S||!MASTER)return;try{
-  if(WEAK){vault.ct=weakEnc(S,MASTER.weakPwd);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
-  else{vault.data=await encData(MASTER.bytes,S);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
-  updateStorage();}catch(e){const full=e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014);
-  toast(full?('⚠️ '+(lang==='fa'?'فضای ذخیره پر شد! پشتیبان بگیر':'Storage full! Back up now')):'⚠️ save failed');
-  if(full&&$('storageWarn')){$('storageWarn').classList.remove('hidden');$('storageWarn').textContent='⚠️ '+(lang==='fa'?'فضا پر است':'Storage full');}}}
+if(WEAK){vault.ct=weakEnc(S,MASTER.weakPwd);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+else{vault.data=await encData(MASTER.bytes,S);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+updateStorage();}catch(e){const full=e&&(e.name==='QuotaExceededError'||e.code===22||e.code===1014);
+toast(full?('⚠️ '+(lang==='fa'?'فضای ذخیره پر شد! پشتیبان بگیر':'Storage full! Back up now')):'⚠️ save failed');
+if(full&&$('storageWarn')){$('storageWarn').classList.remove('hidden');$('storageWarn').textContent='⚠️ '+(lang==='fa'?'فضا پر است':'Storage full');}}}
 async function createVault(pwd,state){
-  if(WEAK){vault={v:5,weak:1,ct:weakEnc(state,pwd)};MASTER={weakPwd:pwd};}
-  else{const master=crypto.getRandomValues(new Uint8Array(32));
-    vault={v:5,data:await encData(master,state),pwd:await wrapMaster(master,pwd),pin:null,bio:null};
-    MASTER={bytes:master};}
-  localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
+if(WEAK){vault={v:5,weak:1,ct:weakEnc(state,pwd)};MASTER={weakPwd:pwd};}
+else{const master=crypto.getRandomValues(new Uint8Array(32));
+vault={v:5,data:await encData(master,state),pwd:await wrapMaster(master,pwd),pin:null,bio:null};
+MASTER={bytes:master};}
+localStorage.setItem(VAULT_KEY,JSON.stringify(vault));}
 async function unlockWith(secret,kind){
-  vault=JSON.parse(localStorage.getItem(VAULT_KEY));
-  if(WEAK){S=JSON.parse(decodeURIComponent(weakDec(vault.ct,secret)));MASTER={weakPwd:secret};return;}
-  let master;
-  if(kind==='pwd')master=await unwrapMaster(vault.pwd,secret);
-  else if(kind==='pin')master=await unwrapMaster(vault.pin,secret);
-  else if(kind==='bio'){
-    const credId=localStorage.getItem(CREDID);
-    const dk=JSON.parse(localStorage.getItem(DEVKEY)||'null');
-    if(!credId||!dk)throw new Error('no-bio');
-    await navigator.credentials.get({publicKey:{
-      challenge:crypto.getRandomValues(new Uint8Array(32)),
-      allowCredentials:[{id:b642buf(credId),type:'public-key',transport:['internal']}],
-      userVerification:'required',timeout:60000}});
-    master=await unwrapMaster(vault.bio,dk);}
-  S=await decData(master,vault.data);MASTER={bytes:master};}
+vault=JSON.parse(localStorage.getItem(VAULT_KEY));
+if(WEAK){S=JSON.parse(decodeURIComponent(weakDec(vault.ct,secret)));MASTER={weakPwd:secret};return;}
+let master;
+if(kind==='pwd')master=await unwrapMaster(vault.pwd,secret);
+else if(kind==='pin')master=await unwrapMaster(vault.pin,secret);
+else if(kind==='bio'){
+const credId=localStorage.getItem(CREDID);
+const dk=JSON.parse(localStorage.getItem(DEVKEY)||'null');
+if(!credId||!dk)throw new Error('no-bio');
+await navigator.credentials.get({publicKey:{
+challenge:crypto.getRandomValues(new Uint8Array(32)),
+allowCredentials:[{id:b642buf(credId),type:'public-key',transport:['internal']}],
+userVerification:'required',timeout:60000}});
+master=await unwrapMaster(vault.bio,dk);}
+S=await decData(master,vault.data);MASTER={bytes:master};}
 async function setPin(){const pin=$('pinSet').value;if(!/^\d{4,6}$/.test(pin))return toast(lang==='fa'?'پین ۴ تا ۶ رقم':'PIN must be 4-6 digits');
-  if(WEAK)return toast('PIN unavailable');
-  vault.pin=await wrapMaster(MASTER.bytes,pin);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
-  $('pinSet').value='';updatePinStatus();toast('🔑 '+(lang==='fa'?'پین تنظیم شد':'PIN set'));}
+if(WEAK)return toast('PIN unavailable');
+vault.pin=await wrapMaster(MASTER.bytes,pin);localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
+$('pinSet').value='';updatePinStatus();toast('🔑 '+(lang==='fa'?'پین تنظیم شد':'PIN set'));}
 async function setupBio(){
-  if(!window.PublicKeyCredential||!window.isSecureContext){toast(lang==='fa'?'اثرانگشت اینجا کار نمی‌کنه (نیاز به HTTPS و دستگاه دارای حسگر)':'Biometrics need HTTPS + a fingerprint device');return;}
-  try{
-    const cred=await navigator.credentials.create({publicKey:{
-      challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'HamMasir'},
-      user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'hammasir',displayName:'HamMasir'},
-      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
-      authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000}});
-    localStorage.setItem(CREDID,buf2b64(cred.rawId));
-    const dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));
-    localStorage.setItem(DEVKEY,JSON.stringify(dk));
-    vault.bio=await wrapMaster(MASTER.bytes,dk);
-    localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
-    updatePinStatus();toast('👆 '+(lang==='fa'?'اثرانگشت فعال شد — موقع باز کردن چک می‌شه':'Fingerprint enabled'));
-  }catch(e){toast(lang==='fa'?'اثرانگشت لغو یا پشتیبانی نشد':'Biometric cancelled/unsupported');}}
+if(!window.PublicKeyCredential||!window.isSecureContext){toast(lang==='fa'?'اثرانگشت اینجا کار نمی‌کنه (نیاز به HTTPS و دستگاه دارای حسگر)':'Biometrics need HTTPS + a fingerprint device');return;}
+try{
+const cred=await navigator.credentials.create({publicKey:{
+challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'HamMasir'},
+user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'hammasir',displayName:'HamMasir'},
+pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
+authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000}});
+localStorage.setItem(CREDID,buf2b64(cred.rawId));
+const dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));
+localStorage.setItem(DEVKEY,JSON.stringify(dk));
+vault.bio=await wrapMaster(MASTER.bytes,dk);
+localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
+updatePinStatus();toast('👆 '+(lang==='fa'?'اثرانگشت فعال شد':'Fingerprint enabled'));
+}catch(e){toast(lang==='fa'?'اثرانگشت لغو یا پشتیبانی نشد':'Biometric cancelled/unsupported');}}
 async function changePwd(){const o=$('cp-old').value,n=$('cp-new').value,c=$('cp-con').value;
-  if(n.length<4)return toast(lang==='fa'?'رمز جدید حداقل ۴ نویسه':'Min 4 chars');if(n!==c)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');
-  if(WEAK){if(o!==MASTER.weakPwd)return toast(t('wrongCred'));vault.ct=weakEnc(S,n);MASTER.weakPwd=n;}
-  else{try{await unwrapMaster(vault.pwd,o);}catch(e){return toast(t('wrongCred'));}
-    vault.pwd=await wrapMaster(MASTER.bytes,n);}
-  localStorage.setItem(VAULT_KEY,JSON.stringify(vault));$('cp-old').value=$('cp-new').value=$('cp-con').value='';toast('🔑');}
+if(n.length<4)return toast(lang==='fa'?'رمز جدید حداقل ۴ نویسه':'Min 4 chars');if(n!==c)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');
+if(WEAK){if(o!==MASTER.weakPwd)return toast(t('wrongCred'));vault.ct=weakEnc(S,n);MASTER.weakPwd=n;}
+else{try{await unwrapMaster(vault.pwd,o);}catch(e){return toast(t('wrongCred'));}
+vault.pwd=await wrapMaster(MASTER.bytes,n);}
+localStorage.setItem(VAULT_KEY,JSON.stringify(vault));$('cp-old').value=$('cp-new').value=$('cp-con').value='';toast('🔑');}
 function updatePinStatus(){const hasPin=vault&&vault.pin;const hasBio=vault&&vault.bio;
 $('pinStatus').textContent=(hasPin?'✅ PIN':'')+(hasBio?' · 👆 Bio':'');
 if(window.PublicKeyCredential&&window.isSecureContext)$('bioSetBtn').classList.remove('hidden');}
-
-/* ═══ صفحه‌ها ═══ */
 function showScreen(id){['lock','setup','app','emergency'].forEach(s=>$('scr-'+s).classList.toggle('hidden',s!==id));}
 function renderLock(){const hasPin=vault&&vault.pin;$('pinArea').classList.toggle('hidden',!hasPin);
 $('pwdArea').classList.toggle('hidden',!!hasPin);$('bioArea').classList.toggle('hidden',!(vault&&vault.bio));
 $('lockAppName').textContent=stealthName();}
 function boot(){applyTheme();applyStatic();initPWA();
-  const raw=localStorage.getItem(VAULT_KEY);
-  if(raw){vault=JSON.parse(raw);showScreen('lock');renderLock();setTimeout(()=>$(vault&&vault.pin?'lockPin':'lockPwd').focus(),100);}
-  else{showScreen('setup');suShow();$('su-dx').value=dkey(new Date());renderConcernChips('su-concerns',setupConcerns);}}
+const raw=localStorage.getItem(VAULT_KEY);
+if(raw){vault=JSON.parse(raw);showScreen('lock');renderLock();setTimeout(()=>$(vault&&vault.pin?'lockPin':'lockPwd').focus(),100);}
+else{showScreen('setup');suShow();$('su-dx').value=dkey(new Date());renderConcernChips('su-concerns',setupConcerns);}}
 async function unlockPwd(){try{await unlockWith($('lockPwd').value,'pwd');enterApp();}catch(e){lockError();}}
 async function unlockPin(){try{await unlockWith($('lockPin').value,'pin');enterApp();}catch(e){lockError();}}
 async function unlockBio(){try{await unlockWith(null,'bio');enterApp();}catch(e){lockError();}}
@@ -682,8 +717,6 @@ checkReviewPrompt();checkBackupPrompt();toast(lang==='fa'?'خوش برگشتی �
 function forgot(){if(confirm(lang==='fa'?'بدون رمز داده‌ها قابل بازیابی نیستند. پاک شود؟':'Without the password data is unrecoverable. Erase?'))wipeAll();}
 function lockApp(){MASTER=null;S=null;showScreen('lock');renderLock();}
 function wipeAll(){if(confirm(lang==='fa'?'همه‌چیز برای همیشه پاک می‌شود. مطمئنی؟':'Erase everything forever?')){localStorage.removeItem(VAULT_KEY);localStorage.removeItem(DEVKEY);localStorage.removeItem(CREDID);location.reload();}}
-
-/* ═══ حالت مخفی ═══ */
 let stealthOn=localStorage.getItem('hammasir-stealth')==='1';
 let stealthAppName=localStorage.getItem('hammasir-appname')||'';
 function stealth(){return stealthOn;}
@@ -696,26 +729,22 @@ $('stealthQuick').classList.toggle('hidden',!stealthOn);
 ['medsSensitive','medListWrap','reportWrap'].forEach(id=>wrapStealth($(id)));}
 function wrapStealth(el){if(!el)return;const existing=el.querySelector('.cover');
 if(stealth()){if(!existing){el.classList.add('blurbox');
-  const c=document.createElement('div');c.className='cover';c.innerHTML=`<button onclick="revealOnce(this)" class="bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm font-bold shadow-lg">🔓 ${lang==='fa'?'نمایش':'Reveal'}</button>`;
-  el.classList.add('revealwrap');el.appendChild(c);}}
+const c=document.createElement('div');c.className='cover';c.innerHTML=`<button onclick="revealOnce(this)" class="bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm font-bold shadow-lg">🔓 ${lang==='fa'?'نمایش':'Reveal'}</button>`;
+el.classList.add('revealwrap');el.appendChild(c);}}
 else{el.classList.remove('blurbox');if(existing)existing.remove();}}
 function revealOnce(btn){const p=btn.closest('.revealwrap');p.classList.remove('blurbox');btn.remove();}
 function quickHide(){$('fakeNote').classList.toggle('hidden');
 if(!$('fakeNote').classList.contains('hidden')){$('fakeList').innerHTML=['خرید: نان، شیر','تماس با بانک','قرار پنجشنبه'].map(n=>`<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow border-r-4 border-amber-400">${n}</div>`).join('');}}
-
-/* ═══ کارت اورژانس ═══ */
 function showEmergency(){let emg={};try{emg=JSON.parse(localStorage.getItem('hammasir-emg')||'{}');}catch(e){}
 $('emgBody').innerHTML=`
-  <div class="bg-rose-50 dark:bg-rose-900/30 rounded-lg p-3"><b>${t('emgContact')}:</b> ${emg.contact||'—'}<br><b>${t('emgPhone')}:</b> ${emg.phone||'—'}</div>
-  <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgAllergy')}:</b> ${emg.allergy||'—'}</div>
-  <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgNotes')}:</b> ${emg.notes||'—'}</div>
-  <p class="text-xs text-slate-400">${lang==='fa'?'برای ویرایش، وارد اپ شوید و به تنظیمات بروید.':'Sign in and edit in Settings.'}</p>`;
+<div class="bg-rose-50 dark:bg-rose-900/30 rounded-lg p-3"><b>${t('emgContact')}:</b> ${emg.contact||'—'}<br><b>${t('emgPhone')}:</b> ${emg.phone||'—'}</div>
+<div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgAllergy')}:</b> ${emg.allergy||'—'}</div>
+<div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><b>${t('emgNotes')}:</b> ${emg.notes||'—'}</div>
+<p class="text-xs text-slate-400">${lang==='fa'?'برای ویرایش، وارد اپ شوید و به تنظیمات بروید.':'Sign in and edit in Settings.'}</p>`;
 showScreen('emergency');}
 function hideEmergency(){showScreen('lock');}
 function saveEmergency(){const e={contact:$('emg-contact').value,phone:$('emg-phone').value,allergy:$('emg-allergy').value,notes:$('emg-notes').value};
 localStorage.setItem('hammasir-emg',JSON.stringify(e));if(S){S.emergency=e;persist();}toast('🚑 '+t('save'));}
-
-/* ═══ خوش‌آمد ═══ */
 let suStep=0,setupConcerns=new Set(),profileConcerns=new Set();
 function suShow(){for(let i=0;i<4;i++)$('su-s'+i).classList.toggle('hidden',i!==suStep);
 $('suProg').innerHTML=[0,1,2,3].map(i=>`<div class="h-1.5 flex-1 rounded-full ${i<=suStep?'bg-teal-400':'bg-white/20'}"></div>`).join('');
@@ -726,10 +755,10 @@ function suBack(){if(suStep>0){suStep--;suShow();}}
 function pwdStrength(){const p=$('su-pwd1').value;let s=0;if(p.length>=4)s++;if(p.length>=8)s++;if(/[0-9]/.test(p))s++;if(p.length>=12||/[^a-zA-Z0-9]/.test(p))s++;
 const b=$('pwdBar');b.style.width=(s/4*100)+'%';b.className='h-full rounded-full transition-all '+(s<=1?'bg-rose-500':s===2?'bg-amber-500':'bg-emerald-500');}
 async function finishSetup(){
-  const state=defaultState();
-  state.profile={name:$('su-name').value.trim(),age:+$('su-age').value||30,sex:$('su-sex').value,height:+$('su-height').value||170,weight:+$('su-weight').value||70,dxDate:$('su-dx').value,msType:$('su-mstype').value,dmt:$('su-dmt').value.trim(),doctor:$('su-doc').value.trim(),nextVisit:$('su-next').value,concerns:[...setupConcerns]};
-  await createVault($('su-pwd1').value,state);S=state;
-  showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();toast('🎉');}
+const state=defaultState();
+state.profile={name:$('su-name').value.trim(),age:+$('su-age').value||30,sex:$('su-sex').value,height:+$('su-height').value||170,weight:+$('su-weight').value||70,dxDate:$('su-dx').value,msType:$('su-mstype').value,dmt:$('su-dmt').value.trim(),doctor:$('su-doc').value.trim(),nextVisit:$('su-next').value,concerns:[...setupConcerns]};
+await createVault($('su-pwd1').value,state);S=state;
+showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();toast('🎉');}
 function defaultState(){return{profile:{},symptoms:defaultSymptoms(),checkins:{},meds:[],doseLog:{},medHistory:[],
 reminders:{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}},
 water:{d:dkey(new Date()),c:0},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,
@@ -749,23 +778,17 @@ S.meds=S.meds||[];S.doseLog=S.doseLog||{};S.medHistory=S.medHistory||[];S.flareD
 S.reminders=S.reminders||{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}};
 S.water=S.water||{d:dkey(new Date()),c:0};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
 S.checkins=S.checkins||{};S.triage=S.triage||[];}
-
-/* ═══ PWA ═══ */
 let deferredPrompt=null;
 function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
 const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',display_override:['standalone','minimal-ui'],orientation:'portrait',background_color:'#0d3b3a',theme_color:'#0d3b3a',categories:['health','medical','lifestyle'],lang:'fa',dir:'rtl',icons:[{src:icon,sizes:'any',type:'image/svg+xml',purpose:'any'},{src:icon,sizes:'512x512',type:'image/svg+xml',purpose:'maskable'}],shortcuts:[{name:'Check-in',short_name:'Check-in',url:'./?tab=check',icons:[{src:icon,sizes:'any'}]},{name:'Meds',short_name:'Meds',url:'./?tab=meds',icons:[{src:icon,sizes:'any'}]},{name:'Sleep',short_name:'Sleep',url:'./?tab=sleep',icons:[{src:icon,sizes:'any'}]}]};
 const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));document.head.appendChild(l);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden');});}
 function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('installBtn').classList.add('hidden');}else toast(lang==='fa'?'از منوی مرورگر «Add to Home Screen» بزن':'Use browser "Add to Home Screen"');}
-
-/* ═══ تب‌ها ═══ */
 function showTab(id){curTab=id;document.querySelectorAll('#scr-app .view').forEach(v=>v.classList.add('hidden'));$('view-'+id).classList.remove('hidden');buildNav();
 window.scrollTo({top:0,behavior:'smooth'});
 if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
-if(id==='check'){renderCheck();afterCheckRender();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();renderCatchup();}
+if(id==='check'){renderCheck();afterCheckRender();renderGaps();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();renderCatchup();}
 if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();if(id==='sleep'){applySleepTxt();renderSleep();}}
-
-/* ═══ دارویار ═══ */
 function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
 if(m.freq.type==='everyN'){const s=new Date(m.start||dkey(new Date()));const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const b=new Date(date.getFullYear(),date.getMonth(),date.getDate());const diff=Math.round((b-a)/86400000);return diff>=0&&diff%(m.freq.n||1)===0;}
 if(m.freq.type==='days')return(m.freq.days||[]).includes(date.getDay());return true;}
@@ -789,7 +812,6 @@ function logMedHistory(action,name){S.medHistory.unshift({date:new Date().toISOS
 function renderMedHistory(){const am={add:['➕',lang==='fa'?'افزوده شد':'added'],edit:['✏️',lang==='fa'?'ویرایش شد':'edited'],del:['🗑️',lang==='fa'?'حذف شد':'removed'],pause:['⏸️',lang==='fa'?'غیرفعال شد':'paused'],resume:['▶️',lang==='fa'?'فعال شد':'resumed']};
 $('medHistory').innerHTML=S.medHistory.length?S.medHistory.slice(0,10).map(h=>{const a=am[h.action]||['·',h.action];
 return `<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${a[0]}</span><span class="flex-1"><b>${h.name}</b> — ${a[1]}</span><span class="text-xs text-slate-400">${fdate(new Date(h.date))}</span></div>`;}).join(''):`<p class="text-slate-400">${lang==='fa'?'تاریخچه‌ای نیست':'No history'}</p>`;}
-
 let editingId=null,mfColor='#0f766e',mfDays=new Set();
 const MED_COLORS=['#0f766e','#f59e0b','#e11d48','#0284c7','#059669','#ea580c','#7c3aed','#db2777','#0d9488','#ca8a04'];
 function dayLbl(){return lang==='fa'?[['ش',6],['ی',0],['د',1],['س',2],['چ',3],['پ',4],['ج',5]]:[['S',0],['M',1],['T',2],['W',3],['T',4],['F',5],['S',6]];}
@@ -827,7 +849,6 @@ function toggleMedActive(id){const m=S.meds.find(x=>x.id===id);m.active=m.active
 function copyMedList(){if(!S.meds.length)return toast(lang==='fa'?'دارویی نیست':'No meds');
 const txt=(lang==='fa'?'لیست داروها — ':'Medication list — ')+(S.profile.name||'')+'\n'+S.meds.map(m=>`• ${m.name} ${m.dose} — ${(m.times||[]).map(fmtTime).join(', ')}${m.food?' ('+t('withFood')+')':''}`).join('\n');
 navigator.clipboard.writeText(txt).then(()=>toast('📋')).catch(()=>prompt('Copy:',txt));}
-
 function fmtTime(tm){const[h,m]=tm.split(':').map(Number);const d=new Date();d.setHours(h,m);return new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-US',{hour:'2-digit',minute:'2-digit'}).format(d);}
 function stChip(c,txt){const map={emerald:'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',amber:'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',rose:'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',slate:'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-200',sky:'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300'};
 return `<span class="text-[11px] font-bold ${map[c]} rounded-full px-2.5 py-1">${txt}</span>`;}
@@ -864,7 +885,6 @@ ${m.remaining!=null?`<span class="text-[11px] text-slate-400 mr-auto self-center
 function act(a,key){const d=todayDoses(new Date()).find(x=>x.key===key);if(!d)return;
 if(a==='take')takeDose(d);else if(a==='skip')skipDose(d);else if(a==='undo')undoDose(d);
 else if(a==='snooze'){snoozes[key]=Date.now()+15*60000;hideBanner();toast('⏰');}}
-
 let notifiedKeys=new Set(),snoozes={},audioCtx=null;
 function enableNotif(){if(!('Notification'in window))return toast(t('notifNone'));
 Notification.requestPermission().then(p=>{updateNotifLbl();if(p==='granted')notify('HamMasir','✅');});}
@@ -882,7 +902,6 @@ $('doseBanner').classList.remove('hidden');}
 function hideBanner(){$('doseBanner').classList.add('hidden');bannerDose=null;}
 function alertDose(d){showBanner(d);notify('💊 '+d.med.name,d.med.dose);beep();if(navigator.vibrate)navigator.vibrate([120,60,120]);}
 function inQuiet(now){const h=now.getHours();return h>=23||h<7;}
-
 let lastAlert={water:0,stand:0,eye:0,sleepDone:false};
 function waterGoal(){return(S.reminders.water.goal||8)+((S._wxHigh||0)>=35?2:0);}
 function checkReminders(now){if(S.flareDays[dkey(now)])return;
@@ -905,7 +924,6 @@ $('reminderList').innerHTML=rows.map(([k,l])=>`<div class="flex items-center jus
 <label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" ${R[k].on?'checked':''} onchange="toggleReminder('${k}',this.checked)" class="sr-only peer">
 <div class="w-11 h-6 bg-slate-300 peer-checked:bg-teal-600 rounded-full peer-checked:after:-translate-x-5 after:content-[''] after:absolute after:top-0.5 after:right-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div></label></div>`).join('');}
 function toggleReminder(k,v){S.reminders[k].on=v;persist();renderReminders();}
-
 let engineOn=false;
 function startEngine(){if(engineOn)return;engineOn=true;tick();setInterval(tick,30000);}
 function tick(){if(!S||!MASTER)return;const now=new Date();
@@ -921,8 +939,6 @@ if(next){const mins=Math.round((next.sch-now)/60000);$('nextDoseTxt').textConten
 $('nextDoseSub').textContent=num(mins)+' min · '+num(taken)+'/'+num(doses.length);}
 else if(doses.length){$('nextDoseTxt').textContent='🎉';$('nextDoseSub').textContent=num(taken)+'/'+num(doses.length);}
 else{$('nextDoseTxt').textContent='—';$('nextDoseSub').textContent='';}}
-
-/* ═══ پایبندی ═══ */
 function dayAdherence(date){const ds=todayDoses(date);if(!ds.length)return null;
 let taken=0;ds.forEach(d=>{const l=getLog(dkey(date),d.key);if(l&&(l.s==='ontime'||l.s==='late'))taken++;});
 return{taken,total:ds.length,pct:taken/ds.length};}
@@ -973,8 +989,6 @@ for(let i=1;i<60;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));cons
 const fat=c&&c.v?c.v.fatigue:null;if(a&&fat!=null){xs.push(1-a.pct);ys.push(fat);}}
 const r=pearson(xs,ys);
 $('adhInsight').textContent=(xs.length>=10&&r>0.3)?'🔗 '+(lang==='fa'?'روزهای بدون دارو ⇒ خستگی بیشتر فردا':'Missed meds ⇒ more fatigue next day'):'';}
-
-/* ═══ چک‌این ═══ */
 let chkSel={},chkTrig=new Set();
 const FACES=['😄','🙂','😐','🙁','😞'];
 function trigList(){return lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];}
@@ -1011,13 +1025,9 @@ if(txt.toLowerCase().includes(label)||txt.includes(s.fa)){const m=txt.match(/(\d
 for(const tok of (m||[])){let n=parseInt(tok);if(isNaN(n))n=faNums[tok];
 if(!isNaN(n)&&n>=0&&n<=10){const sev=clamp(n,0,10);chkSel[s.id]=clamp(Math.round((s.good?(10-sev):sev)/2.5),0,4);matched++;break;}}}});
 applyFaces();toast(matched?(lang==='fa'?num(matched)+' مورد تنظیم شد':num(matched)+' set'):(lang==='fa'?'تشخیص داده نشد — دستی تنظیم کن':'No match — adjust manually'));}
-
-/* ═══ روز بد ═══ */
 function badDay(){if(!confirm(lang==='fa'?'امروز به‌عنوان «روز بد / عود» ثبت شود؟ یادآورهای غیردارویی امروز خاموش می‌شوند.':'Mark today as a bad/flare day? Non-med reminders will pause today.'))return;
 S.flareDays[dkey(new Date())]=true;persist();renderDash();toast('🌧️ '+(lang==='fa'?'ثبت شد. مراقب خودت باش':'Logged. Be kind to yourself'));
 showTab('triage');tri={step:0,symptom:'',duration:'',triggers:[],severity:5};renderTriage();}
-
-/* ═══ مرور هفتگی ═══ */
 function checkReviewPrompt(){const today=new Date();if(today.getDay()===5){const wk=dkey(new Date(today.getFullYear(),0,1))+Math.floor((today-new Date(today.getFullYear(),0,1))/604800000);
 if(!S.reviews.some(r=>r.wk===wk))$('reviewBanner').classList.remove('hidden');}}
 function openReview(){$('reviewModal').classList.remove('hidden');}
@@ -1028,8 +1038,6 @@ $('rv-good').value=$('rv-hard').value=$('rv-goal').value='';persist();closeRevie
 function renderReviewList(){$('reviewList').innerHTML=S.reviews.length?S.reviews.slice(0,5).map(r=>`<div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3">
 <p class="text-xs text-slate-400 mb-1">${fdate(new Date(r.date),{dateStyle:'medium'})}</p>
 <p>✅ ${r.good||'—'}</p><p>😓 ${r.hard||'—'}</p><p>🎯 ${r.goal||'—'}</p></div>`).join(''):`<p class="text-slate-400">${lang==='fa'?'هنوز مرور نیست':'No reviews yet'}</p>`;}
-
-/* ═══ پایش ═══ */
 function addMonitor(){const title=prompt(lang==='fa'?'عنوان (مثلاً: آزمایش خون)':'Title (e.g., Blood test)');if(!title)return;
 const due=prompt(lang==='fa'?'تاریخ (YYYY-MM-DD)':'Date (YYYY-MM-DD)',dkey(new Date()));if(!due)return;
 S.monitor.push({id:'mn'+Date.now(),title,due,done:false});persist();renderMonitor();}
@@ -1042,8 +1050,6 @@ ${overdue?`<span class="text-[11px] font-bold bg-rose-100 dark:bg-rose-900 text-
 <button onclick="delMonitor('${m.id}')" class="text-rose-400 hover:text-rose-600">🗑️</button></label>`;}).join(''):`<p class="text-slate-400 text-sm">${t('monitorSub')}</p>`;}
 function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();}
 function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();}
-
-/* ═══ تریاژ ═══ */
 let tri={step:0,symptom:'',duration:'',triggers:[],severity:5};
 function renderTriage(){const b=$('triageBox');
 const syms=lang==='fa'?['بینایی','ضعف/بی‌حسی','تعادل','ادراری','سایر']:['Vision','Weakness','Balance','Bladder','Other'];
@@ -1073,8 +1079,6 @@ $('triageBox').innerHTML=`<div class="screen rounded-xl border-2 ${level==='red'
 renderTriageHist();renderFlags();}
 function renderTriageHist(){const ic={red:'🔴',amber:'🟠',yellow:'🟡'};
 $('triageHist').innerHTML=S.triage.length?S.triage.slice(0,5).map(x=>`<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${ic[x.level]}</span><span class="flex-1"><b>${x.symptom}</b> — ${num(x.severity)}</span><span class="text-xs text-slate-400">${fdate(new Date(x.date))}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
-
-/* ═══ آب‌وهوا ═══ */
 const CITIES={tehran:{lat:35.6892,lon:51.389,fa:'تهران',en:'Tehran'},zahedan:{lat:29.4963,lon:60.8629,fa:'زاهدان',en:'Zahedan'},mashhad:{lat:36.2605,lon:59.6168,fa:'مشهد',en:'Mashhad'},isfahan:{lat:32.6546,lon:51.6680,fa:'اصفهان',en:'Isfahan'},shiraz:{lat:29.5918,lon:52.5837,fa:'شیراز',en:'Shiraz'},tabriz:{lat:38.0962,lon:46.2738,fa:'تبریز',en:'Tabriz'},ahvaz:{lat:31.3183,lon:48.6706,fa:'اهواز',en:'Ahvaz'},rasht:{lat:37.2808,lon:49.5832,fa:'رشت',en:'Rasht'},bandar:{lat:27.1865,lon:56.2808,fa:'بندرعباس',en:'Bandar Abbas'},london:{lat:51.5072,lon:-0.1276,fa:'لندن',en:'London'},dubai:{lat:25.2048,lon:55.2708,fa:'دبی',en:'Dubai'},toronto:{lat:43.6532,lon:-79.3832,fa:'تورنتو',en:'Toronto'}};
 function cityLabel(id){const c=CITIES[id];if(c)return lang==='fa'?c.fa:c.en;
 const cc=(S.settings.customCities||[]).find(x=>x.id===id);return cc?cc.name:id;}
@@ -1104,8 +1108,6 @@ $('weatherBody').innerHTML=`<div class="flex items-end justify-between"><div><p 
 <div class="flex gap-2 mt-3">${max.map((m,i)=>`<div class="flex-1 text-center bg-slate-50 dark:bg-slate-700 rounded-lg py-1.5"><p class="text-[10px] text-slate-400">${i===0?(lang==='fa'?'امروز':'Today'):fdate(new Date(Date.now()+i*86400000),{day:'numeric'})}</p><p class="text-sm font-bold">${num(Math.round(m))}°</p></div>`).join('')}</div>`;}
 catch(e){$('weatherBody').innerHTML=`<p class="text-sm text-slate-500">📴 ${lang==='fa'?'آفلاین':'Offline'}</p>`;}}
 $('citySel').addEventListener('change',e=>setCity(e.target.value));
-
-/* ═══ نمودار ═══ */
 let range=90,activeSeries={},chartLayout=null;
 function buildChips(){const box=$('seriesChips');box.innerHTML='';
 activeSyms().forEach(s=>{if(activeSeries[s.id]===undefined)activeSeries[s.id]=['fatigue','sleep'].includes(s.id);
@@ -1142,7 +1144,6 @@ let h=`<b>${fdate(d)}</b><br>`;activeSyms().forEach(s=>{if(activeSeries[s.id]&&e
 tip.innerHTML=h;tip.classList.remove('hidden');tip.style.left=clamp(X(i)-70,0,r.width-150)+'px';tip.style.top='10px';
 drawChart(1);const ctx=$('chart').getContext('2d');ctx.save();ctx.strokeStyle='#0d3b3a';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(i),12);ctx.lineTo(X(i),r.height-26);ctx.stroke();ctx.restore();});
 $('chart').addEventListener('mouseleave',()=>$('chartTip').classList.add('hidden'));
-
 function seed(){const out={},tt=new Date();const syms=activeSyms();const TR=trigList();
 for(let i=89;i>=0;i--){const d=new Date(tt);d.setDate(d.getDate()-i);const v={};
 syms.forEach(s=>{let val;if(s.id==='sleep')val=r1(Math.random()<0.35?2+Math.random()*3:6+Math.random()*3);
@@ -1150,8 +1151,6 @@ else val=r1(clamp(2+Math.random()*5+((s.id==='fatigue')?((90-i)/90)*2:0),0,10));
 out[dkey(d)]={v,note:'',trig:Math.random()<0.3?[TR[0]]:[]};}return out;}
 function loadSample(){S.checkins=seed();S.seeded=true;S.seedDismissed=false;persist();renderAll();toast('✨');}
 function clearSample(){S.checkins={};S.seeded=false;S.seedDismissed=true;persist();renderAll();}
-
-/* ═══ داشبورد ═══ */
 function bmi(){const p=S.profile,h=(p.height||170)/100;return r1((p.weight||70)/(h*h));}
 function calcStreak(){let s=0,d=new Date();if(!S.checkins[dkey(d)])d.setDate(d.getDate()-1);while(S.checkins[dkey(d)]){s++;d.setDate(d.getDate()-1);}return s;}
 function renderDash(){const p=S.profile;
@@ -1173,7 +1172,7 @@ $('statStrip').innerHTML=`
 $('sampleBanner').classList.toggle('hidden',!(S.seeded&&!S.seedDismissed));
 const nv=p.nextVisit?new Date(p.nextVisit):null;
 $('nextVisitTxt').textContent=nv?fdate(nv,{dateStyle:'medium'})+' ('+num(Math.max(0,Math.ceil((nv-new Date())/86400000)))+' '+(lang==='fa'?'روز':'d')+')':'—';
-updateNextDose();}
+updateNextDose();renderGapsBanner();}
 function renderInsights(){const box=$('insights');box.innerHTML='';
 const entries=Object.values(S.checkins).filter(e=>e.v);
 if(entries.length<10){box.innerHTML=`<p class="text-slate-400">${lang==='fa'?'داده‌ی کافی نیست':'Not enough data'}</p>`;return;}
@@ -1193,14 +1192,13 @@ if(!box.innerHTML)box.innerHTML=`<p class="text-slate-400">—</p>`;}
 function renderFlags(){const box=$('redflags');const items=[];const refill=S.settings.refillDays||7;
 S.meds.forEach(m=>{if(m.remaining!=null){const pd=(m.times||[]).length||1;if(Math.floor(m.remaining/pd)<=refill)items.push(`💊 <b>${m.name}</b> — ${lang==='fa'?'رو به اتمام':'running low'}`);}});
 const od=S.monitor.filter(m=>!m.done&&m.due<dkey(new Date())).length;if(od)items.push(`📅 ${num(od)} ${lang==='fa'?'پایش عقب‌افتاده':'overdue monitor'}`);
+const gaps=getGapDays(14);if(gaps.length)items.push(`📅 ${num(gaps.length)} ${lang==='fa'?'روز بدون ثبت':'unlogged days'}`);
 const last7=Object.entries(S.checkins).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7);
 const sev=last7.filter(([,e])=>e.v&&Object.entries(e.v).some(([k,v])=>{const s=S.symptoms.find(x=>x.id===k);return s&&!s.good&&v>=8;})).length;
 if(sev)items.push(`⚠️ ${num(sev)} ${lang==='fa'?'روز اخیر علامت شدید':'recent severe days'}`);
 if(bmi()<18.5)items.push(`⚖️ BMI ${num(bmi())}`);
 if(!S.meds.length)items.push(`💊 ${t('noMed')}`);
 box.innerHTML=items.length?items.map(i=>`<li class="flex gap-2 items-start"><span class="pulse-dot bg-rose-500 text-rose-500 mt-1.5"></span><span>${i}</span></li>`).join(''):`<li class="text-slate-400">🌿 ${lang==='fa'?'همه‌چیز مرتب':'All clear'}</li>`;}
-
-/* ═══ گزارش ═══ */
 const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['cognition','تمرکز','Cognition'],['vision','بینایی','Vision'],['balance','تعادل','Balance'],['mood','خلق','Mood'],['sleep','خواب','Sleep'],['bladder','مثانه','Bladder'],['heat','گرما','Heat'],['work','کار','Work']];
 function renderReport(){const items=activeSyms().filter(s=>!s.good).slice(0,6);
 $('repSymp').innerHTML=items.map(s=>{const vals=Object.values(S.checkins).map(e=>e.v?e.v[s.id]:null).filter(v=>v!=null);
@@ -1215,8 +1213,6 @@ function renderConcernChips(id,set){const el=$(id);el.innerHTML='';
 CONCERNS.forEach(([k,fa,en])=>{const b=document.createElement('button');b.type='button';
 b.className='text-sm rounded-full px-3 py-1.5 border-2 transition-all '+(set.has(k)?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 font-bold text-teal-800 dark:text-teal-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300');
 b.textContent=lang==='fa'?fa:en;b.onclick=()=>{set.has(k)?set.delete(k):set.add(k);renderConcernChips(id,set);};el.appendChild(b);});}
-
-/* ═══ تنظیمات ═══ */
 function populateProfile(){const p=S.profile;
 $('pf-name').value=p.name||'';$('pf-age').value=p.age||'';$('pf-height').value=p.height||'';$('pf-weight').value=p.weight||'';
 $('pf-dx').value=p.dxDate||'';$('pf-dmt').value=p.dmt||'';$('pf-doc').value=p.doctor||'';$('pf-next').value=p.nextVisit||'';
@@ -1244,7 +1240,6 @@ function delSymptom(id){S.symptoms=S.symptoms.filter(x=>x.id!==id);persist();ren
 function addSymptom(){const fa=$('newSymFa').value.trim(),en=$('newSymEn').value.trim();if(!fa&&!en)return;
 S.symptoms.push({id:'s'+Date.now(),fa:fa||en,en:en||fa,color:MED_COLORS[S.symptoms.length%MED_COLORS.length],good:false,active:true});
 $('newSymFa').value='';$('newSymEn').value='';persist();renderSymptomMgr();buildChips();toast('＋');}
-
 function updateStorage(){let used=0;for(const k in localStorage){if(localStorage.hasOwnProperty(k))used+=localStorage[k].length*2;}
 const quota=5*1024*1024;const free=Math.max(0,quota-used);
 const usedKB=Math.round(used/1024),freeKB=Math.round(free/1024);
@@ -1260,7 +1255,6 @@ persist();renderAll();toast('🗑️');}
 function checkBackupPrompt(){if(S.lastBackup){const days=Math.floor((Date.now()-S.lastBackup)/86400000);
 if(days>30){$('backupMsg').textContent=(lang==='fa'?num(days)+' روز از آخرین پشتیبان گذشته':num(days)+' days since last backup');$('backupBanner').classList.remove('hidden');}}
 else{$('backupMsg').textContent=lang==='fa'?'هنوز پشتیبان نگرفته‌ای':'No backup yet';$('backupBanner').classList.remove('hidden');}}
-
 function exportVault(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
 const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));
 a.download='hammasir-backup-'+dkey(new Date())+'.json';a.click();URL.revokeObjectURL(a.href);
@@ -1278,8 +1272,6 @@ try{const master=await unwrapMaster(v.pwd,$('importPwd').value);S=await decData(
 MASTER={bytes:master};vault=v;ensureState();await persist();renderAll();
 $('importPwdBox').classList.add('hidden');$('importPwd').value='';toast('✔');}
 catch(e){toast(t('wrongCred'));}}
-
-/* ═══ چاپ ═══ */
 function printReport(){buildDigest();window.print();}
 function buildDigest(){const p=S.profile;
 $('pdTitle').textContent=stealthAppName||(lang==='fa'?'خلاصه‌ی ویزیت — هم‌مسیر':'Visit summary — HamMasir');
@@ -1309,13 +1301,160 @@ ${S.meds.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">💊
 ${S.reviews.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">🪞</h2><p class="text-sm mb-4">✅ ${S.reviews[0].good||'—'} · 😓 ${S.reviews[0].hard||'—'} · 🎯 ${S.reviews[0].goal||'—'}</p>`:''}`;}
 window.addEventListener('beforeprint',buildDigest);
 
-/* ═══ رندر کلی ═══ */
+/* ═══════════════════════════════════════════
+   ═══ روزهای گم‌شده (Gap Detection & Backfill) ═══
+   ═══════════════════════════════════════════ */
+function getGapDays(lookback=30){
+  const gaps=[];
+  const today=new Date();
+  const keys=Object.keys(S.checkins).sort();
+  const firstKey=keys.length?keys[0]:null;
+  for(let i=1;i<=lookback;i++){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const dk=dkey(d);
+    if(firstKey&&dk<firstKey)break;
+    if(!S.checkins[dk])gaps.push({date:d,dk});
+  }
+  return gaps;
+}
+
+function renderGapsBanner(){
+  const gaps=getGapDays(30);
+  const banner=$('gapsBanner');
+  if(!gaps.length){banner.classList.add('hidden');return;}
+  banner.classList.remove('hidden');
+  $('gapsMsg').textContent=num(gaps.length)+' '+t('gapsBanner');
+}
+
+function renderGaps(){
+  const gaps=getGapDays(30);
+  const section=$('gapsSection');
+  if(!gaps.length){
+    section.classList.remove('hidden');
+    $('gapsList').classList.add('hidden');
+    $('gapsCalendar').innerHTML='';
+    $('gapsCount').textContent=num(0);
+    $('noGaps').classList.remove('hidden');
+    renderGapsBanner();
+    return;
+  }
+  $('noGaps').classList.add('hidden');
+  section.classList.remove('hidden');
+  $('gapsCount').textContent=num(gaps.length)+' '+t('gapsTab');
+  renderGapsBanner();
+  // Mini calendar strip (last 30 days)
+  const cal=$('gapsCalendar');cal.innerHTML='';
+  const gapSet=new Set(gaps.map(g=>g.dk));
+  const today=new Date();
+  for(let i=29;i>=0;i--){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const dk=dkey(d);
+    const dot=document.createElement('div');
+    dot.className='gap-dot '+(i===0?'today':gapSet.has(dk)?'empty':'filled');
+    dot.title=fdate(d)+(gapSet.has(dk)?' — '+(lang==='fa'?'بدون ثبت':'No data'):' ✓');
+    if(gapSet.has(dk))dot.style.cursor='pointer';
+    if(gapSet.has(dk))dot.onclick=()=>openBackfill(dk);
+    cal.appendChild(dot);
+  }
+  // Gap cards
+  $('gapsList').classList.remove('hidden');
+  $('gapsList').innerHTML=gaps.map(g=>{
+    const dayName=fdate(g.date,{weekday:'short'});
+    const dateStr=fdate(g.date,{day:'numeric',month:'short'});
+    return `<button onclick="openBackfill('${g.dk}')" class="gap-card flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-900/30">
+      <span class="text-xs text-slate-500 dark:text-slate-400">${dayName}</span>
+      <span class="font-bold text-sm text-teal-800 dark:text-teal-300">${dateStr}</span>
+      <span class="text-[10px] text-sky-600 dark:text-sky-400 font-bold">➕ ${t('gapsFill')}</span>
+    </button>`;
+  }).join('');
+}
+
+function scrollToGaps(){
+  setTimeout(()=>{const el=$('gapsSection');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},100);
+}
+
+/* ═══ Backfill Modal State ═══ */
+let bfSel={},bfTrig=new Set(),bfTargetKey=null;
+
+function openBackfill(dk){
+  bfTargetKey=dk;bfSel={};bfTrig=new Set();
+  const d=new Date(dk+'T12:00:00');
+  $('bfDate').textContent=fdate(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const box=$('bfRows');box.innerHTML='';
+  activeSyms().forEach(s=>{
+    bfSel[s.id]=2;
+    box.insertAdjacentHTML('beforeend',`<div class="flex items-center justify-between gap-3 py-2 border-b border-slate-100 dark:border-slate-700">
+      <span class="font-bold text-xs sm:text-sm w-20 sm:w-32 shrink-0">${symLabel(s)}</span>
+      <div class="flex gap-1 sm:gap-1.5" id="bf-faces-${s.id}">${FACES.map((f,i)=>`<button type="button" onclick="pickBfFace('${s.id}',${i})" class="face w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl text-lg sm:text-2xl flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 transition-all hover:scale-110 hover:border-teal-400">${f}</button>`).join('')}</div></div>`);
+  });
+  applyBfFaces();
+  renderBfTrigChips();
+  $('bfNote').value='';
+  $('backfillModal').classList.remove('hidden');
+}
+
+function closeBackfill(){$('backfillModal').classList.add('hidden');bfTargetKey=null;}
+
+function pickBfFace(id,i){bfSel[id]=i;applyBfFaces();}
+
+function applyBfFaces(){activeSyms().forEach(s=>{const c=$('bf-faces-'+s.id);if(!c)return;[...c.children].forEach((b,i)=>{const on=i===bfSel[s.id];b.classList.toggle('border-teal-600',on);b.classList.toggle('bg-teal-50',on);b.classList.toggle('scale-110',on);b.classList.toggle('opacity-50',!on);});});}
+
+function renderBfTrigChips(){$('bfTrigChips').innerHTML=trigList().map(tr=>`<button type="button" onclick="toggleBfTrig('${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${bfTrig.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
+
+function toggleBfTrig(tr){bfTrig.has(tr)?bfTrig.delete(tr):bfTrig.add(tr);renderBfTrigChips();}
+
+function saveBackfill(){
+  if(!bfTargetKey)return;
+  const v={};activeSyms().forEach(s=>{const sev=bfSel[s.id]*2.5;v[s.id]=s.good?(10-sev):sev;});
+  S.checkins[bfTargetKey]={v,note:$('bfNote').value.trim(),trig:[...bfTrig],backfilled:true};
+  persist();closeBackfill();renderAll();
+  toast('📅 '+(lang==='fa'?'ثبت شد!':'Saved!'));
+}
+
+/* ═══ Sleep tab (from features.js pattern) ═══ */
+let slQ=2;
+function sleepTxt(){const fa=lang==='fa';return{title:fa?'مانیتور خواب و چرت':'Sleep & nap monitor',sub:fa?'دیشب چطور خوابیدی؟ چرت‌هات رو ثبت کن':'Log last night + naps',last:fa?'خواب دیشب':'Last night',bed:fa?'ساعت خواب':'Bedtime',wake:fa?'ساعت بیداری':'Wake time',sq:fa?'کیفیت خواب':'Sleep quality',wu:fa?'بیداری‌های مکرر داشتم':'I woke up multiple times',saveN:fa?'ثبت خواب دیشب':'Save last night',nap:fa?'چرت امروز':'Nap today',ns:fa?'شروع':'Start',nd:fa?'مدت (دقیقه)':'Duration (min)',saveNap:fa?'ثبت چرت':'Save nap',hist:fa?'چرت‌های اخیر':'Recent naps',stats:fa?'آمار خواب (۷ روز)':'Sleep stats (7d)'};}
+function renderSleepFaces(){$('sl-faces').innerHTML=FACES.map((f,i)=>`<button type="button" onclick="slQ=${4-i};renderSleepFaces()" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 ${slQ===(4-i)?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
+function applySleepTxt(){const x=sleepTxt();$('sleepTitle').textContent=x.title;$('sleepSub').textContent=x.sub;$('lastNightTitle').textContent=x.last;$('bedLbl').textContent=x.bed;$('wakeLbl').textContent=x.wake;$('sqLbl').textContent=x.sq;$('wakeupsLbl').textContent=x.wu;$('saveNightBtn').textContent=x.saveN;$('napTitle').textContent=x.nap;$('napStartLbl').textContent=x.ns;$('napDurLbl').textContent=x.nd;$('saveNapBtn').textContent=x.saveNap;$('napHistLbl').textContent=x.hist;$('sleepStatsTitle').textContent=x.stats;renderSleepFaces();renderSleep();}
+function sleepDur(bed,wake){const[bh,bm]=bed.split(':').map(Number);const[wh,wm]=wake.split(':').map(Number);let mins=(wh*60+wm)-(bh*60+bm);if(mins<=0)mins+=1440;return mins;}
+function saveNight(){const bed=$('sl-bed').value,wake=$('sl-wake').value;if(!bed||!wake)return toast('⚠️');
+S.sleep=S.sleep||{nights:[],naps:[]};S.sleep.nights=(S.sleep.nights||[]).filter(n=>n.dk!==dkey(new Date()));
+S.sleep.nights.push({dk:dkey(new Date()),bed,wake,mins:sleepDur(bed,wake),q:slQ,wakeups:$('sl-wakeups').checked});
+persist();renderSleep();toast('🌙 '+(lang==='fa'?'ثبت شد':'Saved'));}
+function saveNap(){const st=$('nap-start').value,dur=+$('nap-dur').value||30;
+S.sleep=S.sleep||{nights:[],naps:[]};S.sleep.naps=S.sleep.naps||[];S.sleep.naps.push({dk:dkey(new Date()),t:st||new Date().toTimeString().slice(0,5),dur});
+if(S.sleep.naps.length>100)S.sleep.naps=S.sleep.naps.slice(-100);persist();renderSleep();toast('💤 '+(lang==='fa'?'چرت ثبت شد':'Nap logged'));}
+function renderSleep(){S.sleep=S.sleep||{nights:[],naps:[]};
+const nights=(S.sleep.nights||[]).slice(-7);const avgM=nights.length?Math.round(nights.reduce((a,n)=>a+(n.mins||0),0)/nights.length):0;const avgQ=nights.length?(nights.reduce((a,n)=>a+(n.q||0),0)/nights.length).toFixed(1):'—';
+const napsToday=(S.sleep.naps||[]).filter(n=>n.dk===dkey(new Date()));const napMin=napsToday.reduce((a,n)=>a+n.dur,0);
+$('sleepStats').innerHTML=`<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین خواب':'Avg sleep'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${avgM?Math.floor(avgM/60)+'h'+(avgM%60):'—'}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین کیفیت':'Avg quality'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${num(avgQ)}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'چرت امروز':'Naps today'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napsToday.length)}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'دقیقه چرت':'Nap minutes'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napMin)}</p></div>`;
+$('napHist').innerHTML=napsToday.length?napsToday.map(n=>`<div class="flex justify-between bg-slate-50 dark:bg-slate-700 rounded-lg p-2"><span>💤 ${n.t}</span><span class="text-slate-500 dark:text-slate-400">${num(n.dur)} ${lang==='fa'?'دقیقه':'min'}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
+function renderCatchup(){const box=$('catchupBox');if(!box)return;
+const y=new Date();y.setDate(y.getDate()-1);const yk=dkey(y);
+const ds=todayDoses(y).filter(d=>!getLog(yk,d.key));
+if(!ds.length){box.classList.add('hidden');return;}
+box.classList.remove('hidden');
+$('catchupTitle').textContent=lang==='fa'?'دوزهای ثبت‌نشده‌ی دیروز':"Yesterday's unlogged doses";
+$('catchupSub').textContent=lang==='fa'?'گذشت از ۱۲ شب؟ همین‌جا برای دیروز ثبت کن':'Past midnight? Log yesterday here';
+$('catchupList').innerHTML=ds.map(d=>`<div class="flex flex-wrap items-center gap-3 border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/30 rounded-xl p-3">
+<span class="text-xl">${d.med.emoji}</span><div class="flex-1 min-w-0"><b>${d.med.name}</b> <span class="text-xs text-slate-500">${d.med.dose} · ${fmtTime(d.time)}</span></div>
+<button onclick="catchupAct('take','${d.key}')" class="bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg px-3 py-1.5 text-sm">${t('took')}</button>
+<button onclick="catchupAct('skip','${d.key}')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg px-3 py-1.5 text-sm">${t('skipped')}</button></div>`).join('');}
+function catchupAct(a,key){const y=new Date();y.setDate(y.getDate()-1);const yk=dkey(y);
+const d=todayDoses(y).find(x=>x.key===key);if(!d)return;
+if(a==='take'){const m=S.meds.find(x=>x.id===d.med.id);if(m&&m.remaining!=null)m.remaining=Math.max(0,m.remaining-1);setLog(yk,key,{s:'late',t:Date.now(),lateLog:true});}
+else setLog(yk,key,{s:'skip',t:Date.now(),lateLog:true});
+persist();renderCatchup();renderMeds();renderDash();toast(a==='take'?'⏱️':'⏭️');}
+function afterCheckRender(){const el=$('entryCount');if(!el)return;
+const today=S.checkins[dkey(new Date())];
+if(today){el.classList.remove('hidden');el.textContent=lang==='fa'?'✅ ثبت شده':'✅ Logged';}
+else el.classList.add('hidden');}
+
 function renderAll(){applyStealth();buildCitySel();
 renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
 renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
-renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderCatchup();loadWeather();}
+renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderCatchup();renderGaps();loadWeather();}
 window.addEventListener('DOMContentLoaded',boot);
 </script>
-<script src="features.js"></script>
 </body>
 </html>
