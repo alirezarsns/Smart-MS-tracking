@@ -46,9 +46,6 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 .gap-card{transition:all .2s cubic-bezier(.22,1,.36,1)}
 .gap-card:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 20px rgba(14,165,233,.2)}
 .gap-card:active{transform:scale(.97)}
-.sleep-gap-card{transition:all .2s cubic-bezier(.22,1,.36,1)}
-.sleep-gap-card:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 20px rgba(124,58,237,.2)}
-.sleep-gap-card:active{transform:scale(.97)}
 .backfill-modal{animation:modalIn .3s cubic-bezier(.22,1,.36,1) both}
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 #printDigest{display:none}
@@ -56,6 +53,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </style>
 </head>
 <body class="font-body text-slate-800 dark:text-slate-100 antialiased">
+
 <!-- قفل -->
 <div id="scr-lock" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
 <svg viewBox="0 0 624 100" preserveAspectRatio="none" class="absolute bottom-10 left-0 w-full h-24 opacity-40"><path class="ecg-base" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/><path class="ecg-live" d="M0 60 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40 h30 l6 -8 l6 8 h14 l5 -26 l7 48 l6 -36 l4 14 h22 l8 -10 l8 10 h40"/></svg>
@@ -88,6 +86,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <p class="text-center text-teal-400/70 text-[11px] mt-4" data-t="lockHint"></p>
 </div>
 </div>
+
 <!-- کارت اورژانس -->
 <div id="scr-emergency" class="app screen hidden darkbg min-h-screen p-4">
 <div class="max-w-md mx-auto pt-8">
@@ -99,6 +98,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 </div>
 </div>
+
 <!-- خوش‌آمد -->
 <div id="scr-setup" class="app screen hidden darkbg min-h-screen flex items-center justify-center p-4">
 <div class="w-full max-w-lg">
@@ -137,6 +137,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 </div>
 </div>
+
 <!-- اپ -->
 <div id="scr-app" class="app screen hidden">
 <header class="sticky top-0 z-50 bg-[#0d3b3a] dark:bg-slate-900 text-white shadow-lg">
@@ -155,6 +156,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 <nav class="max-w-6xl mx-auto px-4 pb-3 flex gap-1.5 overflow-x-auto" style="scrollbar-width:none" id="navBar"></nav>
 </header>
+
 <div id="doseBanner" class="app hidden fixed top-24 left-1/2 -translate-x-1/2 z-[65] w-[92%] max-w-md bg-[#0d3b3a] dark:bg-slate-800 text-white rounded-2xl shadow-2xl p-4 border-2 border-amber-400">
 <p id="dbText" class="font-bold text-center mb-3"></p>
 <div class="flex gap-2">
@@ -163,6 +165,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <button id="dbSkip" class="flex-1 bg-rose-600 hover:bg-rose-500 rounded-xl py-2.5 font-bold"></button>
 </div>
 </div>
+
 <div id="fakeNote" class="app hidden fixed inset-0 z-[80] bg-amber-50 dark:bg-slate-900 p-6 overflow-auto">
 <div class="max-w-md mx-auto">
 <h1 class="font-display text-3xl text-amber-800 dark:text-amber-300 mb-4">📝 <span data-t="fakeTitle"></span></h1>
@@ -170,7 +173,10 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <button onclick="quickHide()" class="mt-6 w-full border-2 border-amber-300 text-amber-700 dark:text-amber-300 rounded-xl py-3 font-bold" data-t="fakeBack"></button>
 </div>
 </div>
+
 <main class="max-w-6xl mx-auto px-4 py-8" id="mainArea">
+
+<!-- داشبورد -->
 <section id="view-dash" class="view">
 <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
 <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300"><span data-t="hello"></span>، <span id="greetName"></span> 👋</h2><p class="text-sm text-slate-500 dark:text-slate-400" id="greetSub"></p></div>
@@ -179,14 +185,16 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <button onclick="showTab('check')" class="bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl px-5 py-2.5 transition-all hover:scale-105 shadow">✍️ <span data-t="checkin"></span></button>
 </div>
 </div>
-<!-- بنر خواب ثبت نشده -->
-<div id="sleepGapBanner" class="hidden mb-4 bg-gradient-to-l from-violet-50 to-purple-50 dark:from-violet-900/30 dark:to-purple-900/30 border-s-4 border-violet-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
+
+<!-- بنر خواب ثبت‌نشده -->
+<div id="sleepBanner" class="hidden mb-4 bg-gradient-to-l from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 border-s-4 border-indigo-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
 <div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/50 flex items-center justify-center text-xl">😴</div>
-<div><p class="text-sm font-bold text-violet-900 dark:text-violet-200" id="sleepGapMsg"></p><p class="text-xs text-violet-700 dark:text-violet-300" data-t="sleepGapSub"></p></div>
+<div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-xl">🌙</div>
+<div><p class="text-sm font-bold text-indigo-900 dark:text-indigo-200" id="sleepMsg"></p><p class="text-xs text-indigo-700 dark:text-indigo-300" data-t="sleepGapsSub"></p></div>
 </div>
-<button onclick="showTab('sleep');scrollToSleepGaps()" class="bg-violet-500 hover:bg-violet-400 text-white text-sm font-bold rounded-lg px-4 py-2 transition-all hover:scale-105 shadow" data-t="sleepGapFill"></button>
+<button onclick="showTab('sleep');scrollToSleepGaps()" class="bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-bold rounded-lg px-4 py-2 transition-all hover:scale-105 shadow" data-t="sleepGapsFill"></button>
 </div>
+
 <div id="reviewBanner" class="hidden mb-4 bg-indigo-50 dark:bg-indigo-900/30 border-s-4 border-indigo-500 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3">
 <p class="text-sm text-indigo-900 dark:text-indigo-200">🪞 <span data-t="reviewPrompt"></span></p>
 <button onclick="openReview()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-lg px-4 py-2" data-t="reviewStart"></button>
@@ -225,8 +233,9 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 shadow-sm p-5"><h3 class="font-bold text-rose-700 dark:text-rose-300 mb-3">🚩 <span data-t="attention"></span></h3><ul id="redflags" class="space-y-2 text-sm text-slate-700 dark:text-slate-200"></ul></div>
 </div>
 </section>
+
+<!-- دارویار -->
 <section id="view-meds" class="view hidden space-y-6">
-<div id="catchupBox" class="hidden rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 mb-4"><h3 class="font-bold text-amber-800 dark:text-amber-300 mb-1">⏪ <span id="catchupTitle"></span></h3><p class="text-xs text-amber-700 dark:text-amber-400 mb-3" id="catchupSub"></p><div id="catchupList" class="space-y-2"></div></div>
 <div class="flex flex-wrap items-center justify-between gap-3">
 <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">💊 <span data-t="medsTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="medsSub"></p></div>
 <div class="flex flex-wrap gap-2">
@@ -282,18 +291,10 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">📜 <span data-t="medHistory"></span></h3>
 <div id="medHistory" class="space-y-2 text-sm"></div></div>
 </section>
+
+<!-- خواب -->
 <section id="view-sleep" class="view hidden space-y-6">
 <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">😴 <span id="sleepTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" id="sleepSub"></p></div>
-<!-- بخش شب‌های بدون ثبت -->
-<div id="sleepGapsSection" class="hidden rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
-<div class="flex items-center justify-between flex-wrap gap-2 mb-3">
-<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">🌙 <span data-t="sleepGapsTitle"></span></h3>
-<span class="text-xs font-bold bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 rounded-full px-3 py-1" id="sleepGapsCount"></span>
-</div>
-<p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="sleepGapsSub"></p>
-<div id="sleepGapsList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
-<div id="noSleepGaps" class="hidden text-center py-6"><p class="text-4xl mb-2">🎉</p><p class="font-bold text-emerald-600 dark:text-emerald-400" data-t="noSleepGaps"></p></div>
-</div>
 <div class="grid lg:grid-cols-2 gap-6">
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
 <h3 class="font-bold mb-4">🌙 <span id="lastNightTitle"></span></h3>
@@ -316,7 +317,20 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 </div>
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h3 class="font-bold mb-4">📊 <span id="sleepStatsTitle"></span></h3><div id="sleepStats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div></div>
+
+<!-- ═══ بخش شب‌های بدون ثبت ═══ -->
+<div id="sleepGapsSection" class="hidden rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
+<div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+<h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">🌙 <span data-t="sleepGapsTitle"></span></h3>
+<span class="text-xs font-bold bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full px-3 py-1" id="sleepGapsCount"></span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-3" data-t="sleepGapsSub"></p>
+<div id="sleepGapsList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+<div id="noSleepGaps" class="hidden text-center py-6"><p class="text-4xl mb-2">🎉</p><p class="font-bold text-emerald-600 dark:text-emerald-400" data-t="noSleepGaps"></p></div>
+</div>
 </section>
+
+<!-- پایبندی -->
 <section id="view-adh" class="view hidden space-y-6">
 <div><h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">📈 <span data-t="adhTitle"></span></h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="adhSub"></p></div>
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="adhStats"></div>
@@ -331,6 +345,8 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <h3 class="font-bold mb-4">📅 <span data-t="weeklyTrend"></span></h3><div id="weeklyTrend" class="flex items-end gap-2 h-32"></div>
 <p id="adhInsight" class="text-sm mt-4 font-bold text-teal-700 dark:text-teal-300"></p></div>
 </section>
+
+<!-- چک‌این -->
 <section id="view-check" class="view hidden">
 <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
 <div class="flex items-center justify-between flex-wrap gap-2">
@@ -348,6 +364,8 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <button onclick="saveCheckin()" class="mt-4 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="saveCheck"></button>
 </div>
 </section>
+
+<!-- تریاژ -->
 <section id="view-triage" class="view hidden">
 <div class="max-w-2xl mx-auto rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
 <h2 class="font-display text-3xl text-teal-900 dark:text-teal-300" data-t="triageTitle"></h2>
@@ -356,6 +374,8 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <div class="mt-8"><h3 class="font-bold text-sm text-slate-600 dark:text-slate-300 mb-2" data-t="triageHist"></h3><div id="triageHist" class="space-y-2 text-sm"></div></div>
 </div>
 </section>
+
+<!-- پایش -->
 <section id="view-cal" class="view hidden">
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
 <div class="flex items-center justify-between mb-4 flex-wrap gap-2"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300">📅 <span data-t="monitorTitle"></span></h2>
@@ -363,6 +383,8 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-t="monitorSub"></p>
 <div id="monitorList" class="space-y-3"></div></div>
 </section>
+
+<!-- گزارش -->
 <section id="view-report" class="view hidden space-y-8">
 <div class="revealwrap" id="reportWrap">
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🌡️ <span data-t="mainSymptoms"></span></h2><div class="space-y-4 text-sm" id="repSymp"></div></div>
@@ -370,6 +392,8 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <div class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white p-6"><h2 class="font-display text-2xl text-amber-300 mb-3">💬 <span data-t="myConcerns"></span></h2><div id="repConcerns" class="flex flex-wrap gap-2"></div></div>
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"><h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">🪞 <span data-t="reviewHist"></span></h2><div id="reviewList" class="space-y-3 text-sm"></div></div>
 </section>
+
+<!-- تنظیمات -->
 <section id="view-profile" class="view hidden space-y-6">
 <div class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6">
 <h2 class="font-display text-2xl text-teal-900 dark:text-teal-300 mb-4">👤 <span data-t="profileTitle"></span></h2>
@@ -470,6 +494,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </section>
 </main>
 </div>
+
 <!-- مرور هفتگی -->
 <div id="reviewModal" class="app hidden fixed inset-0 z-[75] bg-black/50 flex items-center justify-center p-4">
 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-md w-full">
@@ -483,32 +508,32 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <button onclick="closeReview()" class="border-2 border-slate-300 dark:border-slate-600 rounded-xl px-4 font-bold text-slate-600 dark:text-slate-300" data-t="later"></button></div>
 </div>
 </div>
-<!-- مودال ثبت خواب عقب‌افتاده -->
+
+<!-- ═══ مودال ثبت خواب گذشته ═══ -->
 <div id="sleepBackfillModal" class="app hidden fixed inset-0 z-[77] bg-black/50 flex items-center justify-center p-4">
-<div class="backfill-modal bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-lg w-full max-h-[90vh] overflow-auto">
+<div class="backfill-modal bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 max-w-md w-full max-h-[90vh] overflow-auto">
 <div class="flex items-center justify-between mb-1">
 <h3 class="font-display text-2xl text-teal-900 dark:text-teal-300">🌙 <span data-t="sleepBackfillTitle"></span></h3>
 <button onclick="closeSleepBackfill()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">✕</button>
 </div>
-<p id="sbfDate" class="text-sm font-bold text-violet-600 dark:text-violet-400 mb-4"></p>
+<p id="sbfDate" class="text-sm font-bold text-indigo-600 dark:text-indigo-400 mb-4"></p>
 <div class="grid grid-cols-2 gap-3 mb-4">
-<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="bedTime"></label><input type="time" id="sbf-bed" value="23:30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-violet-500"></div>
-<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="wakeTime"></label><input type="time" id="sbf-wake" value="07:00" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-violet-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sbfBedLbl"></label><input type="time" id="sbf-bed" value="23:30" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sbfWakeLbl"></label><input type="time" id="sbf-wake" value="07:00" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
 </div>
-<div class="mb-4"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" data-t="sleepQuality"></label><div class="flex gap-1.5 mt-1" id="sbf-faces"></div></div>
-<div class="mb-4"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sbf-wakeups" class="w-5 h-5 accent-violet-600"><span data-t="hadWakeups"></span></label></div>
+<div class="mb-4"><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sbfSqLbl"></label><div class="flex gap-1.5 mt-1" id="sbf-faces"></div></div>
+<div class="mb-4"><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sbf-wakeups" class="w-5 h-5 accent-teal-600"><span id="sbfWakeupsLbl"></span></label></div>
 <div class="border-t border-slate-200 dark:border-slate-600 pt-4 mb-4">
-<h4 class="font-bold text-sm mb-2">💤 <span data-t="napsForDay"></span></h4>
-<div id="sbfNapList" class="space-y-2 mb-2"></div>
-<div class="flex gap-2">
-<input type="time" id="sbf-nap-time" class="flex-1 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:border-sky-500">
-<input type="number" id="sbf-nap-dur" value="30" min="5" max="180" class="w-20 border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2 outline-none focus:border-sky-500">
-<button onclick="addSbfNap()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl px-4 py-2">＋</button>
+<h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">💤 <span id="sbfNapTitle"></span></h4>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300" id="sbfNapDurLbl"></label><input type="number" id="sbf-nap-dur" value="30" min="0" max="180" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none focus:border-teal-500"></div>
+<div class="flex items-end"><p class="text-xs text-slate-400">۰ = بدون چرت</p></div>
 </div>
 </div>
-<button onclick="saveSleepBackfill()" class="w-full bg-gradient-to-l from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="sleepBackfillSave"></button>
+<button onclick="saveSleepBackfill()" class="w-full bg-gradient-to-l from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl py-3.5 text-lg transition-all hover:scale-[1.01] shadow-lg" data-t="sleepBackfillSave"></button>
 </div>
 </div>
+
 <div id="printDigest" class="max-w-3xl mx-auto p-6 text-slate-900">
 <div class="flex items-center justify-between border-b-4 border-teal-700 pb-3 mb-4">
 <div><h1 class="font-display text-3xl" id="pdTitle"></h1><p id="pdPatient" class="text-sm text-slate-600"></p></div>
@@ -519,6 +544,7 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 <div id="toast" class="toast hidden fixed bottom-6 left-1/2 z-[90] bg-[#0d3b3a] dark:bg-slate-700 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
 <div id="softToast" class="toast hidden fixed bottom-20 left-1/2 z-[89] bg-sky-600 text-white rounded-full px-5 py-2.5 text-sm shadow-2xl"></div>
+
 <script>
 /* ═══ i18n ═══ */
 let lang=localStorage.getItem('hammasir-lang')||'fa';
@@ -578,11 +604,14 @@ fakeTitle:['یادداشت‌ها','Notes'],fakeBack:['بازگشت','Back'],
 notifOn:['اعلان فعال','Notifications on'],notifOff:['فعال‌سازی اعلان','Enable notifications'],notifDenied:['اعلان مسدود است','Notifications blocked'],notifNone:['اعلان پشتیبانی نمی‌شود','Not supported'],
 took:['✅ خوردم','✅ Taken'],snooze:['⏰ بعداً','⏰ Later'],skipped:['❌ نخوردم','❌ Skipped'],
 stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],
-sleepGapSub:['شب‌هایی که خوابشون رو ثبت نکردی','Nights you haven\'t logged'],sleepGapFill:['ثبت خواب‌ها','Log nights'],sleepGapBanner:['شب بدون ثبت داری!','unlogged nights!'],
-sleepGapsTitle:['شب‌های بدون ثبت','Unlogged nights'],sleepGapsSub:['روی هر شب بزن تا خوابش رو ثبت کنی','Tap a night to log its sleep'],noSleepGaps:['همه‌ی شب‌ها ثبت شده 🎉','All nights logged 🎉'],
-sleepBackfillTitle:['ثبت خواب برای','Log sleep for'],sleepBackfillSave:['ثبت و ذخیره','Save entry'],
-bedTime:['ساعت خواب','Bedtime'],wakeTime:['ساعت بیداری','Wake time'],sleepQuality:['کیفیت خواب','Sleep quality'],hadWakeups:['بیداری مکرر داشتم','I woke up multiple times'],
-napsForDay:['چرت‌های این روز','Naps for this day'],
+sleepGapsTitle:['شب‌های بدون ثبت','Unlogged nights'],
+sleepGapsSub:['روی هر شب بزن تا خوابش رو ثبت کنی','Tap a night to log its sleep'],
+sleepBackfillTitle:['ثبت خواب برای','Log sleep for'],
+sleepBackfillSave:['ثبت و ذخیره','Save entry'],
+noSleepGaps:['همه‌ی شب‌ها ثبت شده 🎉','All nights logged 🎉'],
+sleepGapsBanner:['شب بدون ثبت داری!','unlogged nights!'],
+sleepGapsFill:['ثبت خواب','Log sleep'],
+sleepGapsTab:['شب‌های گمشده','Missing nights'],
 };
 function t(k){let v=L;for(const p of k.split('.')){v=v&&v[p];}return Array.isArray(v)?v[lang==='fa'?0:1]:k;}
 function num(n){return Number(n).toLocaleString(lang==='fa'?'fa-IR':'en-US');}
@@ -596,11 +625,13 @@ function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic()
 function buildNav(){const tabs=['dash','meds','adh','sleep','check','triage','cal','report','profile'];
 const icons={dash:'📊',meds:'💊',adh:'📈',sleep:'😴',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
 $('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
+/* ═══ تم ═══ */
 let theme=localStorage.getItem('hammasir-theme')||'system';
 function applyTheme(){const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
 document.documentElement.classList.toggle('dark',dark);}
 function setTheme(m){theme=m;localStorage.setItem('hammasir-theme',m);applyTheme();toast('🌓');}
 function cycleTheme(){setTheme(document.documentElement.classList.contains('dark')?'light':'dark');}
+/* ═══ ابزار ═══ */
 const $=id=>document.getElementById(id);
 const dkey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -674,7 +705,7 @@ const dk=buf2b64(crypto.getRandomValues(new Uint8Array(32)));
 localStorage.setItem(DEVKEY,JSON.stringify(dk));
 vault.bio=await wrapMaster(MASTER.bytes,dk);
 localStorage.setItem(VAULT_KEY,JSON.stringify(vault));
-updatePinStatus();toast('👆 '+(lang==='fa'?'اثرانگشت فعال شد':'Fingerprint enabled'));
+updatePinStatus();toast('👆 '+(lang==='fa'?'اثرانگشت فعال شد — موقع باز کردن چک می‌شه':'Fingerprint enabled'));
 }catch(e){toast(lang==='fa'?'اثرانگشت لغو یا پشتیبانی نشد':'Biometric cancelled/unsupported');}}
 async function changePwd(){const o=$('cp-old').value,n=$('cp-new').value,c=$('cp-con').value;
 if(n.length<4)return toast(lang==='fa'?'رمز جدید حداقل ۴ نویسه':'Min 4 chars');if(n!==c)return toast(lang==='fa'?'تکرار مطابقت ندارد':'Mismatch');
@@ -685,6 +716,7 @@ localStorage.setItem(VAULT_KEY,JSON.stringify(vault));$('cp-old').value=$('cp-ne
 function updatePinStatus(){const hasPin=vault&&vault.pin;const hasBio=vault&&vault.bio;
 $('pinStatus').textContent=(hasPin?'✅ PIN':'')+(hasBio?' · 👆 Bio':'');
 if(window.PublicKeyCredential&&window.isSecureContext)$('bioSetBtn').classList.remove('hidden');}
+/* ═══ صفحه‌ها ═══ */
 function showScreen(id){['lock','setup','app','emergency'].forEach(s=>$('scr-'+s).classList.toggle('hidden',s!==id));}
 function renderLock(){const hasPin=vault&&vault.pin;$('pinArea').classList.toggle('hidden',!hasPin);
 $('pwdArea').classList.toggle('hidden',!!hasPin);$('bioArea').classList.toggle('hidden',!(vault&&vault.bio));
@@ -704,6 +736,7 @@ checkReviewPrompt();checkBackupPrompt();toast(lang==='fa'?'خوش برگشتی �
 function forgot(){if(confirm(lang==='fa'?'بدون رمز داده‌ها قابل بازیابی نیستند. پاک شود؟':'Without the password data is unrecoverable. Erase?'))wipeAll();}
 function lockApp(){MASTER=null;S=null;showScreen('lock');renderLock();}
 function wipeAll(){if(confirm(lang==='fa'?'همه‌چیز برای همیشه پاک می‌شود. مطمئنی؟':'Erase everything forever?')){localStorage.removeItem(VAULT_KEY);localStorage.removeItem(DEVKEY);localStorage.removeItem(CREDID);location.reload();}}
+/* ═══ حالت مخفی ═══ */
 let stealthOn=localStorage.getItem('hammasir-stealth')==='1';
 let stealthAppName=localStorage.getItem('hammasir-appname')||'';
 function stealth(){return stealthOn;}
@@ -722,6 +755,7 @@ else{el.classList.remove('blurbox');if(existing)existing.remove();}}
 function revealOnce(btn){const p=btn.closest('.revealwrap');p.classList.remove('blurbox');btn.remove();}
 function quickHide(){$('fakeNote').classList.toggle('hidden');
 if(!$('fakeNote').classList.contains('hidden')){$('fakeList').innerHTML=['خرید: نان، شیر','تماس با بانک','قرار پنجشنبه'].map(n=>`<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow border-r-4 border-amber-400">${n}</div>`).join('');}}
+/* ═══ کارت اورژانس ═══ */
 function showEmergency(){let emg={};try{emg=JSON.parse(localStorage.getItem('hammasir-emg')||'{}');}catch(e){}
 $('emgBody').innerHTML=`
 <div class="bg-rose-50 dark:bg-rose-900/30 rounded-lg p-3"><b>${t('emgContact')}:</b> ${emg.contact||'—'}<br><b>${t('emgPhone')}:</b> ${emg.phone||'—'}</div>
@@ -732,6 +766,7 @@ showScreen('emergency');}
 function hideEmergency(){showScreen('lock');}
 function saveEmergency(){const e={contact:$('emg-contact').value,phone:$('emg-phone').value,allergy:$('emg-allergy').value,notes:$('emg-notes').value};
 localStorage.setItem('hammasir-emg',JSON.stringify(e));if(S){S.emergency=e;persist();}toast('🚑 '+t('save'));}
+/* ═══ خوش‌آمد ═══ */
 let suStep=0,setupConcerns=new Set(),profileConcerns=new Set();
 function suShow(){for(let i=0;i<4;i++)$('su-s'+i).classList.toggle('hidden',i!==suStep);
 $('suProg').innerHTML=[0,1,2,3].map(i=>`<div class="h-1.5 flex-1 rounded-full ${i<=suStep?'bg-teal-400':'bg-white/20'}"></div>`).join('');
@@ -748,8 +783,7 @@ await createVault($('su-pwd1').value,state);S=state;
 showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();toast('🎉');}
 function defaultState(){return{profile:{},symptoms:defaultSymptoms(),checkins:{},meds:[],doseLog:{},medHistory:[],
 reminders:{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}},
-water:{d:dkey(new Date()),c:0},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,
-sleep:{nights:[],naps:[]},
+water:{d:dkey(new Date()),c:0},sleep:{nights:[],naps:[]},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,
 settings:{refillDays:7,city:'tehran',customCities:[],wxOn:true},seeded:false,seedDismissed:false};}
 function defaultSymptoms(){return[
 {id:'fatigue',fa:'خستگی',en:'Fatigue',color:'#f59e0b',good:false,active:true},
@@ -764,21 +798,22 @@ function symLabel(s){return lang==='fa'?s.fa:s.en;}
 function ensureState(){if(!S.symptoms||!S.symptoms.length)S.symptoms=defaultSymptoms();
 S.meds=S.meds||[];S.doseLog=S.doseLog||{};S.medHistory=S.medHistory||[];S.flareDays=S.flareDays||{};S.reviews=S.reviews||[];S.monitor=S.monitor||[];
 S.reminders=S.reminders||{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}};
-S.water=S.water||{d:dkey(new Date()),c:0};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
-S.checkins=S.checkins||{};S.triage=S.triage||[];
-S.sleep=S.sleep||{nights:[],naps:[]};}
+S.water=S.water||{d:dkey(new Date()),c:0};S.sleep=S.sleep||{nights:[],naps:[]};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
+S.checkins=S.checkins||{};S.triage=S.triage||[];}
+/* ═══ PWA ═══ */
 let deferredPrompt=null;
 function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
 const man={name:'HamMasir',short_name:'HamMasir',start_url:'.',display:'standalone',display_override:['standalone','minimal-ui'],orientation:'portrait',background_color:'#0d3b3a',theme_color:'#0d3b3a',categories:['health','medical','lifestyle'],lang:'fa',dir:'rtl',icons:[{src:icon,sizes:'any',type:'image/svg+xml',purpose:'any'},{src:icon,sizes:'512x512',type:'image/svg+xml',purpose:'maskable'}],shortcuts:[{name:'Check-in',short_name:'Check-in',url:'./?tab=check',icons:[{src:icon,sizes:'any'}]},{name:'Meds',short_name:'Meds',url:'./?tab=meds',icons:[{src:icon,sizes:'any'}]},{name:'Sleep',short_name:'Sleep',url:'./?tab=sleep',icons:[{src:icon,sizes:'any'}]}]};
 const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));document.head.appendChild(l);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden');});}
 function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;$('installBtn').classList.add('hidden');}else toast(lang==='fa'?'از منوی مرورگر «Add to Home Screen» بزن':'Use browser "Add to Home Screen"');}
+/* ═══ تب‌ها ═══ */
 function showTab(id){curTab=id;document.querySelectorAll('#scr-app .view').forEach(v=>v.classList.add('hidden'));$('view-'+id).classList.remove('hidden');buildNav();
 window.scrollTo({top:0,behavior:'smooth'});
 if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
-if(id==='check'){renderCheck();afterCheckRender();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();renderCatchup();}
+if(id==='check'){renderCheck();afterCheckRender();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();}
 if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();if(id==='sleep'){applySleepTxt();renderSleep();renderSleepGaps();}}
-/* ═══ دارویار (بدون تغییر) ═══ */
+/* ═══ دارویار ═══ */
 function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
 if(m.freq.type==='everyN'){const s=new Date(m.start||dkey(new Date()));const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const b=new Date(date.getFullYear(),date.getMonth(),date.getDate());const diff=Math.round((b-a)/86400000);return diff>=0&&diff%(m.freq.n||1)===0;}
 if(m.freq.type==='days')return(m.freq.days||[]).includes(date.getDay());return true;}
@@ -921,7 +956,7 @@ if(S.water.d!==dkey(now)){S.water={d:dkey(now),c:0};persist();}
 if(!inQuiet(now)){todayDoses(now).forEach(d=>{const st=doseStatus(d,now);const kk=d.date+'|'+d.key;
 if(st==='due'&&!notifiedKeys.has(kk)){const sn=snoozes[d.key];if(sn&&now.getTime()<sn)return;alertDose(d);notifiedKeys.add(kk);}});
 Object.keys(snoozes).forEach(k=>{if(now.getTime()>=snoozes[k]){delete snoozes[k];const d=todayDoses(now).find(x=>x.key===k);if(d&&doseStatus(d,now)==='due')alertDose(d);}});}
-checkReminders(now);updateNextDose();renderSleepGapBanner();}
+checkReminders(now);updateNextDose();renderSleepBanner();}
 function updateNextDose(){const now=new Date();const doses=todayDoses(now);let next=null;
 for(const d of doses){if(getLog(d.date,d.key))continue;const[h,m]=d.time.split(':').map(Number);const sch=new Date(now);sch.setHours(h,m,0,0);if(sch>now){next={d,sch};break;}}
 const taken=doses.filter(d=>{const l=getLog(d.date,d.key);return l&&(l.s==='ontime'||l.s==='late');}).length;
@@ -929,7 +964,7 @@ if(next){const mins=Math.round((next.sch-now)/60000);$('nextDoseTxt').textConten
 $('nextDoseSub').textContent=num(mins)+' min · '+num(taken)+'/'+num(doses.length);}
 else if(doses.length){$('nextDoseTxt').textContent='🎉';$('nextDoseSub').textContent=num(taken)+'/'+num(doses.length);}
 else{$('nextDoseTxt').textContent='—';$('nextDoseSub').textContent='';}}
-/* ═══ پایبندی (بدون تغییر) ═══ */
+/* ═══ پایبندی ═══ */
 function dayAdherence(date){const ds=todayDoses(date);if(!ds.length)return null;
 let taken=0;ds.forEach(d=>{const l=getLog(dkey(date),d.key);if(l&&(l.s==='ontime'||l.s==='late'))taken++;});
 return{taken,total:ds.length,pct:taken/ds.length};}
@@ -980,7 +1015,7 @@ for(let i=1;i<60;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));cons
 const fat=c&&c.v?c.v.fatigue:null;if(a&&fat!=null){xs.push(1-a.pct);ys.push(fat);}}
 const r=pearson(xs,ys);
 $('adhInsight').textContent=(xs.length>=10&&r>0.3)?'🔗 '+(lang==='fa'?'روزهای بدون دارو ⇒ خستگی بیشتر فردا':'Missed meds ⇒ more fatigue next day'):'';}
-/* ═══ چک‌این (بدون تغییر) ═══ */
+/* ═══ چک‌این ═══ */
 let chkSel={},chkTrig=new Set();
 const FACES=['😄','🙂','😐','🙁','😞'];
 function trigList(){return lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];}
@@ -1002,6 +1037,10 @@ chkTrig=new Set(e.trig||[]);applyFaces();renderTrigChips();toast('📋');}
 function saveCheckin(){const v={};activeSyms().forEach(s=>{const sev=chkSel[s.id]*2.5;v[s.id]=s.good?(10-sev):sev;});
 S.checkins[dkey(new Date())]={v,note:$('noteTxt').value.trim(),trig:[...chkTrig]};
 persist();renderAll();toast('🎉');showTab('dash');}
+function afterCheckRender(){const el=$('entryCount');if(!el)return;
+const today=S.checkins[dkey(new Date())];
+if(today){el.classList.remove('hidden');el.textContent=lang==='fa'?'✅ ثبت شده':'✅ Logged';}
+else el.classList.add('hidden');}
 function voiceCheck(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 if(!SR)return toast(lang==='fa'?'تشخیص گفتار پشتیبانی نمی‌شود':'Speech not supported');
 const rec=new SR();rec.lang=lang==='fa'?'fa-IR':'en-US';rec.interimResults=false;
@@ -1017,13 +1056,11 @@ if(txt.toLowerCase().includes(label)||txt.includes(s.fa)){const m=txt.match(/(\d
 for(const tok of (m||[])){let n=parseInt(tok);if(isNaN(n))n=faNums[tok];
 if(!isNaN(n)&&n>=0&&n<=10){const sev=clamp(n,0,10);chkSel[s.id]=clamp(Math.round((s.good?(10-sev):sev)/2.5),0,4);matched++;break;}}}});
 applyFaces();toast(matched?(lang==='fa'?num(matched)+' مورد تنظیم شد':num(matched)+' set'):(lang==='fa'?'تشخیص داده نشد — دستی تنظیم کن':'No match — adjust manually'));}
-function afterCheckRender(){const el=$('entryCount');if(!el)return;
-const today=S.checkins[dkey(new Date())];
-if(today){el.classList.remove('hidden');el.textContent=lang==='fa'?'✅ ثبت شده':'✅ Logged';}
-else el.classList.add('hidden');}
+/* ═══ روز بد ═══ */
 function badDay(){if(!confirm(lang==='fa'?'امروز به‌عنوان «روز بد / عود» ثبت شود؟ یادآورهای غیردارویی امروز خاموش می‌شوند.':'Mark today as a bad/flare day? Non-med reminders will pause today.'))return;
 S.flareDays[dkey(new Date())]=true;persist();renderDash();toast('🌧️ '+(lang==='fa'?'ثبت شد. مراقب خودت باش':'Logged. Be kind to yourself'));
 showTab('triage');tri={step:0,symptom:'',duration:'',triggers:[],severity:5};renderTriage();}
+/* ═══ مرور هفتگی ═══ */
 function checkReviewPrompt(){const today=new Date();if(today.getDay()===5){const wk=dkey(new Date(today.getFullYear(),0,1))+Math.floor((today-new Date(today.getFullYear(),0,1))/604800000);
 if(!S.reviews.some(r=>r.wk===wk))$('reviewBanner').classList.remove('hidden');}}
 function openReview(){$('reviewModal').classList.remove('hidden');}
@@ -1034,6 +1071,7 @@ $('rv-good').value=$('rv-hard').value=$('rv-goal').value='';persist();closeRevie
 function renderReviewList(){$('reviewList').innerHTML=S.reviews.length?S.reviews.slice(0,5).map(r=>`<div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-3">
 <p class="text-xs text-slate-400 mb-1">${fdate(new Date(r.date),{dateStyle:'medium'})}</p>
 <p>✅ ${r.good||'—'}</p><p>😓 ${r.hard||'—'}</p><p>🎯 ${r.goal||'—'}</p></div>`).join(''):`<p class="text-slate-400">${lang==='fa'?'هنوز مرور نیست':'No reviews yet'}</p>`;}
+/* ═══ پایش ═══ */
 function addMonitor(){const title=prompt(lang==='fa'?'عنوان (مثلاً: آزمایش خون)':'Title (e.g., Blood test)');if(!title)return;
 const due=prompt(lang==='fa'?'تاریخ (YYYY-MM-DD)':'Date (YYYY-MM-DD)',dkey(new Date()));if(!due)return;
 S.monitor.push({id:'mn'+Date.now(),title,due,done:false});persist();renderMonitor();}
@@ -1046,7 +1084,7 @@ ${overdue?`<span class="text-[11px] font-bold bg-rose-100 dark:bg-rose-900 text-
 <button onclick="delMonitor('${m.id}')" class="text-rose-400 hover:text-rose-600">🗑️</button></label>`;}).join(''):`<p class="text-slate-400 text-sm">${t('monitorSub')}</p>`;}
 function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();}
 function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();}
-/* ═══ تریاژ (بدون تغییر) ═══ */
+/* ═══ تریاژ ═══ */
 let tri={step:0,symptom:'',duration:'',triggers:[],severity:5};
 function renderTriage(){const b=$('triageBox');
 const syms=lang==='fa'?['بینایی','ضعف/بی‌حسی','تعادل','ادراری','سایر']:['Vision','Weakness','Balance','Bladder','Other'];
@@ -1076,7 +1114,7 @@ $('triageBox').innerHTML=`<div class="screen rounded-xl border-2 ${level==='red'
 renderTriageHist();renderFlags();}
 function renderTriageHist(){const ic={red:'🔴',amber:'🟠',yellow:'🟡'};
 $('triageHist').innerHTML=S.triage.length?S.triage.slice(0,5).map(x=>`<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700 rounded-lg p-3"><span>${ic[x.level]}</span><span class="flex-1"><b>${x.symptom}</b> — ${num(x.severity)}</span><span class="text-xs text-slate-400">${fdate(new Date(x.date))}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
-/* ═══ آب‌وهوا (بدون تغییر) ═══ */
+/* ═══ آب‌وهوا ═══ */
 const CITIES={tehran:{lat:35.6892,lon:51.389,fa:'تهران',en:'Tehran'},zahedan:{lat:29.4963,lon:60.8629,fa:'زاهدان',en:'Zahedan'},mashhad:{lat:36.2605,lon:59.6168,fa:'مشهد',en:'Mashhad'},isfahan:{lat:32.6546,lon:51.6680,fa:'اصفهان',en:'Isfahan'},shiraz:{lat:29.5918,lon:52.5837,fa:'شیراز',en:'Shiraz'},tabriz:{lat:38.0962,lon:46.2738,fa:'تبریز',en:'Tabriz'},ahvaz:{lat:31.3183,lon:48.6706,fa:'اهواز',en:'Ahvaz'},rasht:{lat:37.2808,lon:49.5832,fa:'رشت',en:'Rasht'},bandar:{lat:27.1865,lon:56.2808,fa:'بندرعباس',en:'Bandar Abbas'},london:{lat:51.5072,lon:-0.1276,fa:'لندن',en:'London'},dubai:{lat:25.2048,lon:55.2708,fa:'دبی',en:'Dubai'},toronto:{lat:43.6532,lon:-79.3832,fa:'تورنتو',en:'Toronto'}};
 function cityLabel(id){const c=CITIES[id];if(c)return lang==='fa'?c.fa:c.en;
 const cc=(S.settings.customCities||[]).find(x=>x.id===id);return cc?cc.name:id;}
@@ -1106,7 +1144,7 @@ $('weatherBody').innerHTML=`<div class="flex items-end justify-between"><div><p 
 <div class="flex gap-2 mt-3">${max.map((m,i)=>`<div class="flex-1 text-center bg-slate-50 dark:bg-slate-700 rounded-lg py-1.5"><p class="text-[10px] text-slate-400">${i===0?(lang==='fa'?'امروز':'Today'):fdate(new Date(Date.now()+i*86400000),{day:'numeric'})}</p><p class="text-sm font-bold">${num(Math.round(m))}°</p></div>`).join('')}</div>`;}
 catch(e){$('weatherBody').innerHTML=`<p class="text-sm text-slate-500">📴 ${lang==='fa'?'آفلاین':'Offline'}</p>`;}}
 $('citySel').addEventListener('change',e=>setCity(e.target.value));
-/* ═══ نمودار (بدون تغییر) ═══ */
+/* ═══ نمودار ═══ */
 let range=90,activeSeries={},chartLayout=null;
 function buildChips(){const box=$('seriesChips');box.innerHTML='';
 activeSyms().forEach(s=>{if(activeSeries[s.id]===undefined)activeSeries[s.id]=['fatigue','sleep'].includes(s.id);
@@ -1172,7 +1210,7 @@ $('statStrip').innerHTML=`
 $('sampleBanner').classList.toggle('hidden',!(S.seeded&&!S.seedDismissed));
 const nv=p.nextVisit?new Date(p.nextVisit):null;
 $('nextVisitTxt').textContent=nv?fdate(nv,{dateStyle:'medium'})+' ('+num(Math.max(0,Math.ceil((nv-new Date())/86400000)))+' '+(lang==='fa'?'روز':'d')+')':'—';
-updateNextDose();renderSleepGapBanner();}
+updateNextDose();renderSleepBanner();}
 function renderInsights(){const box=$('insights');box.innerHTML='';
 const entries=Object.values(S.checkins).filter(e=>e.v);
 if(entries.length<10){box.innerHTML=`<p class="text-slate-400">${lang==='fa'?'داده‌ی کافی نیست':'Not enough data'}</p>`;return;}
@@ -1192,12 +1230,13 @@ if(!box.innerHTML)box.innerHTML=`<p class="text-slate-400">—</p>`;}
 function renderFlags(){const box=$('redflags');const items=[];const refill=S.settings.refillDays||7;
 S.meds.forEach(m=>{if(m.remaining!=null){const pd=(m.times||[]).length||1;if(Math.floor(m.remaining/pd)<=refill)items.push(`💊 <b>${m.name}</b> — ${lang==='fa'?'رو به اتمام':'running low'}`);}});
 const od=S.monitor.filter(m=>!m.done&&m.due<dkey(new Date())).length;if(od)items.push(`📅 ${num(od)} ${lang==='fa'?'پایش عقب‌افتاده':'overdue monitor'}`);
-const sleepGaps=getSleepGapDays(7);if(sleepGaps.length)items.push(`😴 ${num(sleepGaps.length)} ${lang==='fa'?'شب بدون ثبت خواب':'unlogged nights'}`);
 const last7=Object.entries(S.checkins).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7);
 const sev=last7.filter(([,e])=>e.v&&Object.entries(e.v).some(([k,v])=>{const s=S.symptoms.find(x=>x.id===k);return s&&!s.good&&v>=8;})).length;
 if(sev)items.push(`⚠️ ${num(sev)} ${lang==='fa'?'روز اخیر علامت شدید':'recent severe days'}`);
 if(bmi()<18.5)items.push(`⚖️ BMI ${num(bmi())}`);
 if(!S.meds.length)items.push(`💊 ${t('noMed')}`);
+const missedSleep=getMissedSleepDays(7).length;
+if(missedSleep)items.push(`🌙 ${num(missedSleep)} ${lang==='fa'?'شب بدون ثبت خواب (۷ روز اخیر)':'unlogged sleep nights (last 7 days)'}`);
 box.innerHTML=items.length?items.map(i=>`<li class="flex gap-2 items-start"><span class="pulse-dot bg-rose-500 text-rose-500 mt-1.5"></span><span>${i}</span></li>`).join(''):`<li class="text-slate-400">🌿 ${lang==='fa'?'همه‌چیز مرتب':'All clear'}</li>`;}
 /* ═══ گزارش ═══ */
 const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['cognition','تمرکز','Cognition'],['vision','بینایی','Vision'],['balance','تعادل','Balance'],['mood','خلق','Mood'],['sleep','خواب','Sleep'],['bladder','مثانه','Bladder'],['heat','گرما','Heat'],['work','کار','Work']];
@@ -1274,6 +1313,7 @@ try{const master=await unwrapMaster(v.pwd,$('importPwd').value);S=await decData(
 MASTER={bytes:master};vault=v;ensureState();await persist();renderAll();
 $('importPwdBox').classList.add('hidden');$('importPwd').value='';toast('✔');}
 catch(e){toast(t('wrongCred'));}}
+/* ═══ چاپ ═══ */
 function printReport(){buildDigest();window.print();}
 function buildDigest(){const p=S.profile;
 $('pdTitle').textContent=stealthAppName||(lang==='fa'?'خلاصه‌ی ویزیت — هم‌مسیر':'Visit summary — HamMasir');
@@ -1292,115 +1332,9 @@ let arrow='—',cls='';
 if(b!==null){const d=a-b;const worse=s.good?d<0:d>0;if(Math.abs(d)>0.7){arrow=worse?'▲':'▼';cls=worse?'text-rose-600':'text-emerald-600';}}
 symRows+=`<tr class="border-b border-slate-200"><td class="py-1.5">${symLabel(s)}</td><td class="text-center">${num(a.toFixed(1))}</td><td class="text-center font-bold ${cls}">${arrow}</td></tr>`;});
 const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
-const nights7=(S.sleep.nights||[]).filter(n=>{const d=new Date(n.dk+'T12:00:00');return (new Date()-d)/86400000<=7;});
-const avgSleepMins=nights7.length?Math.round(nights7.reduce((a,n)=>a+n.mins,0)/nights7.length):null;
+const nights7=(S.sleep.nights||[]).filter(n=>{const d=new Date(n.dk);return(Date.now()-d.getTime())/(86400000)<=7;});
+const avgSleep=night7.length?Math.round(nights7.reduce((a,n)=>a+n.mins,0)/nights7.length/60*10)/10:null;
 $('pdBody').innerHTML=`
 <div class="grid grid-cols-3 gap-3 text-center mb-4">
 <div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">${t('adhTitle')} 30d</p><p class="font-display text-2xl">${pct30===null?'—':num(pct30)+'٪'}</p></div>
-<div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">${t('todayMeds')}</p><p class="font-display text-2xl">${num(taken)}/${num(doses.length)}</p></div>
-<div class="border border-slate-300 rounded-lg p-2"><p class="text-xs text-slate-500">BMI</p><p class="font-display text-2xl">${num(bmi())}</p></div></div>
-${avgSleepMins?`<p class="text-sm mb-3">😴 ${lang==='fa'?'میانگین خواب ۷ روز اخیر':'Avg sleep (7d)'}: <b>${Math.floor(avgSleepMins/60)}h ${avgSleepMins%60}m</b> · ${nights7.length} ${lang==='fa'?'شب ثبت‌شده':'nights logged'}</p>`:''}
-${(p.concerns||[]).length?`<p class="text-sm mb-3"><b>${t('concerns')}:</b> ${p.concerns.map(c=>cmap[c]||c).join(', ')}</p>`:''}
-${S.meds.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">💊</h2><table class="w-full text-sm mb-4"><tbody>${medRows}</tbody></table>`:''}
-<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">📈</h2><table class="w-full text-sm mb-4"><tbody>${symRows||'<tr><td class="text-slate-400 py-2">—</td></tr>'}</tbody></table>
-${S.reviews.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">🪞</h2><p class="text-sm mb-4">✅ ${S.reviews[0].good||'—'} · 😓 ${S.reviews[0].hard||'—'} · 🎯 ${S.reviews[0].goal||'—'}</p>`:''}`;}
-window.addEventListener('beforeprint',buildDigest);
-/* ═══ خواب و چرت ═══ */
-let slQ=2;
-function sleepTxt(){const fa=lang==='fa';return{title:fa?'مانیتور خواب و چرت':'Sleep & nap monitor',sub:fa?'دیشب چطور خوابیدی؟ چرت‌هات رو ثبت کن':'Log last night + naps',last:fa?'خواب دیشب':'Last night',bed:fa?'ساعت خواب':'Bedtime',wake:fa?'ساعت بیداری':'Wake time',sq:fa?'کیفیت خواب':'Sleep quality',wu:fa?'بیداری مکرر داشتم':'I woke up multiple times',saveN:fa?'ثبت خواب دیشب':'Save last night',nap:fa?'چرت امروز':'Nap today',ns:fa?'شروع':'Start',nd:fa?'مدت (دقیقه)':'Duration (min)',saveNap:fa?'ثبت چرت':'Save nap',hist:fa?'چرت‌های اخیر':'Recent naps',stats:fa?'آمار خواب (۷ روز)':'Sleep stats (7d)'};}
-function renderSleepFaces(){$('sl-faces').innerHTML=FACES.map((f,i)=>`<button type="button" onclick="slQ=${4-i};renderSleepFaces()" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 ${slQ===(4-i)?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
-function applySleepTxt(){const x=sleepTxt();$('sleepTitle').textContent=x.title;$('sleepSub').textContent=x.sub;$('lastNightTitle').textContent=x.last;$('bedLbl').textContent=x.bed;$('wakeLbl').textContent=x.wake;$('sqLbl').textContent=x.sq;$('wakeupsLbl').textContent=x.wu;$('saveNightBtn').textContent=x.saveN;$('napTitle').textContent=x.nap;$('napStartLbl').textContent=x.ns;$('napDurLbl').textContent=x.nd;$('saveNapBtn').textContent=x.saveNap;$('napHistLbl').textContent=x.hist;$('sleepStatsTitle').textContent=x.stats;renderSleepFaces();renderSleep();}
-function sleepDur(bed,wake){const[bh,bm]=bed.split(':').map(Number);const[wh,wm]=wake.split(':').map(Number);let mins=(wh*60+wm)-(bh*60+bm);if(mins<=0)mins+=1440;return mins;}
-function saveNight(){const bed=$('sl-bed').value,wake=$('sl-wake').value;if(!bed||!wake)return toast('⚠️');
-S.sleep.nights=(S.sleep.nights||[]).filter(n=>n.dk!==dkey(new Date()));
-S.sleep.nights.push({dk:dkey(new Date()),bed,wake,mins:sleepDur(bed,wake),q:slQ,wakeups:$('sl-wakeups').checked});
-persist();renderSleep();toast('🌙 '+(lang==='fa'?'ثبت شد':'Saved'));}
-function saveNap(){const st=$('nap-start').value,dur=+$('nap-dur').value||30;
-S.sleep.naps=S.sleep.naps||[];S.sleep.naps.push({dk:dkey(new Date()),t:st||new Date().toTimeString().slice(0,5),dur});
-if(S.sleep.naps.length>100)S.sleep.naps=S.sleep.naps.slice(-100);persist();renderSleep();toast('💤 '+(lang==='fa'?'چرت ثبت شد':'Nap logged'));}
-function renderSleep(){S.sleep=S.sleep||{nights:[],naps:[]};
-const nights=(S.sleep.nights||[]).slice(-7);const avgM=nights.length?Math.round(nights.reduce((a,n)=>a+(n.mins||0),0)/nights.length):0;const avgQ=nights.length?(nights.reduce((a,n)=>a+(n.q||0),0)/nights.length).toFixed(1):'—';
-const napsToday=(S.sleep.naps||[]).filter(n=>n.dk===dkey(new Date()));const napMin=napsToday.reduce((a,n)=>a+n.dur,0);
-$('sleepStats').innerHTML=`<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین خواب':'Avg sleep'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${avgM?Math.floor(avgM/60)+'h'+(avgM%60):'—'}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین کیفیت':'Avg quality'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${num(avgQ)}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'چرت امروز':'Naps today'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napsToday.length)}</p></div><div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'دقیقه چرت':'Nap minutes'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napMin)}</p></div>`;
-$('napHist').innerHTML=napsToday.length?napsToday.map(n=>`<div class="flex justify-between bg-slate-50 dark:bg-slate-700 rounded-lg p-2"><span>💤 ${n.t}</span><span class="text-slate-500 dark:text-slate-400">${num(n.dur)} ${lang==='fa'?'دقیقه':'min'}</span></div>`).join(''):`<p class="text-slate-400">—</p>`;}
-/* ═══ شب‌های بدون ثبت (Backfill خواب) ═══ */
-function getSleepGapDays(lookback=14){
-const gaps=[];const today=new Date();
-const loggedNights=new Set((S.sleep.nights||[]).map(n=>n.dk));
-for(let i=1;i<=lookback;i++){
-const d=new Date(today);d.setDate(d.getDate()-i);
-const dk=dkey(d);
-if(!loggedNights.has(dk))gaps.push({date:d,dk});
-}
-return gaps;}
-function renderSleepGaps(){
-const gaps=getSleepGapDays(14);
-const section=$('sleepGapsSection');
-if(!gaps.length){
-section.classList.remove('hidden');
-$('sleepGapsList').classList.add('hidden');
-$('noSleepGaps').classList.remove('hidden');
-$('sleepGapsCount').textContent=num(0);
-renderSleepGapBanner();
-return;}
-$('noSleepGaps').classList.add('hidden');
-section.classList.remove('hidden');
-$('sleepGapsCount').textContent=num(gaps.length)+' '+(lang==='fa'?'شب':'nights');
-renderSleepGapBanner();
-$('sleepGapsList').innerHTML=gaps.map(g=>{
-const dayName=fdate(g.date,{weekday:'short'});
-const dateStr=fdate(g.date,{day:'numeric',month:'short'});
-return `<button onclick="openSleepBackfill('${g.dk}')" class="sleep-gap-card flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-900/30">
-<span class="text-xs text-slate-500 dark:text-slate-400">${dayName}</span>
-<span class="font-bold text-sm text-violet-800 dark:text-violet-300">${dateStr}</span>
-<span class="text-[10px] text-violet-600 dark:text-violet-400 font-bold">🌙 ${lang==='fa'?'ثبت خواب':'Log sleep'}</span>
-</button>`;}).join('');}
-function renderSleepGapBanner(){
-const banner=$('sleepGapBanner');if(!banner)return;
-const gaps=getSleepGapDays(14);
-if(!gaps.length){banner.classList.add('hidden');return;}
-banner.classList.remove('hidden');
-$('sleepGapMsg').textContent=num(gaps.length)+' '+t('sleepGapBanner');}
-function scrollToSleepGaps(){
-setTimeout(()=>{const el=$('sleepGapsSection');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},100);}
-let sbfQ=2,sbfNaps=[],sbfTargetDk=null;
-function openSleepBackfill(dk){
-sbfTargetDk=dk;sbfQ=2;sbfNaps=[];
-const d=new Date(dk+'T12:00:00');
-$('sbfDate').textContent=fdate(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-$('sbf-bed').value='23:30';$('sbf-wake').value='07:00';$('sbf-wakeups').checked=false;
-$('sbf-nap-time').value='';$('sbf-nap-dur').value='30';
-renderSbfFaces();renderSbfNaps();
-$('sleepBackfillModal').classList.remove('hidden');}
-function closeSleepBackfill(){$('sleepBackfillModal').classList.add('hidden');sbfTargetDk=null;sbfNaps=[];}
-function renderSbfFaces(){$('sbf-faces').innerHTML=FACES.map((f,i)=>`<button type="button" onclick="sbfQ=${4-i};renderSbfFaces()" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 ${sbfQ===(4-i)?'border-violet-600 bg-violet-50 dark:bg-violet-900/40 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
-function addSbfNap(){
-const t=$('sbf-nap-time').value;const dur=+$('sbf-nap-dur').value||30;
-if(!t)return toast(lang==='fa'?'ساعت چرت را وارد کن':'Enter nap time');
-sbfNaps.push({t,dur});
-$('sbf-nap-time').value='';$('sbf-nap-dur').value='30';
-renderSbfNaps();}
-function removeSbfNap(i){sbfNaps.splice(i,1);renderSbfNaps();}
-function renderSbfNaps(){
-$('sbfNapList').innerHTML=sbfNaps.length?sbfNaps.map((n,i)=>`<div class="flex items-center justify-between bg-sky-50 dark:bg-sky-900/30 rounded-lg p-2">
-<span class="text-sm">💤 ${n.t} · ${num(n.dur)} ${lang==='fa'?'دقیقه':'min'}</span>
-<button onclick="removeSbfNap(${i})" class="text-rose-400 hover:text-rose-600 text-sm">✕</button></div>`).join(''):`<p class="text-xs text-slate-400">${lang==='fa'?'چرتی اضافه نشده':'No naps added'}</p>`;}
-function saveSleepBackfill(){
-if(!sbfTargetDk)return;
-const bed=$('sbf-bed').value,wake=$('sbf-wake').value;
-if(!bed||!wake)return toast(lang==='fa'?'ساعت خواب و بیداری را وارد کن':'Enter bed and wake times');
-S.sleep.nights=(S.sleep.nights||[]).filter(n=>n.dk!==sbfTargetDk);
-S.sleep.nights.push({dk:sbfTargetDk,bed,wake,mins:sleepDur(bed,wake),q:sbfQ,wakeups:$('sbf-wakeups').checked,backfilled:true});
-S.sleep.naps=S.sleep.naps||[];
-sbfNaps.forEach(n=>S.sleep.naps.push({dk:sbfTargetDk,t:n.t,dur:n.dur,backfilled:true}));
-persist();closeSleepBackfill();renderSleep();renderSleepGaps();renderSleepGapBanner();renderDash();
-toast('🌙 '+(lang==='fa'?'خواب ثبت شد!':'Sleep logged!'));}
-/* ═══ رندر کلی ═══ */
-function renderAll(){applyStealth();buildCitySel();
-renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
-renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
-renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderSleepGaps();loadWeather();}
-window.addEventListener('DOMContentLoaded',boot);
-</script>
-</body>
-</html>
+<div class="
