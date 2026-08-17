@@ -43,6 +43,12 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 .revealwrap .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
 .mic{animation:micPulse 1.2s infinite}
 @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(225,29,72,.5)}50%{box-shadow:0 0 0 12px rgba(225,29,72,0)}}
+.missed-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px}
+.dark .missed-block{background:#0f172a;border-color:#334155}
+.missed-block h4{font-weight:700;font-size:14px;margin-bottom:10px;color:#0f766e}
+.dark .missed-block h4{color:#5eead4}
+details.missed-day>summary::-webkit-details-marker{display:none}
+details.missed-day>summary{list-style:none}
 #printDigest{display:none}
 @media print{.app{display:none!important}#printDigest{display:block!important}body{background:#fff!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
@@ -209,27 +215,6 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 <div class="rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-900/20 shadow-sm p-5"><h3 class="font-bold text-rose-700 dark:text-rose-300 mb-3">🚩 <span data-t="attention"></span></h3><ul id="redflags" class="space-y-2 text-sm text-slate-700 dark:text-slate-200"></ul></div>
 </div>
 </section>
-
-<!-- ══════════ تب جدید: کامل‌کردن روزهای خالی ══════════ -->
-<section id="view-backfill" class="view hidden space-y-6">
-<div class="flex flex-wrap items-end justify-between gap-3">
-<div>
-<h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">🧩 <span data-t="bfTitle"></span></h2>
-<p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="bfSub"></p>
-</div>
-<div class="flex items-center gap-2">
-<span class="text-xs text-slate-500 dark:text-slate-400" data-t="bfRange"></span>
-<div id="bfRangeBtns" class="flex gap-1.5"></div>
-</div>
-</div>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="bfSummary"></div>
-<div id="bfCheckins" class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"></div>
-<div id="bfDoses" class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"></div>
-<div id="bfSleep" class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"></div>
-<div id="bfMonitors" class="rounded-xl border border-teal-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-6"></div>
-</section>
-<!-- ══════════ پایان تب جدید ══════════ -->
-
 <section id="view-meds" class="view hidden space-y-6">
 <div id="catchupBox" class="hidden rounded-xl border-2 border-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 mb-4"><h3 class="font-bold text-amber-800 dark:text-amber-300 mb-1">⏪ <span id="catchupTitle"></span></h3><p class="text-xs text-amber-700 dark:text-amber-400 mb-3" id="catchupSub"></p><div id="catchupList" class="space-y-2"></div></div>
 <div class="flex flex-wrap items-center justify-between gap-3">
@@ -463,6 +448,24 @@ body{background-color:#f2f7f5;background-image:linear-gradient(rgba(13,148,136,.
 </div>
 </div>
 </section>
+<section id="view-missed" class="view hidden space-y-6">
+<div class="flex flex-wrap items-end justify-between gap-3">
+<div>
+<h2 class="font-display text-3xl text-teal-900 dark:text-teal-300">🩹 <span data-t="missedTitle"></span></h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-t="missedSub"></p>
+</div>
+<div class="flex items-center gap-2">
+<label class="text-xs text-slate-500 dark:text-slate-400" data-t="missedRangeLbl"></label>
+<select id="missedRangeSel" onchange="missedRange=+this.value;renderMissed()" class="text-sm border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1.5 outline-none">
+<option value="7">7</option>
+<option value="14" selected>14</option>
+<option value="30">30</option>
+</select>
+</div>
+</div>
+<div id="missedSummary" class="rounded-xl bg-[#0d3b3a] dark:bg-slate-700 text-white p-4 text-sm leading-7"></div>
+<div id="missedList" class="space-y-4"></div>
+</section>
 </main>
 </div>
 <!-- مرور هفتگی -->
@@ -505,7 +508,7 @@ back:['قبلی','Back'],next:['بعدی','Next'],
 fName:['نام/حروف اختصاری','Name/initials'],fAge:['سن','Age'],fSex:['جنسیت','Sex'],male:['مرد','Male'],female:['زن','Female'],fHeight:['قد (cm)','Height (cm)'],fWeight:['وزن (kg)','Weight (kg)'],
 fDx:['تاریخ تشخیص','Diagnosis date'],fType:['نوع MS','MS type'],fDmt:['داروی اصلی','Main DMT'],fDoc:['پزشک','Doctor'],fNext:['ویزیت بعدی','Next visit'],
 tagline:['پایش هوشمند MS','Smart MS tracking'],install:['نصب','Install'],print:['چاپ/PDF','Print/PDF'],
-tabs:{dash:['داشبورد','Dashboard'],backfill:['کامل‌کردن','Backfill'],meds:['دارویار','Meds'],adh:['پایبندی','Adherence'],sleep:['خواب','Sleep'],check:['چک‌این','Check-in'],triage:['تریاژ','Triage'],cal:['پایش','Monitor'],report:['گزارش','Report'],profile:['تنظیمات','Settings']},
+tabs:{dash:['داشبورد','Dashboard'],meds:['دارویار','Meds'],adh:['پایبندی','Adherence'],missed:['جبران','Catch-up'],sleep:['خواب','Sleep'],check:['چک‌این','Check-in'],triage:['تریاژ','Triage'],cal:['پایش','Monitor'],report:['گزارش','Report'],profile:['تنظیمات','Settings']},
 hello:['سلام','Hello'],checkin:['چک‌این امروز','Check-in'],badDay:['روز بد / عود','Bad day / Flare'],
 reviewPrompt:['وقت بازبینی هفتگی است — ۳ سوال کوتاه','Time for your weekly review — 3 short questions'],reviewStart:['شروع','Start'],
 backupNow:['پشتیبان بگیر','Back up now'],sampleWarn:['⚠️ داده‌های نمونه فعال‌اند','⚠️ Sample data is active'],clearSample:['پاک کردن','Clear'],
@@ -547,36 +550,21 @@ fakeTitle:['یادداشت‌ها','Notes'],fakeBack:['بازگشت','Back'],
 notifOn:['اعلان فعال','Notifications on'],notifOff:['فعال‌سازی اعلان','Enable notifications'],notifDenied:['اعلان مسدود است','Notifications blocked'],notifNone:['اعلان پشتیبانی نمی‌شود','Not supported'],
 took:['✅ خوردم','✅ Taken'],snooze:['⏰ بعداً','⏰ Later'],skipped:['❌ نخوردم','❌ Skipped'],
 stOntime:['به‌موقع','On time'],stLate:['دیر','Late'],stSkip:['رد شد','Skipped'],stMiss:['فراموش شد','Missed'],stDue:['وقتشه!','Due now!'],
-/* ── کلیدهای جدید: کامل‌کردن و خواب ── */
-bfTitle:['کامل‌کردن روزهای خالی','Fill in missing days'],
-bfSub:['روزهایی که داده‌ای وارد نشده را پیدا و کامل کن','Find and complete days with no data'],
-bfRange:['بازه زمانی:','Range:'],
-bfChk:['چک‌این‌های جاافتاده','Missing check-ins'],
-bfDose:['دوزهای ثبت‌نشده','Unlogged doses'],
-bfSleepT:['خواب‌های ثبت‌نشده','Missing sleep'],
-bfMon:['پایش عقب‌افتاده','Overdue monitors'],
-bfComplete:['کامل کن','Complete'],
-bfSave:['ثبت','Save'],
-bfTaken:['خوردم','Taken'],
-bfNotTaken:['نخوردم','Skipped'],
-bfBed:['ساعت خواب','Bedtime'],
-bfWake:['ساعت بیداری','Wake time'],
-bfQuality:['کیفیت خواب','Sleep quality'],
-bfWakeups:['بیداری‌های مکرر داشتم','I woke up multiple times'],
-bfNone:['همه‌چیز کامل است! 🎉','All caught up! 🎉'],
-bfNote:['یادداشت (اختیاری)','Note (optional)'],
-sleepTitle:['خواب و چرت','Sleep & Naps'],
-sleepSub:['ثبت خواب شب و چرت‌های روز','Log night sleep and daytime naps'],
-lastNightTitle:['خواب دیشب','Last night'],
-saveNightBtn:['ثبت خواب','Save sleep'],
-napTitle:['چرت امروز','Today\'s nap'],
-napStartLbl:['ساعت شروع','Start time'],
-napDurLbl:['مدت (دقیقه)','Duration (min)'],
-saveNapBtn:['ثبت چرت','Save nap'],
-napHistLbl:['چرت‌های اخیر','Recent naps'],
-sleepStatsTitle:['آمار خواب (۷ روز اخیر)','Sleep stats (last 7 days)'],
-catchupTitle:['دوزهای ثبت‌نشده‌ی دیروز','Yesterday\'s unlogged doses'],
-catchupSub:['هنوز می‌توانی دوزهای دیروز را ثبت کنی','You can still log yesterday\'s doses'],
+missedTitle:['جبران روزهای فراموش‌شده','Catch up on missed days'],
+missedSub:['روزهایی که دیتایی وارد نشده را پیدا و کامل کن','Find and complete days with missing data'],
+missedRangeLbl:['بازه:','Range:'],
+missedNone:['همه‌چیز کامل است!','Everything is complete!'],
+missedNoneSub:['هیچ روز فراموش‌شده‌ای در این بازه نیست','No missed days in this range'],
+missedDaysWord:['روز فراموش‌شده','missed day(s)'],
+missedFillCheckin:['چک‌این این روز را کامل کن','Complete this day\'s check-in'],
+missedFillSleep:['خواب این شب را ثبت کن','Log this night\'s sleep'],
+missedFillDoses:['دوزهای ثبت‌نشده را مشخص کن','Mark unlogged doses'],
+missedSaved:['ذخیره شد','Saved'],
+missedMonitors:['پایش عقب‌افتاده','Overdue monitor'],
+missedMarkDone:['انجام شد','Mark done'],
+checkinShort:['چک‌این','Check-in'],sleepShort:['خواب','Sleep'],doseShort:['دوز','Dose'],
+bedLbl:['ساعت خواب','Bedtime'],wakeLbl:['ساعت بیداری','Wake time'],sqLbl:['کیفیت خواب','Sleep quality'],wuLbl:['بیداری‌های مکرر داشتم','I woke up multiple times'],
+notePh:['یادداشت…','Note…'],
 };
 function t(k){let v=L;for(const p of k.split('.')){v=v&&v[p];}return Array.isArray(v)?v[lang==='fa'?0:1]:k;}
 function num(n){return Number(n).toLocaleString(lang==='fa'?'fa-IR':'en-US');}
@@ -587,8 +575,8 @@ document.querySelectorAll('[data-t-attr]').forEach(el=>{el.setAttribute(el.datas
 document.documentElement.dir=lang==='fa'?'rtl':'ltr';document.documentElement.lang=lang;
 $('langLbl').textContent=lang==='fa'?'EN':'فا';buildNav();}
 function setLang(l){lang=l;localStorage.setItem('hammasir-lang',l);applyStatic();if(S){renderAll();}else{renderLock();}}
-function buildNav(){const tabs=['dash','backfill','meds','adh','sleep','check','triage','cal','report','profile'];
-const icons={dash:'📊',backfill:'🧩',meds:'💊',adh:'📈',sleep:'😴',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
+function buildNav(){const tabs=['dash','meds','adh','missed','sleep','check','triage','cal','report','profile'];
+const icons={dash:'📊',meds:'💊',adh:'📈',missed:'🩹',sleep:'😴',check:'✍️',triage:'🚨',cal:'📅',report:'📋',profile:'⚙️'};
 $('navBar').innerHTML=tabs.map(tb=>`<button class="tab shrink-0 rounded-full px-4 py-1.5 text-sm font-medium text-teal-100 hover:bg-white/10 transition-all ${curTab===tb?'active':''}" onclick="showTab('${tb}')">${icons[tb]} ${t('tabs.'+tb)}</button>`).join('');}
 /* ═══ تم ═══ */
 let theme=localStorage.getItem('hammasir-theme')||'system';
@@ -602,6 +590,7 @@ const dkey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${St
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const r1=v=>Math.round(v*10)/10;
 const ease=t=>1-Math.pow(1-t,3);
+function dkToDate(dk){const p=dk.split('-').map(Number);return new Date(p[0],p[1]-1,p[2],12,0,0);}
 function toast(m){const el=$('toast');el.textContent=m;el.classList.remove('hidden');clearTimeout(el._h);el._h=setTimeout(()=>el.classList.add('hidden'),2600);}
 function softToast(m){const el=$('softToast');el.textContent=m;el.classList.remove('hidden');clearTimeout(el._h);el._h=setTimeout(()=>el.classList.add('hidden'),4000);}
 function pearson(x,y){const n=x.length;if(n<5)return 0;const mx=x.reduce((a,b)=>a+b)/n,my=y.reduce((a,b)=>a+b)/n;let nu=0,dx=0,dy=0;for(let i=0;i<n;i++){const a=x[i]-mx,b=y[i]-my;nu+=a*b;dx+=a*a;dy+=b*b;}return dx&&dy?nu/Math.sqrt(dx*dy):0;}
@@ -748,7 +737,7 @@ await createVault($('su-pwd1').value,state);S=state;
 showScreen('app');renderAll();startEngine();updatePinStatus();applyStealth();toast('🎉');}
 function defaultState(){return{profile:{},symptoms:defaultSymptoms(),checkins:{},meds:[],doseLog:{},medHistory:[],
 reminders:{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}},
-water:{d:dkey(new Date()),c:0},sleep:{nights:{},naps:[]},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,
+water:{d:dkey(new Date()),c:0},triage:[],flareDays:{},reviews:[],monitor:[],lastBackup:null,sleepData:{nights:[],naps:[]},
 settings:{refillDays:7,city:'tehran',customCities:[],wxOn:true},seeded:false,seedDismissed:false};}
 function defaultSymptoms(){return[
 {id:'fatigue',fa:'خستگی',en:'Fatigue',color:'#f59e0b',good:false,active:true},
@@ -763,8 +752,8 @@ function symLabel(s){return lang==='fa'?s.fa:s.en;}
 function ensureState(){if(!S.symptoms||!S.symptoms.length)S.symptoms=defaultSymptoms();
 S.meds=S.meds||[];S.doseLog=S.doseLog||{};S.medHistory=S.medHistory||[];S.flareDays=S.flareDays||{};S.reviews=S.reviews||[];S.monitor=S.monitor||[];
 S.reminders=S.reminders||{water:{on:true,every:120,goal:8},stand:{on:true,every:90},eye:{on:false,every:20},sleep:{on:true,at:'00:30'},cool:{on:true}};
-S.water=S.water||{d:dkey(new Date()),c:0};S.sleep=S.sleep||{nights:{},naps:[]};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
-S.checkins=S.checkins||{};S.triage=S.triage||[];}
+S.water=S.water||{d:dkey(new Date()),c:0};S.settings=S.settings||{refillDays:7,city:'tehran',customCities:[],wxOn:true};
+S.checkins=S.checkins||{};S.triage=S.triage||[];S.sleepData=S.sleepData||{nights:[],naps:[]};}
 /* ═══ PWA ═══ */
 let deferredPrompt=null;
 function initPWA(){const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0d3b3a"/><text x="50" y="66" font-size="52" text-anchor="middle">💊</text></svg>');
@@ -778,7 +767,7 @@ window.scrollTo({top:0,behavior:'smooth'});
 if(id==='dash')animateChart();if(id==='profile'){populateProfile();updateStorage();updatePinStatus();}
 if(id==='check'){renderCheck();afterCheckRender();}if(id==='meds'){renderMeds();renderWater();renderReminders();renderMedHistory();renderCatchup();}
 if(id==='adh')renderAdh();if(id==='cal')renderMonitor();if(id==='report')renderReport();if(id==='sleep'){applySleepTxt();renderSleep();}
-if(id==='backfill')renderBackfill();}
+if(id==='missed')renderMissed();}
 /* ═══ دارویار ═══ */
 function isDoseDay(m,date){if(!m.freq||m.freq.type==='daily')return true;
 if(m.freq.type==='everyN'){const s=new Date(m.start||dkey(new Date()));const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const b=new Date(date.getFullYear(),date.getMonth(),date.getDate());const diff=Math.round((b-a)/86400000);return diff>=0&&diff%(m.freq.n||1)===0;}
@@ -859,9 +848,8 @@ else if(st==='late'){chip=stChip('amber',t('stLate'));acts=`<button onclick='act
 else{chip=stChip('sky','🔜 '+fmtTime(d.time));acts=`<button onclick='act("take","${d.key}")' class="text-xs border-2 border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 font-bold text-slate-600 dark:text-slate-300">${t('took')}</button>`;}
 return `<div class="dosecard ${cls} flex flex-wrap items-center gap-3 border border-slate-200 dark:border-slate-600 rounded-xl p-3 bg-white dark:bg-slate-700">
 <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</div>
-<div class="flex-1 min-w-0"><p class="font-bold truncate">${m.name} <span class="text-xs text-slate-400 font-normal">${m.dose}</span></p>
-<p class="text-[11px] text-slate-500 dark:text-slate-400">${fmtTime(d.time)}${m.food?' · 🍽️':''}</p></div>${chip}
-<div class="flex gap-1.5 items-center flex-wrap">${acts}</div></div>`;}).join('');
+<div class="flex-1 min-w-0"><p class="font-bold text-xs truncate">${m.name} <span class="text-slate-400 font-normal">${m.dose}</span></p><p class="text-[10px] text-slate-500">${fmtTime(d.time)}</p></div>
+${chip}<div class="flex gap-1.5 items-center flex-wrap">${acts}</div></div>`;}).join('');
 const refill=S.settings.refillDays||7;
 $('medList').innerHTML=S.meds.length?S.meds.map(m=>{const pd=(m.times||[]).length||1;const dl=m.remaining!=null?Math.floor(m.remaining/pd):null;
 return `<div class="border border-slate-200 dark:border-slate-600 rounded-xl p-4 bg-white dark:bg-slate-700 hover:shadow-md transition-shadow ${m.active===false?'opacity-50':''}">
@@ -895,7 +883,7 @@ function alertDose(d){showBanner(d);notify('💊 '+d.med.name,d.med.dose);beep()
 function inQuiet(now){const h=now.getHours();return h>=23||h<7;}
 let lastAlert={water:0,stand:0,eye:0,sleepDone:false};
 function waterGoal(){return(S.reminders.water.goal||8)+((S._wxHigh||0)>=35?2:0);}
-function checkReminders(now){if(S.flareDays[dkey(now]])return;
+function checkReminders(now){if(S.flareDays[dkey(now)])return;
 const R=S.reminders;
 if(R.water.on&&S.water.c<waterGoal()&&now.getTime()-lastAlert.water>(R.water.every||120)*60000){lastAlert.water=now.getTime();softToast('💧 '+num(S.water.c)+'/'+num(waterGoal()));}
 if(R.stand.on&&now.getTime()-lastAlert.stand>(R.stand.every||90)*60000){lastAlert.stand=now.getTime();softToast('🧍');}
@@ -930,64 +918,6 @@ if(next){const mins=Math.round((next.sch-now)/60000);$('nextDoseTxt').textConten
 $('nextDoseSub').textContent=num(mins)+' min · '+num(taken)+'/'+num(doses.length);}
 else if(doses.length){$('nextDoseTxt').textContent='🎉';$('nextDoseSub').textContent=num(taken)+'/'+num(doses.length);}
 else{$('nextDoseTxt').textContent='—';$('nextDoseSub').textContent='';}}
-/* ═══ ماژول خواب (قبلاً در features.js) ═══ */
-let sleepQ=5;
-function getSleepNight(dk){return (S&&S.sleep&&S.sleep.nights&&S.sleep.nights[dk])||null;}
-function applySleepTxt(){const set=(id,txt)=>{const el=$(id);if(el)el.textContent=txt;};
-set('sleepTitle',t('sleepTitle'));set('sleepSub',t('sleepSub'));set('lastNightTitle',t('lastNightTitle'));
-set('bedLbl',t('bfBed'));set('wakeLbl',t('bfWake'));set('sqLbl',t('bfQuality'));set('wakeupsLbl',t('bfWakeups'));
-set('saveNightBtn',t('saveNightBtn'));set('napTitle',t('napTitle'));set('napStartLbl',t('napStartLbl'));
-set('napDurLbl',t('napDurLbl'));set('saveNapBtn',t('saveNapBtn'));set('napHistLbl',t('napHistLbl'));set('sleepStatsTitle',t('sleepStatsTitle'));}
-function renderSleepFaces(){const el=$('sl-faces');if(!el)return;
-const curIdx=sleepQ!=null?clamp(Math.round((10-sleepQ)/2.5),0,4):-1;
-el.innerHTML=FACES.map((f,i)=>`<button type="button" onclick="pickSleepFace(${i})" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 ${i===curIdx?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
-function pickSleepFace(i){sleepQ=(4-i)*2.5;renderSleepFaces();}
-function sleepDurMins(bed,wake){const[bh,bm]=(bed||'0:0').split(':').map(Number);const[wh,wm]=(wake||'0:0').split(':').map(Number);
-let diff=(wh*60+wm)-(bh*60+bm);if(diff<=0)diff+=1440;return diff;}
-function saveNight(){const dk=dkey(new Date());const bed=$('sl-bed').value,wake=$('sl-wake').value;
-if(!bed||!wake){toast(lang==='fa'?'ساعت خواب و بیداری را وارد کن':'Enter bedtime & wake time');return;}
-if(!S.sleep)S.sleep={nights:{},naps:[]};if(!S.sleep.nights)S.sleep.nights={};
-S.sleep.nights[dk]={bed,wake,q:sleepQ,wakeups:$('sl-wakeups').checked};
-persist();renderSleep();toast(lang==='fa'?'✔ ثبت شد':'✔ Saved');}
-function saveNap(){const start=$('nap-start').value,dur=+$('nap-dur').value||0;
-if(!dur){toast(lang==='fa'?'مدت چرت را وارد کن':'Enter nap duration');return;}
-if(!S.sleep)S.sleep={nights:{},naps:[]};if(!S.sleep.naps)S.sleep.naps=[];
-S.sleep.naps.push({dk:dkey(new Date()),start:start||'',dur});
-persist();renderSleep();toast(lang==='fa'?'✔ چرت ثبت شد':'✔ Nap saved');}
-function renderSleep(){if(!S)return;if(!S.sleep)S.sleep={nights:{},naps:[]};
-const today=getSleepNight(dkey(new Date()));
-if($('sl-bed'))$('sl-bed').value=today?today.bed:'23:30';
-if($('sl-wake'))$('sl-wake').value=today?today.wake:'07:00';
-if($('sl-wakeups'))$('sl-wakeups').checked=today?!!today.wakeups:false;
-sleepQ=today&&today.q!=null?today.q:5;
-renderSleepFaces();
-let totDur=0,cnt=0,totQ=0,cntQ=0;
-for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);const n=getSleepNight(dkey(d));
-if(n){if(n.bed&&n.wake){totDur+=sleepDurMins(n.bed,n.wake);cnt++;}if(n.q!=null){totQ+=n.q;cntQ++;}}}
-const avgH=cnt?(totDur/cnt/60):0;const avgQ=cntQ?(totQ/cntQ):null;
-if($('sleepStats'))$('sleepStats').innerHTML=`
-<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین مدت':'Avg duration'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${cnt?num(avgH.toFixed(1))+'h':'—'}</p></div>
-<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین کیفیت':'Avg quality'}</p><p class="font-display text-2xl text-teal-600 dark:text-teal-300">${avgQ!=null?num(avgQ.toFixed(1)):'—'}</p></div>
-<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'شب‌های ثبت‌شده':'Nights logged'}</p><p class="font-display text-2xl text-teal-600 dark:text-teal-300">${num(cnt)}</p></div>
-<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'چرت‌های امروز':'Naps today'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num((S.sleep.naps||[]).filter(n=>n.dk===dkey(new Date())).length)}</p></div>`;
-const naps=(S.sleep.naps||[]).slice(-7).reverse();
-if($('napHist'))$('napHist').innerHTML=naps.length?naps.map(n=>`<div class="flex justify-between bg-slate-50 dark:bg-slate-700 rounded-lg p-2"><span class="text-sm">💤 ${n.start||''} · ${num(n.dur)} ${lang==='fa'?'دقیقه':'min'}</span><span class="text-xs text-slate-400">${n.dk}</span></div>`).join(''):`<p class="text-slate-400 text-sm">—</p>`;}
-/* ═══ جبران دوزهای دیروز (قبلاً در features.js) ═══ */
-function renderCatchup(){const box=$('catchupBox');if(!box)return;
-const y=new Date();y.setDate(y.getDate()-1);const yk=dkey(y);
-const missing=todayDoses(y).filter(d=>!getLog(yk,d.key)&&(!d.med.start||d.med.start<=yk));
-if(!missing.length){box.classList.add('hidden');return;}
-box.classList.remove('hidden');
-if($('catchupTitle'))$('catchupTitle').textContent=t('catchupTitle');
-if($('catchupSub'))$('catchupSub').textContent=t('catchupSub');
-if($('catchupList'))$('catchupList').innerHTML=missing.map(d=>`<div class="flex flex-wrap items-center gap-2 bg-white dark:bg-slate-700 rounded-lg p-2 border border-amber-300 dark:border-amber-700">
-<span class="text-lg">${d.med.emoji}</span>
-<span class="flex-1 text-sm font-bold text-slate-700 dark:text-slate-200">${d.med.name} <span class="text-xs text-slate-400 font-normal">${d.med.dose} · ${fmtTime(d.time)}</span></span>
-<button onclick="catchupTake('${d.key}')" class="text-xs bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg px-3 py-1.5">${t('took')}</button>
-<button onclick="catchupSkip('${d.key}')" class="text-xs bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg px-3 py-1.5">${t('skipped')}</button>
-</div>`).join('');}
-function catchupTake(key){const y=new Date();y.setDate(y.getDate()-1);setLog(dkey(y),key,{s:'late',t:Date.now(),bf:true});persist();renderCatchup();renderMeds();renderDash();}
-function catchupSkip(key){const y=new Date();y.setDate(y.getDate()-1);setLog(dkey(y),key,{s:'skip',t:Date.now(),bf:true});persist();renderCatchup();renderMeds();renderDash();}
 /* ═══ پایبندی ═══ */
 function dayAdherence(date){const ds=todayDoses(date);if(!ds.length)return null;
 let taken=0;ds.forEach(d=>{const l=getLog(dkey(date),d.key);if(l&&(l.s==='ontime'||l.s==='late'))taken++;});
@@ -1033,7 +963,7 @@ $('timeInsight').textContent=worst&&wr>20?'💡 '+(lang==='fa'?'بیشتر در 
 const wt=$('weeklyTrend');wt.innerHTML='';
 for(let w=7;w>=0;w--){let tt=0,tk=0;for(let i=0;i<7;i++){const a=dayAdherence(new Date(Date.now()-(w*7+i)*86400000));if(a){tt+=a.total;tk+=a.taken;}}
 const p=tt?Math.round(tk/tt*100):0;
-wt.insertAdjacentHTML('beforeend',`<div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg ${p>=80?'bg-emerald-400':p>=50?'bg-amber-400':'bg-rose-400'}" style="height:${Math.max(4,p)}%"></div><span class="text-[10px] text-slate-400">${w===0?'←':num(w)}</span></div>`);}
+wt.insertAdjacentHTML('beforeend',`<div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg ${p>=80?'bg-emerald-400':p>=50?'bg-amber-400':'bg-rose-400'}" style="height:${Math.max(4,p)}%"></div><span class="text-[10px] text-slate-400">${w===0?'←':w}</span></div>`);}
 const xs=[],ys=[];
 for(let i=1;i<60;i++){const a=dayAdherence(new Date(Date.now()-i*86400000));const c=S.checkins[dkey(new Date(Date.now()-(i-1)*86400000))];
 const fat=c&&c.v?c.v.fatigue:null;if(a&&fat!=null){xs.push(1-a.pct);ys.push(fat);}}
@@ -1044,18 +974,16 @@ let chkSel={},chkTrig=new Set();
 const FACES=['😄','🙂','😐','🙁','😞'];
 function trigList(){return lang==='fa'?['استرس','گرمای زیاد','خواب بد','عفونت','قاعدگی','سرما','مسافرت']:['Stress','Heat','Bad sleep','Infection','Period','Cold','Travel'];}
 function activeSyms(){return S.symptoms.filter(s=>s.active!==false);}
-function afterCheckRender(){const el=$('entryCount');if(!el)return;const today=S.checkins[dkey(new Date())];
-if(today){el.classList.remove('hidden');el.textContent=t('alreadyChecked');}else el.classList.add('hidden');}
 function renderCheck(){const today=S.checkins[dkey(new Date())];$('checkDone').classList.toggle('hidden',!today);
 const box=$('emoRows');box.innerHTML='';chkTrig=new Set(today&&today.trig?today.trig:[]);
 activeSyms().forEach(s=>{let idx=2;if(today&&today.v&&today.v[s.id]!=null){const sev=s.good?(10-today.v[s.id]):today.v[s.id];idx=clamp(Math.round(sev/2.5),0,4);}chkSel[s.id]=idx;
-box.insertAdjacentHTML('beforeend',`<div class="flex items-center justify-between gap-3 py-2 border-b border-slate-100 dark:border-slate-700">
+box.insertAdjacentHTML('beforeend',`<div class="flex items-center justify-between gap-3 py-3 border-b border-slate-100 dark:border-slate-700">
 <span class="font-bold text-xs sm:text-sm w-20 sm:w-32 shrink-0">${symLabel(s)}</span>
 <div class="flex gap-1 sm:gap-1.5" id="faces-${s.id}">${FACES.map((f,i)=>`<button type="button" onclick="pickFace('${s.id}',${i})" class="face w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl text-lg sm:text-2xl flex items-center justify-center border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 transition-all hover:scale-110 hover:border-teal-400">${f}</button>`).join('')}</div></div>`);});
 applyFaces();renderTrigChips();$('noteTxt').value=today?today.note||'':'';}
 function renderTrigChips(){$('trigChips').innerHTML=trigList().map(tr=>`<button type="button" onclick="toggleTrig('${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${chkTrig.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
 function toggleTrig(tr){chkTrig.has(tr)?chkTrig.delete(tr):chkTrig.add(tr);renderTrigChips();}
-function applyFaces(){activeSyms().forEach(s=>{const c=$('faces-'+s.id);if(!c)return;[...c.children].forEach((b,i)=>{const on=i===chkSel[s.id];b.classList.toggle('border-teal-600',on);b.classList.toggle('bg-teal-50',on);b.classList.toggle('scale-110',on);b.classList.toggle('opacity-60',!on);});});}
+function applyFaces(){activeSyms().forEach(s=>{const c=$('faces-'+s.id);if(!c)return;[...c.children].forEach((b,i)=>{const on=i===chkSel[s.id];b.classList.toggle('border-teal-600',on);b.classList.toggle('bg-teal-50',on);b.classList.toggle('scale-110',on);b.classList.toggle('opacity-50',!on);});});}
 function pickFace(id,i){chkSel[id]=i;applyFaces();}
 function copyYesterday(){const y=new Date();y.setDate(y.getDate()-1);const e=S.checkins[dkey(y)];if(!e||!e.v)return toast(lang==='fa'?'دیروز ثبتی نیست':'Nothing yesterday');
 activeSyms().forEach(s=>{if(e.v[s.id]!=null){const sev=s.good?(10-e.v[s.id]):e.v[s.id];chkSel[s.id]=clamp(Math.round(sev/2.5),0,4);}});
@@ -1101,11 +1029,11 @@ function renderMonitor(){const today=dkey(new Date());
 $('monitorList').innerHTML=S.monitor.length?S.monitor.map(m=>{const overdue=!m.done&&m.due<today;
 return `<label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700 cursor-pointer">
 <input type="checkbox" ${m.done?'checked':''} onchange="toggleMonitor('${m.id}',this.checked)" class="w-5 h-5 accent-teal-600">
-<div class="flex-1"><b class="text-sm text-slate-700 dark:text-slate-200">${m.title}</b> <span class="text-xs text-slate-500 dark:text-slate-400">— ${m.due}</span></div>
+<div class="flex-1"><b>${m.title}</b> <span class="text-xs text-slate-500 dark:text-slate-400">— ${m.due}</span></div>
 ${overdue?`<span class="text-[11px] font-bold bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full px-2.5 py-1">${lang==='fa'?'عقب‌افتاده':'Overdue'}</span>`:''}
 <button onclick="delMonitor('${m.id}')" class="text-rose-400 hover:text-rose-600">🗑️</button></label>`;}).join(''):`<p class="text-slate-400 text-sm">${t('monitorSub')}</p>`;}
-function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();if(curTab==='backfill')renderBackfill();}
-function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();if(curTab==='backfill')renderBackfill();}
+function toggleMonitor(id,v){const m=S.monitor.find(x=>x.id===id);m.done=v;persist();renderMonitor();renderFlags();}
+function delMonitor(id){S.monitor=S.monitor.filter(x=>x.id!==id);persist();renderMonitor();}
 /* ═══ تریاژ ═══ */
 let tri={step:0,symptom:'',duration:'',triggers:[],severity:5};
 function renderTriage(){const b=$('triageBox');
@@ -1263,8 +1191,7 @@ const CONCERNS=[['fatigue','خستگی','Fatigue'],['pain','درد','Pain'],['co
 function renderReport(){const items=activeSyms().filter(s=>!s.good).slice(0,6);
 $('repSymp').innerHTML=items.map(s=>{const vals=Object.values(S.checkins).map(e=>e.v?e.v[s.id]:null).filter(v=>v!=null);
 const avg=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;const pct=avg?avg*10:0;
-return `<div><div class="flex justify-between text-xs mb-1"><b>${symLabel(s)}</b><span class="text-slate-500 dark:text-slate-400">${avg!=null?num(avg.toFixed(1))+'/10':'—'}</span></div>
-<div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden"><div class="fill h-full rounded-full" style="background:${s.color}" data-val="${pct}"></div></div></div>`;}).join('');
+return `<div class="h-2 bg-slate-100 dark:bg-slate-600 rounded-full overflow-hidden"><div class="fill h-full rounded-full" style="background:${s.color}" data-val="${pct}"></div></div></div>`;}).join('');
 setTimeout(()=>document.querySelectorAll('#repSymp .fill').forEach(f=>f.style.width=f.dataset.val+'%'),300);
 const cmap={};CONCERNS.forEach(([k,fa,en])=>cmap[k]=lang==='fa'?fa:en);
 $('repConcerns').innerHTML=(S.profile.concerns||[]).length?S.profile.concerns.map(c=>`<span class="bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-sm">${cmap[c]||c}</span>`).join(''):`<span class="text-teal-300 text-sm">—</span>`;
@@ -1273,126 +1200,6 @@ function renderConcernChips(id,set){const el=$(id);el.innerHTML='';
 CONCERNS.forEach(([k,fa,en])=>{const b=document.createElement('button');b.type='button';
 b.className='text-sm rounded-full px-3 py-1.5 border-2 transition-all '+(set.has(k)?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 font-bold text-teal-800 dark:text-teal-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300');
 b.textContent=lang==='fa'?fa:en;b.onclick=()=>{set.has(k)?set.delete(k):set.add(k);renderConcernChips(id,set);};el.appendChild(b);});}
-/* ══════════ کامل‌کردن روزهای خالی (Backfill) ══════════ */
-let bfRange=14,bfCheckinSel={},bfTrigSel={},bfSleepQIdx={};
-function bfDays(){const days=[];const now=new Date();
-for(let i=bfRange-1;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);days.push(d);}return days;}
-function bfMissingDoses(d){const dk=dkey(d);const isToday=dk===dkey(new Date());
-return todayDoses(d).filter(dose=>{
-if(getLog(dk,dose.key))return false;
-const m=dose.med;if(m.start&&m.start>dk)return false;
-if(isToday)return doseStatus(dose,new Date())==='miss';
-return true;});}
-function setBfRange(r){bfRange=r;renderBackfill();}
-function bfToggle(id){const el=$('bf-'+id);if(el)el.classList.toggle('hidden');}
-function renderBackfill(){if(!S)return;
-if($('bfRangeBtns'))$('bfRangeBtns').innerHTML=[7,14,30,60].map(r=>`<button onclick="setBfRange(${r})" class="text-xs rounded-full px-3 py-1 border transition-all ${r===bfRange?'bg-teal-600 text-white border-teal-600':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-teal-400'}">${num(r)}</button>`).join('');
-const days=bfDays();
-const missChk=days.filter(d=>!S.checkins[dkey(d)]);
-const doseDays=[];let doseTotal=0;
-days.forEach(d=>{const md=bfMissingDoses(d);if(md.length){doseDays.push({d,doses:md});doseTotal+=md.length;}});
-const missSleep=days.filter(d=>!getSleepNight(dkey(d)));
-const overdueMon=S.monitor.filter(m=>!m.done&&m.due<dkey(new Date()));
-if($('bfSummary'))$('bfSummary').innerHTML=
-bfSumCard('✍️',missChk.length,t('bfChk'),'text-teal-700 dark:text-teal-300')+
-bfSumCard('💊',doseTotal,t('bfDose'),'text-emerald-700 dark:text-emerald-300')+
-bfSumCard('😴',missSleep.length,t('bfSleepT'),'text-sky-700 dark:text-sky-300')+
-bfSumCard('📅',overdueMon.length,t('bfMon'),'text-rose-700 dark:text-rose-300');
-renderBfCheckins(missChk);renderBfDoses(doseDays);renderBfSleep(missSleep);renderBfMonitors(overdueMon);}
-function bfSumCard(icon,count,label,cls){return `<div class="bg-white dark:bg-slate-800 rounded-xl border border-teal-900/10 dark:border-slate-700 shadow-sm p-4 text-center"><p class="text-2xl">${icon}</p><p class="font-display text-3xl ${cls}">${num(count)}</p><p class="text-[11px] text-slate-500 dark:text-slate-400">${label}</p></div>`;}
-function renderBfCheckins(missChk){const el=$('bfCheckins');if(!el)return;
-let html=`<div class="flex items-center justify-between mb-3"><h3 class="font-bold">✍️ ${t('bfChk')}</h3><span class="text-xs text-slate-400">${num(missChk.length)}</span></div>`;
-if(!missChk.length){el.innerHTML=html+`<p class="text-sm text-emerald-600 dark:text-emerald-400">${t('bfNone')}</p>`;return;}
-missChk.forEach(d=>{const dk=dkey(d);
-html+=`<div class="border border-slate-200 dark:border-slate-600 rounded-xl mb-2 overflow-hidden">
-<button onclick="bfToggle('chk-${dk}')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700">
-<span class="font-bold text-sm text-slate-700 dark:text-slate-200">${fdate(d,{weekday:'long',day:'numeric',month:'long'})}</span>
-<span class="text-xs text-teal-600 dark:text-teal-400 font-bold">${t('bfComplete')} ▾</span>
-</button>
-<div id="bf-chk-${dk}" class="hidden p-3 border-t border-slate-100 dark:border-slate-700">
-<div class="space-y-2">`+
-activeSyms().map(s=>`<div class="flex items-center justify-between gap-3 py-2 border-b border-slate-100 dark:border-slate-700">
-<span class="font-bold text-xs sm:text-sm w-20 sm:w-32 shrink-0">${symLabel(s)}</span>
-<div class="flex gap-1 flex-wrap" id="bf-faces-${dk}-${s.id}">${bfFacesHTML(dk,s.id)}</div>
-</div>`).join('')+
-`</div>
-<div class="mt-3"><p class="text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">${t('triggers')}</p><div class="flex flex-wrap gap-2" id="bf-trig-${dk}">${bfTrigChipsHTML(dk)}</div></div>
-<textarea id="bf-note-${dk}" rows="2" class="mt-3 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl p-3 text-sm outline-none resize-none" placeholder="${t('bfNote')}"></textarea>
-<button onclick="bfSaveCheckin('${dk}')" class="mt-3 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-2.5">${t('bfSave')}</button>
-</div>
-</div>`;});
-el.innerHTML=html;}
-function bfFacesHTML(dk,symId){const sel=bfCheckinSel[dk]||{};const cur=sel[symId]!=null?sel[symId]:-1;
-return FACES.map((f,i)=>`<button type="button" onclick="bfPickFace('${dk}','${symId}',${i})" class="face w-8 h-8 sm:w-10 sm:h-10 rounded-lg text-lg flex items-center justify-center border-2 ${i===cur?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
-function bfPickFace(dk,symId,idx){if(!bfCheckinSel[dk])bfCheckinSel[dk]={};bfCheckinSel[dk][symId]=idx;
-const c=$('bf-faces-'+dk+'-'+symId);if(c)c.innerHTML=bfFacesHTML(dk,symId);}
-function bfTrigChipsHTML(dk){const sel=bfTrigSel[dk]||new Set();
-return trigList().map(tr=>`<button type="button" onclick="bfToggleTrig('${dk}','${tr}')" class="text-xs rounded-full px-3 py-1.5 border-2 transition-all ${sel.has(tr)?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`).join('');}
-function bfToggleTrig(dk,tr){if(!bfTrigSel[dk])bfTrigSel[dk]=new Set();const s=bfTrigSel[dk];s.has(tr)?s.delete(tr):s.add(tr);
-const c=$('bf-trig-'+dk);if(c)c.innerHTML=bfTrigChipsHTML(dk);}
-function bfSaveCheckin(dk){const sel=bfCheckinSel[dk]||{};const v={};let anySet=false;
-activeSyms().forEach(s=>{if(sel[s.id]!=null){const sev=sel[s.id]*2.5;v[s.id]=s.good?(10-sev):sev;anySet=true;}});
-if(!anySet){toast(lang==='fa'?'حداقل یک مورد را انتخاب کن':'Select at least one item');return;}
-const trig=[...(bfTrigSel[dk]||[])];const noteEl=$('bf-note-'+dk);const note=noteEl?noteEl.value.trim():'';
-S.checkins[dk]={v,note,trig};persist();toast('✔ '+(lang==='fa'?'ثبت شد':'Saved'));
-renderAll();renderBackfill();}
-function renderBfDoses(doseDays){const el=$('bfDoses');if(!el)return;
-const total=doseDays.reduce((a,x)=>a+x.doses.length,0);
-let html=`<div class="flex items-center justify-between mb-3"><h3 class="font-bold">💊 ${t('bfDose')}</h3><span class="text-xs text-slate-400">${num(total)}</span></div>`;
-if(!doseDays.length){el.innerHTML=html+`<p class="text-sm text-emerald-600 dark:text-emerald-400">${t('bfNone')}</p>`;return;}
-doseDays.forEach(({d,doses})=>{const dk=dkey(d);
-html+=`<div class="border border-slate-200 dark:border-slate-600 rounded-xl mb-2 p-3">
-<p class="font-bold text-sm text-slate-700 dark:text-slate-200 mb-2">${fdate(d,{weekday:'long',day:'numeric',month:'long'})}</p>
-<div class="space-y-2">`+
-doses.map(dose=>`<div class="flex flex-wrap items-center gap-2 bg-slate-50 dark:bg-slate-700 rounded-lg p-2">
-<span class="text-lg">${dose.med.emoji}</span>
-<span class="flex-1 text-sm font-bold text-slate-700 dark:text-slate-200">${dose.med.name} <span class="text-xs text-slate-400 font-normal">${dose.med.dose} · ${fmtTime(dose.time)}</span></span>
-<button onclick="bfDoseTake('${dk}','${dose.key}')" class="text-xs bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg px-3 py-1.5">${t('bfTaken')}</button>
-<button onclick="bfDoseSkip('${dk}','${dose.key}')" class="text-xs bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg px-3 py-1.5">${t('bfNotTaken')}</button>
-</div>`).join('')+
-`</div></div>`;});
-el.innerHTML=html;}
-function bfDoseTake(dk,key){setLog(dk,key,{s:'late',t:Date.now(),bf:true});persist();renderAll();renderBackfill();}
-function bfDoseSkip(dk,key){setLog(dk,key,{s:'skip',t:Date.now(),bf:true});persist();renderAll();renderBackfill();}
-function renderBfSleep(missSleep){const el=$('bfSleep');if(!el)return;
-let html=`<div class="flex items-center justify-between mb-3"><h3 class="font-bold">😴 ${t('bfSleepT')}</h3><span class="text-xs text-slate-400">${num(missSleep.length)}</span></div>`;
-if(!missSleep.length){el.innerHTML=html+`<p class="text-sm text-emerald-600 dark:text-emerald-400">${t('bfNone')}</p>`;return;}
-missSleep.forEach(d=>{const dk=dkey(d);
-html+=`<div class="border border-slate-200 dark:border-slate-600 rounded-xl mb-2 overflow-hidden">
-<button onclick="bfToggle('slp-${dk}')" class="w-full flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700">
-<span class="font-bold text-sm text-slate-700 dark:text-slate-200">${fdate(d,{weekday:'long',day:'numeric',month:'long'})}</span>
-<span class="text-xs text-teal-600 dark:text-teal-400 font-bold">${t('bfComplete')} ▾</span>
-</button>
-<div id="bf-slp-${dk}" class="hidden p-3 border-t border-slate-100 dark:border-slate-700">
-<div class="grid grid-cols-2 gap-3">
-<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300">${t('bfBed')}</label><input type="time" id="bf-bed-${dk}" value="23:30" class="mt-1 w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none"></div>
-<div><label class="text-xs font-bold text-slate-600 dark:text-slate-300">${t('bfWake')}</label><input type="time" id="bf-wake-${dk}" value="07:00" class="mt-1 w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-xl px-3 py-2.5 outline-none"></div>
-</div>
-<div class="mt-3"><label class="text-xs font-bold text-slate-600 dark:text-slate-300">${t('bfQuality')}</label><div class="flex gap-1 mt-1" id="bf-sleepq-${dk}">${bfSleepFacesHTML(dk)}</div></div>
-<label class="flex items-center gap-2 text-sm mt-3"><input type="checkbox" id="bf-wakeups-${dk}" class="w-5 h-5 accent-teal-600"><span class="text-slate-600 dark:text-slate-300">${t('bfWakeups')}</span></label>
-<button onclick="bfSaveSleep('${dk}')" class="mt-3 w-full bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl py-2.5">${t('bfSave')}</button>
-</div>
-</div>`;});
-el.innerHTML=html;}
-function bfSleepFacesHTML(dk){const cur=bfSleepQIdx[dk]!=null?bfSleepQIdx[dk]:-1;
-return FACES.map((f,i)=>`<button type="button" onclick="bfPickSleepQ('${dk}',${i})" class="face w-9 h-9 rounded-lg text-xl flex items-center justify-center border-2 ${i===cur?'border-teal-600 bg-teal-50 dark:bg-teal-900/40 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
-function bfPickSleepQ(dk,idx){bfSleepQIdx[dk]=idx;const c=$('bf-sleepq-'+dk);if(c)c.innerHTML=bfSleepFacesHTML(dk);}
-function bfSaveSleep(dk){const bedEl=$('bf-bed-'+dk),wakeEl=$('bf-wake-'+dk),wuEl=$('bf-wakeups-'+dk);
-const bed=bedEl?bedEl.value:'',wake=wakeEl?wakeEl.value:'';
-if(!bed||!wake){toast(lang==='fa'?'ساعت خواب و بیداری را وارد کن':'Enter bedtime & wake time');return;}
-const qIdx=bfSleepQIdx[dk]!=null?bfSleepQIdx[dk]:2;const q=(4-qIdx)*2.5;
-if(!S.sleep)S.sleep={nights:{},naps:[]};if(!S.sleep.nights)S.sleep.nights={};
-S.sleep.nights[dk]={bed,wake,q,wakeups:wuEl?wuEl.checked:false};
-persist();toast('✔ '+(lang==='fa'?'ثبت شد':'Saved'));renderAll();renderBackfill();}
-function renderBfMonitors(overdueMon){const el=$('bfMonitors');if(!el)return;
-let html=`<div class="flex items-center justify-between mb-3"><h3 class="font-bold">📅 ${t('bfMon')}</h3><span class="text-xs text-slate-400">${num(overdueMon.length)}</span></div>`;
-if(!overdueMon.length){el.innerHTML=html+`<p class="text-sm text-emerald-600 dark:text-emerald-400">${t('bfNone')}</p>`;return;}
-html+=`<div class="space-y-2">`+overdueMon.map(m=>`<label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-teal-50 dark:hover:bg-slate-700 cursor-pointer">
-<input type="checkbox" onchange="toggleMonitor('${m.id}',this.checked)" class="w-5 h-5 accent-teal-600">
-<div class="flex-1"><b class="text-sm text-slate-700 dark:text-slate-200">${m.title}</b> <span class="text-xs text-rose-500">— ${m.due}</span></div>
-</label>`).join('')+`</div>`;
-el.innerHTML=html;}
-/* ══════════ پایان کامل‌کردن ══════════ */
 /* ═══ تنظیمات ═══ */
 function populateProfile(){const p=S.profile;
 $('pf-name').value=p.name||'';$('pf-age').value=p.age||'';$('pf-height').value=p.height||'';$('pf-weight').value=p.weight||'';
@@ -1426,14 +1233,14 @@ const quota=5*1024*1024;const free=Math.max(0,quota-used);
 const usedKB=Math.round(used/1024),freeKB=Math.round(free/1024);
 if($('storageUsed'))$('storageUsed').textContent=num(usedKB)+' KB';
 if($('storageFree'))$('storageFree').textContent='~'+num(freeKB)+' KB';
-if($('lastBackupTxt'))$('lastBackupTxt').textContent=S&&S.lastBackup?fdate(new Date(S.lastBackup),{dateStyle:'medium'}):t('never');
+if($('lastBackupTxt'))$('lastBackupTxt').textContent=S.lastBackup?fdate(new Date(S.lastBackup),{dateStyle:'medium'}):t('never');
 const low=freeKB<500||used>quota*0.8;const w=$('storageWarn');
 if(w){w.classList.toggle('hidden',!low);
 if(low)w.textContent='⚠️ '+(lang==='fa'?'فضای ذخیره‌سازی رو به اتمامه ('+num(freeKB)+' KB مونده) — پشتیبان بگیر و داده‌های قدیمی رو پاک کن':'Storage nearly full ('+num(freeKB)+' KB left) — back up now');}}
 function clearPart(k){if(!confirm(lang==='fa'?'پاک شود؟':'Clear?'))return;
 if(k==='dose')S.doseLog={};if(k==='check')S.checkins={};if(k==='triage')S.triage=[];
 persist();renderAll();toast('🗑️');}
-function checkBackupPrompt(){if(S&&S.lastBackup){const days=Math.floor((Date.now()-S.lastBackup)/86400000);
+function checkBackupPrompt(){if(S.lastBackup){const days=Math.floor((Date.now()-S.lastBackup)/86400000);
 if(days>30){$('backupMsg').textContent=(lang==='fa'?num(days)+' روز از آخرین پشتیبان گذشته':num(days)+' days since last backup');$('backupBanner').classList.remove('hidden');}}
 else{$('backupMsg').textContent=lang==='fa'?'هنوز پشتیبان نگرفته‌ای':'No backup yet';$('backupBanner').classList.remove('hidden');}}
 function exportVault(){const raw=localStorage.getItem(VAULT_KEY);if(!raw)return;
@@ -1482,12 +1289,188 @@ ${S.meds.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">💊
 <h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">📈</h2><table class="w-full text-sm mb-4"><tbody>${symRows||'<tr><td class="text-slate-400 py-2">—</td></tr>'}</tbody></table>
 ${S.reviews.length?`<h2 class="font-bold border-b-2 border-teal-700 pb-1 mb-2">🪞</h2><p class="text-sm mb-4">✅ ${S.reviews[0].good||'—'} · 😓 ${S.reviews[0].hard||'—'} · 🎯 ${S.reviews[0].goal||'—'}</p>`:''}`;}
 window.addEventListener('beforeprint',buildDigest);
+/* ═══ خواب و چرت ═══ */
+let slQ=2;
+function sleepTxt(){const fa=lang==='fa';return{
+title:fa?'مانیتور خواب و چرت':'Sleep & nap monitor',
+sub:fa?'خواب دیشب و چرت‌های امروز را ثبت کن':'Log last night and today\'s naps',
+last:fa?'خواب دیشب':'Last night',bed:fa?'ساعت خواب':'Bedtime',wake:fa?'ساعت بیداری':'Wake time',
+sq:fa?'کیفیت خواب':'Sleep quality',wu:fa?'بیداری‌های مکرر داشتم':'I woke up multiple times',
+saveN:fa?'ثبت خواب دیشب':'Save last night',nap:fa?'چرت امروز':'Today\'s nap',
+ns:fa?'شروع':'Start',nd:fa?'مدت (دقیقه)':'Duration (min)',saveNap:fa?'ثبت چرت':'Save nap',
+hist:fa?'چرت‌های اخیر':'Recent naps',stats:fa?'آمار خواب (۷ روز)':'Sleep stats (7d)'};}
+function applySleepTxt(){const x=sleepTxt();
+$('sleepTitle').textContent=x.title;$('sleepSub').textContent=x.sub;$('lastNightTitle').textContent=x.last;
+$('bedLbl').textContent=x.bed;$('wakeLbl').textContent=x.wake;$('sqLbl').textContent=x.sq;
+$('wakeupsLbl').textContent=x.wu;$('saveNightBtn').textContent=x.saveN;$('napTitle').textContent=x.nap;
+$('napStartLbl').textContent=x.ns;$('napDurLbl').textContent=x.nd;$('saveNapBtn').textContent=x.saveNap;
+$('napHistLbl').textContent=x.hist;$('sleepStatsTitle').textContent=x.stats;renderSleepFaces();renderSleep();}
+function renderSleepFaces(){$('sl-faces').innerHTML=FACES.map((f,i)=>`<button type="button" onclick="slQ=${i};renderSleepFaces()" class="face w-11 h-11 rounded-xl text-2xl flex items-center justify-center border-2 ${slQ===i?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 opacity-60'} transition-all hover:scale-110">${f}</button>`).join('');}
+function sleepDur(bed,wake){const[bh,bm]=bed.split(':').map(Number);const[wh,wm]=wake.split(':').map(Number);
+let mins=(wh*60+wm)-(bh*60+bm);if(mins<=0)mins+=1440;return mins;}
+function saveNight(){const bed=$('sl-bed').value,wake=$('sl-wake').value;
+if(!bed||!wake)return toast(lang==='fa'?'ساعت خواب و بیداری را وارد کن':'Enter bed & wake times');
+const dk=dkey(new Date());const mins=sleepDur(bed,wake);
+S.sleepData=S.sleepData||{nights:[],naps:[]};
+S.sleepData.nights=(S.sleepData.nights||[]).filter(n=>n.dk!==dk);
+S.sleepData.nights.push({dk,bed,wake,mins,q:slQ,wakeups:$('sl-wakeups').checked});
+persist();renderSleep();toast('🌙 '+(lang==='fa'?'خواب دیشب ثبت شد':'Last night saved'));}
+function saveNap(){const st=$('nap-start').value;const dur=+$('nap-dur').value||30;const dk=dkey(new Date());
+S.sleepData=S.sleepData||{nights:[],naps:[]};S.sleepData.naps=S.sleepData.naps||[];
+S.sleepData.naps.push({dk,t:st||new Date().toTimeString().slice(0,5),dur});
+if(S.sleepData.naps.length>200)S.sleepData.naps=S.sleepData.naps.slice(-200);
+persist();renderSleep();toast('💤 '+(lang==='fa'?'چرت ثبت شد':'Nap logged'));}
+function renderSleep(){S.sleepData=S.sleepData||{nights:[],naps:[]};
+const nights=(S.sleepData.nights||[]).slice(-7);
+const avgM=nights.length?Math.round(nights.reduce((a,n)=>a+(n.mins||0),0)/nights.length):0;
+const avgQ=nights.length?(nights.reduce((a,n)=>a+(4-(n.q!=null?n.q:2)),0)/nights.length):0;
+const todayDk=dkey(new Date());
+const napsToday=(S.sleepData.naps||[]).filter(n=>n.dk===todayDk);
+const napMin=napsToday.reduce((a,n)=>a+(n.dur||0),0);
+$('sleepStats').innerHTML=`
+<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین خواب':'Avg sleep'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${avgM?Math.floor(avgM/60)+'h'+(avgM%60):'—'}</p></div>
+<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'میانگین کیفیت':'Avg quality'}</p><p class="font-display text-2xl text-teal-800 dark:text-teal-300">${nights.length?avgQ.toFixed(1)+' / 4':'—'}</p></div>
+<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'چرت امروز':'Naps today'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napsToday.length)}</p></div>
+<div class="bg-slate-50 dark:bg-slate-700 rounded-xl p-3 text-center"><p class="text-[11px] text-slate-500 dark:text-slate-400">${lang==='fa'?'دقیقه چرت':'Nap minutes'}</p><p class="font-display text-2xl text-sky-600 dark:text-sky-300">${num(napMin)}</p></div>`;
+$('napHist').innerHTML=napsToday.length?napsToday.map(n=>`<div class="flex justify-between bg-slate-50 dark:bg-slate-700 rounded-lg p-2 text-sm"><span>💤 ${n.t}</span><span class="text-slate-500 dark:text-slate-400">${num(n.dur)} ${lang==='fa'?'دقیقه':'min'}</span></div>`).join(''):`<p class="text-slate-400 text-sm">—</p>`;}
+/* ═══ جبران دیروز (داخل دارویار) ═══ */
+function renderCatchup(){const y=new Date();y.setDate(y.getDate()-1);const yk=dkey(y);
+const doses=todayDoses(y).filter(d=>!getLog(yk,d.key));
+const box=$('catchupBox');if(!box)return;
+if(!doses.length){box.classList.add('hidden');return;}
+box.classList.remove('hidden');
+$('catchupTitle').textContent=lang==='fa'?'دوزهای ثبت‌نشده‌ی دیروز':'Yesterday\'s unlogged doses';
+$('catchupSub').textContent=lang==='fa'?'اگر دیشب فراموش کردی ثبت کنی، همین‌جا جبران کن':'If you forgot to log last night, catch up here';
+$('catchupList').innerHTML=doses.map(d=>{const m=d.med;
+return `<div class="flex flex-wrap items-center gap-2 border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-700 rounded-lg p-2.5">
+<span class="w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</span>
+<div class="flex-1 min-w-0"><p class="font-bold text-xs truncate">${m.name} <span class="text-slate-400 font-normal">${m.dose}</span></p><p class="text-[10px] text-slate-500">${fmtTime(d.time)}</p></div>
+<button onclick="catchupAct('${d.key}','take')" class="text-xs bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg px-3 py-1.5">${t('took')}</button>
+<button onclick="catchupAct('${d.key}','skip')" class="text-xs bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg px-3 py-1.5">${t('skipped')}</button></div>`;}).join('');}
+function catchupAct(key,action){const y=new Date();y.setDate(y.getDate()-1);const yk=dkey(y);
+if(action==='take')setLog(yk,key,{s:'late',t:Date.now()});else setLog(yk,key,{s:'skip',t:Date.now()});
+persist();renderCatchup();renderMeds();renderDash();renderAdh();
+toast(action==='take'?'⏱️ '+(lang==='fa'?'برای دیروز ثبت شد':'Logged for yesterday'):'⏭️');}
+function afterCheckRender(){try{const el=$('entryCount');if(!el)return;
+const has=!!S.checkins[dkey(new Date())];
+el.classList.toggle('hidden',!has);}catch(e){}}
+/* ═══ جبران روزهای فراموش‌شده (تب جدید) ═══ */
+let missedRange=14;
+let missedState={};
+function missedInitDay(dk){if(!missedState[dk]){
+missedState[dk]={checkin:{sel:{},trig:new Set(),note:''},sleep:{bed:'23:30',wake:'07:00',q:2,wakeups:false},open:false};
+activeSyms().forEach(s=>{missedState[dk].checkin.sel[s.id]=2;});}
+return missedState[dk];}
+function getDayMissing(dk){const missing={checkin:false,sleep:false,doses:[]};
+if(!S.checkins[dk])missing.checkin=true;
+if(!((S.sleepData&&S.sleepData.nights||[]).find(n=>n.dk===dk)))missing.sleep=true;
+const doses=todayDoses(dkToDate(dk));
+doses.forEach(d=>{const m=d.med;
+if(m.start&&dk<m.start)return;
+if(!getLog(dk,d.key))missing.doses.push(d);});
+return missing;}
+function missedToggle(dk,open){const st=missedInitDay(dk);st.open=open;}
+function renderMissed(){ensureState();const box=$('missedList');const sum=$('missedSummary');if(!box)return;
+let daysHtml='';let totalDays=0,totalCheckin=0,totalSleep=0,totalDoses=0;
+const today=new Date();
+for(let i=1;i<=missedRange;i++){const d=new Date(today);d.setDate(d.getDate()-i);const dk=dkey(d);
+const missing=getDayMissing(dk);
+if(!(missing.checkin||missing.sleep||missing.doses.length>0))continue;
+totalDays++;if(missing.checkin)totalCheckin++;if(missing.sleep)totalSleep++;totalDoses+=missing.doses.length;
+daysHtml+=renderMissedDay(dk,d,missing);}
+const overdueMon=(S.monitor||[]).filter(m=>!m.done&&m.due<dkey(new Date()));
+let monHtml='';
+if(overdueMon.length){monHtml+=`<div class="rounded-xl border-2 border-rose-300 dark:border-rose-700 bg-rose-50 dark:bg-rose-900/20 p-4">
+<h3 class="font-bold text-rose-700 dark:text-rose-300 mb-2">📅 ${t('missedMonitors')} (${num(overdueMon.length)})</h3>`;
+overdueMon.forEach(m=>{monHtml+=`<div class="flex items-center gap-2 py-1.5 border-b border-rose-200 dark:border-rose-800 last:border-0">
+<div class="flex-1"><b class="text-sm">${m.title}</b> <span class="text-xs text-slate-500">— ${m.due}</span></div>
+<button onclick="missedMonitorDone('${m.id}')" class="text-xs bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-3 py-1.5">${t('missedMarkDone')}</button></div>`;});
+monHtml+=`</div>`;}
+if(totalDays===0&&!overdueMon.length){
+sum.innerHTML=`🎉 <b>${t('missedNone')}</b> — ${t('missedNoneSub')}`;box.innerHTML='';return;}
+let sumTxt=`🩹 <b>${num(totalDays)}</b> ${t('missedDaysWord')} · ✍️ ${num(totalCheckin)} ${t('checkinShort')} · 😴 ${num(totalSleep)} ${t('sleepShort')} · 💊 ${num(totalDoses)} ${t('doseShort')}`;
+if(overdueMon.length)sumTxt+=` · 📅 ${num(overdueMon.length)} ${t('missedMonitors')}`;
+sum.innerHTML=sumTxt;
+box.innerHTML=monHtml+(totalDays?`<div class="space-y-4">${daysHtml}</div>`:'');}
+function renderMissedDay(dk,d,missing){const st=missedInitDay(dk);
+const badges=[];
+if(missing.checkin)badges.push(`<span class="inline-flex items-center gap-1 text-[11px] font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 rounded-full px-2 py-0.5">✍️ ${t('checkinShort')}</span>`);
+if(missing.sleep)badges.push(`<span class="inline-flex items-center gap-1 text-[11px] font-bold bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 rounded-full px-2 py-0.5">😴 ${t('sleepShort')}</span>`);
+if(missing.doses.length)badges.push(`<span class="inline-flex items-center gap-1 text-[11px] font-bold bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 rounded-full px-2 py-0.5">💊 ${num(missing.doses.length)} ${t('doseShort')}</span>`);
+let inner='';
+if(missing.checkin)inner+=renderMissedCheckin(dk);
+if(missing.sleep)inner+=renderMissedSleep(dk);
+if(missing.doses.length)inner+=renderMissedDoses(dk,missing);
+return `<details class="missed-day rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm overflow-hidden" ${st.open?'open':''} ontoggle="missedToggle('${dk}',this.open)">
+<summary class="cursor-pointer select-none p-4 flex flex-wrap items-center justify-between gap-2 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<div class="flex flex-wrap items-center gap-2"><span class="font-display text-lg text-teal-900 dark:text-teal-300">${fdate(d,{weekday:'long',day:'numeric',month:'long'})}</span><div class="flex flex-wrap gap-1">${badges.join('')}</div></div>
+<span class="text-slate-400 text-sm">▾</span></summary>
+<div class="p-4 pt-3 space-y-4 border-t border-slate-100 dark:border-slate-700">${inner}</div></details>`;}
+function renderMissedCheckin(dk){const st=missedState[dk].checkin;let h=`<div class="missed-block"><h4>✍️ ${t('missedFillCheckin')}</h4>`;
+activeSyms().forEach(s=>{const sel=st.sel[s.id]!=null?st.sel[s.id]:2;
+h+=`<div class="flex items-center justify-between gap-2 py-2 border-b border-slate-200/60 dark:border-slate-600/50">
+<span class="font-bold text-xs w-24 shrink-0">${symLabel(s)}</span><div class="flex gap-1">`;
+FACES.forEach((f,idx)=>{const on=idx===sel;
+h+=`<button type="button" id="mf-${dk}-${s.id}-${idx}" onclick="missedPick('${dk}','${s.id}',${idx})" class="face w-8 h-8 rounded-lg text-lg flex items-center justify-center border-2 ${on?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 opacity-60'}">${f}</button>`;});
+h+=`</div></div>`;});
+h+=`<div class="mt-3"><p class="text-xs font-bold mb-1">${t('triggers')}</p><div class="flex flex-wrap gap-1.5">`;
+trigList().forEach((tr,ti)=>{const on=st.trig.has(tr);
+h+=`<button type="button" id="mt-${dk}-${ti}" onclick="missedTrig('${dk}',${ti})" class="text-xs rounded-full px-2.5 py-1 border-2 ${on?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}">${tr}</button>`;});
+h+=`</div></div>`;
+h+=`<textarea id="missedNote-${dk}" rows="1" oninput="missedNote('${dk}',this.value)" class="mt-2 w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg p-2 text-sm" placeholder="${t('notePh')}">${st.note}</textarea>`;
+h+=`<button onclick="missedSaveCheckin('${dk}')" class="mt-2 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-4 py-2 text-sm">${t('save')}</button></div>`;return h;}
+function renderMissedSleep(dk){const st=missedState[dk].sleep;let h=`<div class="missed-block"><h4>😴 ${t('missedFillSleep')}</h4>`;
+h+=`<div class="grid grid-cols-2 gap-2">
+<div><label class="text-[11px] font-bold">${t('bedLbl')}</label><input type="time" value="${st.bed}" onchange="missedSleepSet('${dk}','bed',this.value)" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1.5 text-sm"></div>
+<div><label class="text-[11px] font-bold">${t('wakeLbl')}</label><input type="time" value="${st.wake}" onchange="missedSleepSet('${dk}','wake',this.value)" class="w-full border-2 border-slate-300 dark:border-slate-600 dark:bg-slate-700 rounded-lg px-2 py-1.5 text-sm"></div></div>`;
+h+=`<div class="mt-2"><label class="text-[11px] font-bold">${t('sqLbl')}</label><div class="flex gap-1 mt-1">`;
+FACES.forEach((f,idx)=>{const on=idx===st.q;
+h+=`<button type="button" id="msq-${dk}-${idx}" onclick="missedSleepQ('${dk}',${idx})" class="face w-8 h-8 rounded-lg text-lg flex items-center justify-center border-2 ${on?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 opacity-60'}">${f}</button>`;});
+h+=`</div></div>`;
+h+=`<label class="flex items-center gap-2 text-xs mt-2"><input type="checkbox" ${st.wakeups?'checked':''} onchange="missedSleepSet('${dk}','wakeups',this.checked)" class="w-4 h-4 accent-teal-600">${t('wuLbl')}</label>`;
+h+=`<button onclick="missedSaveSleep('${dk}')" class="mt-2 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-lg px-4 py-2 text-sm">${t('save')}</button></div>`;return h;}
+function renderMissedDoses(dk,missing){let h=`<div class="missed-block"><h4>💊 ${t('missedFillDoses')}</h4>`;
+missing.doses.forEach(d=>{const m=d.med;
+h+=`<div class="flex flex-wrap items-center gap-2 py-2 border-b border-slate-200/60 dark:border-slate-600/50 last:border-0">
+<span class="w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0" style="background:${m.color}22;border:2px solid ${m.color}">${m.emoji}</span>
+<div class="flex-1 min-w-0"><p class="font-bold text-xs truncate">${m.name} <span class="text-slate-400 font-normal">${m.dose}</span></p><p class="text-[10px] text-slate-500">${fmtTime(d.time)}</p></div>
+<button onclick="missedDoseAct('${dk}','${d.key}','take')" class="text-xs bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-lg px-3 py-1.5">${t('took')}</button>
+<button onclick="missedDoseAct('${dk}','${d.key}','skip')" class="text-xs bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-lg px-3 py-1.5">${t('skipped')}</button></div>`;});
+h+=`</div>`;return h;}
+function missedPick(dk,symId,idx){const st=missedInitDay(dk);st.checkin.sel[symId]=idx;
+for(let i=0;i<5;i++){const b=$('mf-'+dk+'-'+symId+'-'+i);if(!b)continue;const on=i===idx;
+b.className=`face w-8 h-8 rounded-lg text-lg flex items-center justify-center border-2 ${on?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 opacity-60'}`;}}
+function missedTrig(dk,ti){const st=missedInitDay(dk);const tr=trigList()[ti];
+if(st.checkin.trig.has(tr))st.checkin.trig.delete(tr);else st.checkin.trig.add(tr);
+const b=$('mt-'+dk+'-'+ti);if(b){const on=st.checkin.trig.has(tr);
+b.className=`text-xs rounded-full px-2.5 py-1 border-2 ${on?'border-rose-500 bg-rose-50 dark:bg-rose-900/40 font-bold text-rose-700 dark:text-rose-300':'border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300'}`;}}
+function missedNote(dk,val){const st=missedInitDay(dk);st.checkin.note=val;}
+function missedSleepSet(dk,field,val){const st=missedInitDay(dk);st.sleep[field]=val;}
+function missedSleepQ(dk,idx){const st=missedInitDay(dk);st.sleep.q=idx;
+for(let i=0;i<5;i++){const b=$('msq-'+dk+'-'+i);if(!b)continue;const on=i===idx;
+b.className=`face w-8 h-8 rounded-lg text-lg flex items-center justify-center border-2 ${on?'border-teal-600 bg-teal-50 scale-110':'border-slate-200 dark:border-slate-600 opacity-60'}`;}}
+function missedSaveCheckin(dk){const st=missedInitDay(dk);const v={};
+activeSyms().forEach(s=>{const idx=st.checkin.sel[s.id]!=null?st.checkin.sel[s.id]:2;const sev=idx*2.5;v[s.id]=s.good?(10-sev):sev;});
+S.checkins[dk]={v,note:st.checkin.note,trig:[...st.checkin.trig]};
+persist();renderMissed();renderDash();drawChart(1);renderInsights();
+toast('✅ '+t('missedSaved'));}
+function missedSaveSleep(dk){const st=missedInitDay(dk);const bed=st.sleep.bed,wake=st.sleep.wake;
+if(!bed||!wake)return toast(lang==='fa'?'ساعت خواب و بیداری را وارد کن':'Enter bed & wake times');
+const mins=sleepDur(bed,wake);
+S.sleepData=S.sleepData||{nights:[],naps:[]};
+S.sleepData.nights=(S.sleepData.nights||[]).filter(n=>n.dk!==dk);
+S.sleepData.nights.push({dk,bed,wake,mins,q:st.sleep.q,wakeups:st.sleep.wakeups});
+persist();renderMissed();renderSleep();toast('✅ '+t('missedSaved'));}
+function missedDoseAct(dk,key,action){
+if(action==='take')setLog(dk,key,{s:'late',t:Date.now()});else setLog(dk,key,{s:'skip',t:Date.now()});
+persist();renderMissed();renderMeds();renderDash();renderAdh();renderCatchup();
+toast(action==='take'?'⏱️ '+(lang==='fa'?'ثبت شد':'Logged'):'⏭️');}
+function missedMonitorDone(id){const m=(S.monitor||[]).find(x=>x.id===id);if(m){m.done=true;persist();renderMissed();renderMonitor();renderFlags();toast('✅ '+t('missedMarkDone'));}}
 /* ═══ رندر کلی ═══ */
 function renderAll(){applyStealth();buildCitySel();
 renderDash();buildChips();drawChart(1);renderInsights();renderFlags();
 renderMeds();renderWater();renderReminders();renderMedHistory();updateNotifLbl();
-renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderCatchup();loadWeather();
-if(curTab==='backfill')renderBackfill();}
+renderTriage();renderTriageHist();renderReport();renderMonitor();renderSleep();renderCatchup();loadWeather();}
 window.addEventListener('DOMContentLoaded',boot);
 </script>
 </body>
